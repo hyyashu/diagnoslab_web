@@ -1,0 +1,180 @@
+"use client";
+
+import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { 
+  Menu, X, Home, FileText, Package, 
+  Microscope, Handshake, Users, Phone 
+} from 'lucide-react';
+
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Content for the marquee
+  const tickerItems = [
+    "ISO certified",
+    "2500+ verified reviews",
+    "15+ Years of trust",
+  ];
+  
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isOpen]);
+
+  const navLinks = [
+    { name: 'Home', href: '/', icon: <Home size={20} /> },
+    { name: 'Tests', href: '/tests', icon: <FileText size={20} /> },
+    { name: 'Packages', href: '/packages', icon: <Package size={20} /> },
+    { name: 'Radiology', href: '/radiology', icon: <Microscope size={20} /> },
+    { name: 'Corporate Tie-ups', href: '/corporate', icon: <Handshake size={20} /> },
+    { name: 'About Us', href: '/about', icon: <Users size={20} /> },
+    { name: 'Contact Us', href: '/contact', icon: <Phone size={20} /> },
+  ];
+
+  return (
+    <nav className="w-full bg-white shadow-sm sticky top-0 z-50 font-body">
+      
+      {/* --- ADDED MARQUEE (Big and Middle Screens Only) --- */}
+      <div className="hidden md:block w-full bg-[#C62828] overflow-hidden py-2">
+        <div className="flex whitespace-nowrap animate-marquee w-max">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="flex items-center">
+              {tickerItems.map((item, index) => (
+                <div key={index} className="flex items-center mx-10">
+                  <span className="w-1 h-1 bg-white rounded-full mr-3 opacity-60" />
+                  <span className="text-white text-[11px] font-bold uppercase tracking-widest">
+                    {item}
+                  </span>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-14 md:h-20">
+          
+          {/* Mobile: Hamburger + Brand (Matches image_ea5841.png) */}
+          <div className="flex items-center space-x-3 md:hidden">
+            <button
+              onClick={() => setIsOpen(true)}
+              className="text-red-600 focus:outline-none"
+            >
+              <Menu size={26} strokeWidth={2.5} />
+            </button>
+            <Link href="/">
+              <Image 
+                src="/images/diagnoslogo.png" 
+                alt="Diagnos Labs" 
+                width={80} 
+                height={80} 
+                className="h-16 md:h-20 w-auto object-contain"
+                priority
+              />
+            </Link>
+          </div>
+
+          {/* Desktop Left: Main Logo */}
+          <Link href="/" className="hidden md:flex flex-shrink-0 items-center">
+            <Image 
+              src="/images/diagnoslogo.png" 
+              alt="Diagnos Labs" 
+              width={100} 
+              height={100} 
+              className="h-20 md:h-30 w-auto object-contain"
+              priority
+            />
+          </Link>
+
+          {/* Center: Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-5 lg:space-x-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`text-[15px] font-bold transition-colors relative pb-1 ${
+                  link.name === 'Home' 
+                    ? 'text-black border-b-2 border-red-600' 
+                    : 'text-black hover:text-red-600'
+                }`}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </div>
+
+          {/* Right Side: CTA and Partner Logo */}
+          <div className="flex items-center space-x-4 lg:space-x-10">
+            <button className="hidden xl:block bg-background-primary text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-red-700 transition-all shadow-md">
+              Book Home Collection
+            </button>
+            
+            <div className="flex items-center   pl-4 lg:pl-10 h-10">
+              <Image 
+                src="/images/narayanalogo.png" 
+                alt="Narayana Diagnostic" 
+                width={140} 
+                height={40} 
+                className="h-20 md:h-30 w-auto object-contain"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* --- MOBILE SIDE DRAWER (Matches image_ea58c3.png) --- */}
+      
+      {/* Background Overlay */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-[60] md:hidden transition-opacity"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+
+      {/* Side Menu */}
+      <aside className={`fixed top-0 left-0 h-full w-[280px] bg-white z-[70] shadow-2xl transform transition-transform duration-300 ease-in-out md:hidden ${
+        isOpen ? 'translate-x-0' : '-translate-x-full'
+      }`}>
+        {/* Drawer Header */}
+        <div className="flex items-center h-16 px-4 border-b border-slate-100">
+          <button onClick={() => setIsOpen(false)} className="text-red-600 mr-4">
+            <Menu size={30} />
+          </button>
+          <span className="font-bold text-slate-800 text-lg">Menu</span>
+        </div>
+
+        {/* Drawer Links with Icons */}
+        <div className="py-4 flex flex-col">
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              onClick={() => setIsOpen(false)}
+              className="flex items-center px-6 py-4 space-x-5 hover:bg-slate-50 transition-colors group"
+            >
+              <span className="text-slate-900 group-hover:text-red-600 transition-colors">
+                {link.icon}
+              </span>
+              <span className={`text-[15px] font-bold ${
+                link.name === 'Home' 
+                  ? 'text-red-600 border-b-2 border-red-600' 
+                  : 'text-slate-800'
+              }`}>
+                {link.name}
+              </span>
+            </Link>
+          ))}
+        </div>
+      </aside>
+    </nav>
+  );
+};
+
+export default Navbar;
