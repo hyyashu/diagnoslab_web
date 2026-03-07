@@ -10,12 +10,14 @@ import HowItWorks from "./components/howItWorks";
 import FAQAccordion from "./components/faq";
 import Footer from "./components/footer";
 import FindUs from "./components/findus";
+import FloatingCTA from "./components/FloatingCTA";
 
 export default function Home() {
   return (
     <>
       <Navbar />
       <HeroSection />
+      <FloatingCTA phoneNumber="+91 8404802201" whatsappNumber="+91 8404802201" />
       <WhyDiagnosLab />
       <PopularTests />
       <Packages />
