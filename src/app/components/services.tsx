@@ -87,7 +87,7 @@ const RadiologySlider = () => {
         </div>
 
         {/* Slider */}
-        <div className="relative px-12">
+        <div className="relative px-4 md:px-12">
 
           <Swiper
             modules={[Navigation, Pagination]}
@@ -102,10 +102,10 @@ const RadiologySlider = () => {
               768: { slidesPerView: 2 },
               1024: { slidesPerView: 3 },
             }}
-            className="px-2 py-6"
+            className="py-6"
           >
             {services.map((service) => (
-              <SwiperSlide key={service.id} className="px-2 py-4">
+             <SwiperSlide key={service.id} className="py-4">
                 <div className="bg-white rounded-3xl p-6 md:p-8 shadow-lg border border-gray-100 h-full  flex flex-col">
 
                   <h3 className="font-heading text-base md:text-xl font-bold text-black mb-4">
@@ -153,11 +153,11 @@ const RadiologySlider = () => {
           </Swiper>
 
           {/* Navigation Buttons */}
-          <button className="font-heading prev-btn absolute left-6 md:left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-background-primary rounded-full flex items-center justify-center text-white shadow-lg hover:bg-red-700 transition">
+          <button className="font-heading prev-btn absolute left-0  top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-background-primary rounded-full flex items-center justify-center text-white shadow-lg hover:bg-red-700 transition">
             <ChevronLeft size={18} />
           </button>
 
-          <button className="font-heading next-btn absolute right-6 md:right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-background-primary rounded-full flex items-center justify-center text-white shadow-lg hover:bg-red-700 transition">
+          <button className="font-heading next-btn absolute right-0  top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-background-primary rounded-full flex items-center justify-center text-white shadow-lg hover:bg-red-700 transition">
             <ChevronRight size={18} />
           </button>
 

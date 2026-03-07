@@ -73,12 +73,12 @@ export default function PopularTests() {
         </div>
 
         {/* Carousel Wrapper */}
-        <div className="relative px-8 lg:px-20">
+        <div className="relative px-4 md:px-8 lg:px-20">
 
           {/* Left Arrow */}
           <button
             onClick={scrollPrev}
-            className="absolute left-6 top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 rounded-full bg-background-primary text-white shadow-xl hover:bg-red-600 active:scale-95 transition-all flex"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 rounded-full bg-background-primary text-white shadow-xl hover:bg-red-600 active:scale-95 transition-all flex"
             aria-label="Previous"
           >
             <ChevronLeft size={18} className="md:w-7 md:h-7" />
@@ -87,7 +87,7 @@ export default function PopularTests() {
           {/* Right Arrow */}
           <button
             onClick={scrollNext}
-            className="absolute right-6 top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 rounded-full bg-background-primary text-white shadow-xl hover:bg-red-600 active:scale-95 transition-all flex"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 rounded-full bg-background-primary text-white shadow-xl hover:bg-red-600 active:scale-95 transition-all flex"
             aria-label="Next"
           >
             <ChevronRight size={18} className="md:w-7 md:h-7" />
@@ -99,7 +99,7 @@ export default function PopularTests() {
               {testData.map((test, index) => (
                 <div
                   key={index}
-                  className="flex-[0_0_88%] sm:flex-[0_0_48%] lg:flex-[0_0_32%] min-w-0"
+                  className="flex-[0_0_94%] sm:flex-[0_0_48%] lg:flex-[0_0_32%] min-w-0"
                 >
                   <div className="h-full bg-white rounded-3xl border border-slate-200 p-8 shadow-sm  transition-all duration-300 flex flex-col justify-between">
                     

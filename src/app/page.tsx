@@ -9,6 +9,7 @@ import ReviewCarousel from "./components/reviews";
 import HowItWorks from "./components/howItWorks";
 import FAQAccordion from "./components/faq";
 import Footer from "./components/footer";
+import FindUs from "./components/findus";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
       <PopularTests />
       <Packages />
       <RadiologySlider />
+      <FindUs />
       <ReviewCarousel />
       <HowItWorks />
       <FAQAccordion />

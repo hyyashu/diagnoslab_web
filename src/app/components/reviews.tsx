@@ -76,7 +76,7 @@ export default function ReviewCarousel() {
         {/* Navigation Buttons */}
         <button
           onClick={scrollPrev}
-          className="absolute left-0 top-1/2 -translate-y-1/2 w-12 h-12 bg-[#ef4444] text-white rounded-full flex items-center justify-center shadow-lg z-20 hover:bg-red-600 transition"
+          className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 bg-background-primary text-white rounded-full flex items-center justify-center shadow-lg z-20 hover:bg-red-600 transition"
           aria-label="Previous slide"
         >
           <ChevronLeft size={18} />
@@ -84,7 +84,7 @@ export default function ReviewCarousel() {
 
         <button
           onClick={scrollNext}
-          className="absolute right-0 top-1/2 -translate-y-1/2 w-12 h-12 bg-[#ef4444] text-white rounded-full flex items-center justify-center shadow-lg z-20 hover:bg-red-600 transition"
+          className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 bg-background-primary text-white rounded-full flex items-center justify-center shadow-lg z-20 hover:bg-red-600 transition"
           aria-label="Next slide"
         >
           <ChevronRight size={18} />
