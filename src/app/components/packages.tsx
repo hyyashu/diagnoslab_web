@@ -4,6 +4,7 @@ import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import HealthPackageCard from "./HealthPackageCard";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -82,7 +83,7 @@ export default function PopularHealthPackages() {
           </p>
         </div>
 
-        {/* Carousel Wrapper */}
+        {/* Carousel */}
         <div className="relative w-[90%] md:w-full mx-auto">
 
           <Swiper
@@ -102,44 +103,13 @@ export default function PopularHealthPackages() {
           >
             {packageData.map((pkg) => (
               <SwiperSlide key={pkg.id}>
-                <div className="h-full bg-white rounded-[2rem] p-6 shadow-xl flex flex-col justify-between min-h-[240px]">
-
-                  <div>
-                    <h3 className="font-heading text-xl font-bold text-black">
-                      {pkg.name}
-                    </h3>
-
-                    <p className="font-body text-black text-sm font-medium mb-5">
-                      {pkg.parameters} parameters
-                    </p>
-
-                    <p className="font-body text-black text-xs md:text-sm  mb-8">
-                      {pkg.description}
-                    </p>
-                  </div>
-
-                  <div>
-                    <div className="flex items-center gap-2 mb-4">
-                      <span className="font-heading text-xl font-bold text-green-600">
-                        ₹{pkg.currentPrice}
-                      </span>
-                      <span className="font-heading text-gray-400 line-through text-xs font-medium">
-                        ₹{pkg.originalPrice}
-                      </span>
-                    </div>
-
-                    <div className="flex gap-3">
-                      <button className="font-heading flex-1 py-2.5 bg-background-primary hover:bg-red-700 text-white text-sm font-bold rounded-xl transition-all shadow-md">
-                        Book
-                      </button>
-
-                      <button className="font-heading flex-1 py-2.5 border border-background-primary text-background-primary hover:bg-red-50 text-sm font-bold rounded-xl transition-all">
-                        Details
-                      </button>
-                    </div>
-                  </div>
-
-                </div>
+                <HealthPackageCard
+                  name={pkg.name}
+                  parameters={pkg.parameters}
+                  description={pkg.description}
+                  currentPrice={pkg.currentPrice}
+                  originalPrice={pkg.originalPrice}
+                />
               </SwiperSlide>
             ))}
           </Swiper>
