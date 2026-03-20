@@ -35,10 +35,10 @@ export default function HealthPackageCard({
 
       <div>
         <div className="flex items-center gap-2 mb-4">
-          <span className="font-heading text-xl font-bold text-green-600">
+          <span className="font-heading text-xl  font-bold text-green-600">
             ₹{currentPrice}
           </span>
-          <span className="font-heading text-gray-400 line-through text-xs font-medium">
+          <span className="font-heading text-gray-400 line-through text-sm md:text-base font-medium">
             ₹{originalPrice}
           </span>
         </div>

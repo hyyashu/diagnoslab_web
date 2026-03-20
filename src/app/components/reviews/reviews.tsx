@@ -63,14 +63,14 @@ export default function ReviewCarousel() {
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
 
   return (
-    <section className="w-full bg-white py-12 md:py-16 px-4 text-slate-900 relative font-sans">
+    <section className="w-full bg-white py-12 md:py-16 px-4 text-black relative ">
 
       {/* Header */}
       <div className="max-w-6xl mx-auto text-center mb-12">
         <h2 className="font-heading text-2xl md:text-4xl font-extrabold mb-2">
           Google Reviews
         </h2>
-        <p className="font-heading text-black text-lg">
+        <p className="font-body text-gray-500 font-medium text-sm md:text-lg">
           Trusted by thousands of patients.
         </p>
       </div>
@@ -105,7 +105,7 @@ export default function ReviewCarousel() {
                   rating={review.rating}
                   time={review.time}
                   text={review.text}
-                  hasReadMore={review.hasReadMore}
+                  
                 />
               </div>
             ))}
@@ -118,11 +118,25 @@ export default function ReviewCarousel() {
       <div className="max-w-7xl mx-auto px-4 md:px-16 mt-12 flex flex-col md:flex-row justify-between items-center gap-8">
 
         <div className="flex gap-4 w-full md:w-auto">
-          <button className="flex-1 md:flex-none px-10 py-4 bg-background-primary text-white font-bold rounded-2xl shadow-md hover:bg-red-600 transition text-base">
+          <button
+          onClick={() =>
+            window.open(
+              "https://maps.app.goo.gl/wDxQ7Aa3Ra9ToY1J9",
+              "_blank"
+            )
+          }
+           className="flex-1 md:flex-none px-10 py-4 bg-background-primary text-white font-bold rounded-2xl shadow-md hover:bg-red-600 transition text-base">
             Write A Review
           </button>
 
-          <button className="flex-1 md:flex-none px-10 py-4 bg-white border border-slate-200 text-slate-700 font-bold rounded-2xl shadow-sm hover:bg-slate-50 transition text-base">
+          <button
+           onClick={() =>
+            window.open(
+              "https://www.google.com/maps/place/Diagnos+Lab/@22.8088744,86.2029601,17z/data=!4m8!3m7!1s0x39f5e3088f40bb2b:0x46180907852da273!8m2!3d22.8088744!4d86.2029601!9m1!1b1!16s%2Fg%2F1260h0qk1!17m2!4m1!1e3!18m1!1e1?entry=ttu&g_ep=EgoyMDI2MDMxNy4wIKXMDSoASAFQAw%3D%3D",
+              "_blank"
+            )
+          }
+           className="flex-1 md:flex-none px-10 py-4 bg-white border border-slate-200 text-black font-bold rounded-2xl shadow-sm hover:bg-slate-50 transition text-base">
             View All Reviews
           </button>
         </div>
@@ -135,7 +149,7 @@ export default function ReviewCarousel() {
           </div>
 
           <div className="flex items-center gap-1.5">
-            <span className="font-bold text-2xl text-slate-900 leading-none">
+            <span className="font-bold text-2xl text-black leading-none">
               4.9
             </span>
             <span className="text-slate-400 text-sm font-medium leading-none mt-1">

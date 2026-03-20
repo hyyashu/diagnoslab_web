@@ -1,13 +1,12 @@
 "use client";
 
-import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import RadiologyCard from "./RadiologyCard";
-
 import "swiper/css";
 import "swiper/css/navigation";
+import Link from "next/link";
 
 interface RadiologyService {
   id: number;
@@ -82,7 +81,7 @@ const RadiologySlider = () => {
           <h2 className="font-heading text-2xl md:text-4xl font-extrabold text-black mb-2">
             Radiology Services
           </h2>
-          <p className="font-heading text-black text-lg">
+          <p className="font-body text-gray-500 font-medium text-sm md:text-lg">
             Advanced imaging with fast reporting.
           </p>
         </div>
@@ -130,9 +129,11 @@ const RadiologySlider = () => {
 
         {/* Bottom CTA */}
         <div className="flex justify-center mt-8">
+          <Link href="/radiology">
           <button className="font-heading px-10 py-3 text-white bg-background-primary hover:bg-red-800 font-bold rounded-xl transition">
             View All Radiology
           </button>
+          </Link>
         </div>
 
       </div>

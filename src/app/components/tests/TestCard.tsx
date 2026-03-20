@@ -23,18 +23,18 @@ export default function TestCard({
           {title}
         </h3>
 
-        <p className="font-body text-slate-600 text-sm md:text-base leading-relaxed mb-2 md:mb-8">
+        <p className="font-body text-black text-sm  leading-relaxed mb-2 md:mb-8">
           {description}
         </p>
       </div>
 
       <div className="space-y-1 md:space-y-5">
         <div className="flex items-baseline gap-3">
-          <span className="text-xl md:text-2xl font-bold text-green-600">
+          <span className="text-xl font-bold text-green-600 font-heading">
             ₹{price}
           </span>
 
-          <span className="font-heading text-slate-400 line-through text-sm md:text-base">
+          <span className="font-heading text-gray-400 line-through text-sm md:text-base">
             ₹{originalPrice}
           </span>
         </div>

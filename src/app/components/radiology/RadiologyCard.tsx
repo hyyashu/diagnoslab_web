@@ -1,7 +1,5 @@
 "use client";
 
-import React from "react";
-
 interface RadiologyCardProps {
   title: string;
   description: string;

@@ -3,7 +3,7 @@
 import React, { useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import TestCard from "./TestCard";
+import TestCard from "../../components/tests/TestCard";
 
 interface TestCardProps {
   title: string;
@@ -60,15 +60,15 @@ export default function PopularTests() {
   }, [emblaApi]);
 
   return (
-    <section className="w-full py-16 bg-white">
+    <section className="w-full py-16 bg-background-primary">
       <div className="max-w-7xl mx-auto px-4">
 
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="font-heading text-2xl md:text-4xl font-black text-black mb-3 tracking-tight">
+          <h2 className="font-heading text-2xl md:text-4xl text-white font-extrabold text-black mb-3 tracking-tight">
             Popular Tests
           </h2>
-          <p className="font-heading text-black text-lg">
+          <p className="font-heading text-white font-medium text-base md:text-lg">
             Most Commonly booked diagnostic tests.
           </p>
         </div>
@@ -79,7 +79,7 @@ export default function PopularTests() {
           {/* Left Arrow */}
           <button
             onClick={scrollPrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 rounded-full bg-background-primary text-white shadow-xl hover:bg-red-600 active:scale-95 transition-all flex"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 rounded-full bg-white text-background-primary shadow-xl  active:scale-95 transition-all flex"
           >
             <ChevronLeft size={18} className="md:w-7 md:h-7" />
           </button>
@@ -87,7 +87,7 @@ export default function PopularTests() {
           {/* Right Arrow */}
           <button
             onClick={scrollNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 rounded-full bg-background-primary text-white shadow-xl hover:bg-red-600 active:scale-95 transition-all flex"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 rounded-full bg-white text-background-primary shadow-xl  active:scale-95 transition-all flex"
           >
             <ChevronRight size={18} className="md:w-7 md:h-7" />
           </button>
@@ -112,15 +112,7 @@ export default function PopularTests() {
           </div>
 
         </div>
-
-        {/* View All Button */}
-        <div className="mt-16 text-center">
-          <button className="font-heading px-10 py-4 bg-background-primary hover:bg-red-600 text-white font-bold rounded-2xl transition-all shadow-lg hover:shadow-red-200">
-            View All Tests
-          </button>
-        </div>
-
-      </div>
+  </div>
     </section>
   );
 }

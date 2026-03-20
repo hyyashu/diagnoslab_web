@@ -6,9 +6,8 @@ import { MapPin, ExternalLink } from "lucide-react";
 
 const FindUs = () => {
   return (
-    <section className="relative bg-background-primary py-16 px-4 overflow-hidden">
-      {/* Background Shape */}
-      <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-red-400/40 rounded-full blur-3xl"></div>
+    <section className="relative py-16 px-4 overflow-hidden">
+      <div className="absolute -top-32 -left-32 w-[500px] h-[500px]  rounded-full blur-3xl"></div>
 
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Title */}

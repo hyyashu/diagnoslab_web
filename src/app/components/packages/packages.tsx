@@ -1,13 +1,11 @@
 "use client";
-
-import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import HealthPackageCard from "./HealthPackageCard";
-
 import "swiper/css";
 import "swiper/css/navigation";
+import Link from "next/link";
 
 interface HealthPackage {
   id: number;
@@ -68,17 +66,17 @@ const packageData: HealthPackage[] = [
 
 export default function PopularHealthPackages() {
   return (
-    <section className="relative w-full py-12 bg-[#ef3130] overflow-hidden">
+    <section className="relative w-full py-12 bg-white overflow-hidden">
       <div className="absolute inset-0 bg-background-primary" />
 
       <div className="max-w-[1200px] mx-auto px-6 md:px-16 relative z-10">
 
         {/* Header */}
-        <div className="text-center mb-10 text-white">
-          <h2 className="font-heading text-2xl md:text-4xl font-extrabold mb-2 tracking-tight">
+        <div className="text-center mb-10 ">
+          <h2 className="font-heading text-white text-2xl md:text-4xl font-extrabold mb-2 tracking-tight">
             Popular Health Packages
           </h2>
-          <p className="font-heading text-white/90 text-sm">
+          <p className="font-heading text-white font-medium text-sm md:text-base">
             Preventive health packages designed for every age group.
           </p>
         </div>
@@ -127,9 +125,11 @@ export default function PopularHealthPackages() {
 
         {/* Bottom CTA */}
         <div className="mt-12 text-center">
+          <Link href="/packages">
           <button className="font-heading px-8 py-3 bg-white text-background-primary font-bold text-sm rounded-xl transition-all shadow-lg">
             View All Packages
           </button>
+          </Link>
         </div>
 
       </div>

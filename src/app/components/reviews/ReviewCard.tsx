@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { Star, User } from "lucide-react";
 
 interface ReviewCardProps {

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { 
   Menu, X, Home, FileText, Package, 
   Microscope, Handshake, Users, Phone 
@@ -10,6 +11,13 @@ import {
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
+
+  // helper function for active route
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname === href || pathname.startsWith(href + "/");
+  };
 
   // Content for the marquee
   const tickerItems = [
@@ -39,7 +47,7 @@ const Navbar = () => {
   return (
     <nav className="w-full bg-white shadow-sm sticky top-0 z-50 font-body">
       
-      {/* --- ADDED MARQUEE (Big and Middle Screens Only) --- */}
+      {/* --- MARQUEE --- */}
       <div className="hidden md:block w-full bg-[#C62828] overflow-hidden py-2">
         <div className="flex whitespace-nowrap animate-marquee w-max">
           {[...Array(4)].map((_, i) => (
@@ -60,7 +68,7 @@ const Navbar = () => {
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-14 md:h-20">
           
-          {/* Mobile: Hamburger + Brand (Matches image_ea5841.png) */}
+          {/* Mobile */}
           <div className="flex items-center space-x-3 md:hidden">
             <button
               onClick={() => setIsOpen(true)}
@@ -80,7 +88,7 @@ const Navbar = () => {
             </Link>
           </div>
 
-          {/* Desktop Left: Main Logo */}
+          {/* Desktop Logo */}
           <Link href="/" className="hidden md:flex flex-shrink-0 items-center">
             <Image 
               src="/images/diagnoslogo.png" 
@@ -92,15 +100,15 @@ const Navbar = () => {
             />
           </Link>
 
-          {/* Center: Desktop Navigation */}
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-5 lg:space-x-8">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
                 className={`text-[15px] font-bold transition-colors relative pb-1 ${
-                  link.name === 'Home' 
-                    ? 'text-black border-b-2 border-red-600' 
+                  isActive(link.href)
+                    ? 'text-black border-b-2 border-red-600'
                     : 'text-black hover:text-red-600'
                 }`}
               >
@@ -109,13 +117,13 @@ const Navbar = () => {
             ))}
           </div>
 
-          {/* Right Side: CTA and Partner Logo */}
+          {/* Right Side */}
           <div className="flex items-center space-x-4 lg:space-x-10">
             <button className="hidden xl:block bg-background-primary text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-red-700 transition-all shadow-md">
               Book Home Collection
             </button>
             
-            <div className="flex items-center   pl-4 lg:pl-10 h-10">
+            <div className="flex items-center pl-4 lg:pl-10 h-10">
               <Image 
                 src="/images/narayanalogo.png" 
                 alt="Narayana Diagnostic" 
@@ -128,9 +136,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* --- MOBILE SIDE DRAWER (Matches image_ea58c3.png) --- */}
-      
-      {/* Background Overlay */}
+      {/* Overlay */}
       {isOpen && (
         <div 
           className="fixed inset-0 bg-black/50 z-[60] md:hidden transition-opacity"
@@ -142,15 +148,14 @@ const Navbar = () => {
       <aside className={`fixed top-0 left-0 h-full w-[280px] bg-white z-[70] shadow-2xl transform transition-transform duration-300 ease-in-out md:hidden ${
         isOpen ? 'translate-x-0' : '-translate-x-full'
       }`}>
-        {/* Drawer Header */}
+        
         <div className="flex items-center h-16 px-4 border-b border-slate-100">
-          <button onClick={() => setIsOpen(false)} className="text-red-600 mr-4">
+          <button onClick={() => setIsOpen(false)} className="text-background-primary mr-4">
             <Menu size={30} />
           </button>
-          <span className="font-bold text-slate-800 text-lg">Menu</span>
+          <span className="font-bold text-black text-lg">Menu</span>
         </div>
 
-        {/* Drawer Links with Icons */}
         <div className="py-4 flex flex-col">
           {navLinks.map((link) => (
             <Link
@@ -159,13 +164,18 @@ const Navbar = () => {
               onClick={() => setIsOpen(false)}
               className="flex items-center px-6 py-4 space-x-5 hover:bg-slate-50 transition-colors group"
             >
-              <span className="text-slate-900 group-hover:text-red-600 transition-colors">
+              <span className={`${
+                isActive(link.href)
+                  ? 'text-background-primary'
+                  : 'text-black group-hover:text-background-primary'
+              }`}>
                 {link.icon}
               </span>
+
               <span className={`text-[15px] font-bold ${
-                link.name === 'Home' 
-                  ? 'text-red-600 border-b-2 border-red-600' 
-                  : 'text-slate-800'
+                isActive(link.href)
+                  ? 'text-background-primary border-b-2 border-background-primary'
+                  : 'text-black'
               }`}>
                 {link.name}
               </span>
