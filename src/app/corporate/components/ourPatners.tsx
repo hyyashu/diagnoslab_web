@@ -10,11 +10,18 @@ const partners = [
   { name: "Provident Fund", image: "/images/provident.png" },
   { name: "Union Bank of India", image: "/images/union.png" },
   { name: "National Metallurgical Laboratory", image: "/images/nml.png" },
+  { name: "Linde India", image: "/images/linde.png" },
+  { name: "Akin Care", image: "/images/akincare-logo.png" },
+  { name: "Tata Zoological", image: "/images/tataZoo.png" },
+  { name: "Arcofemi Health Care Ltd (Medi Wheel)", image: "/images/mediwheel-logo.png" },
   { name: "Care And Cure Primary Care Pvt. Ltd.", image: "/images/care.png" },
-  { name: "Tata 1mg corporate wellness", image: "/images/tata.png" },
-  { name: "Tata 1mg corporate wellness", image: "/images/tata.png" },
-  { name: "Tata 1mg corporate wellness", image: "/images/tata.png" },
-  { name: "Tata 1mg corporate wellness", image: "/images/tata.png" },
+  { name: "Ekincare", image: "/images/ekincare_logo.png" },
+  { name: "Health Wealth Management Pvt Ltd", image: "/images/healthwealth.png" },
+  { name: "Healthindia Allied Services Pvt Ltd", image: "/images/HealthIndia.png" },
+  { name: "Life Cell International Pvt Ltd", image: "/images/LifeCell.png" },
+  { name: "Maggnessa Health Care", image: "/images/meggnessa.png" },
+  { name: "Medipiper Technologies", image: "/images/MedPiper.png" },
+  { name: "Tata Steel Zoo", image: "/images/TataSteel.png" },
   { name: "Tata 1mg corporate wellness", image: "/images/tata.png" },
 ];
 
@@ -98,7 +105,7 @@ export default function OurPartners() {
                 >
                   <FeatureCard
                     icon={
-                      <div className="relative w-12 h-12 md:w-16 md:h-16">
+                      <div className="relative w-20 h-12 md:w-40 md:h-18">
                         <Image
                           src={partner.image}
                           alt={partner.name}

@@ -105,7 +105,6 @@ export default function ReviewCarousel() {
                   rating={review.rating}
                   time={review.time}
                   text={review.text}
-                  
                 />
               </div>
             ))}
