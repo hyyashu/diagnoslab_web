@@ -7,73 +7,19 @@ import RadiologyCard from "./RadiologyCard";
 import "swiper/css";
 import "swiper/css/navigation";
 import Link from "next/link";
+import rawData from "@/data/radiologyServices.json";
 
-interface RadiologyService {
-  id: number;
-  title: string;
-  description: string;
-  uses: string[];
-  footerNote: string;
-}
 
-const services: RadiologyService[] = [
-  {
-    id: 1,
-    title: "ULTRASOUND",
-    description: "Safe imaging using sound waves to examine internal organs.",
-    uses: [
-      "Abdomen scans",
-      "Pelvic scans",
-      "Pregnancy scans",
-      "Kidney and liver evaluation",
-    ],
-    footerNote:
-      "Performed by experienced doctors with clear reporting. Female Radiologist for female cases.",
-  },
-  {
-    id: 2,
-    title: "ULTRASOUND",
-    description: "Safe imaging using sound waves to examine internal organs.",
-    uses: [
-      "Abdomen scans",
-      "Pelvic scans",
-      "Pregnancy scans",
-      "Kidney and liver evaluation",
-    ],
-    footerNote:
-      "Performed by experienced doctors with clear reporting. Female Radiologist for female cases.",
-  },
-  {
-    id: 3,
-    title: "ULTRASOUND",
-    description: "Safe imaging using sound waves to examine internal organs.",
-    uses: [
-      "Abdomen scans",
-      "Pelvic scans",
-      "Pregnancy scans",
-      "Kidney and liver evaluation",
-    ],
-    footerNote:
-      "Performed by experienced doctors with clear reporting. Female Radiologist for female cases.",
-  },
-  {
-    id: 4,
-    title: "ULTRASOUND",
-    description: "Safe imaging using sound waves to examine internal organs.",
-    uses: [
-      "Abdomen scans",
-      "Pelvic scans",
-      "Pregnancy scans",
-      "Kidney and liver evaluation",
-    ],
-    footerNote:
-      "Performed by experienced doctors with clear reporting. Female Radiologist for female cases.",
-  },
-];
-
-const RadiologySlider = () => {
+const RadiologyServices = () => {
+  const services = rawData.radiologyServices.map((service: any) => ({
+    id: service.id,
+    title: service.title,
+    description: service.description,
+    uses: service.bullets,
+    footerNote: service.extra,
+  }));
   return (
-    <section className="py-12 px-4 bg-gray-50">
+    <section id="radiology-services" className="py-12 px-4 bg-gray-50">
       <div className="max-w-7xl mx-auto">
 
         {/* Header */}
@@ -129,7 +75,7 @@ const RadiologySlider = () => {
 
         {/* Bottom CTA */}
         <div className="flex justify-center mt-8">
-          <Link href="/radiology">
+          <Link href="/radiology#radiology-section">
           <button className="font-heading px-10 py-3 text-white bg-background-primary hover:bg-red-800 font-bold rounded-xl transition">
             View All Radiology
           </button>
@@ -141,4 +87,4 @@ const RadiologySlider = () => {
   );
 };
 
-export default RadiologySlider;
+export default RadiologyServices;

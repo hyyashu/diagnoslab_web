@@ -4,52 +4,16 @@ import React, { useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import ReviewCard from "./ReviewCard";
+import rawData from "@/data/reviews.json";
 
-interface Review {
-  id: number;
-  author: string;
-  stats: string;
-  rating: number;
-  time: string;
-  text: string;
-  hasReadMore?: boolean;
-}
-
-const REVIEWS: Review[] = [
-  {
-    id: 1,
-    author: "v niharika",
-    stats: "3 reviews",
-    rating: 5,
-    time: "a month ago",
-    text: "A reliable place for blood tests. Staff is polite and expert on sample collection. Would recommend others to consider this lab.",
-  },
-  {
-    id: 2,
-    author: "Dharmendra Prasad",
-    stats: "4 reviews • 1 photo",
-    rating: 5,
-    time: "2 month ago",
-    text: "All Staff are excellent professionals. Very skilled and knowledgeable in their work. Diligent, well behaved and punctual.",
-  },
-  {
-    id: 3,
-    author: "manisha choudhary",
-    stats: "2 reviews",
-    rating: 5,
-    time: "a month ago",
-    text: "Booked blood test and response was very quick. The phlebotomist came on time and his behavior was very polite. He took all the precautions during blood...",
-    hasReadMore: true,
-  },
-  {
-    id: 4,
-    author: "Rajesh Kumar",
-    stats: "5 reviews",
-    rating: 5,
-    time: "3 months ago",
-    text: "The experience was very smooth. The report was delivered on the same day as promised. Very professional service.",
-  },
-];
+const REVIEWS = rawData.reviews.map((r: any) => ({
+  id: r.id,
+  author: r.authorName,
+  stats: `${r.reviewCount} reviews`,
+  rating: r.rating,
+  time: r.date,
+  text: r.text,
+}));
 
 export default function ReviewCarousel() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -94,9 +58,9 @@ export default function ReviewCarousel() {
 
         <div className="overflow-hidden" ref={emblaRef}>
           <div className="flex">
-            {REVIEWS.map((review) => (
+          {REVIEWS.map((review, index) => (
               <div
-                key={review.id}
+              key={`${review.id || review.author}-${index}`}
                 className="flex-[0_0_100%] md:flex-[0_0_48%] lg:flex-[0_0_33.333%] px-3 py-4"
               >
                 <ReviewCard
@@ -114,7 +78,7 @@ export default function ReviewCarousel() {
       </div>
 
       {/* Bottom Section */}
-      <div className="max-w-7xl mx-auto px-4 md:px-16 mt-12 flex flex-col md:flex-row justify-between items-center gap-8">
+      <div className="max-w-7xl mx-auto px-4 md:px-16 mt-2 md:mt-4 flex flex-col md:flex-row justify-between items-center gap-8">
 
         <div className="flex gap-4 w-full md:w-auto">
           <button
@@ -124,7 +88,7 @@ export default function ReviewCarousel() {
               "_blank"
             )
           }
-           className="flex-1 md:flex-none px-10 py-4 bg-background-primary text-white font-bold rounded-2xl shadow-md hover:bg-red-600 transition text-base">
+           className="flex-1 md:flex-none px-10 py-4 bg-background-primary text-white font-bold rounded-2xl shadow-md hover:bg-red-600 transition text-sm md:text-base">
             Write A Review
           </button>
 
@@ -135,7 +99,7 @@ export default function ReviewCarousel() {
               "_blank"
             )
           }
-           className="flex-1 md:flex-none px-10 py-4 bg-white border border-slate-200 text-black font-bold rounded-2xl shadow-sm hover:bg-slate-50 transition text-base">
+           className="flex-1 md:flex-none px-5 md:px-10 py-4 bg-white border border-slate-200 text-black font-bold rounded-2xl shadow-sm hover:bg-slate-50 transition text-sm md:text-base">
             View All Reviews
           </button>
         </div>

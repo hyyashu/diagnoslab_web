@@ -1,0 +1,62 @@
+{
+  "summary": {
+    "overallRating": 4.9,
+    "totalReviews": 2500
+  },
+  "reviews": [
+    {
+      "authorName": "v niharika",
+      "rating": 5,
+      "date": "a month ago",
+      "text": "A reliable place for blood tests. Staff is polite and expert on sample collection. Would recommend others to consider this lab.",
+      "reviewCount": 3
+    },
+    {
+      "authorName": "Dharmendra Prasad",
+      "rating": 5,
+      "date": "2 months ago",
+      "text": "All Staff are excellent professionals. Very skilled and knowledgeable in their work. Diligent, well behaved and punctual.",
+      "reviewCount": 4,
+      "photos": 1
+    },
+    {
+      "authorName": "manisha choudhary",
+      "rating": 5,
+      "date": "a month ago",
+      "text": "Booked blood test and response was very quick. The phlebotomist came on time and his behaviour was very polite and humble. He took all the precautions during blood collection. Overall experience of blood collection was very good and satisfying.",
+      "reviewCount": 2
+    },
+    {
+      "authorName": "Chiranjeev Singh",
+      "rating": 5,
+      "date": "2 weeks ago",
+      "text": "Recently got my complete blood work done here and also my father's ultrasound along with comprehensive allergy parameters. The service was excellent, professional, and truly up to the mark. Prompt replies, regular updates, and smooth coordination throughout. Highly reliable and trustworthy lab. Recommended 👍",
+      "reviewCount": 30,
+      "photos": 12,
+      "localGuide": true,
+      "isNew": true
+    },
+    {
+      "authorName": "SHILPI SINGH",
+      "rating": 5,
+      "date": "a month ago",
+      "text": "The process of sample taken of blood is very smoothing and no pain trick. Thank you Diagnolab for the great service.",
+      "reviewCount": 4
+    },
+    {
+      "authorName": "subhadeep mandal",
+      "rating": 5,
+      "date": "3 weeks ago",
+      "text": "All the staffs are very cooperative and responsible, provided the report on time. The behaviour of all staffs are very friendly. Highly recommend to this diagnostics center in jamshedpur.",
+      "reviewCount": 1,
+      "isNew": true
+    },
+    {
+      "authorName": "Lisha Sen",
+      "rating": 5,
+      "date": "a month ago",
+      "text": "It's been a year that my mumma is his patient , and she always prefer Diagnos Lab for giving her blood samples..... Such a good and polite behaviour , also there is never any delay for the blood tests , always make sure that there will be no gaps for the blood tests done 👍......",
+      "reviewCount": 1
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 
 import WhyDiagnosLab from "./components/whyDiagnos/whyDiagnos";
 import PopularTests from "./components/tests/popular";
-import RadiologySlider from "./components/radiology/services";
 import Packages from "./components/packages/packages";
 import HeroSection from "./components/hero";
+import RadiologyServices from "./components/radiology/services";
 
 export default function Home() {
   return (
@@ -12,7 +12,7 @@ export default function Home() {
       <WhyDiagnosLab />
       <PopularTests />
       <Packages />
-      <RadiologySlider />
+      <RadiologyServices />
     </>
   );
 }

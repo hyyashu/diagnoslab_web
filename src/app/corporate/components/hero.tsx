@@ -124,7 +124,7 @@ const HeroSection: React.FC = () => {
       </div>
 
       {/* --- FLOATING ENQUIRY FORM --- */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-20 w-full max-w-[90%] md:max-w-5xl">
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-20 w-full max-w-[100%] md:max-w-5xl">
         <div className="bg-white p-4 md:p-8 rounded-[2rem] shadow-2xl border border-slate-100 ml-4 mr-4 lg:ml-0 lg:mr-0">
           <h3 className="font-heading text-xl md:text-2xl font-black text-black mb-2 md:mb-6">
             Get In touch

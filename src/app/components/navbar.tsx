@@ -36,16 +36,16 @@ const Navbar = () => {
 
   const navLinks = [
     { name: 'Home', href: '/', icon: <Home size={20} /> },
-    { name: 'Tests', href: '/tests', icon: <FileText size={20} /> },
-    { name: 'Packages', href: '/packages', icon: <Package size={20} /> },
-    { name: 'Radiology', href: '/radiology', icon: <Microscope size={20} /> },
+    { name: 'Tests', href: '/tests#tests-section', icon: <FileText size={20} /> },
+    { name: 'Packages', href: '/packages#packages-section', icon: <Package size={20} /> },
+    { name: 'Radiology', href: '/radiology#radiology-section', icon: <Microscope size={20} /> },
     { name: 'Corporate Tie-ups', href: '/corporate', icon: <Handshake size={20} /> },
-    { name: 'About Us', href: '/about', icon: <Users size={20} /> },
+    { name: 'About Us', href: '/aboutUs', icon: <Users size={20} /> },
     { name: 'Contact Us', href: '/contact', icon: <Phone size={20} /> },
   ];
 
   return (
-    <nav className="w-full bg-white shadow-sm sticky top-0 z-50 font-body">
+    <nav className="w-full bg-white shadow-sm fixed left-0 right-0 z-[100] font-body">
       
       {/* --- MARQUEE --- */}
       <div className="hidden md:block w-full bg-[#C62828] overflow-hidden py-2">

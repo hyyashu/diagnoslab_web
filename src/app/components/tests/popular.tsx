@@ -5,46 +5,15 @@ import React, { useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import TestCard from "./TestCard";
+import rawData from "@/data/tests.json";
 
-interface TestCardProps {
-  title: string;
-  description: string;
-  price: number;
-  originalPrice: number;
-}
-
-const testData: TestCardProps[] = [
-  {
-    title: "Complete Blood Count",
-    description: "Checks overall blood health and detects infections.",
-    price: 320,
-    originalPrice: 450,
-  },
-  {
-    title: "Semen Test",
-    description: "Analyzes sperm count, motility, and fertility health.",
-    price: 250,
-    originalPrice: 300,
-  },
-  {
-    title: "HbA1c Test",
-    description: "Monitors average blood sugar over three months.",
-    price: 550,
-    originalPrice: 600,
-  },
-  {
-    title: "Complete Blood Count",
-    description: "Checks overall blood health and detects infections.",
-    price: 320,
-    originalPrice: 450,
-  },
-  {
-    title: "Complete Blood Count",
-    description: "Checks overall blood health and detects infections.",
-    price: 320,
-    originalPrice: 450,
-  },
-];
+const tests = rawData.tests.map((test: any) => ({
+  id: test.Id,
+  title: test.TestName,
+  description: test.Description,
+  price: test.DiscountedPrice,
+  originalPrice: test.Price,
+}));
 
 export default function PopularTests() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -96,7 +65,7 @@ export default function PopularTests() {
           {/* Carousel */}
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex gap-6 m-6">
-              {testData.map((test, index) => (
+              {tests.map((test: any, index: number) => (
                 <div
                   key={index}
                   className="flex-[0_0_94%] sm:flex-[0_0_48%] lg:flex-[0_0_32%] min-w-0"
@@ -116,7 +85,7 @@ export default function PopularTests() {
 
         {/* View All Button */}
         <div className="mt-16 text-center">
-          <Link href="/tests">
+          <Link href="/tests#tests-section">
           <button className="font-heading px-10 py-4 bg-background-primary hover:bg-red-600 text-white font-bold rounded-2xl transition-all shadow-lg hover:shadow-red-200">
             View All Tests
           </button>

@@ -1,4 +1,5 @@
 "use client";
+import rawData from "@/data/tests.json";
 
 import { useMemo, useState } from "react";
 import TextCard from "./textCard";
@@ -17,16 +18,16 @@ const filters = [
   "Liver Health",
 ];
 
-const tests = Array.from({ length: 30 }).map((_, i) => ({
-  id: i,
-  title: "Complete Blood Count",
-  description: "Checks overall blood health and detects infections.",
-  price: 320,
-  originalPrice: 450,
-  category: filters[(i % (filters.length - 1)) + 1],
-}));
 
 const ITEMS_PER_PAGE = 6;
+const tests = rawData.tests.map((t: any) => ({
+  id: t.Id,
+  title: t.TestName,
+  description: t.Description,
+  price: t.DiscountedPrice,
+  originalPrice: t.Price,
+  category: t.Categories?.[0] || "General Health",
+}));
 
 export default function SearchTests() {
   const [active, setActive] = useState("All");
@@ -82,7 +83,7 @@ export default function SearchTests() {
   };
 
   return (
-    <div className="min-h-screen bg-white px-4 md:px-6 py-8 md:py-12">
+    <div id="tests-section" className="min-h-screen bg-white px-4 md:px-6 py-8 md:py-12">
       
       {/* Heading Section */}
       <div className="text-center mb-8 md:mb-10">

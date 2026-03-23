@@ -6,7 +6,7 @@ import HealthPackageCard from "./HealthPackageCard";
 import "swiper/css";
 import "swiper/css/navigation";
 import Link from "next/link";
-
+import rawData from "@/data/packages.json";
 interface HealthPackage {
   id: number;
   name: string;
@@ -16,55 +16,17 @@ interface HealthPackage {
   originalPrice: string;
 }
 
-const packageData: HealthPackage[] = [
-  {
-    id: 1,
-    name: "ND Plus",
-    parameters: 75,
-    description:
-      "Comprehensive tests assessing blood health, glucose, liver and kidney function,...",
-    currentPrice: "2,500",
-    originalPrice: "10,000",
-  },
-  {
-    id: 2,
-    name: "ND Max Plus",
-    parameters: 89,
-    description:
-      "Extensive tests including those in ND Plus autoimmune markers, inflammatory",
-    currentPrice: "3,000",
-    originalPrice: "15,000",
-  },
-  {
-    id: 3,
-    name: "BIO T Plus",
-    parameters: 51,
-    description:
-      "Tests for blood health, glucose, cholesterol, kidney function, uric acid,.....",
-    currentPrice: "1,100",
-    originalPrice: "4,000",
-  },
-  {
-    id: 4,
-    name: "BIO T D Plus",
-    parameters: 53,
-    description:
-      "Similar to Bio T Plus but with long term glucose monitoring (HbA1c)...",
-    currentPrice: "1,400",
-    originalPrice: "4,600",
-  },
-  {
-    id: 5,
-    name: "ND Basic",
-    parameters: 40,
-    description:
-      "Essential health screening for daily wellness and routine monitoring.",
-    currentPrice: "1,200",
-    originalPrice: "3,500",
-  },
-];
+
 
 export default function PopularHealthPackages() {
+  const packageData = rawData.packages.map((p: any) => ({
+    id: p.Id,
+    name: p.PackageName,
+    parameters: p.ParametersCovered,
+    description: p.Description,
+    currentPrice: p.DiscountedPrice,
+    originalPrice: p.Price,
+  }));
   return (
     <section className="relative w-full py-12 bg-white overflow-hidden">
       <div className="absolute inset-0 bg-background-primary" />
@@ -99,8 +61,8 @@ export default function PopularHealthPackages() {
             }}
             className="py-6"
           >
-            {packageData.map((pkg) => (
-              <SwiperSlide key={pkg.id}>
+            {packageData.map((pkg, index) => (
+                <SwiperSlide key={`${pkg.id || pkg.name}-${index}`}>
                 <HealthPackageCard
                   name={pkg.name}
                   parameters={pkg.parameters}
@@ -125,13 +87,12 @@ export default function PopularHealthPackages() {
 
         {/* Bottom CTA */}
         <div className="mt-12 text-center">
-          <Link href="/packages">
+          <Link href="/packages#packages-section">
           <button className="font-heading px-8 py-3 bg-white text-background-primary font-bold text-sm rounded-xl transition-all shadow-lg">
             View All Packages
           </button>
           </Link>
         </div>
-
       </div>
     </section>
   );

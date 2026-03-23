@@ -23,7 +23,7 @@ export default function TestCard({
           {title}
         </h3>
 
-        <p className="font-body text-black text-sm  leading-relaxed mb-2 md:mb-8">
+        <p className="font-body text-black text-sm  leading-relaxed ">
           {description}
         </p>
       </div>

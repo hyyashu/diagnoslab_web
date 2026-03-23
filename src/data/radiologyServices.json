@@ -1,0 +1,64 @@
+{
+  "radiologyServices": [
+    {
+      "id": "ultrasound",
+      "title": "ULTRASOUND",
+      "bookLabel": "Book Ultrasound",
+      "description": "Safe imaging using sound waves to examine internal organs.",
+      "bullets": [
+        "Abdomen scans",
+        "Pelvic scans",
+        "Pregnancy scans",
+        "Kidney and liver evaluation"
+      ],
+      "extra": "Performed by experienced doctors with clear reporting. Female Radiologist for female cases.",
+      "reportingTime": "1-2 hours",
+      "image": "/images/heroimage.png"
+    },
+    {
+      "id": "pft",
+      "title": "PFT",
+      "bookLabel": "Book PFT",
+      "description": "A breathing test used to evaluate lung capacity and airflow.",
+      "bullets": [
+        "Asthma",
+        "Chronic cough",
+        "Breathlessness",
+        "Pre-surgery lung assessment"
+      ],
+      "extra": "Performed by experienced doctors with clear reporting. Female Radiologist for female cases.",
+      "reportingTime": "1-2 hours",
+      "image": "/images/heroimage.png"
+    },
+    {
+      "id": "ecg",
+      "title": "ECG (Electrocardiogram)",
+      "bookLabel": "Book ECG",
+      "description": "Quick test to check heart rhythm and electrical activity.",
+      "bullets": [
+        "Chest pain",
+        "Irregular heartbeat",
+        "Pre-surgery fitness",
+        "Routine cardiac screening"
+      ],
+      "extra": "Performed by experienced doctors with clear reporting. Female Radiologist for female cases.",
+      "reportingTime": "1-2 hours",
+      "image": "/images/heroimage.png"
+    },
+    {
+      "id": "xray",
+      "title": "X-RAY",
+      "bookLabel": "Book X-Ray",
+      "description": "Fast, low radiation imaging for bones, chest, spine, joints, and more.",
+      "bullets": [
+        "Fractures",
+        "Chest infections",
+        "Back pain",
+        "Joint problems"
+      ],
+      "extra": "Performed by experienced doctors with clear reporting. Female Radiologist for female cases.",
+      "reportingTime": "1-2 hours",
+      "image": "/images/heroimage.png"
+    }
+  ]
+}

@@ -8,7 +8,6 @@ interface ReviewCardProps {
   rating: number;
   time: string;
   text: string;
-  hasReadMore?: boolean;
 }
 
 export default function ReviewCard({
@@ -17,14 +16,20 @@ export default function ReviewCard({
   rating,
   time,
   text,
-  hasReadMore,
 }: ReviewCardProps) {
+
+  const MAX_LENGTH = 140;
+
+  const isLong = text.length > MAX_LENGTH;
+  const displayText = isLong ? text.slice(0, MAX_LENGTH) : text;
+
   return (
     <div className="h-full bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-[0_10px_30px_rgba(0,0,0,0.06)] flex flex-col min-h-[260px]">
       
+      {/* Header */}
       <div className="flex justify-between items-start mb-6">
+        
         <div className="flex gap-4 items-center">
-
           <div className="w-12 md:w-14 h-12 md:h-14 bg-background-primary rounded-full flex items-center justify-center text-white shrink-0 shadow-sm">
             <User size={28} />
           </div>
@@ -37,7 +42,6 @@ export default function ReviewCard({
               {stats}
             </p>
           </div>
-
         </div>
 
         <div className="flex flex-col items-end">
@@ -51,13 +55,15 @@ export default function ReviewCard({
             {time}
           </p>
         </div>
+
       </div>
 
-      <p className="text-slate-600 text-[14px] leading-relaxed flex-grow">
-        {text}
-        {hasReadMore && (
-          <span className="text-red-500 font-medium cursor-pointer ml-1 hover:underline">
-            Read more
+      {/* Review Text */}
+      <p className="text-slate-600 text-[14px] leading-relaxed min-h-[72px]">
+        {displayText}
+        {isLong && (
+          <span className=" font-medium cursor-pointer ml-1 hover:underline">
+            ...
           </span>
         )}
       </p>

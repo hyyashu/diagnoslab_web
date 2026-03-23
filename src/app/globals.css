@@ -42,3 +42,7 @@ body {
 .pause-hover:hover {
   animation-play-state: paused;
 }
+html {
+  scroll-padding-top: 96px; /* navbar height */
+  scroll-behavior: smooth;
+}

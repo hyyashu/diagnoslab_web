@@ -8,8 +8,9 @@ import Footer from "./components/footer";
 import FAQAccordion from "./components/faq";
 import FindUs from "./components/findus";
 import ReviewCarousel from "./components/reviews/reviews";
-import HowItWorks from "./components/howItWorks";
-import HeroSection from "./components/hero";
+import HowItWorks from "./components/conditionalHowItWorks";
+import ConditionalHowItWorks from "./components/conditionalHowItWorks";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,15 +35,17 @@ export default function RootLayout({
   return (
     <html lang="en">
        
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      ><Navbar />
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}> 
+        <Navbar />
+        <main className="pt-12 md:pt-24">
         {children}
         <FloatingCTA phoneNumber="+91 8404802201" whatsappNumber="+91 8404802201" />
+        
         <FindUs />
       <ReviewCarousel />
-      <HowItWorks />
+      <ConditionalHowItWorks />
       <FAQAccordion />
+      </main>
         <Footer />
       </body>
     </html>
