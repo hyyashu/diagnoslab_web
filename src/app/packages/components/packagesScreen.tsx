@@ -57,6 +57,7 @@ export default function PackagesScreen() {
                 categories={pkg.Categories || ""}
                 fasting={pkg.Fasting || ""}
                 reporting={pkg.Reporting || ""}
+                slug={pkg.Slug || ""}
               />
             ))}
 

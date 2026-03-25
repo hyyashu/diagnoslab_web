@@ -79,7 +79,7 @@ export default function ContactFormCard() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full bg-background-primary text-white py-2 rounded-lg hover:bg-red-500 transition disabled:opacity-50 font-heading font-bold text-lg"
+          className="w-full bg-background-primary text-white py-2 rounded-lg hover:bg-red-700 transition disabled:opacity-50 font-heading font-bold text-lg"
         >
           {loading ? "Sending..." : "Book"}
         </button>

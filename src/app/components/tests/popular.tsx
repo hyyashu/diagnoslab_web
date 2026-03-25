@@ -86,7 +86,7 @@ export default function PopularTests() {
         {/* View All Button */}
         <div className="mt-16 text-center">
           <Link href="/tests#tests-section">
-          <button className="font-heading px-10 py-4 bg-background-primary hover:bg-red-600 text-white font-bold rounded-2xl transition-all shadow-lg hover:shadow-red-200">
+          <button className="font-heading px-10 py-4 bg-background-primary hover:bg-red-700 text-white font-bold rounded-2xl transition-all shadow-lg hover:shadow-red-200">
             View All Tests
           </button>
           </Link>

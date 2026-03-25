@@ -165,7 +165,7 @@ const HeroSection: React.FC = () => {
             {/* Button */}
             <button
               type="submit"
-              className="font-heading w-full bg-background-primary hover:bg-red-600 text-white font-black py-4 rounded-xl shadow-lg transition-all active:scale-95 uppercase tracking-widest"
+              className="font-heading w-full bg-background-primary hover:bg-red-700 text-white font-black py-4 rounded-xl shadow-lg transition-all active:scale-95 uppercase tracking-widest"
             >
               Book
             </button>

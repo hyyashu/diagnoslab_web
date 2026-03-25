@@ -1,7 +1,5 @@
 "use client";
 
-import React from "react";
-
 interface TestCardProps {
   title: string;
   description: string;
@@ -39,7 +37,7 @@ export default function TestCard({
           </span>
         </div>
 
-        <button className="font-heading w-full mt-2 md:mt-0 py-4 bg-background-primary hover:bg-red-600 text-white font-bold rounded-2xl transition-colors text-sm md:text-lg">
+        <button className="font-heading w-full mt-2 md:mt-0 py-4 bg-background-primary hover:bg-red-700 text-white font-bold rounded-2xl transition-colors text-sm md:text-lg">
           Book
         </button>
       </div>

@@ -38,7 +38,7 @@ export default function ContactCard({
         <p className="font-body">{email}</p>
       </div>
 
-      <button className="mt-6 w-full bg-background-primary text-white py-2 rounded-lg hover:bg-red-500 transition font-heading font-bold text-lg">
+      <button className="mt-6 w-full bg-background-primary text-white py-2 rounded-lg hover:bg-red-700 transition font-heading font-bold text-lg">
         {buttonText}
       </button>
     </div>

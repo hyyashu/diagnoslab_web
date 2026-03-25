@@ -19,7 +19,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "nd-plus"
     },
     {
       "Id": 2,
@@ -40,7 +40,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "nd-max-plus"
     },
     {
       "Id": 3,
@@ -61,7 +61,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "bio-t-plus"
     },
     {
       "Id": 4,
@@ -82,7 +82,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "bio-t-d-plus"
     },
     {
       "Id": 5,
@@ -103,7 +103,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "amh-plus"
     },
     {
       "Id": 6,
@@ -124,7 +124,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "pcod-profile"
     },
     {
       "Id": 7,
@@ -145,7 +145,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "ante-natal-panel"
     },
     {
       "Id": 8,
@@ -166,7 +166,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "diabetes-monitoring-panel-1"
     },
     {
       "Id": 9,
@@ -187,7 +187,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "diabetes-monitoring-panel-2"
     },
     {
       "Id": 10,
@@ -208,7 +208,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "arthriti-panel-1"
     },
     {
       "Id": 9,
@@ -229,7 +229,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "arthriti-panel-2"
     },
     {
       "Id": 10,
@@ -250,7 +250,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "complete-anemia-profile"
     },
     {
       "Id": 11,
@@ -271,7 +271,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "fever-panel "
     },
     {
       "Id": 12,
@@ -292,7 +292,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "liver-function-test-lft"
     },
     {
       "Id": 13,
@@ -313,7 +313,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "kidney-function-tests-kft"
     },
     {
       "Id": 15,
@@ -334,7 +334,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "antenatal-panel-1sl"
     },
     {
       "Id": 16,
@@ -355,7 +355,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "antenatal-panel-pg"
     }
   ]
 }

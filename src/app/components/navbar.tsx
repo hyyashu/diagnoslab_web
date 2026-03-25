@@ -9,15 +9,29 @@ import {
   Microscope, Handshake, Users, Phone 
 } from 'lucide-react';
 
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
 
   // helper function for active route
   const isActive = (href: string) => {
-    if (href === "/") return pathname === "/";
-    return pathname === href || pathname.startsWith(href + "/");
+    const cleanHref = href.split("#")[0];
+  
+    // Route match 
+    if (pathname === cleanHref || pathname.startsWith(cleanHref + "/")) {
+      return true;
+    }
+  
+    // Section match 
+    if (href.includes("#")) {
+      const sectionId = href.split("#")[1];
+      return activeSection === sectionId;
+    }
+  
+    return false;
   };
+  
 
   // Content for the marquee
   const tickerItems = [
@@ -26,13 +40,35 @@ const Navbar = () => {
     "15+ Years of trust",
   ];
   
+  const [activeSection, setActiveSection] = useState("");
+
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-  }, [isOpen]);
+    const sections = [
+      "tests-section",
+      "packages-section",
+      "radiology-section",
+    ];
+  
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      {
+        threshold: 0.5,
+      }
+    );
+  
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+  
+    return () => observer.disconnect();
+  }, []);
 
   const navLinks = [
     { name: 'Home', href: '/', icon: <Home size={20} /> },

@@ -76,7 +76,7 @@ export default function RadiologyCard({
             <span className="font-bold">Reporting:</span> {reportingTime}
           </p>
           
-          <button className="w-full md:w-auto bg-background-primary hover:bg-red-600 text-white font-semibold px-12 py-3 rounded-2xl transition-colors text-lg shadow-md">
+          <button className="w-full md:w-auto bg-background-primary hover:bg-red-700 text-white font-semibold px-12 py-3 rounded-2xl transition-colors text-lg shadow-md">
             Book {title}
           </button>
         </div>

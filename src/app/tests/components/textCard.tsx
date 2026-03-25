@@ -40,7 +40,7 @@ export default function TestCard({
             <p className="text-xl font-bold text-green-600 font-heading">₹{price}</p>
             <p className="text-sm line-through text-slate-400 font-medium font-heading">₹{originalPrice}</p>
           </div>
-          <button className="bg-background-primary text-white px-10 py-2.5 rounded-xl text-lg font-bold shadow-md hover:bg-red-600 transition-colors font-heading">
+          <button className="bg-background-primary text-white px-10 py-2.5 rounded-xl text-lg font-bold shadow-md hover:bg-red-700 transition-colors font-heading">
             Book
           </button>
         </div>

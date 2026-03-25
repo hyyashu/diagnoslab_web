@@ -6,7 +6,7 @@ import { Phone, MessageCircle, Mail } from 'lucide-react';
 const Footer = () => {
   const quickLinks = [
     { name: 'Home', href: '/' },
-    { name: 'About us', href: '/about' },
+    { name: 'About us', href: '/aboutUs' },
     { name: 'Radiology', href: '/radiology' },
     { name: 'Packages', href: '/packages' },
     { name: 'Tests', href: '/tests' },
@@ -72,7 +72,7 @@ const Footer = () => {
                     <Phone size={18} className="fill-white" />
                     <span>+91 84048 02201</span>
                   </a>
-                  <a href="#" className="flex items-center gap-3 hover:opacity-100">
+                  <a href="https://wa.me/918404802201" className="flex items-center gap-3 hover:opacity-100">
                     <MessageCircle size={18} className="fill-white" />
                     <span>Whatsapp Support</span>
                   </a>
@@ -86,7 +86,7 @@ const Footer = () => {
               <section>
                 <h3 className="text-lg font-bold mb-3">Working Hours</h3>
                 <p className="text-sm opacity-90">Mon–Sun: 7:30 AM – 7:30 PM</p>
-                <p className="text-sm mt-4 italic opacity-80">Home collection slots available daily.</p>
+                <p className="text-sm mt-4 italic ">Home collection slots available daily.</p>
               </section>
             </div>
           </div>

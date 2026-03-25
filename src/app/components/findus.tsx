@@ -36,7 +36,7 @@ const FindUs = () => {
             <a
               href="https://maps.app.goo.gl/"
               target="_blank"
-              className="inline-flex items-center gap-2 bg-background-primary border border- font-heading text-white px-5 py-2 rounded-full text-sm hover:bg-red-600 transition"
+              className="inline-flex items-center gap-2 bg-background-primary border border- font-heading text-white px-5 py-2 rounded-full text-sm hover:bg-red-700 transition"
             >
               Get Directions
               <ExternalLink size={16} />

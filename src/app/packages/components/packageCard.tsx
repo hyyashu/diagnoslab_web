@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 
 interface Props {
   title: string;
@@ -9,6 +10,7 @@ interface Props {
   categories?: string;
   fasting?: string;
   reporting?: string;
+  slug: string;
 }
 
 export default function PackageCard({
@@ -20,6 +22,7 @@ export default function PackageCard({
   categories = "A, B, C",
   fasting = "Not Required",
   reporting = "Same Day",
+  slug = "",
 }: Props) {
   return (
     <div className="bg-white rounded-3xl p-8 shadow-[0px_10px_30px_rgba(0,0,0,0.1)] border border-gray-50 relative flex flex-col w-full max-w-[400px]">
@@ -62,10 +65,12 @@ export default function PackageCard({
 
       {/* Compact Buttons */}
       <div className="grid grid-cols-2 gap-3">
-        <button className="w-full py-2 border-[1.5px] border-background-primary text-background-primary rounded-xl text-base font-bold hover:bg-red-50 transition-colors font-heading">
-          Details
-        </button>
-        <button className="w-full py-2 bg-background-primary text-white rounded-xl text-base font-bold hover:bg-red-600 shadow-sm shadow-red-100 transition-all font-heading text-sm md:text-base">
+      <Link href={`/packages/${slug}`}>
+          <button className="w-full py-2 border-[1.5px] border-background-primary text-background-primary rounded-xl text-base font-bold hover:bg-red-50 transition-colors font-heading">
+            Details
+          </button>
+        </Link>
+        <button className="w-full py-2 bg-background-primary text-white rounded-xl text-base font-bold hover:bg-red-700 shadow-sm shadow-red-100 transition-all font-heading text-sm md:text-base">
           Book
         </button>
       </div>
