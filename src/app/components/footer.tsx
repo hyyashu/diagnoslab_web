@@ -23,7 +23,7 @@ const Footer = () => {
           {/* Logo Image */}
           <div className="flex items-center gap-2">
           <Image 
-              src="/images/diagnologo.png" 
+              src="/images/diagnoslogo.png" 
               alt="Diagnos Labs Logo"
               width={500}
               height={500}
