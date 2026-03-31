@@ -2,10 +2,11 @@
 import rawData from "@/data/tests.json";
 
 import { useMemo, useState } from "react";
-import TextCard from "./textCard";
+
 import FilterChips from "./filterChips";
 import { Pagination } from "./pagination";
 import SearchBar from "./searchBar"; 
+import TestCard from "./testCard";
 
 const filters = [
   "All",
@@ -27,6 +28,8 @@ const tests = rawData.tests.map((t: any) => ({
   price: t.DiscountedPrice,
   originalPrice: t.Price,
   category: t.Categories?.[0] || "General Health",
+  fasting: t.Fasting || "Not Required",
+  reporting: t.Reporting || "Same Day",
 }));
 
 export default function SearchTests() {
@@ -83,7 +86,7 @@ export default function SearchTests() {
   };
 
   return (
-    <div id="tests-section" className="min-h-screen bg-white px-4 md:px-6 py-8 md:py-12">
+    <div id="tests-section" className=" bg-white px-4 md:px-6 py-8 md:py-10">
       
       {/* Heading Section */}
       <div className="text-center mb-8 md:mb-10">
@@ -109,7 +112,7 @@ export default function SearchTests() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-10 md:mt-12 max-w-6xl mx-auto">
         {paginatedTests.length > 0 ? (
           paginatedTests.map((test) => (
-            <TextCard key={test.id} {...test} />
+            <TestCard key={test.id} {...test} />
           ))
         ) : (
           <div className="col-span-full py-16 text-center">

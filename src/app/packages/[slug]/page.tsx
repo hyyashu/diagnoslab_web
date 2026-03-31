@@ -1,5 +1,6 @@
 import data from "@/data/packages.json";
 import PackageDetails from "../components/packageDetails";
+import SimilarPackages from "../components/similarPackages";
 
 // ✅ keep this as is
 export function generateStaticParams() {
@@ -22,5 +23,8 @@ export default async function Page({
 
   if (!pkg) return <div>Package not found</div>;
 
-  return <PackageDetails pkg={pkg} />;
+  return <>
+    <PackageDetails pkg={pkg} />
+    <SimilarPackages currentSlug={slug} />
+  </>;
 }

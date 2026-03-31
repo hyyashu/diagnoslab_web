@@ -1,49 +1,35 @@
 "use client";
+import Link from "next/link";
 
 import React, { useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import TestCard from "../../components/tests/TestCard";
+import TestCard from "./testCard";
+import rawData from "@/data/tests.json";
 
-interface TestCardProps {
-  title: string;
-  description: string;
-  price: number;
-  originalPrice: number;
-}
+type RawTest = {
+  Id: number;
+  TestName: string;
+  Description: string;
+  Price: number;
+  DiscountedPrice: number;
+  Categories?: string[];
+  Fasting?: string;
+  Reporting?: string;
+};
 
-const testData: TestCardProps[] = [
-  {
-    title: "Complete Blood Count",
-    description: "Checks overall blood health and detects infections.",
-    price: 320,
-    originalPrice: 450,
-  },
-  {
-    title: "Semen Test",
-    description: "Analyzes sperm count, motility, and fertility health.",
-    price: 250,
-    originalPrice: 300,
-  },
-  {
-    title: "HbA1c Test",
-    description: "Monitors average blood sugar over three months.",
-    price: 550,
-    originalPrice: 600,
-  },
-  {
-    title: "Complete Blood Count",
-    description: "Checks overall blood health and detects infections.",
-    price: 320,
-    originalPrice: 450,
-  },
-  {
-    title: "Complete Blood Count",
-    description: "Checks overall blood health and detects infections.",
-    price: 320,
-    originalPrice: 450,
-  },
-];
+const tests = rawData.tests
+  .slice(0, 15) 
+  .map((test: any) => ({
+    id: test.Id,
+    title: test.TestName,
+    description: test.Description,
+    price: test.DiscountedPrice,
+    originalPrice: test.Price,
+    category: test.Categories?.[0] || "General Health",
+    fasting: test.Fasting?.trim() || "Not Required",
+    reporting: test.Reporting?.trim() || "Same Day",
+  }));
 
 export default function PopularTests() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -60,15 +46,15 @@ export default function PopularTests() {
   }, [emblaApi]);
 
   return (
-    <section className="w-full py-16 bg-background-primary">
+    <section className="w-full py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4">
 
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="font-heading text-2xl md:text-4xl text-white font-extrabold text-black mb-3 tracking-tight">
+          <h2 className="font-heading text-2xl md:text-4xl font-black text-black mb-3 tracking-tight">
             Popular Tests
           </h2>
-          <p className="font-heading text-white font-medium text-base md:text-lg">
+          <p className="font-body text-gray-500 font-medium text-sm md:text-lg">
             Most Commonly booked diagnostic tests.
           </p>
         </div>
@@ -79,7 +65,7 @@ export default function PopularTests() {
           {/* Left Arrow */}
           <button
             onClick={scrollPrev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 rounded-full bg-white text-background-primary shadow-xl  active:scale-95 transition-all flex"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 rounded-full bg-background-primary text-white shadow-xl hover:bg-red-600 active:scale-95 transition-all flex"
           >
             <ChevronLeft size={18} className="md:w-7 md:h-7" />
           </button>
@@ -87,7 +73,7 @@ export default function PopularTests() {
           {/* Right Arrow */}
           <button
             onClick={scrollNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 rounded-full bg-white text-background-primary shadow-xl  active:scale-95 transition-all flex"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 rounded-full bg-background-primary text-white shadow-xl hover:bg-red-600 active:scale-95 transition-all flex"
           >
             <ChevronRight size={18} className="md:w-7 md:h-7" />
           </button>
@@ -95,24 +81,20 @@ export default function PopularTests() {
           {/* Carousel */}
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex gap-6 m-6">
-              {testData.map((test, index) => (
+              {tests.map((test: any, index: number) => (
                 <div
                   key={index}
                   className="flex-[0_0_94%] sm:flex-[0_0_48%] lg:flex-[0_0_32%] min-w-0"
                 >
-                  <TestCard
-                    title={test.title}
-                    description={test.description}
-                    price={test.price}
-                    originalPrice={test.originalPrice}
-                  />
+                  <TestCard {...test} />
                 </div>
               ))}
             </div>
           </div>
 
         </div>
-  </div>
+
+      </div>
     </section>
   );
 }

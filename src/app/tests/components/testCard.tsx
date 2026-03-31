@@ -6,6 +6,8 @@ interface TestCardProps {
   price: number;
   originalPrice: number;
   category: string;
+  fasting: string;
+  reporting: string;
 }
 
 export default function TestCard({
@@ -14,6 +16,8 @@ export default function TestCard({
   price,
   originalPrice,
   category,
+  fasting,
+  reporting,
 }: TestCardProps) {
   return (
     <div className="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between min-h-[220px]">
@@ -31,8 +35,8 @@ export default function TestCard({
 
       <div className="flex items-end justify-between">
         <div className="text-sm text-black space-y-1 pb-1">
-          <p><span className="font-bold font-body">Fasting:</span> Not Required</p>
-          <p><span className="font-bold font-body">Reporting:</span> Same Day</p>
+          <p><span className="font-bold font-body">Fasting:</span> {fasting}</p>
+          <p><span className="font-bold font-body">Reporting:</span> {reporting}</p>
         </div>
 
         <div className="flex flex-col items-end">

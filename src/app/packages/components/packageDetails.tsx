@@ -15,7 +15,7 @@ export default function PackageDetails({ pkg }: any) {
       </div>
 
       {/* Title */}
-      <h1 className="text-white font-heading text-2xl md:text-3xl text-center font-bold mb-8 px-4">
+      <h1 className="text-white font-heading text-2xl md:text-4xl text-center font-bold mb-8 px-4">
         {pkg.PackageName}
       </h1>
 

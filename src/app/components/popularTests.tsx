@@ -4,16 +4,21 @@ import Link from "next/link";
 import React, { useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import TestCard from "./TestCard";
+import TestCard from "../tests/components/testCard";
 import rawData from "@/data/tests.json";
 
-const tests = rawData.tests.map((test: any) => ({
-  id: test.Id,
-  title: test.TestName,
-  description: test.Description,
-  price: test.DiscountedPrice,
-  originalPrice: test.Price,
-}));
+const tests = rawData.tests
+  .slice(0, 15) 
+  .map((test: any) => ({
+    id: test.Id,
+    title: test.TestName,
+    description: test.Description,
+    price: test.DiscountedPrice,
+    originalPrice: test.Price,
+    category: test.Categories?.[0] || "General Health",
+    fasting: test.Fasting?.trim() || "Not Required",
+    reporting: test.Reporting?.trim() || "Same Day",
+  }));
 
 export default function PopularTests() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -70,12 +75,7 @@ export default function PopularTests() {
                   key={index}
                   className="flex-[0_0_94%] sm:flex-[0_0_48%] lg:flex-[0_0_32%] min-w-0"
                 >
-                  <TestCard
-                    title={test.title}
-                    description={test.description}
-                    price={test.price}
-                    originalPrice={test.originalPrice}
-                  />
+                  <TestCard {...test} />
                 </div>
               ))}
             </div>
@@ -84,7 +84,7 @@ export default function PopularTests() {
         </div>
 
         {/* View All Button */}
-        <div className="mt-16 text-center">
+        <div className="mt-4 text-center">
           <Link href="/tests#tests-section">
           <button className="font-heading px-10 py-4 bg-background-primary hover:bg-red-700 text-white font-bold rounded-2xl transition-all shadow-lg hover:shadow-red-200">
             View All Tests

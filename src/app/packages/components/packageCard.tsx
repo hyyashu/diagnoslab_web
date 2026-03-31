@@ -4,7 +4,7 @@ import Link from "next/link";
 interface Props {
   title: string;
   description: string;
-  price: number;
+  price?: number;
   originalPrice: number;
   parameters?: number;
   categories?: string;
@@ -54,9 +54,9 @@ export default function PackageCard({
       </div>
 
       {/* Pricing */}
-      <div className="flex justify-end items-center gap-2 mb-6 mt-auto">
+      <div className="flex justify-end items-center gap-2 mb-4 mt-6">
         <span className="text-green-600 font-bold text-xl font-heading">
-          ₹{price.toLocaleString()}
+          ₹{price?.toLocaleString()}
         </span>
         <span className="text-slate-400 line-through text-sm md:text-base font-heading">
           ₹{originalPrice.toLocaleString()}

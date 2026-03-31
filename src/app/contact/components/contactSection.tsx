@@ -2,7 +2,6 @@
 
 import ContactCard from "./contactCard";
 import ContactFormCard from "./contactFormCard";
-import { Phone } from "lucide-react";
 
 export default function ContactSection() {
   return (
@@ -37,8 +36,6 @@ export default function ContactSection() {
           <ContactFormCard />
         </div>
       </div>
-
-      
     </section>
   );
 }

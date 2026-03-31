@@ -1,7 +1,7 @@
 
 import WhyDiagnosLab from "./components/whyDiagnos/whyDiagnos";
-import PopularTests from "./components/tests/popular";
-import Packages from "./components/packages/packages";
+import PopularTests from "./components/popularTests";
+import Packages from "./components/packages";
 import HeroSection from "./components/hero";
 import RadiologyServices from "./components/radiology/services";
 
