@@ -1,23 +1,49 @@
+"use client";
 import Link from "next/link";
+import EnquiryForm from "@/app/components/enquiryForm";
+import LeadForm from "../../components/leadForm";
+import { useMemo, useState } from "react";
 
+interface leadMetaProps {
+  package_name: string;
+  package_description: string;
+  package_price: number;
+  package_original_price: number;
+  package_parameters: number;
+  package_categories: string[];
+}
 export default function PackageDetails({ pkg }: any) {
   const categories = pkg.Categories?.split(", ") || [];
-
+  const [showLeadForm, setShowLeadForm] = useState(false);
+  const leadMeta = useMemo<leadMetaProps>(() => ({
+    package_name: pkg.PackageName,
+    package_description: pkg.Description,
+    package_price: pkg.DiscountedPrice,
+    package_original_price: pkg.Price,
+    package_parameters: pkg.ParametersCovered,
+    package_categories: categories,
+  }), [pkg.PackageName, pkg.Description, pkg.DiscountedPrice, pkg.Price, pkg.ParametersCovered, categories]);
   return (
+    <>
     <div className="bg-background-primary p-4 md:p-8 ">
       {/* Back Button */}
       <div className="max-w-6xl mx-auto mb-6">
         <Link href="/packages#packages-section">
-          <button className="bg-white text-background-primary px-4 py-2 rounded-full text-sm font-medium font-heading flex items-center gap-2 shadow-sm hover:bg-gray-100 transition-all">
-            <span className="text-sm md:text-base font-heading">←</span> Back to Packages
+          <button className="bg-white text-background-primary px-2 py-1 rounded-full text-[10px] md:text-sm font-medium font-heading flex items-center gap-1 shadow-sm hover:bg-gray-100 transition-all">
+            <span className="text-sm md:text-base font-heading">←</span> Back
           </button>
         </Link>
       </div>
+
 
       {/* Title */}
       <h1 className="text-white font-heading text-2xl md:text-4xl text-center font-bold mb-8 px-4">
         {pkg.PackageName}
       </h1>
+
+      <div className="mx-auto w-full max-w-[90%] md:max-w-6xl mb-8">
+  <EnquiryForm />
+</div>
 
       <div className="max-w-6xl mx-auto space-y-4 ">
         {/* Info Header - Stacked on mobile, row on desktop */}
@@ -91,12 +117,23 @@ export default function PackageDetails({ pkg }: any) {
                 <span className="text-slate-400 line-through text-sm font-semibold font-heading">₹{pkg.Price}</span>
               </div>
             </div>
-            <button className="bg-background-primary hover:bg-red-700 text-white w-full sm:w-auto px-10 py-3 rounded-xl font-bold transition-all shadow-md font-heading">
+            <button onClick={() => setShowLeadForm(true)} className="bg-background-primary hover:bg-red-700 text-white w-full sm:w-auto px-10 py-3 rounded-xl font-bold transition-all shadow-md font-heading">
               Book Now
             </button>
           </div>
         </div>
       </div>
     </div>
+    <LeadForm
+  open={showLeadForm}
+  onOpenChange={setShowLeadForm}
+  title="Book"
+  testName={pkg.PackageName}
+  testDescription={pkg.Description}
+  testPrice={pkg.DiscountedPrice}
+  testOriginalPrice={pkg.Price}
+  additionalSourceData={leadMeta}
+/>
+    </>
   );
 }

@@ -10,37 +10,18 @@ import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
+import EnquiryForm from "./enquiryForm";
 
 const HeroSection: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [swiperRef, setSwiperRef] = useState<SwiperType | null>(null);
 
-  // form state
-  const [name, setName] = useState<string>("");
-  const [phone, setPhone] = useState<string>("");
-  const [submitted, setSubmitted] = useState<boolean>(false);
 
   const carouselImages: string[] = [
     "/images/heroimage.png",
     "/images/heroimage.png",
     "/images/heroimage.png",
   ];
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    console.log({
-      name,
-      phone,
-    });
-
-    // reset form
-    setName("");
-    setPhone("");
-    // show success message
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
-  };
 
   return (
     <section className="relative w-full h-[600px] md:h-[700px] flex flex-col items-center justify-center overflow-visible mb-[180px] md:mb-[120px] z-10 ">
@@ -125,53 +106,8 @@ const HeroSection: React.FC = () => {
 
       {/* --- FLOATING ENQUIRY FORM --- */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-20 w-full max-w-[90%] md:max-w-5xl">
-        <div className="bg-white p-6 md:p-8 rounded-[2rem] shadow-2xl border border-slate-100">
-          <h3 className="font-heading text-xl md:text-2xl font-black text-slate-900 mb-6">
-            Enquire Now
-          </h3>
-
-          <form
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 items-end"
-            onSubmit={handleSubmit}
-          >
-            {/* Name */}
-            <div className="flex flex-col space-y-2">
-              <label className="font-body text-sm font-bold text-black">Name</label>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Your Name"
-                required
-                className="w-full text-black bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:border-red-500 outline-none transition-all"
-              />
-            </div>
-
-            {/* Phone */}
-            <div className="flex flex-col space-y-2">
-              <label className="font-body text-sm font-bold text-black">
-                Phone Number
-              </label>
-              <input
-                type="tel"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                placeholder="10-Digit Mobile Number"
-                required
-                className="w-full text-black bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:border-red-500 outline-none transition-all"
-              />
-            </div>
-
-            {/* Button */}
-            <button
-              type="submit"
-              className="font-heading w-full bg-background-primary hover:bg-red-700 text-white font-black py-4 rounded-xl shadow-lg transition-all active:scale-95 uppercase tracking-widest"
-            >
-              Book
-            </button>
-          </form>
-        </div>
-      </div>
+  <EnquiryForm />
+</div>
     </section>
   );
 };

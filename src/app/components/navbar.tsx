@@ -84,7 +84,7 @@ const Navbar = () => {
     <nav className="w-full bg-white shadow-sm fixed left-0 right-0 z-[100] font-body">
       
       {/* --- MARQUEE --- */}
-      <div className="hidden md:block w-full bg-[#C62828] overflow-hidden py-2">
+      <div className="block w-full bg-[#C62828] overflow-hidden py-2">
         <div className="flex whitespace-nowrap animate-marquee w-max">
           {[...Array(4)].map((_, i) => (
             <div key={i} className="flex items-center">
@@ -110,7 +110,7 @@ const Navbar = () => {
               onClick={() => setIsOpen(true)}
               className="text-red-600 focus:outline-none"
             >
-              <Menu size={26} strokeWidth={2.5} />
+              <Menu size={30} strokeWidth={2.5} />
             </button>
             <Link href="/">
               <Image 
@@ -118,7 +118,7 @@ const Navbar = () => {
                 alt="Diagnos Labs" 
                 width={80} 
                 height={80} 
-                className="h-16 md:h-20 w-auto object-contain"
+                className="h-20 md:h-20 w-auto object-contain"
                 priority
               />
             </Link>
@@ -131,7 +131,7 @@ const Navbar = () => {
               alt="Diagnos Labs" 
               width={100} 
               height={100} 
-              className="h-20 md:h-30 w-auto object-contain"
+              className="h-24 md:h-30 w-auto object-contain"
               priority
             />
           </Link>
@@ -165,7 +165,7 @@ const Navbar = () => {
                 alt="Narayana Diagnostic" 
                 width={140} 
                 height={40} 
-                className="h-20 md:h-30 w-auto object-contain"
+                className="h-30 md:h-30 w-auto object-contain"
               />
             </div>
           </div>

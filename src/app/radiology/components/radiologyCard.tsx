@@ -1,6 +1,17 @@
 "use client";
 
 import Image from "next/image";
+import { submitLeadForm } from "@/lib/api";
+import { useSource } from "@/lib/useSource";
+import LeadForm from "../../components/leadForm";
+import { useMemo, useState } from "react";
+
+interface leadMetaProps {
+  radiology_name: string;
+  radiology_description: string;
+  radiology_facilities: string[];
+  radiology_reporting_time: string;
+}
 
 interface RadiologyCardProps {
   title: string;
@@ -21,7 +32,15 @@ export default function RadiologyCard({
   reverse = false,
   femaleRadiologist = true,
 }: RadiologyCardProps) {
+  const [showLeadForm, setShowLeadForm] = useState(false);
+  const leadMeta = useMemo<leadMetaProps>(() => ({
+    radiology_name: title,
+    radiology_description: description,
+    radiology_facilities: facilities,
+    radiology_reporting_time: reportingTime,
+  }), [title, description, facilities, reportingTime]);
   return (
+    <>
     <div
       className={`flex flex-col ${
         reverse ? "md:flex-row-reverse" : "md:flex-row"
@@ -76,11 +95,20 @@ export default function RadiologyCard({
             <span className="font-bold">Reporting:</span> {reportingTime}
           </p>
           
-          <button className="w-full md:w-auto bg-background-primary hover:bg-red-700 text-white font-semibold px-12 py-3 rounded-2xl transition-colors text-lg shadow-md">
+          <button onClick={() => setShowLeadForm(true)} className="w-full md:w-auto bg-background-primary hover:bg-red-700 text-white font-semibold px-12 py-3 rounded-2xl transition-colors text-lg shadow-md">
             Book {title}
           </button>
         </div>
       </div>
     </div>
+    <LeadForm
+  open={showLeadForm}
+  onOpenChange={setShowLeadForm}
+  title="Book"
+  testName={title}
+  testDescription={description}
+  additionalSourceData={leadMeta}
+/>
+    </>
   );
 }

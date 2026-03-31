@@ -1,5 +1,8 @@
 "use client";
 
+import { useMemo, useState } from "react";
+import LeadForm from "../../components/leadForm";
+
 interface TestCardProps {
   title: string;
   description: string;
@@ -8,7 +11,18 @@ interface TestCardProps {
   category: string;
   fasting: string;
   reporting: string;
+
 }
+
+interface leadMetaProps {
+  test_name: string;
+  test_price: number;
+  test_original_price: number;
+  test_category: string;
+  test_fasting: string;
+  test_reporting: string;
+}
+
 
 export default function TestCard({
   title,
@@ -19,7 +33,17 @@ export default function TestCard({
   fasting,
   reporting,
 }: TestCardProps) {
+  const [showLeadForm, setShowLeadForm] = useState(false);
+  const leadMeta = useMemo<leadMetaProps>(() => ({
+    test_name: title,
+    test_price: price,
+    test_original_price: originalPrice,
+    test_category: category,
+    test_fasting: fasting,
+    test_reporting: reporting,
+  }), [title, price, originalPrice, category, fasting, reporting]);
   return (
+    <>
     <div className="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between min-h-[220px]">
       <div>
         <div className="flex justify-between items-start mb-2">
@@ -44,11 +68,27 @@ export default function TestCard({
             <p className="text-xl font-bold text-green-600 font-heading">₹{price}</p>
             <p className="text-sm line-through text-slate-400 font-medium font-heading">₹{originalPrice}</p>
           </div>
-          <button className="bg-background-primary text-white px-10 py-2.5 rounded-xl text-lg font-bold shadow-md hover:bg-red-700 transition-colors font-heading">
+          <button onClick={() => setShowLeadForm(true)} className="bg-background-primary text-white px-10 py-2.5 rounded-xl text-lg font-bold shadow-md hover:bg-red-700 transition-colors font-heading">
             Book
           </button>
         </div>
       </div>
+
     </div>
+    <LeadForm
+  open={showLeadForm}
+  onOpenChange={setShowLeadForm}
+  title="Book"
+  testName={title}
+  testDescription={description}
+  testPrice={price}
+  testOriginalPrice={originalPrice}
+  
+  additionalSourceData={leadMeta}
+/>
+    </>
+
+
+    
   );
 }

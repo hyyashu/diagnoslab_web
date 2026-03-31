@@ -1,10 +1,20 @@
 "use client";
 
+import { useMemo, useState } from "react";
+import LeadForm from "../leadForm";
+
 interface RadiologyCardProps {
   title: string;
   description: string;
   uses: string[];
   footerNote: string;
+}
+
+interface leadMetaProps {
+  radiology_name: string;
+  radiology_description: string;
+  radiology_uses: string[];
+  radiology_footer_note: string;
 }
 
 export default function RadiologyCard({
@@ -13,6 +23,13 @@ export default function RadiologyCard({
   uses,
   footerNote,
 }: RadiologyCardProps) {
+  const [showLeadForm, setShowLeadForm] = useState(false);
+  const leadMeta = useMemo<leadMetaProps>(() => ({
+    radiology_name: title,
+    radiology_description: description,
+    radiology_uses: uses,
+    radiology_footer_note: footerNote,
+  }), [title, description, uses, footerNote]);
   return (
     <div className="bg-white rounded-3xl p-6 md:p-8 shadow-lg border border-gray-100 h-full flex flex-col">
       
@@ -46,11 +63,19 @@ export default function RadiologyCard({
         {footerNote}
       </p>
 
-      <button className="font-heading w-full text-sm md:text-base py-4 bg-background-primary hover:bg-red-700 text-white font-bold rounded-xl transition shadow-md active:scale-[0.98]">
+      <button onClick={() => setShowLeadForm(true)} className="font-heading w-full text-sm md:text-base py-4 bg-background-primary hover:bg-red-700 text-white font-bold rounded-xl transition shadow-md active:scale-[0.98]">
         Book{" "}
         {title.toLowerCase().charAt(0).toUpperCase() +
           title.toLowerCase().slice(1)}
       </button>
+      <LeadForm
+  open={showLeadForm}
+  onOpenChange={setShowLeadForm}
+  title="Book"
+  testName={title}
+  testDescription={description}  
+  additionalSourceData={leadMeta}
+/>
     </div>
   );
 }

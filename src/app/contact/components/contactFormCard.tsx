@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { submitLeadForm } from "@/lib/api";
+import { useSource } from "@/lib/useSource";
 
 export default function ContactFormCard() {
   const [form, setForm] = useState({
@@ -10,6 +12,9 @@ export default function ContactFormCard() {
   });
 
   const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const source = useSource({ form_type: "contact_form" });
 
   // Handle input change
   const handleChange = (
@@ -22,15 +27,28 @@ export default function ContactFormCard() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError(null);
+    setSubmitted(false);
 
     try {
+      await submitLeadForm({
+        name: form.name.trim(),
+        phone: form.phone.replace(/\D/g, ""),
+        source: {
+          ...source,
+          message: form.message.trim(),
+        },
+      });
+
       setForm({
         name: "",
         phone: "",
         message: "",
       });
+      setSubmitted(true);
     } catch (error) {
       console.error(error);
+      setError("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -84,6 +102,14 @@ export default function ContactFormCard() {
           {loading ? "Sending..." : "Book"}
         </button>
       </form>
+      {submitted && (
+        <p className="mt-3 text-sm font-semibold text-green-600">
+          Form submitted successfully!
+        </p>
+      )}
+      {error && (
+        <p className="mt-3 text-sm font-semibold text-red-600">{error}</p>
+      )}
     </div>
   );
 }

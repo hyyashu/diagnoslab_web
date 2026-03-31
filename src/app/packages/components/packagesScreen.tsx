@@ -2,6 +2,7 @@
 
 import rawData from "@/data/packages.json";
 import { useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 import Search from "./search";
 import PackageCard from "./packageCard";
@@ -9,7 +10,6 @@ import { Pagination } from "../../tests/components/pagination";
 
 const ITEMS_PER_PAGE = 9;
 
-//  STEP 1: Transform data (same like tests.tsx)
 const packages = rawData.packages.map((pkg: any) => ({
   id: pkg.Id,
   title: pkg.PackageName || "",
@@ -26,6 +26,8 @@ const packages = rawData.packages.map((pkg: any) => ({
 export default function PackagesScreen() {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
+  const searchParams = useSearchParams();
+  const showDetailsButton = searchParams.get("details") !== "hidden";
 
   //  STEP 2: FILTER LOGIC (same style as tests)
   const filteredPackages = useMemo(() => {
@@ -76,6 +78,7 @@ export default function PackagesScreen() {
                 fasting={pkg.fasting}
                 reporting={pkg.reporting}
                 slug={pkg.slug}
+                showDetailsButton={showDetailsButton}
               />
             ))}
 

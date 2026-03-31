@@ -5,6 +5,8 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, EffectFade } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
+import { submitLeadForm } from "@/lib/api";
+import { useSource } from "@/lib/useSource";
 
 // Import Swiper styles
 import "swiper/css";
@@ -16,8 +18,11 @@ const HeroSection: React.FC = () => {
   const [swiperRef, setSwiperRef] = useState<SwiperType | null>(null);
 
   const [submitted, setSubmitted] = useState<boolean>(false);
+  const [submitting, setSubmitting] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   const formRef = useRef<HTMLFormElement>(null);
+  const source = useSource({ form_type: "corporate_hero_form" });
 
   const carouselImages: string[] = [
     "/images/corporate.jpg",
@@ -25,26 +30,42 @@ const HeroSection: React.FC = () => {
     "/images/corporate.jpg",
   ];
 
-  const handleSubmit = (formData: FormData) => {
-    const data = {
-      companyName: formData.get("companyName"),
-      contactPerson: formData.get("contactPerson"),
-      phone: formData.get("phone"),
-      email: formData.get("email"),
-      employees: formData.get("employees"),
-    };
+  const handleSubmit = async (formData: FormData) => {
+    const companyName = String(formData.get("companyName") ?? "").trim();
+    const contactPerson = String(formData.get("contactPerson") ?? "").trim();
+    const phone = String(formData.get("phone") ?? "").replace(/\D/g, "");
+    const email = String(formData.get("email") ?? "").trim();
+    const employees = String(formData.get("employees") ?? "").trim();
 
+    setError(null);
+    setSubmitting(true);
 
-    //  Reset form
-    formRef.current?.reset();
+    try {
+      await submitLeadForm({
+        name: contactPerson || companyName,
+        phone,
+        source: {
+          ...source,
+          company_name: companyName,
+          contact_person: contactPerson,
+          email,
+          employees,
+          lead_type: "corporate",
+        },
+      });
 
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
+      formRef.current?.reset();
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 3000);
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
     <section className="relative w-full h-[600px] md:h-[700px] flex flex-col items-center justify-center overflow-visible mb-[180px] md:mb-[120px] z-10 ">
-      
       {/* --- BACKGROUND CAROUSEL --- */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <Swiper
@@ -79,21 +100,26 @@ const HeroSection: React.FC = () => {
       <div className="relative z-10 w-full flex flex-col items-start">
         <div className="w-full max-w-7xl mx-auto px-4 mb-6 -mt-30 md:-mt-20">
           <h1 className="font-heading text-3xl md:text-4xl lg:text-6xl font-black text-white uppercase ">
-            We are the Trusted <br /> Partner for Employee <br />Health in Jharkhand.<br />
+            We are the Trusted <br /> Partner for Employee <br />
+            Health in Jharkhand.
+            <br />
           </h1>
         </div>
 
         {/* --- SERVICES BAR --- */}
-        <div className="relative w-full overflow-x-hidden 
+        <div
+          className="relative w-full overflow-x-hidden 
           md:[mask-image:linear-gradient(to_right,black_0%,black_40%,transparent_95%)] 
-          md:[webkit-mask-image:linear-gradient(to_right,black_0%,black_40%,transparent_95%)]">
+          md:[webkit-mask-image:linear-gradient(to_right,black_0%,black_40%,transparent_95%)]"
+        >
           <div className="bg-white/70 backdrop-blur-md py-3 md:py-4">
             <div className="w-full max-w-7xl mx-auto px-4">
-            <p className="font-body text-[10px] md:text-xl font-bold text-black whitespace-normal max-w-prose md:max-w-none">
-              We specialise in corporae health screening for banks, industries, hotels, 
-              and organisations. Partner with Diagnos Lab for on-site camps, bulk testing, 
-              and fast digital reports, managed by an experienced medical team.
-            </p>
+              <p className="font-body text-[10px] md:text-xl font-bold text-black whitespace-normal max-w-prose md:max-w-none">
+                We specialise in corporae health screening for banks,
+                industries, hotels, and organisations. Partner with Diagnos Lab
+                for on-site camps, bulk testing, and fast digital reports,
+                managed by an experienced medical team.
+              </p>
             </div>
           </div>
         </div>
@@ -167,7 +193,7 @@ const HeroSection: React.FC = () => {
                 type="tel"
                 placeholder="10-Digit Mobile Number"
                 required
-                className="w-full  h-8 md:h-full text-black bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:border-red-500 outline-none"
+                className="w-full h-8 md:h-full text-black bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:border-red-500 outline-none"
               />
             </div>
 
@@ -181,7 +207,7 @@ const HeroSection: React.FC = () => {
                 type="email"
                 placeholder="Company@example.com"
                 required
-                className="w-full  h-8 md:h-full text-black bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:border-red-500 outline-none"
+                className="w-full h-8 md:h-full text-black bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:border-red-500 outline-none"
               />
             </div>
 
@@ -195,18 +221,26 @@ const HeroSection: React.FC = () => {
                 type="number"
                 placeholder="e.g. 100"
                 required
-                className="w-full  h-8 md:h-full text-black bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:border-red-500 outline-none"
+                className="w-full h-8 md:h-full text-black bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:border-red-500 outline-none"
               />
             </div>
 
             {/* Button */}
             <button
               type="submit"
-              className="font-heading w-full h-10 md:h-14 bg-background-primary hover:bg-red-700 text-white font-black  rounded-xl shadow-lg transition-all active:scale-95"
+              disabled={submitting}
+              className="font-heading w-full h-10 md:h-14 bg-background-primary hover:bg-red-700 text-white font-black rounded-xl shadow-lg transition-all active:scale-95 disabled:opacity-60 disabled:pointer-events-none"
             >
-              Get In Touch!
+              {submitting ? "Submitting..." : "Get In Touch!"}
             </button>
           </form>
+
+          {submitted && (
+            <p className="text-green-600 mt-4 font-semibold">
+              Form submitted successfully!
+            </p>
+          )}
+          {error && <p className="text-red-600 mt-4 font-semibold">{error}</p>}
         </div>
       </div>
     </section>

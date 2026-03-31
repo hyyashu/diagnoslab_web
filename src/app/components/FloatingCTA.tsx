@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { PhoneIcon } from "@heroicons/react/24/solid";
+import EnquiryForm from "./enquiryForm";
 
 interface FloatingCTAProps {
   phoneNumber: string;      // +919876543210
@@ -77,7 +78,7 @@ export default function FloatingCTA({
       {/* Vertical Request a Call CTA */}
       <button
         onClick={() => setOpenForm(true)}
-        className="fixed right-0 top-1/2 -translate-y-1/2 z-50 bg-orange-500 text-white px-3 py-6 rounded-l-lg shadow-lg hover:bg-orange-600 transition"
+        className="fixed left-0 top-1/2 -translate-y-1/2 z-50 bg-orange-500 text-white px-3 py-6 rounded-r-lg shadow-lg hover:bg-orange-600 transition"
       >
         <span className="[writing-mode:vertical-rl] rotate-180 text-sm font-medium tracking-wide">
           Request a Call
@@ -86,49 +87,25 @@ export default function FloatingCTA({
 
       {/* Popup Form */}
       {openForm && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 px-4 py-6">
+        <div
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 px-4 py-6"
+          onClick={() => setOpenForm(false)}
+        >
           
-          <div className="relative w-full max-w-md bg-white rounded-xl shadow-2xl p-5 sm:p-6 md:p-7 max-h-[90vh] overflow-y-auto">
+          <div
+            className="relative w-full max-w-md  rounded-xl shadow-2xl p-5 sm:p-6 md:p-7 max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
 
             <button
               onClick={() => setOpenForm(false)}
-              className="absolute top-3 right-3 text-black text-lg"
+              className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center text-black text-sm"
             >
               ✕
             </button>
 
-            <h3 className="text-lg sm:text-xl font-semibold mb-5 text-center text-background-primary">
-              Request a Call
-            </h3>
 
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-
-              <input
-                type="text"
-                placeholder="Enter your name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-                className="w-full border border-background-primary text-black rounded-lg px-4 py-2.5 text-sm sm:text-base outline-none focus:ring-2 focus:ring-background-primary"
-              />
-
-              <input
-                type="tel"
-                placeholder="Enter your phone number"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                required
-                className="w-full border border-background-primary text-black rounded-lg px-4 py-2.5 text-sm sm:text-base outline-none focus:ring-2 focus:ring-background-primary"
-              />
-
-              <button
-                type="submit"
-                className="w-full bg-background-primary text-white py-2.5 sm:py-3 rounded-lg text-sm sm:text-base hover:opacity-90 transition"
-              >
-                Submit Request
-              </button>
-
-            </form>
+            <EnquiryForm />
           </div>
         </div>
       )}

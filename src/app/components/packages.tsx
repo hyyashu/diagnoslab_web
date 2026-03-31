@@ -17,9 +17,7 @@ const packageData = rawData.packages.map((p: any) => ({
     price: p.DiscountedPrice,
     originalPrice: p.Price,
     parameters: p.ParametersCovered || 0,
-    categories: p.Categories
-      ? p.Categories.split(",").map((c: string) => c.trim())
-      : ["General"],
+    categories: p.Categories || "General",
 
     fasting: p.Fasting?.trim() || "Not Required",
     reporting: p.Reporting?.trim() || "Same Day",
