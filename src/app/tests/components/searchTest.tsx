@@ -1,8 +1,7 @@
 "use client";
 import rawData from "@/data/tests.json";
-
 import { useMemo, useState } from "react";
-
+import { useSearchParams } from "next/navigation";
 import FilterChips from "./filterChips";
 import { Pagination } from "./pagination";
 import SearchBar from "./searchBar"; 
@@ -30,12 +29,15 @@ const tests = rawData.tests.map((t: any) => ({
   category: t.Categories?.[0] || "General Health",
   fasting: t.Fasting || "Not Required",
   reporting: t.Reporting || "Same Day",
+  slug: t.Slug,
 }));
 
 export default function SearchTests() {
   const [active, setActive] = useState("All");
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
+  const searchParams = useSearchParams();
+  const showDetailsButton = searchParams.get("details") !== "hidden";
 
   // FILTER LOGIC
   const filteredTests = useMemo(() => {
@@ -87,6 +89,7 @@ export default function SearchTests() {
 
   return (
     <div id="tests-section" className=" bg-white px-4 md:px-6 py-8 md:py-10">
+       
       
       {/* Heading Section */}
       <div className="text-center mb-8 md:mb-10">
@@ -112,7 +115,7 @@ export default function SearchTests() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mt-10 md:mt-12 max-w-6xl mx-auto">
         {paginatedTests.length > 0 ? (
           paginatedTests.map((test) => (
-            <TestCard key={test.id} {...test} />
+            <TestCard key={test.id} {...test} showDetailsButton={showDetailsButton}/>
           ))
         ) : (
           <div className="col-span-full py-16 text-center">

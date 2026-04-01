@@ -74,7 +74,7 @@ const RadiologyServices = () => {
         </div>
 
         {/* Bottom CTA */}
-        <div className="flex justify-center mt-8">
+        <div className="flex justify-center mt-4">
           <Link href="/radiology#radiology-section">
           <button className="font-heading px-10 py-3 text-white bg-background-primary hover:bg-red-800 font-bold rounded-xl transition">
             View All Radiology

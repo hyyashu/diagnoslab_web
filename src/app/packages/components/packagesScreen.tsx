@@ -3,7 +3,6 @@
 import rawData from "@/data/packages.json";
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-
 import Search from "./search";
 import PackageCard from "./packageCard";
 import { Pagination } from "../../tests/components/pagination";
@@ -64,7 +63,7 @@ export default function PackagesScreen() {
       {/* Grid */}
       <div className="max-w-7xl mx-auto px-4 md:px-10 py-12">
         {paginatedPackages.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10 justify-items-center">
             
             {paginatedPackages.map((pkg) => (
               <PackageCard

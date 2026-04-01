@@ -43,6 +43,15 @@ body {
   animation-play-state: paused;
 }
 html {
-  scroll-padding-top: 96px; /* navbar height */
+  scroll-padding-top: 98px; /* navbar height */
   scroll-behavior: smooth;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE & Edge */
+  scrollbar-width: none;     /* Firefox */
 }

@@ -8,12 +8,14 @@ import {
   Menu, X, Home, FileText, Package, 
   Microscope, Handshake, Users, Phone 
 } from 'lucide-react';
+import EnquiryForm from './enquiryForm';
+import Modal from './modal';
 
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
-
+  const [openForm, setOpenForm] = useState(false);
   // helper function for active route
   const isActive = (href: string) => {
     const cleanHref = href.split("#")[0];
@@ -81,6 +83,7 @@ const Navbar = () => {
   ];
 
   return (
+    <>  
     <nav className="w-full bg-white shadow-sm fixed left-0 right-0 z-[100] font-body">
       
       {/* --- MARQUEE --- */}
@@ -155,7 +158,7 @@ const Navbar = () => {
 
           {/* Right Side */}
           <div className="flex items-center space-x-4 lg:space-x-10">
-            <button className="hidden xl:block bg-background-primary text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-red-700 transition-all shadow-md">
+            <button onClick={() => setOpenForm(true)} className="hidden xl:block bg-background-primary text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-red-700 transition-all shadow-md">
               Book Home Collection
             </button>
             
@@ -220,6 +223,10 @@ const Navbar = () => {
         </div>
       </aside>
     </nav>
+    <Modal isOpen={openForm} onClose={() => setOpenForm(false)}>
+        <EnquiryForm />
+    </Modal>
+    </>
   );
 };
 

@@ -1,7 +1,5 @@
 "use client";
-
 import Image from "next/image";
-
 
 type AboutCardProps = {
   title: string;
@@ -33,13 +31,13 @@ export default function AboutCard({
         </h2>
 
         {Array.isArray(description) ? (
-          <ul className="font-body list-disc pl-5 space-y-1 text-black text-sm md:text-base">
+          <ul className="font-body list-disc pl-5 space-y-1 text-gray-700 text-sm md:text-base">
             {description.map((item, index) => (
               <li key={index}>{item}</li>
             ))}
           </ul>
         ) : (
-          <p className="font-body text-black leading-relaxed text-sm md:text-base whitespace-pre-line">
+          <p className="font-body text-gray-700 leading-relaxed text-sm md:text-base whitespace-pre-line">
             {description}
           </p>
         )}

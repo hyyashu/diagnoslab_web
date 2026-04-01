@@ -23,7 +23,7 @@ export default function FAQAccordion() {
    
     <div className="w-full bg-white px-6">
       <div className="max-w-6xl mx-auto py-8"> 
-        <h2 className="font-heading text-2xl md:text-4xl font-extrabold text-center mb-8  text-black uppercase">
+        <h2 className="font-heading text-2xl md:text-4xl md:mt-6 font-extrabold text-center mb-8  text-black uppercase">
           FAQ
         </h2>
 
@@ -56,7 +56,7 @@ export default function FAQAccordion() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.2, ease: 'easeOut' }}
                     >
-                      <div className="px-10 pb-4 font-medium text-sm font-body text-slate-500 leading-relaxed">
+                      <div className="px-10 pb-4 font-medium text-sm font-body text-gray-700 leading-relaxed">
                         {item.answer}
                       </div>
                     </motion.div>

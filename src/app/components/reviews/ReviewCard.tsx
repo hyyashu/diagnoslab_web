@@ -38,9 +38,9 @@ export default function ReviewCard({
             <h4 className="font-heading font-bold text-base leading-tight text-black">
               {author}
             </h4>
-            <p className="text-[12px] text-slate-400 mt-0.5">
+            {/*<p className="text-[12px] text-slate-400 mt-0.5">
               {stats}
-            </p>
+            </p>*/}
           </div>
         </div>
 
@@ -51,7 +51,7 @@ export default function ReviewCard({
             ))}
           </div>
 
-          <p className="text-[10px] text-slate-400 mt-1 uppercase font-medium tracking-wide">
+          <p className="text-[10px] text-gray-700 mt-1 uppercase font-medium tracking-wide">
             {time}
           </p>
         </div>
@@ -59,7 +59,7 @@ export default function ReviewCard({
       </div>
 
       {/* Review Text */}
-      <p className="text-slate-600 text-[14px] leading-relaxed min-h-[72px]">
+      <p className="text-gray-700 text-[14px] leading-relaxed min-h-[72px]">
         {displayText}
         {isLong && (
           <span className=" font-medium cursor-pointer ml-1 hover:underline">

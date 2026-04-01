@@ -13,7 +13,7 @@
       ],
       "extra": "Performed by experienced doctors with clear reporting. Female Radiologist for female cases.",
       "reportingTime": "1-2 hours",
-      "image": "/images/heroimage.png"
+      "image": "/images/radiology/USG.avif"
     },
     {
       "id": "pft",
@@ -28,7 +28,7 @@
       ],
       "extra": "Performed by experienced doctors with clear reporting. Female Radiologist for female cases.",
       "reportingTime": "1-2 hours",
-      "image": "/images/heroimage.png"
+      "image": "/images/radiology/PFT.avif"
     },
     {
       "id": "ecg",
@@ -43,7 +43,7 @@
       ],
       "extra": "Performed by experienced doctors with clear reporting. Female Radiologist for female cases.",
       "reportingTime": "1-2 hours",
-      "image": "/images/heroimage.png"
+      "image": "/images/radiology/ECG.avif"
     },
     {
       "id": "xray",
@@ -58,7 +58,7 @@
       ],
       "extra": "Performed by experienced doctors with clear reporting. Female Radiologist for female cases.",
       "reportingTime": "1-2 hours",
-      "image": "/images/heroimage.png"
+      "image": "/images/radiology/XRAY.avif"
     }
   ]
 }

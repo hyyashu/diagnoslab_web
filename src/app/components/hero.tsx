@@ -18,9 +18,9 @@ const HeroSection: React.FC = () => {
 
 
   const carouselImages: string[] = [
-    "/images/heroimage.png",
-    "/images/heroimage.png",
-    "/images/heroimage.png",
+    "/images/hero/hero1.avif",
+    "/images/hero/hero2.avif",
+    "/images/hero/hero3.avif",
   ];
 
   return (

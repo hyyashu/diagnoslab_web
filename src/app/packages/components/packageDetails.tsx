@@ -27,10 +27,10 @@ export default function PackageDetails({ pkg }: any) {
     <>
     <div className="bg-background-primary p-4 md:p-8 ">
       {/* Back Button */}
-      <div className="max-w-6xl mx-auto mb-6">
+      <div className="max-w-6xl mx-auto mb-6 mt-10">
         <Link href="/packages#packages-section">
-          <button className="bg-white text-background-primary px-2 py-1 rounded-full text-[10px] md:text-sm font-medium font-heading flex items-center gap-1 shadow-sm hover:bg-gray-100 transition-all">
-            <span className="text-sm md:text-base font-heading">←</span> Back
+          <button className="bg-white text-background-primary px-2 py-1 rounded-full text-sm font-medium font-heading flex items-center gap-1 shadow-sm hover:bg-gray-100 transition-all">
+            <span className="text-base font-bold font-heading">←</span> Back
           </button>
         </Link>
       </div>

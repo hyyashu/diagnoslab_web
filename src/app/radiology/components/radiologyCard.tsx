@@ -53,7 +53,7 @@ export default function RadiologyCard({
           alt={title}
           width={400}
           height={250}
-          className="rounded-2xl object-cover w-full h-[200px] md:h-full"
+          className="rounded-2xl object-cover w-full h-[200px]"
         />
       </div>
 
@@ -64,7 +64,7 @@ export default function RadiologyCard({
             {title}
           </h2>
 
-          <p className="text-sm font-body font-bold text-black mt-2 leading-tight">
+          <p className="text-sm font-body  text-gray-700 mt-2 leading-tight">
             {description}
           </p>
 
@@ -75,7 +75,7 @@ export default function RadiologyCard({
                 <span key={index} className="flex items-center">
                   {item}
                   {index < facilities.length - 1 && (
-                    <span className="ml-2 text-black">|</span>
+                    <span className="ml-2 text-gray-700">|</span>
                   )}
                 </span>
               ))}
@@ -83,7 +83,7 @@ export default function RadiologyCard({
           </div>
 
           {femaleRadiologist && (
-            <p className="text-sm font-body font-bold text-black mt-8">
+            <p className="text-sm font-body font-bold text-black mt-6">
               Female Radiologist for female cases.
             </p>
           )}
@@ -91,8 +91,8 @@ export default function RadiologyCard({
 
         {/* Action Group */}
         <div className={`flex flex-col items-start ${reverse ? "md:items-start" : "md:items-end"} mt-6 md:mt-4 space-y-2`}>
-          <p className="text-sm font-body text-black">
-            <span className="font-bold">Reporting:</span> {reportingTime}
+          <p className="text-sm font-body text-gray-700">
+            <span className="font-bold text-black">Reporting:</span> {reportingTime}
           </p>
           
           <button onClick={() => setShowLeadForm(true)} className="w-full md:w-auto bg-background-primary hover:bg-red-700 text-white font-semibold px-12 py-3 rounded-2xl transition-colors text-lg shadow-md">

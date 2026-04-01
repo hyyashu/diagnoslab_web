@@ -24,7 +24,7 @@ export default function RadiologySection() {
         <h1 className="font-heading text-2xl md:text-4xl text-black mb-3 tracking-tight font-bold">
           Radiology Services
         </h1>
-        <p className="font-body text-gray-500 font-medium text-sm md:text-lg">
+        <p className="font-body text-gray-700 font-medium text-sm md:text-lg">
           Book a service below. Click "Book" to open the enquiry form.
         </p>
       </div>

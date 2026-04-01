@@ -2,8 +2,12 @@
 
 import { useMemo, useState } from "react";
 import LeadForm from "../../components/leadForm";
+import Link from "next/link";
 
 interface TestCardProps {
+  slug: string;
+  showDetailsButton?: boolean;
+  fillSlide?: boolean;
   title: string;
   description: string;
   price: number;
@@ -11,11 +15,11 @@ interface TestCardProps {
   category: string;
   fasting: string;
   reporting: string;
-
 }
 
 interface leadMetaProps {
   test_name: string;
+  test_slug: string;
   test_price: number;
   test_original_price: number;
   test_category: string;
@@ -23,8 +27,10 @@ interface leadMetaProps {
   test_reporting: string;
 }
 
-
 export default function TestCard({
+  slug,
+  showDetailsButton = true,
+  fillSlide = false,
   title,
   description,
   price,
@@ -34,61 +40,116 @@ export default function TestCard({
   reporting,
 }: TestCardProps) {
   const [showLeadForm, setShowLeadForm] = useState(false);
-  const leadMeta = useMemo<leadMetaProps>(() => ({
-    test_name: title,
-    test_price: price,
-    test_original_price: originalPrice,
-    test_category: category,
-    test_fasting: fasting,
-    test_reporting: reporting,
-  }), [title, price, originalPrice, category, fasting, reporting]);
+
+  const leadMeta = useMemo<leadMetaProps>(
+    () => ({
+      test_name: title,
+      test_slug: slug,
+      test_price: price,
+      test_original_price: originalPrice,
+      test_category: category,
+      test_fasting: fasting,
+      test_reporting: reporting,
+    }),
+    [title, slug, price, originalPrice, category, fasting, reporting]
+  );
+
   return (
     <>
-    <div className="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between min-h-[220px]">
-      <div>
-        <div className="flex justify-between items-start mb-2">
-          <h3 className="font-bold text-xl text-black leading-tight w-2/3 font-heading">{title}</h3>
-          <span className="text-[10px] px-3 py-1 rounded-full bg-background-primary text-center text-white font-medium uppercase tracking-wider font-heading">
-            {category}
-          </span>
-        </div>
-        <p className="text-sm text-black leading-relaxed mb-4 font-body">
-          {description}
-        </p>
-      </div>
+      <div
+        className={`bg-white rounded-3xl p-8 shadow-[0px_10px_30px_rgba(0,0,0,0.1)] border border-gray-50 flex flex-col w-full ${
+          fillSlide ? "h-full max-w-none" : "max-w-[400px]"
+        }`}
+      >
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+  <h3 className="text-xl md:text-2xl font-bold text-black leading-tight font-heading">
+    {title}
+  </h3>
 
-      <div className="flex items-end justify-between">
-        <div className="text-sm text-black space-y-1 pb-1">
-          <p><span className="font-bold font-body">Fasting:</span> {fasting}</p>
-          <p><span className="font-bold font-body">Reporting:</span> {reporting}</p>
-        </div>
+  <span className="mt-2 md:mt-0 md:ml-2 bg-background-primary text-white text-[10px] md:text-xs px-3 py-1 rounded-full font-medium shrink-0  w-fit">
+    {category}
+  </span>
+</div>
 
-        <div className="flex flex-col items-end">
-          <div className="flex items-center gap-2 mb-2">
-            <p className="text-xl font-bold text-green-600 font-heading">₹{price}</p>
-            <p className="text-sm line-through text-slate-400 font-medium font-heading">₹{originalPrice}</p>
+        <div
+          className={
+            fillSlide ? "flex min-h-0 flex-1 flex-col" : "contents"
+          }
+        >
+          {/* Description */}
+          <p
+            className={`text-gray-700 text-sm mb-4 md:mb-6 font-body ${
+              fillSlide ? "line-clamp-4" : ""
+            }`}
+          >
+            {description}
+          </p>
+
+          {/* Info List */}
+          <div className="space-y-2 text-sm font-body">
+            <p className="text-black">
+              <span className="font-bold">Fasting:</span>{" "}
+              <span className="text-gray-700">{fasting}</span>
+            </p>
+            <p className="text-black">
+              <span className="font-bold">Reporting:</span>{" "}
+              <span className="text-gray-700">{reporting}</span>
+            </p>
           </div>
-          <button onClick={() => setShowLeadForm(true)} className="bg-background-primary text-white px-10 py-2.5 rounded-xl text-lg font-bold shadow-md hover:bg-red-700 transition-colors font-heading">
-            Book
-          </button>
+        </div>
+
+        <div
+          className={fillSlide ? "mt-auto w-full pt-4" : "contents"}
+        >
+          {/* Pricing */}
+          <div
+            className={`flex justify-end items-center gap-2 mb-4${
+              fillSlide ? "" : "mt-6"
+            }`}
+          >
+            <span className="text-green-600 font-bold text-xl font-heading">
+              ₹{price.toLocaleString()}
+            </span>
+            <span className="text-slate-400 line-through text-sm md:text-base font-heading">
+              ₹{originalPrice.toLocaleString()}
+            </span>
+          </div>
+
+          {/* Buttons */}
+          <div
+            className={`grid gap-3 ${
+              showDetailsButton ? "grid-cols-2" : "grid-cols-1"
+            }`}
+          >
+            {showDetailsButton && (
+              <Link href={`/tests/${slug}`}>
+                <button className="w-full py-2 border-[1.5px] border-background-primary text-background-primary rounded-xl text-base font-bold hover:bg-red-50 transition-colors font-heading">
+                  Details
+                </button>
+              </Link>
+            )}
+
+            <button
+              onClick={() => setShowLeadForm(true)}
+              className="w-full py-2 bg-background-primary text-white rounded-xl text-base font-bold hover:bg-red-700 shadow-sm shadow-red-100 transition-all font-heading text-sm md:text-base"
+            >
+              Book
+            </button>
+          </div>
         </div>
       </div>
 
-    </div>
-    <LeadForm
-  open={showLeadForm}
-  onOpenChange={setShowLeadForm}
-  title="Book"
-  testName={title}
-  testDescription={description}
-  testPrice={price}
-  testOriginalPrice={originalPrice}
-  
-  additionalSourceData={leadMeta}
-/>
+      <LeadForm
+        open={showLeadForm}
+        onOpenChange={setShowLeadForm}
+        title="Book"
+        testName={title}
+        testDescription={description}
+        testPrice={price}
+        testOriginalPrice={originalPrice}
+        additionalSourceData={leadMeta}
+      />
     </>
-
-
-    
   );
 }

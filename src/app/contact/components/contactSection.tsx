@@ -5,11 +5,11 @@ import ContactFormCard from "./contactFormCard";
 
 export default function ContactSection() {
   return (
-    <section className="relative bg-background-primary text-white py-16 px-4 overflow-hidden">
+    <section className="relative mt-8  bg-background-primary text-white py-12 px-4 overflow-hidden">
 
       <div className="max-w-6xl mx-auto text-center relative z-10">
         {/* Heading */}
-        <p className="font-heading text-sm md:text-base font-extrabold opacity-90">Contact Us</p>
+        <p className="font-heading text-sm md:text-base font-extrabold ">Contact Us</p>
 
         <h2 className="font-heading text-3xl md:text-4xl font-extrabold mt-2">
           Talk to Diagnos Labs

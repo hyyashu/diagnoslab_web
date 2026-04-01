@@ -17,7 +17,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "complete-blood-count"
     },
     {
       "Id": 2,
@@ -36,7 +36,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "semen-test"
     },
     {
       "Id": 3,
@@ -55,7 +55,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "hba1c-test"
     },
     {
       "Id": 4,
@@ -74,7 +74,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "tsh"
     },
     {
       "Id": 5,
@@ -93,7 +93,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "random-blood-sugar"
     },
     {
       "Id": 6,
@@ -112,7 +112,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "blood-sugar-fasting"
     },
     {
       "Id": 7,
@@ -131,7 +131,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "blood-glucose-pp"
     },
     {
       "Id": 8,
@@ -150,7 +150,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "vitamin-b12"
     },
     {
       "Id": 9,
@@ -169,7 +169,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "vitamin-d"
     },
     {
       "Id": 10,
@@ -188,7 +188,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "ige"
     },
     {
       "Id": 11,
@@ -207,7 +207,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "calcium"
     },
     {
       "Id": 12,
@@ -226,7 +226,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "creatinine"
     },
     {
       "Id": 13,
@@ -245,7 +245,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "urea-serum"
     },
     {
       "Id": 14,
@@ -264,7 +264,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "cholestrol"
     },
     {
       "Id": 15,
@@ -283,7 +283,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "fsh"
     },
     {
       "Id": 16,
@@ -302,7 +302,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "lh"
     },
     {
       "Id": 17,
@@ -321,7 +321,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "prolactin"
     },
     {
       "Id": 18,
@@ -340,7 +340,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "iron-test"
     },
     {
       "Id": 19,
@@ -359,7 +359,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "pregnancy-test"
     },
     {
       "Id": 20,
@@ -378,7 +378,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "bun"
     },
     {
       "Id": 21,
@@ -397,7 +397,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "crp-quantitative"
     },
     {
       "Id": 22,
@@ -416,7 +416,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "electrolytes"
     },
     {
       "Id": 23,
@@ -435,7 +435,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "potassium"
     },
     {
       "Id": 24,
@@ -454,7 +454,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "sodium"
     },
     {
       "Id": 25,
@@ -473,7 +473,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "chloride"
     },
     {
       "Id": 26,
@@ -492,7 +492,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "phosphorus"
     },
     {
       "Id": 27,
@@ -511,7 +511,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "hb-test"
     },
     {
       "Id": 28,
@@ -530,7 +530,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "malaria-test"
     },
     {
       "Id": 29,
@@ -549,7 +549,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "dengue-test-card"
     },
     {
       "Id": 30,
@@ -568,7 +568,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "dengue-test-antigen-elisa"
     },
     {
       "Id": 31,
@@ -587,7 +587,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "ferritin"
     },
     {
       "Id": 32,
@@ -606,7 +606,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "progesteron-test"
     },
     {
       "Id": 33,
@@ -625,7 +625,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "testosterone-test"
     },
     {
       "Id": 34,
@@ -644,7 +644,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "urine-routine"
     },
     {
       "Id": 35,
@@ -663,7 +663,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "urine-culture"
     },
     {
       "Id": 36,
@@ -682,7 +682,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "lft-liver-function-test"
     },
     {
       "Id": 37,
@@ -701,7 +701,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "kft-kidney-function-test"
     },
     {
       "Id": 38,
@@ -720,7 +720,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "hcg-beta-total-quantitative"
     },
     {
       "Id": 39,
@@ -739,7 +739,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "stool-routine"
     },
     {
       "Id": 40,
@@ -758,7 +758,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "c-reactive-protein"
     },
     {
       "Id": 41,
@@ -777,7 +777,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "thyroid-function-profile-tft-free"
     },
     {
       "Id": 42,
@@ -796,7 +796,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "glucose-post-prandial"
     },
     {
       "Id": 43,
@@ -815,7 +815,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "pregnancy-test-urine"
     },
     {
       "Id": 44,
@@ -834,7 +834,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "cbc-esr-blood"
     },
     {
       "Id": 45,
@@ -853,7 +853,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "triglycerides-serum"
     },
     {
       "Id": 46,
@@ -872,7 +872,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "torch-panel-igg-igm"
     },
     {
       "Id": 47,
@@ -891,7 +891,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "esr"
     },
     {
       "Id": 48,
@@ -910,7 +910,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "anti-mullerian-hormone"
     },
     {
       "Id": 49,
@@ -929,7 +929,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "calcitionin"
     },
     {
       "Id": 50,
@@ -948,7 +948,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "antinatal-panel"
     },
     {
       "Id": 51,
@@ -967,7 +967,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "microlbomine-creatinine-ratio"
     },
     {
       "Id": 52,
@@ -986,7 +986,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "hepatitis-c-antibody-anti-hcv-serum"
     },
     {
       "Id": 53,
@@ -1005,7 +1005,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "dual-marker"
     },
     {
       "Id": 54,
@@ -1024,7 +1024,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "blood-group"
     },
     {
       "Id": 55,
@@ -1043,7 +1043,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "amenorrhea-screen"
     },
     {
       "Id": 56,
@@ -1062,7 +1062,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "hemogram"
     },
     {
       "Id": 57,
@@ -1081,7 +1081,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "uric-acid"
     },
     {
       "Id": 58,
@@ -1100,7 +1100,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "widal"
     },
     {
       "Id": 59,
@@ -1119,7 +1119,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "hiv-card-test"
     },
     {
       "Id": 60,
@@ -1138,7 +1138,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "hcv-card-test"
     },
     {
       "Id": 61,
@@ -1157,7 +1157,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "hbsag-card-test"
     },
     {
       "Id": 62,
@@ -1176,7 +1176,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "hiv-elisa"
     },
     {
       "Id": 63,
@@ -1195,7 +1195,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "hcv-elisa"
     },
     {
       "Id": 64,
@@ -1214,7 +1214,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "hbsag-elisa"
     },
     {
       "Id": 65,
@@ -1233,7 +1233,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "anti-ccp"
     },
     {
       "Id": 66,
@@ -1252,7 +1252,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "aborh-blood-group"
     },
     {
       "Id": 67,
@@ -1271,7 +1271,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "prolactin-prl"
     },
     {
       "Id": 68,
@@ -1290,7 +1290,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "hb-tlc-dlc"
     },
     {
       "Id": 69,
@@ -1309,7 +1309,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "hb-tlc-dlc-esr"
     },
     {
       "Id": 70,
@@ -1328,7 +1328,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "antenatal-panel"
     },
     {
       "Id": 71,
@@ -1347,7 +1347,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "antenatal-panel-1sl"
     },
     {
       "Id": 72,
@@ -1366,7 +1366,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "antenatal-panel-pg"
     },
     {
       "Id": 73,
@@ -1385,7 +1385,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "ast-sgot"
     },
     {
       "Id": 74,
@@ -1404,7 +1404,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "alt-sgpt"
     },
     {
       "Id": 75,
@@ -1423,7 +1423,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "iga-serum"
     },
     {
       "Id": 76,
@@ -1442,7 +1442,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "igg"
     },
     {
       "Id": 77,
@@ -1461,7 +1461,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "coeliac-fusion-ttg-dgp"
     },
     {
       "Id": 78,
@@ -1480,7 +1480,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "lactate-plasma"
     },
     {
       "Id": 79,
@@ -1499,7 +1499,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "protein-c-activity"
     },
     {
       "Id": 80,
@@ -1518,7 +1518,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "protein-s-activity"
     },
     {
       "Id": 81,
@@ -1537,7 +1537,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "arsenic-blood"
     },
     {
       "Id": 82,
@@ -1556,7 +1556,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "lead-urine"
     },
     {
       "Id": 83,
@@ -1575,7 +1575,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "myoglobin-serum"
     },
     {
       "Id": 84,
@@ -1594,7 +1594,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "plasma-renin"
     },
     {
       "Id": 85,
@@ -1613,7 +1613,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "hiv-1-drug-resistance"
     },
     {
       "Id": 86,
@@ -1632,7 +1632,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "acftone-serum"
     },
     {
       "Id": 87,
@@ -1651,7 +1651,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "acftone-urine"
     },
     {
       "Id": 88,
@@ -1670,7 +1670,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "activated-protein-c-resistance"
     },
     {
       "Id": 89,
@@ -1689,7 +1689,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "addenoavirus-igg-serum"
     },
     {
       "Id": 90,
@@ -1708,7 +1708,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "anti-mpoab"
     },
     {
       "Id": 91,
@@ -1727,7 +1727,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "anti-pr3-antibodies"
     },
     {
       "Id": 92,
@@ -1746,7 +1746,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "bismoth-blood"
     },
     {
       "Id": 93,
@@ -1765,7 +1765,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "cadmium-blood"
     },
     {
       "Id": 94,
@@ -1784,7 +1784,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "manganese-blood"
     },
     {
       "Id": 95,
@@ -1803,7 +1803,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "parvovirus-b19-igg"
     },
     {
       "Id": 96,
@@ -1822,7 +1822,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "parvovirus-b19-igm"
     },
     {
       "Id": 97,
@@ -1841,7 +1841,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "prealbumin"
     },
     {
       "Id": 98,
@@ -1860,7 +1860,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "sm-smith-antibody-serum"
     },
     {
       "Id": 99,
@@ -1879,7 +1879,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "syphilis-antibodies"
     },
     {
       "Id": 100,
@@ -1898,7 +1898,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "albomin-fluid"
     },
     {
       "Id": 101,
@@ -1917,7 +1917,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "alkaline-phosphatase-serum"
     },
     {
       "Id": 102,
@@ -1955,7 +1955,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "amylaase-serum"
     },
     {
       "Id": 104,
@@ -1974,7 +1974,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "apolipoprotein-a1-serum"
     },
     {
       "Id": 105,
@@ -1993,7 +1993,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "apolipoprotein-b-serum"
     },
     {
       "Id": 106,
@@ -2012,7 +2012,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "anti-soq-serum"
     },
     {
       "Id": 107,
@@ -2031,7 +2031,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "bilirubin-serum"
     },
     {
       "Id": 108,
@@ -2050,7 +2050,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "bilirubin-total-serum"
     },
     {
       "Id": 109,
@@ -2069,7 +2069,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "blood-urea-nitrogen-serum"
     },
     {
       "Id": 110,
@@ -2088,7 +2088,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "calcium-ioni-serum"
     },
     {
       "Id": 111,
@@ -2107,7 +2107,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "calcium-24hrs-urine"
     },
     {
       "Id": 112,
@@ -2126,7 +2126,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "calcium-serum"
     },
     {
       "Id": 113,
@@ -2145,7 +2145,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "chloride-24hrs-urine"
     },
     {
       "Id": 114,
@@ -2164,7 +2164,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "chloride-serum"
     },
     {
       "Id": 115,
@@ -2183,7 +2183,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "cholesterol-hdl-serum"
     },
     {
       "Id": 116,
@@ -2202,7 +2202,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "cholesterol-ldl-direct-serum"
     },
     {
       "Id": 117,
@@ -2221,7 +2221,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "cholesterol-total-serum"
     },
     {
       "Id": 118,
@@ -2240,7 +2240,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "complement-c3-serum"
     },
     {
       "Id": 119,
@@ -2259,7 +2259,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "complement-c4-serum"
     },
     {
       "Id": 120,
@@ -2278,7 +2278,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "creatinine-24hrs-urine"
     },
     {
       "Id": 121,
@@ -2297,7 +2297,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "creatinine-serum"
     },
     {
       "Id": 122,
@@ -2316,7 +2316,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "ggt-serum"
     },
     {
       "Id": 123,
@@ -2335,7 +2335,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "glucose-fasting-plasma"
     },
     {
       "Id": 124,
@@ -2354,7 +2354,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "pp-plasma"
     },
     {
       "Id": 125,
@@ -2373,7 +2373,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "random-plasma"
     },
     {
       "Id": 126,
@@ -2392,7 +2392,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "hs-crp-serum"
     },
     {
       "Id": 127,
@@ -2411,7 +2411,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "iga-serum"
     },
     {
       "Id": 128,
@@ -2430,7 +2430,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "igm-serum"
     },
     {
       "Id": 129,
@@ -2449,7 +2449,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "ldh-serum"
     },
     {
       "Id": 130,
@@ -2468,7 +2468,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "ldh-fluid"
     },
     {
       "Id": 131,
@@ -2487,7 +2487,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "lipase-serum"
     },
     {
       "Id": 132,
@@ -2506,7 +2506,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "lpa-serum"
     },
     {
       "Id": 133,
@@ -2525,7 +2525,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "magnesium-24hrs-urine"
     },
     {
       "Id": 134,
@@ -2544,7 +2544,7 @@
       "MetaDescription": "",
       "MetaKeywords": "",
       "Image": "",
-      "Slug": ""
+      "Slug": "magnesium-serum"
     }
     
   ]

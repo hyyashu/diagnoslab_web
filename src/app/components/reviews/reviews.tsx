@@ -34,7 +34,7 @@ export default function ReviewCarousel() {
         <h2 className="font-heading text-2xl md:text-4xl font-extrabold mb-2">
           Google Reviews
         </h2>
-        <p className="font-body text-gray-500 font-medium text-sm md:text-lg">
+        <p className="font-body text-gray-700 font-medium text-sm md:text-lg">
           Trusted by thousands of patients.
         </p>
       </div>
@@ -115,7 +115,7 @@ export default function ReviewCarousel() {
             <span className="font-bold text-2xl text-black leading-none">
               4.9
             </span>
-            <span className="text-slate-400 text-sm font-medium leading-none mt-1">
+            <span className="text-gray-700 text-sm font-medium leading-none mt-1">
               (2,500+ reviews)
             </span>
           </div>

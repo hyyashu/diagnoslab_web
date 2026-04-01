@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { PhoneIcon } from "@heroicons/react/24/solid";
 import EnquiryForm from "./enquiryForm";
+import Modal from "./modal";
 
 interface FloatingCTAProps {
   phoneNumber: string;      // +919876543210
@@ -15,8 +16,7 @@ export default function FloatingCTA({
 }: FloatingCTAProps) {
 
   const [openForm, setOpenForm] = useState(false);
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
+ 
 
   /* Scroll Lock */
   useEffect(() => {
@@ -37,12 +37,6 @@ export default function FloatingCTA({
 
   const handleWhatsApp = () => {
     window.open(`https://wa.me/${whatsappNumber}`, "_blank");
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log({ name, phone });
-    setOpenForm(false);
   };
 
   return (
@@ -86,29 +80,11 @@ export default function FloatingCTA({
       </button>
 
       {/* Popup Form */}
-      {openForm && (
-        <div
-          className="fixed inset-0 z-[60] flex items-center justify-center bg-black/50 px-4 py-6"
-          onClick={() => setOpenForm(false)}
-        >
-          
-          <div
-            className="relative w-full max-w-md  rounded-xl shadow-2xl p-5 sm:p-6 md:p-7 max-h-[90vh] overflow-y-auto"
-            onClick={(e) => e.stopPropagation()}
-          >
-
-            <button
-              onClick={() => setOpenForm(false)}
-              className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full bg-white border border-slate-200 shadow-sm flex items-center justify-center text-black text-sm"
-            >
-              ✕
-            </button>
-
-
-            <EnquiryForm />
-          </div>
-        </div>
-      )}
+      <Modal isOpen={openForm} onClose={() => setOpenForm(false)}>
+   
+    <EnquiryForm />
+ 
+</Modal>
     </>
   );
 }

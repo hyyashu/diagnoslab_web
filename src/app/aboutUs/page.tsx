@@ -2,7 +2,7 @@ import AboutCard from "./components/aboutCard";
 
 export default function AboutPage() {
   return (
-    <div className="bg-background-primary relative overflow-hidden py-14 md:py-16 px-4 md:px-12">
+    <div className="bg-background-primary relative overflow-hidden py-14  px-4 md:px-12">
       <div className="max-w-5xl mx-auto space-y-10 relative z-10">
 
         {/* Who We Are */}
@@ -41,7 +41,7 @@ Today, we are proud to serve Jamshedpur with a strong reputation built on consis
         {/* Our Presence */}
         <div className="bg-white rounded-2xl p-6 text-center shadow-md">
           <h2 className="font-heading text-black text-2xl md:text-4xl font-extrabold ">Our Presence</h2>
-          <p className="font-body text-black text-sm md:text-base">
+          <p className="font-body text-gray-700 text-sm md:text-base">
             We receive samples from all over Jharkhand.
           </p>
         </div>

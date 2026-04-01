@@ -60,8 +60,10 @@ export default function PopularHealthPackages() {
             className="py-6"
           >
             {packageData.map((pkg, index) => (
-              <SwiperSlide key={`${pkg.id}-${index}`}>
-                <PackageCard {...pkg} />
+              <SwiperSlide key={`${pkg.id}-${index}`} className="h-auto">
+                <div className="flex h-full min-h-0 flex-col">
+                  <PackageCard {...pkg} fillSlide />
+                </div>
               </SwiperSlide>
             ))}
           </Swiper>

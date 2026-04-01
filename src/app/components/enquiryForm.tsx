@@ -36,7 +36,7 @@ const EnquiryForm: React.FC = () => {
   };
 
   return (
-    <div className="bg-white p-6 md:p-8 rounded-[2rem] shadow-2xl border border-slate-100">
+    <div id="enquiry-form" className="bg-white p-6 md:p-8 rounded-[2rem] shadow-2xl border border-slate-100">
       <h3 className="font-heading text-xl md:text-2xl font-black text-slate-900 mb-6">
         Enquire Now
       </h3>
@@ -65,7 +65,7 @@ const EnquiryForm: React.FC = () => {
             type="tel"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            placeholder="10-Digit Mobile Number"
+            placeholder="Mobile Number"
             required
             className="w-full text-black bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:border-red-500 outline-none transition-all"
           />

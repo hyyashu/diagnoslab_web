@@ -9,8 +9,8 @@ const Footer = () => {
     { name: 'About us', href: '/aboutUs' },
     { name: 'Radiology', href: '/radiology' },
     { name: 'Packages', href: '/packages' },
-    { name: 'Tests', href: '/tests' },
-    { name: 'Book a test', href: '/book' },
+    { name: 'Tests', href: '/tests#tests-section' },
+    { name: 'Book a test', href:'/tests#enquiry-form' },
     { name: 'Policy', href: '/policy' },
   ];
 

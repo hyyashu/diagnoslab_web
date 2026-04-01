@@ -211,7 +211,7 @@
       "Slug": "arthriti-panel-1"
     },
     {
-      "Id": 9,
+      "Id": 11,
       "PackageName": "Arthriti Panel - 2",
       "PackageCode": "PN038",
       "ParametersCovered": 10,
@@ -232,7 +232,7 @@
       "Slug": "arthriti-panel-2"
     },
     {
-      "Id": 10,
+      "Id": 12,
       "PackageName": "Complete Anemia Profile",
       "PackageCode": "PN018",
       "ParametersCovered": 12,
@@ -253,7 +253,7 @@
       "Slug": "complete-anemia-profile"
     },
     {
-      "Id": 11,
+      "Id": 13,
       "PackageName": "Fever Panel",
       "PackageCode": "PN004",
       "ParametersCovered": 8,
@@ -274,7 +274,7 @@
       "Slug": "fever-panel "
     },
     {
-      "Id": 12,
+      "Id": 14,
       "PackageName": "Liver Function Test/ LFT",
       "PackageCode": "P038",
       "ParametersCovered": 12,
@@ -295,7 +295,7 @@
       "Slug": "liver-function-test-lft"
     },
     {
-      "Id": 13,
+      "Id": 15,
       "PackageName": "Kidney Function Tests/ KFT",
       "PackageCode": "P036",
       "ParametersCovered": 17,
@@ -316,7 +316,7 @@
       "Slug": "kidney-function-tests-kft"
     },
     {
-      "Id": 15,
+      "Id": 16,
       "PackageName": "ANTENATAL PANEL-1SL",
       "PackageCode": "PN234",
       "ParametersCovered": 10,
@@ -337,7 +337,7 @@
       "Slug": "antenatal-panel-1sl"
     },
     {
-      "Id": 16,
+      "Id": 17,
       "PackageName": "ANTENATAL PANEL (PG)",
       "PackageCode": "CPN015",
       "ParametersCovered": 10,

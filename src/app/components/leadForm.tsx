@@ -183,15 +183,29 @@ export default function LeadForm(props: LeadFormProps) {
   };
 
   const formContent = (
-    <div className="grid gap-3">
+    <div className="grid gap-3 ">
       <form
         onSubmit={handleSubmit}
-        className="grid gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5"
+        className={`grid gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5 ${
+          isModal ? "relative" : ""
+        }`}
       >
-        <div id={titleId} className="text-lg font-bold text-gray-700 font-body">
+        {isModal && modalProps && (
+          <button
+            type="button"
+            onClick={() => modalProps.onOpenChange(false)}
+            aria-label="Close"
+            className="absolute -right-2 -top-2 z-20 flex h-10 w-10 items-center justify-center rounded-full bg-white text-slate-700 shadow-md"
+          >
+            <span className="text-xl leading-none" aria-hidden="true">
+              ×
+            </span>
+          </button>
+        )}
+        <div id={titleId} className="text-lg font-bold text-black font-body">
           {title}
           {testName && (
-            <span className="mt-1 block text-sm font-normal text-gray-700 font-heading">
+            <span className="mt-1 block text-sm font-normal text-black font-heading">
               {testName}
             </span>
           )}
@@ -211,7 +225,7 @@ export default function LeadForm(props: LeadFormProps) {
             </span>
           )}
         </div>
-        <div className="grid gap-2">
+        <div className="grid gap-2 mt-6">
           <label
             htmlFor={nameInputId}
             className="text-sm font-medium text-black font-heading"
@@ -306,7 +320,7 @@ export default function LeadForm(props: LeadFormProps) {
 
   return createPortal(
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 pt-20"
       onClick={() => modalProps.onOpenChange(false)}
     >
       <div
@@ -316,15 +330,6 @@ export default function LeadForm(props: LeadFormProps) {
         className="w-full max-w-md rounded-2xl bg-transparent"
         onClick={(event) => event.stopPropagation()}
       >
-        <div className="mb-2 flex justify-end">
-          <button
-            type="button"
-            onClick={() => modalProps.onOpenChange(false)}
-            className="rounded-lg bg-white/95 px-3 py-1.5 text-sm font-medium text-slate-700 shadow-sm hover:bg-white"
-          >
-            Close
-          </button>
-        </div>
         {formContent}
       </div>
     </div>,

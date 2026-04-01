@@ -6,6 +6,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import TestCard from "./testCard";
 import rawData from "@/data/tests.json";
+import { useSearchParams } from "next/navigation";
 
 type RawTest = {
   Id: number;
@@ -29,9 +30,12 @@ const tests = rawData.tests
     category: test.Categories?.[0] || "General Health",
     fasting: test.Fasting?.trim() || "Not Required",
     reporting: test.Reporting?.trim() || "Same Day",
+    slug: test.Slug,
   }));
 
 export default function PopularTests() {
+  const searchParams = useSearchParams();
+  const showDetailsButton = searchParams.get("details") !== "hidden";
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     containScroll: "trimSnaps",
@@ -67,7 +71,7 @@ export default function PopularTests() {
             onClick={scrollPrev}
             className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 rounded-full bg-background-primary text-white shadow-xl hover:bg-red-600 active:scale-95 transition-all flex"
           >
-            <ChevronLeft size={18} className="md:w-7 md:h-7" />
+            <ChevronLeft size={16} className="md:w-4 md:h-4" />
           </button>
 
           {/* Right Arrow */}
@@ -75,18 +79,24 @@ export default function PopularTests() {
             onClick={scrollNext}
             className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 rounded-full bg-background-primary text-white shadow-xl hover:bg-red-600 active:scale-95 transition-all flex"
           >
-            <ChevronRight size={18} className="md:w-7 md:h-7" />
+            <ChevronRight size={16} className="md:w-4 md:h-4" />
           </button>
 
           {/* Carousel */}
           <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex gap-6 m-6">
-              {tests.map((test: any, index: number) => (
+            <div className="m-6 flex items-stretch gap-6">
+              {tests.map((test: any) => (
                 <div
-                  key={index}
-                  className="flex-[0_0_94%] sm:flex-[0_0_48%] lg:flex-[0_0_32%] min-w-0"
+                  key={test.id}
+                  className="flex min-h-0 min-w-0 flex-[0_0_94%] flex-col sm:flex-[0_0_48%] lg:flex-[0_0_32%]"
                 >
-                  <TestCard {...test} />
+                  <div className="flex min-h-0 flex-1 flex-col">
+                    <TestCard
+                      {...test}
+                      showDetailsButton={showDetailsButton}
+                      fillSlide
+                    />
+                  </div>
                 </div>
               ))}
             </div>

@@ -14,6 +14,8 @@ interface Props {
   reporting?: string;
   slug: string;
   showDetailsButton?: boolean;
+  /** Stretch card to fill carousel slide width/height. */
+  fillSlide?: boolean;
 }
 
 interface leadMetaProps {
@@ -38,6 +40,7 @@ export default function PackageCard({
   reporting = "Same Day",
   slug = "",
   showDetailsButton = true,
+  fillSlide = false,
 }: Props) {
   const [showLeadForm, setShowLeadForm] = useState(false);
   const leadMeta = useMemo<leadMetaProps>(() => ({
@@ -51,7 +54,7 @@ export default function PackageCard({
     package_reporting: reporting ?? "",
   }), [title, description, price, originalPrice, parameters, categories, fasting, reporting]);
   return (
-    <div className="bg-white rounded-3xl p-8 shadow-[0px_10px_30px_rgba(0,0,0,0.1)] border border-gray-50 relative flex flex-col w-full max-w-[400px]">
+    <div className={`bg-white rounded-3xl p-8 shadow-[0px_10px_30px_rgba(0,0,0,0.1)] border border-gray-50 relative flex flex-col w-full ${fillSlide ? "h-full max-w-none" : "max-w-[400px]"}`}>
       
       {/* Header */}
       <div className="flex justify-between items-start mb-4">
@@ -61,46 +64,50 @@ export default function PackageCard({
         </span>
       </div>
 
-      {/* Description */}
-      <p className="text-black text-sm  mb-6 font-body">
-        {description}
-      </p>
+      <div className={fillSlide ? "flex min-h-0 flex-1 flex-col" : "contents"}>
+        {/* Description */}
+        <p className={`text-gray-700 text-sm mb-6 font-body ${fillSlide ? "line-clamp-4" : ""}`}>
+          {description}
+        </p>
 
-      {/* Info List */}
-      <div className="space-y-2 text-sm  font-body">
-        <p className="text-black">
-          <span className="font-bold ">Categories :</span> <span className="text-gray-700 ">{categories}</span>
-        </p>
-        <p className="text-black">
-          <span className="font-bold ">Fasting:</span> <span className="text-gray-700 ">{fasting}</span>
-        </p>
-        <p className="text-black">
-          <span className="font-bold ">Reporting:</span> <span className="text-gray-700 f">{reporting}</span>
-        </p>
+        {/* Info List */}
+        <div className="space-y-2 text-sm font-body">
+          <p className="text-black">
+            <span className="font-bold ">Categories :</span> <span className="text-gray-700 ">{categories}</span>
+          </p>
+          <p className="text-black">
+            <span className="font-bold ">Fasting:</span> <span className="text-gray-700 ">{fasting}</span>
+          </p>
+          <p className="text-black">
+            <span className="font-bold ">Reporting:</span> <span className="text-gray-700">{reporting}</span>
+          </p>
+        </div>
       </div>
 
-      {/* Pricing */}
-      <div className="flex justify-end items-center gap-2 mb-4 mt-6">
-        <span className="text-green-600 font-bold text-xl font-heading">
-          ₹{price?.toLocaleString()}
-        </span>
-        <span className="text-slate-400 line-through text-sm md:text-base font-heading">
-          ₹{originalPrice.toLocaleString()}
-        </span>
-      </div>
+      <div className={fillSlide ? "mt-auto w-full pt-4" : "contents"}>
+        {/* Pricing */}
+        <div className={`flex justify-end items-center gap-2 mb-4 ${fillSlide ? "" : "mt-6"}`}>
+          <span className="text-green-600 font-bold text-xl font-heading">
+            ₹{price?.toLocaleString()}
+          </span>
+          <span className="text-slate-400 line-through text-sm md:text-base font-heading">
+            ₹{originalPrice.toLocaleString()}
+          </span>
+        </div>
 
-      {/* Compact Buttons */}
-      <div className={`grid gap-3 ${showDetailsButton ? "grid-cols-2" : "grid-cols-1"}`}>
-      {showDetailsButton && (
-        <Link href={`/packages/${slug}`}>
-            <button className="w-full py-2 border-[1.5px] border-background-primary text-background-primary rounded-xl text-base font-bold hover:bg-red-50 transition-colors font-heading">
-              Details
-            </button>
-          </Link>
-      )}
-        <button onClick={() => setShowLeadForm(true)} className="w-full py-2 bg-background-primary text-white rounded-xl text-base font-bold hover:bg-red-700 shadow-sm shadow-red-100 transition-all font-heading text-sm md:text-base">
-          Book
-        </button>
+        {/* Compact Buttons */}
+        <div className={`grid gap-3 ${showDetailsButton ? "grid-cols-2" : "grid-cols-1"}`}>
+          {showDetailsButton && (
+            <Link href={`/packages/${slug}`}>
+              <button className="w-full py-2 border-[1.5px] border-background-primary text-background-primary rounded-xl text-base font-bold hover:bg-red-50 transition-colors font-heading">
+                Details
+              </button>
+            </Link>
+          )}
+          <button onClick={() => setShowLeadForm(true)} className="w-full py-2 bg-background-primary text-white rounded-xl text-base font-bold hover:bg-red-700 shadow-sm shadow-red-100 transition-all font-heading text-sm md:text-base">
+            Book
+          </button>
+        </div>
       </div>
       <LeadForm
   open={showLeadForm}

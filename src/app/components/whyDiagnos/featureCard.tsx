@@ -21,7 +21,7 @@ export default function FeatureCard({
         {title}
       </h3>
 
-      <p className="font-body text-sm font-medium text-black mt-2">
+      <p className="font-body text-sm font-medium text-gray-700 mt-2">
         {description}
       </p>
     </div>
