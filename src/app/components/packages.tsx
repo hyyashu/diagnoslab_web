@@ -9,20 +9,19 @@ import "swiper/css/navigation";
 import Link from "next/link";
 import rawData from "@/data/packages.json";
 
-
 const packageData = rawData.packages.map((p: any) => ({
-    id: p.Id,
-    title: p.PackageName,
-    description: p.Description,
-    price: p.DiscountedPrice,
-    originalPrice: p.Price,
-    parameters: p.ParametersCovered || 0,
-    categories: p.Categories || "General",
+  id: p.Id,
+  title: p.PackageName,
+  description: p.Description,
+  price: p.DiscountedPrice,
+  originalPrice: p.Price,
+  parameters: p.ParametersCovered || 0,
+  categories: p.Categories || "General",
 
-    fasting: p.Fasting?.trim() || "Not Required",
-    reporting: p.Reporting?.trim() || "Same Day",
-    slug: p.Slug || "",
-  }));
+  fasting: p.Fasting?.trim() || "Not Required",
+  reporting: p.Reporting?.trim() || "Same Day",
+  slug: p.Slug || "",
+}));
 
 export default function PopularHealthPackages() {
   return (
@@ -87,7 +86,6 @@ export default function PopularHealthPackages() {
             </button>
           </Link>
         </div>
-
       </div>
     </section>
   );

@@ -25,7 +25,7 @@ const HeroSection: React.FC = () => {
 
   return (
     <section className="relative w-full h-[600px] md:h-[700px] flex flex-col items-center justify-center overflow-visible mb-[180px] md:mb-[120px] z-10 ">
-      
+
       {/* --- BACKGROUND CAROUSEL --- */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <Swiper
@@ -92,11 +92,10 @@ const HeroSection: React.FC = () => {
               <button
                 key={i}
                 onClick={() => swiperRef?.slideToLoop(i)}
-                className={`transition-all duration-500 ease-in-out rounded-full bg-white shadow-lg h-2 ${
-                  activeIndex === i
+                className={`transition-all duration-500 ease-in-out rounded-full bg-white shadow-lg h-2 ${activeIndex === i
                     ? "w-16 opacity-100"
                     : "w-2 opacity-40 hover:opacity-70"
-                }`}
+                  }`}
                 aria-label={`Go to slide ${i + 1}`}
               />
             ))}
@@ -106,8 +105,8 @@ const HeroSection: React.FC = () => {
 
       {/* --- FLOATING ENQUIRY FORM --- */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-20 w-full max-w-[90%] md:max-w-5xl">
-  <EnquiryForm />
-</div>
+        <EnquiryForm formType="enquiry_form" />
+      </div>
     </section>
   );
 };

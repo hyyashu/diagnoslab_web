@@ -32,7 +32,7 @@ export default function RadiologyCard({
   }), [title, description, uses, footerNote]);
   return (
     <div className="bg-white rounded-3xl p-6 md:p-8 shadow-lg border border-gray-100 h-full flex flex-col">
-      
+
       <h3 className="font-heading text-base md:text-xl font-bold text-black mb-4">
         {title}
       </h3>
@@ -69,13 +69,13 @@ export default function RadiologyCard({
           title.toLowerCase().slice(1)}
       </button>
       <LeadForm
-  open={showLeadForm}
-  onOpenChange={setShowLeadForm}
-  title="Book"
-  testName={title}
-  testDescription={description}  
-  additionalSourceData={leadMeta}
-/>
+        open={showLeadForm}
+        onOpenChange={setShowLeadForm}
+        title="Book"
+        testName={title}
+        testDescription={description}
+        additionalSourceData={leadMeta}
+      />
     </div>
   );
 }

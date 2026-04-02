@@ -22,9 +22,8 @@ export default function AboutCard({
     >
       {/* TEXT */}
       <div
-        className={`flex-1 ${
-          reverse ? "md:order-2" : "md:order-1"
-        }`}
+        className={`flex-1 ${reverse ? "md:order-2" : "md:order-1"
+          }`}
       >
         <h2 className="font-heading text-black text-2xl md:text-4xl font-extrabold mb-4 md:mb-6">
           {title}
@@ -45,9 +44,8 @@ export default function AboutCard({
 
       {/* IMAGE */}
       <div
-        className={`w-full md:w-[300px] h-[200px] flex-shrink-0 ${
-          reverse ? "md:order-1" : "md:order-2"
-        }`}
+        className={`w-full md:w-[300px] h-[200px] flex-shrink-0 ${reverse ? "md:order-1" : "md:order-2"
+          }`}
       >
         <Image
           src={image}

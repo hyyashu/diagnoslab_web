@@ -14,7 +14,6 @@ interface Props {
   reporting?: string;
   slug: string;
   showDetailsButton?: boolean;
-  /** Stretch card to fill carousel slide width/height. */
   fillSlide?: boolean;
 }
 
@@ -55,7 +54,7 @@ export default function PackageCard({
   }), [title, description, price, originalPrice, parameters, categories, fasting, reporting]);
   return (
     <div className={`bg-white rounded-3xl p-8 shadow-[0px_10px_30px_rgba(0,0,0,0.1)] border border-gray-50 relative flex flex-col w-full ${fillSlide ? "h-full max-w-none" : "max-w-[400px]"}`}>
-      
+
       {/* Header */}
       <div className="flex justify-between items-start mb-4">
         <h3 className="text-xl md:text-2xl font-bold text-black leading-tight font-heading">{title}</h3>
@@ -64,9 +63,9 @@ export default function PackageCard({
         </span>
       </div>
 
-      <div className={fillSlide ? "flex min-h-0 flex-1 flex-col" : "contents"}>
+      <div className="flex flex-col flex-1">
         {/* Description */}
-        <p className={`text-gray-700 text-sm mb-6 font-body ${fillSlide ? "line-clamp-4" : ""}`}>
+        <p className="text-gray-700 text-sm mb-6 font-body line-clamp-4">
           {description}
         </p>
 
@@ -86,14 +85,22 @@ export default function PackageCard({
 
       <div className={fillSlide ? "mt-auto w-full pt-4" : "contents"}>
         {/* Pricing */}
-        <div className={`flex justify-end items-center gap-2 mb-4 ${fillSlide ? "" : "mt-6"}`}>
-          <span className="text-green-600 font-bold text-xl font-heading">
-            ₹{price?.toLocaleString()}
-          </span>
-          <span className="text-slate-400 line-through text-sm md:text-base font-heading">
-            ₹{originalPrice.toLocaleString()}
-          </span>
-        </div>
+        {price && price > 0 && (
+          <div
+            className={`flex justify-end items-center gap-2 mb-4 ${fillSlide ? "" : "mt-6"
+              }`}
+          >
+            <span className="text-green-600 font-bold text-xl font-heading">
+              ₹{price.toLocaleString()}
+            </span>
+
+            {originalPrice > 0 && (
+              <span className="text-gray-700 line-through text-sm md:text-base font-heading">
+                ₹{originalPrice.toLocaleString()}
+              </span>
+            )}
+          </div>
+        )}
 
         {/* Compact Buttons */}
         <div className={`grid gap-3 ${showDetailsButton ? "grid-cols-2" : "grid-cols-1"}`}>
@@ -110,15 +117,15 @@ export default function PackageCard({
         </div>
       </div>
       <LeadForm
-  open={showLeadForm}
-  onOpenChange={setShowLeadForm}
-  title="Book"
-  testName={title}
-  testDescription={description}
-  testPrice={price ?? 0}
-  testOriginalPrice={originalPrice}
-  additionalSourceData={leadMeta}
-/>
+        open={showLeadForm}
+        onOpenChange={setShowLeadForm}
+        title="Book"
+        testName={title}
+        testDescription={description}
+        testPrice={price ?? 0}
+        testOriginalPrice={originalPrice}
+        additionalSourceData={leadMeta}
+      />
     </div>
   );
 }

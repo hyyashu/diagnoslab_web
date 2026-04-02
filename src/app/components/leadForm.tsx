@@ -44,22 +44,16 @@ export type LeadFormSubmitData = {
   name: string;
   phone: string;
   source: ReturnType<typeof useSource>;
+  lead_intent?: "book_home_collection" | "general_enquiry";
 };
 
 type LeadFormBaseProps = {
-  /** Optional heading (e.g. "Enquire now" on home). Default: "Book a test". */
-  title?: string;
-  /** Optional test/package name shown under the title. */
+  title?: string
   testName?: string;
-  /** Optional test/package description shown in the modal header. */
   testDescription?: string;
-  /** Optional discounted price shown in the modal header. */
   testPrice?: number;
-  /** Optional original price shown with strikethrough. */
   testOriginalPrice?: number;
-  /** Called after a successful submit (e.g. to redirect after showing success message). */
   onSuccess?: () => void;
-  /** Additional data to include in the source object */
   additionalSourceData?: Record<string, any>;
 };
 
@@ -160,7 +154,7 @@ export default function LeadForm(props: LeadFormProps) {
     setSubmitting(true);
     try {
       // Add testName to source if available
-      const sourceWithTestName = testName 
+      const sourceWithTestName = testName
         ? { ...source, clicked_at: testName }
         : source;
 
@@ -186,9 +180,8 @@ export default function LeadForm(props: LeadFormProps) {
     <div className="grid gap-3 ">
       <form
         onSubmit={handleSubmit}
-        className={`grid gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5 ${
-          isModal ? "relative" : ""
-        }`}
+        className={`grid gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-5 ${isModal ? "relative" : ""
+          }`}
       >
         {isModal && modalProps && (
           <button

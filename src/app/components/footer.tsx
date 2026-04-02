@@ -10,7 +10,7 @@ const Footer = () => {
     { name: 'Radiology', href: '/radiology' },
     { name: 'Packages', href: '/packages' },
     { name: 'Tests', href: '/tests#tests-section' },
-    { name: 'Book a test', href:'/tests#enquiry-form' },
+    { name: 'Book a test', href: '/tests#enquiry-form' },
     { name: 'Policy', href: '/policy' },
   ];
 
@@ -22,8 +22,8 @@ const Footer = () => {
         <div className="flex flex-col items-center py-2 md:py-8">
           {/* Logo Image */}
           <div className="flex items-center gap-2">
-          <Image 
-              src="/images/diagnoslogo.png" 
+            <Image
+              src="/images/diagnoslogo.avif"
               alt="Diagnos Labs Logo"
               width={500}
               height={500}
@@ -39,12 +39,12 @@ const Footer = () => {
       {/* 2. Red Content Section */}
       <div className="bg-background-primary text-white">
         <div className="max-w-7xl mx-auto px-6 pt-12 pb-8 md:px-12 lg:px-24">
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
             {/* Tagline */}
             <div className="text-sm md:text-base leading-relaxed">
               <p className="max-w-[280px]">
-                Book tests and packages online, choose home collection, 
+                Book tests and packages online, choose home collection,
                 and access your reports securely anytime.
               </p>
             </div>
@@ -97,11 +97,11 @@ const Footer = () => {
           {/* Copyright Bar */}
           <div className="flex flex-col md:flex-row justify-between items-center text-xs md:text-sm gap-4">
             <Link href="/policy" className="hidden md:block hover:underline opacity-80">Policy</Link>
-            
+
             <p className="text-center opacity-80 font-light">
               © 2026 Diagnos Labs. All rights reserved.
             </p>
-            
+
             {/* Mobile Footer Links */}
             <div className="flex gap-4 md:hidden">
               <Link href="/policy">Policy</Link>

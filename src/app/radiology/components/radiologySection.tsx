@@ -36,8 +36,8 @@ export default function RadiologySection() {
             key={service.id}
             title={service.title}
             description={service.description}
-            facilities={service.bullets}   
-            reportingTime={service.reportingTime}        
+            facilities={service.bullets}
+            reportingTime={service.reportingTime}
             image={service.image}
             reverse={index === 1 || index === 3}
           />

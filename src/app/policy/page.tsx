@@ -6,7 +6,7 @@ export default function PrivacyPolicyPage() {
   return (
     <div className="bg-white ">
       <div className="max-w-4xl mx-auto px-4 py-12">
-        
+
         {/* Heading */}
         <h1 className="text-3xl font-heading md:text-4xl font-bold mb-6 text-black">
           Privacy Policy
@@ -109,9 +109,6 @@ export default function PrivacyPolicyPage() {
               be posted on this page with an updated date.
             </p>
           </section>
-
-          
-
         </div>
       </div>
     </div>

@@ -45,7 +45,7 @@ export default function SimilarPackages({
   const allPackages: FormattedPackage[] =
     rawData.packages.map(formatPackage);
 
-  // ✅ find current
+  // find current
   const current = allPackages.find(
     (p) => p.slug === currentSlug
   );
@@ -54,7 +54,7 @@ export default function SimilarPackages({
 
   const currentWords = getSlugWords(current.slug);
 
-  // ✅ SLUG-BASED SIMILARITY
+
   const similar = allPackages
     .filter((p) => p.slug !== currentSlug)
     .map((p) => {

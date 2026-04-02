@@ -4,12 +4,11 @@ import HeroSection from "../components/hero";
 import { Suspense } from "react";
 
 export default function Page() {
-  return<>
-  <HeroSection />
-  <Suspense fallback={<div>Loading popular tests…</div>}>
-<PopularTests />
-<SearchTests />
-</Suspense>
-
-  </> ;
+  return <>
+    <HeroSection />
+    <Suspense fallback={<div>Loading tests…</div>}>
+      <PopularTests />
+      <SearchTests />
+      </Suspense>
+  </>;
 }

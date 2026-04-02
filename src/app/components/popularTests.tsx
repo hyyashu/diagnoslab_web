@@ -8,7 +8,7 @@ import TestCard from "../tests/components/testCard";
 import rawData from "@/data/tests.json";
 
 const tests = rawData.tests
-  .slice(0, 15) 
+  .slice(0, 15)
   .map((test: any) => ({
     id: test.Id,
     title: test.TestName,
@@ -89,9 +89,9 @@ export default function PopularTests() {
         {/* View All Button */}
         <div className="mt-4 text-center">
           <Link href="/tests#tests-section">
-          <button className="font-heading px-10 py-4 bg-background-primary hover:bg-red-700 text-white font-bold rounded-2xl transition-all shadow-lg hover:shadow-red-200">
-            View All Tests
-          </button>
+            <button className="font-heading px-10 py-4 bg-background-primary hover:bg-red-700 text-white font-bold rounded-2xl transition-all shadow-lg hover:shadow-red-200">
+              View All Tests
+            </button>
           </Link>
         </div>
 

@@ -20,7 +20,7 @@ type RawTest = {
 };
 
 const tests = rawData.tests
-  .slice(0, 15) 
+  .slice(0, 15)
   .map((test: any) => ({
     id: test.Id,
     title: test.TestName,
@@ -52,7 +52,6 @@ export default function PopularTests() {
   return (
     <section className="w-full py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4">
-
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="font-heading text-2xl md:text-4xl font-black text-black mb-3 tracking-tight">
@@ -101,9 +100,7 @@ export default function PopularTests() {
               ))}
             </div>
           </div>
-
         </div>
-
       </div>
     </section>
   );

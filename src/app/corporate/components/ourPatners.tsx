@@ -7,22 +7,22 @@ import { useCallback, useEffect, useState } from "react";
 import FeatureCard from "../../components/whyDiagnos/featureCard";
 
 const partners = [
-  { name: "Provident Fund", image: "/images/tie-ups/provident.png" },
-  { name: "Union Bank of India", image: "/images/tie-ups/union.png" },
-  { name: "National Metallurgical Laboratory", image: "/images/tie-ups/nml.png" },
-  { name: "Linde India", image: "/images/tie-ups/linde.png" },
-  { name: "Akin Care", image: "/images/tie-ups/akincare-logo.png" },
-  { name: "Tata Zoological", image: "/images/tie-ups/tataZoo.png" },
-  { name: "Arcofemi Health Care Ltd (Medi Wheel)", image: "/images/tie-ups/mediwheel-logo.png" },
-  { name: "Care And Cure Primary Care Pvt. Ltd.", image: "/images/tie-ups/care.png" },
-  { name: "Ekincare", image: "/images/tie-ups/ekincare_logo.png" },
-  { name: "Health Wealth Management Pvt Ltd", image: "/images/tie-ups/healthwealth.png" },
-  { name: "Healthindia Allied Services Pvt Ltd", image: "/images/tie-ups/HealthIndia.png" },
-  { name: "Life Cell International Pvt Ltd", image: "/images/tie-ups/LifeCell.png" },
-  { name: "Maggnessa Health Care", image: "/images/tie-ups/meggnessa.png" },
-  { name: "Medipiper Technologies", image: "/images/tie-ups/MedPiper.png" },
-  { name: "Tata Steel Zoo", image: "/images/tie-ups/TataSteel.png" },
-  { name: "Tata 1mg corporate wellness", image: "/images/tie-ups/tata.png" },
+  { name: "Provident Fund", image: "/images/tie-ups/provident.avif" },
+  { name: "Union Bank of India", image: "/images/tie-ups/union.avif" },
+  { name: "National Metallurgical Laboratory", image: "/images/tie-ups/nml.avif" },
+  { name: "Linde India", image: "/images/tie-ups/linde.avif" },
+  { name: "Akin Care", image: "/images/tie-ups/akincare-logo.avif" },
+  { name: "Tata Zoological", image: "/images/tie-ups/tataZoo.avif" },
+  { name: "Arcofemi Health Care Ltd (Medi Wheel)", image: "/images/tie-ups/mediwheel-logo.avif" },
+  { name: "Care And Cure Primary Care Pvt. Ltd.", image: "/images/tie-ups/care.avif" },
+  { name: "Ekincare", image: "/images/tie-ups/ekincare_logo.avif" },
+  { name: "Health Wealth Management Pvt Ltd", image: "/images/tie-ups/healthwealth.avif" },
+  { name: "Healthindia Allied Services Pvt Ltd", image: "/images/tie-ups/HealthIndia.avif" },
+  { name: "Life Cell International Pvt Ltd", image: "/images/tie-ups/LifeCell.avif" },
+  { name: "Maggnessa Health Care", image: "/images/tie-ups/meggnessa.avif" },
+  { name: "Medipiper Technologies", image: "/images/tie-ups/MedPiper.avif" },
+  { name: "Tata Steel Zoo", image: "/images/tie-ups/TataSteel.avif" },
+  { name: "Tata 1mg corporate wellness", image: "/images/tie-ups/tata.avif" },
 ];
 
 export default function OurPartners() {
@@ -35,11 +35,6 @@ export default function OurPartners() {
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
-
- 
-
- 
-  
 
   return (
     <section className="bg-background-primary py-20 md:py-16 px-4 lg:px-0 overflow-hidden ">

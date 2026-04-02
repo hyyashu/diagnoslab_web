@@ -21,7 +21,7 @@ export function Pagination({ current, total, onChange }: PaginationProps) {
 
   return (
     <div className="flex justify-center mt-8 gap-2 text-black font-heading items-center">
-      
+
       {showArrows && (
         <>
           {/* Go to Page 1 */}
@@ -55,11 +55,10 @@ export function Pagination({ current, total, onChange }: PaginationProps) {
             <button
               key={pageNumber}
               onClick={() => onChange(pageNumber)}
-              className={`w-8 h-8 rounded-full text-sm font-heading ${
-                current === pageNumber
-                  ? "bg-background-primary text-white"
-                  : "bg-white border border-gray-200"
-              }`}
+              className={`w-8 h-8 rounded-full text-sm font-heading ${current === pageNumber
+                ? "bg-background-primary text-white"
+                : "bg-white border border-gray-200"
+                }`}
             >
               {pageNumber}
             </button>

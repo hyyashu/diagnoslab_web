@@ -9,7 +9,7 @@ interface ModalProps {
 }
 
 const Modal = ({ isOpen, onClose, children }: ModalProps) => {
-  
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -17,7 +17,6 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
       document.body.style.overflow = "auto";
     }
 
-    // cleanup (important)
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -27,7 +26,7 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
-      
+
       {/* Overlay */}
       <div
         className="absolute inset-0 bg-black/50 backdrop-blur-sm"
@@ -36,7 +35,7 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
 
       {/* Modal Content */}
       <div className="relative w-full max-w-xl mx-4 z-10">
-      <button
+        <button
           type="button"
           onClick={onClose}
           aria-label="Close"

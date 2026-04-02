@@ -4,6 +4,7 @@ import { useState } from "react";
 import Modal from "./modal";
 import EnquiryForm from "./enquiryForm";
 
+type EnquiryFormType = "enquiry_form" | "home_collection";
 
 interface Step {
   id: number;
@@ -27,7 +28,7 @@ const InfoCard = ({
 }: CardProps) => {
   return (
     <div className="bg-white rounded-[2.5rem] p-8 md:p-10 lg:p-12 flex flex-col h-full shadow-xl">
-      
+
       {/* Title */}
       <h3 className="text-2xl md:text-3xl font-bold text-black mb-6 md:mb-8">
         {title}
@@ -37,7 +38,7 @@ const InfoCard = ({
       <div className="flex-grow space-y-8">
         {steps.map((step) => (
           <div key={step.id} className="flex gap-5 items-start">
-            
+
             <div className="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-background-primary flex items-center justify-center text-white font-bold">
               {step.id}
             </div>
@@ -70,6 +71,7 @@ const InfoCard = ({
 
 export default function HowItWorks() {
   const [isOpen, setIsOpen] = useState(false);
+  const [formType, setFormType] = useState<EnquiryFormType>("enquiry_form");
 
   const labVisitSteps: Step[] = [
     { id: 1, title: "Visit the lab", description: "Walk in or arrive at your appointment time." },
@@ -88,7 +90,7 @@ export default function HowItWorks() {
     <>
       <section className="bg-background-primary py-6 md:py-12 mb-2 md:mb-6 px-4 flex items-center">
         <div className="max-w-7xl mx-auto w-full">
-          
+
           {/* Heading */}
           <h2 className="text-2xl md:text-4xl font-extrabold text-center text-white mb-12">
             How It Works
@@ -96,19 +98,25 @@ export default function HowItWorks() {
 
           {/* Cards */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            
+
             <InfoCard
               title="Lab Visit"
               steps={labVisitSteps}
               buttonText="Get An Appointment"
-              onButtonClick={() => setIsOpen(true)}
+              onButtonClick={() => {
+                setFormType("enquiry_form");
+                setIsOpen(true);
+              }}
             />
 
             <InfoCard
               title="Home Collection"
               steps={homeCollectionSteps}
               buttonText="Book Home Collection"
-              onButtonClick={() => setIsOpen(true)}
+              onButtonClick={() => {
+                setFormType("home_collection");
+                setIsOpen(true);
+              }}
             />
           </div>
         </div>
@@ -116,7 +124,7 @@ export default function HowItWorks() {
 
       {/* Modal */}
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <EnquiryForm /> 
+        <EnquiryForm formType={formType} />
       </Modal>
     </>
   );

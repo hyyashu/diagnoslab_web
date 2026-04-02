@@ -3,14 +3,22 @@ import React, { useState } from "react";
 import { submitLeadForm } from "@/lib/api";
 import { useSource } from "@/lib/useSource";
 
-const EnquiryForm: React.FC = () => {
+type EnquiryFormType = "enquiry_form" | "home_collection";
+
+interface EnquiryFormProps {
+  formType?: EnquiryFormType;
+}
+
+const EnquiryForm: React.FC<EnquiryFormProps> = ({
+  formType = "enquiry_form",
+}) => {
   const [name, setName] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
-  const source = useSource({ form_type: "enquiry_form" });
+  const source = useSource({ form_type: formType });
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,6 +30,10 @@ const EnquiryForm: React.FC = () => {
         name: name.trim(),
         phone: phone.replace(/\D/g, ""),
         source,
+        lead_intent:
+          formType === "home_collection"
+            ? "book_home_collection"
+            : "general_enquiry",
       });
 
       setName("");
@@ -64,7 +76,10 @@ const EnquiryForm: React.FC = () => {
           <input
             type="tel"
             value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            onChange={(e) => {
+              const digits = e.target.value.replace(/\D/g, "").slice(0, 10);
+              setPhone(digits);
+            }}
             placeholder="Mobile Number"
             required
             className="w-full text-black bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:border-red-500 outline-none transition-all"

@@ -9,9 +9,8 @@ export default function AboutPage() {
         <AboutCard
           title="Who We Are"
           description={`Diagnos Lab is a trusted diagnostic centre in Jamshedpur, built on accuracy, transparency, and patient care. For over 15 years, we have supported doctors, families, and organisations with reliable diagnostic services that help in early detection and better treatment decisions.
-
-From routine blood tests to advanced radiology and cardiac diagnostics, we bring all essential diagnostic services under one roof.`}
-          image="/images/heroimage.png"
+                        From routine blood tests to advanced radiology and cardiac diagnostics, we bring all essential diagnostic services under one roof.`}
+          image="/images/about/about1.avif"
         />
 
         {/* Our Journey */}
@@ -19,9 +18,8 @@ From routine blood tests to advanced radiology and cardiac diagnostics, we bring
           title="Our Journey"
           reverse
           description={`What started as a small collection centre has grown into a full-service laboratory trusted by millions of patients. Over the years, Diagnos Lab has evolved with modern technology, strict quality standards, and a patient-first approach that remains unchanged.
-
-Today, we are proud to serve Jamshedpur with a strong reputation built on consistent reporting, ethical practices, and long-term trust.`}
-          image="/images/heroimage.png"
+                        Today, we are proud to serve Jamshedpur with a strong reputation built on consistent reporting, ethical practices, and long-term trust.`}
+          image="/images/about/about3.avif"
         />
 
         {/* Why Trust */}
@@ -35,7 +33,7 @@ Today, we are proud to serve Jamshedpur with a strong reputation built on consis
             "Fast turnaround time for most tests",
             "Clear digital reports on WhatsApp",
           ]}
-          image="/images/heroimage.png"
+          image="/images/about/about3.avif"
         />
 
         {/* Our Presence */}

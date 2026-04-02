@@ -2,21 +2,11 @@
 
 import React, { useState, useRef } from "react";
 import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, EffectFade } from "swiper/modules";
-import type { Swiper as SwiperType } from "swiper";
 import { submitLeadForm } from "@/lib/api";
 import { useSource } from "@/lib/useSource";
 
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/effect-fade";
 
 const HeroSection: React.FC = () => {
-  const [activeIndex, setActiveIndex] = useState<number>(0);
-  const [swiperRef, setSwiperRef] = useState<SwiperType | null>(null);
-
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -24,11 +14,7 @@ const HeroSection: React.FC = () => {
   const formRef = useRef<HTMLFormElement>(null);
   const source = useSource({ form_type: "corporate_hero_form" });
 
-  const carouselImages: string[] = [
-    "/images/corporate.jpg",
-    "/images/corporate.jpg",
-    "/images/corporate.jpg",
-  ];
+  
 
   const handleSubmit = async (formData: FormData) => {
     const companyName = String(formData.get("companyName") ?? "").trim();
@@ -68,34 +54,9 @@ const HeroSection: React.FC = () => {
     <section className="relative w-full h-[600px] md:h-[700px] flex flex-col items-center justify-center overflow-visible mb-[180px] md:mb-[120px] z-10 ">
       {/* --- BACKGROUND CAROUSEL --- */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <Swiper
-          onSwiper={setSwiperRef}
-          onSlideChange={(swiper: SwiperType) =>
-            setActiveIndex(swiper.realIndex)
-          }
-          modules={[Autoplay, Pagination, EffectFade]}
-          effect="fade"
-          autoplay={{ delay: 5000, disableOnInteraction: false }}
-          loop={true}
-          className="h-full w-full"
-        >
-          {carouselImages.map((src, index) => (
-            <SwiperSlide key={index}>
-              <div className="relative h-full w-full">
-                <Image
-                  src={src}
-                  alt={`Slide ${index + 1}`}
-                  fill
-                  className="object-cover"
-                  priority={index === 0}
-                />
-                <div className="absolute inset-0 bg-slate-900/60" />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        
+          <Image src="/images/corporate.avif" alt="Corporate Hero" fill className="object-cover" />
       </div>
-
       {/* --- TEXT CONTENT --- */}
       <div className="relative z-10 w-full flex flex-col items-start">
         <div className="w-full max-w-7xl mx-auto px-4 mb-6 -mt-30 md:-mt-20">
@@ -109,11 +70,11 @@ const HeroSection: React.FC = () => {
         {/* --- SERVICES BAR --- */}
         <div
           className="relative w-full overflow-x-hidden 
-          md:[mask-image:linear-gradient(to_right,black_0%,black_40%,transparent_95%)] 
+          md:[mask-image:linear-gradient(to_right,black_0%,black_50%,transparent_100%)] 
           md:[webkit-mask-image:linear-gradient(to_right,black_0%,black_40%,transparent_95%)]"
         >
           <div className="bg-white/70 backdrop-blur-md py-3 md:py-4">
-            <div className="w-full max-w-7xl mx-auto px-4">
+            <div className="w-full max-w-6xl mx-auto px-4">
               <p className="font-body text-[10px] md:text-xl font-bold text-black whitespace-normal max-w-prose md:max-w-none">
                 We specialise in corporae health screening for banks,
                 industries, hotels, and organisations. Partner with Diagnos Lab
@@ -122,25 +83,7 @@ const HeroSection: React.FC = () => {
               </p>
             </div>
           </div>
-        </div>
-
-        {/* --- CUSTOM PAGINATION --- */}
-        <div className="w-full max-w-7xl mx-auto px-4 mt-8 mb-8 md:mb-0">
-          <div className="flex items-center space-x-3">
-            {carouselImages.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => swiperRef?.slideToLoop(i)}
-                className={`transition-all duration-500 ease-in-out rounded-full bg-white shadow-lg h-2 ${
-                  activeIndex === i
-                    ? "w-16 opacity-100"
-                    : "w-2 opacity-40 hover:opacity-70"
-                }`}
-                aria-label={`Go to slide ${i + 1}`}
-              />
-            ))}
-          </div>
-        </div>
+        </div> 
       </div>
 
       {/* --- FLOATING ENQUIRY FORM --- */}

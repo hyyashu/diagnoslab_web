@@ -4,9 +4,9 @@ import { Suspense } from "react";
 
 export default function Page() {
   return <>
-  <HeroSection />
-  <Suspense fallback={<div>Loading packages…</div>}>
-        <PackagesScreen />
-      </Suspense>
+    <HeroSection />
+    <Suspense fallback={<div>Loading packages…</div>}>
+      <PackagesScreen />
+    </Suspense>
   </>;
 }

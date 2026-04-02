@@ -15,7 +15,7 @@ const FindUs = () => {
 
         {/* Card */}
         <div className="bg-white rounded-3xl p-6 md:p-8 grid md:grid-cols-3 gap-6 items-center">
-          
+
           {/* Left Info */}
           <div className="space-y-4">
             <div className="flex items-start gap-4">
@@ -46,7 +46,7 @@ const FindUs = () => {
           {/* Location Diagram */}
           <div className="rounded-2xl overflow-hidden bg-gray-300 border border-gray-200 h-[400px] md:h-[320px]">
             <Image
-              src="/images/map.png"
+              src="/images/map.avif"
               alt="Location Map"
               width={500}
               height={400}

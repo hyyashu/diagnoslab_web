@@ -25,10 +25,10 @@ export default function ReviewCard({
 
   return (
     <div className="h-full bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-[0_10px_30px_rgba(0,0,0,0.06)] flex flex-col min-h-[260px]">
-      
+
       {/* Header */}
       <div className="flex justify-between items-start mb-6">
-        
+
         <div className="flex gap-4 items-center">
           <div className="w-12 md:w-14 h-12 md:h-14 bg-background-primary rounded-full flex items-center justify-center text-white shrink-0 shadow-sm">
             <User size={28} />
@@ -51,11 +51,10 @@ export default function ReviewCard({
             ))}
           </div>
 
-          <p className="text-[10px] text-gray-700 mt-1 uppercase font-medium tracking-wide">
+          <p className="text-[10px] text-gray-700 mt-1 font-medium tracking-wide">
             {time}
           </p>
         </div>
-
       </div>
 
       {/* Review Text */}

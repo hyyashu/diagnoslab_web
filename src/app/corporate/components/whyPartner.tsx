@@ -36,35 +36,35 @@ const WhyPartner = () => {
 
       {/* MOBILE CONTAINER (Matches Image Precisely) */}
       <div className="relative flex w-full max-w-lg px-4 lg:hidden min-h-[800px]">
-        
+
         {/* Left Side: The Vertical Arc */}
         <div className="relative w-1/4 flex items-center justify-start">
-        <svg viewBox="0 0 100 600" className="h-full w-full overflow-visible" style={{ filter: "drop-shadow(2px 4px 6px rgba(0,0,0,0.1))" }}>
-  {/*ONLY MOBILE SHIFT */}
-  <g transform="translate(0, 80)">
-    
-    <path
-      d="M 0 50 A 175 175 0 0 1 0 400"
-      fill="none"
-      stroke="#E1352A"
-      strokeWidth="8"
-      strokeLinecap="round"
-    />
+          <svg viewBox="0 0 100 600" className="h-full w-full overflow-visible" style={{ filter: "drop-shadow(2px 4px 6px rgba(0,0,0,0.1))" }}>
+            {/*ONLY MOBILE SHIFT */}
+            <g transform="translate(0, 80)">
 
-    <circle cx="15" cy="50" r="7" fill="white" stroke="white" strokeWidth="1" />
-    <circle cx="124" cy="101.3" r="7" fill="white" stroke="white" strokeWidth="1" />
-    <circle cx="175" cy="225" r="7" fill="white" stroke="white" strokeWidth="1" />
-    <circle cx="124" cy="348.7" r="7" fill="white" stroke="white" strokeWidth="1" />
-    <circle cx="15" cy="400" r="7" fill="white" stroke="white" strokeWidth="1" />
+              <path
+                d="M 0 50 A 175 175 0 0 1 0 400"
+                fill="none"
+                stroke="#E1352A"
+                strokeWidth="8"
+                strokeLinecap="round"
+              />
 
-    </g>
-</svg>
+              <circle cx="15" cy="50" r="7" fill="white" stroke="white" strokeWidth="1" />
+              <circle cx="124" cy="101.3" r="7" fill="white" stroke="white" strokeWidth="1" />
+              <circle cx="175" cy="225" r="7" fill="white" stroke="white" strokeWidth="1" />
+              <circle cx="124" cy="348.7" r="7" fill="white" stroke="white" strokeWidth="1" />
+              <circle cx="15" cy="400" r="7" fill="white" stroke="white" strokeWidth="1" />
+
+            </g>
+          </svg>
 
           {/* Logo overlayed on the arc center */}
           <div className="absolute left-[-10px] top-1/2 -translate-y-1/2 z-10">
             <div className="relative w-20 h-20  flex items-center justify-center ">
               <Image
-                src="/images/logo.png" 
+                src="/images/logo.avif"
                 alt="Logo"
                 width={100}
                 height={100}
@@ -74,21 +74,21 @@ const WhyPartner = () => {
           </div>
         </div>
 
-        
+
         <div className="w-3/4 flex flex-col justify-between py-20 gap-0">
           {features.map((item, i) => {
-            
+
             const offsets = [
-                "-80px",    // Top Card
-                "50px",   // Slightly indented
-                "80px",   // Middle Card (Max indentation)
-                "50px",   // Slightly indented
-                "-80px"     // Bottom Card
+              "-80px",    // Top Card
+              "50px",   // Slightly indented
+              "80px",   // Middle Card (Max indentation)
+              "50px",   // Slightly indented
+              "-80px"     // Bottom Card
             ];
 
             return (
-              <div 
-                key={i} 
+              <div
+                key={i}
                 className="transition-all duration-500 ease-in-out"
                 style={{ marginLeft: offsets[i] }}
               >
@@ -126,7 +126,7 @@ const WhyPartner = () => {
         <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10">
           <div className="relative w-[120px] h-[120px]">
             <Image
-              src="/images/logo.png"
+              src="/images/logo.avif"
               alt="Diagnos Lab Logo"
               fill
               className="object-contain"

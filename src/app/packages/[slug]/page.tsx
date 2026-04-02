@@ -1,5 +1,7 @@
 import data from "@/data/packages.json";
-import PackageDetails from "../components/packageDetails";
+import DetailCard, {
+  DetailEntity,
+} from "../../components/detailCard";
 import SimilarPackages from "../components/similarPackages";
 
 export function generateStaticParams() {
@@ -14,16 +16,29 @@ export default async function Page({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params; 
+  const { slug } = await params;
 
   const pkg = data.packages.find(
     (p) => p.Slug === slug
   );
 
   if (!pkg) return <div>Package not found</div>;
+  const entity: DetailEntity = {
+    id: pkg.Id,
+    name: pkg.PackageName,
+    slug: pkg.Slug,
+    description: pkg.Description,
+    price: Number(pkg.Price),
+    discountedPrice: pkg.DiscountedPrice,
+    categories: pkg.Categories?.split(", ") ?? [],
+    fasting: pkg.Fasting,
+    reporting: pkg.Reporting,
+    whoShouldTake: "A comprehensive full-body health check-up designed to assess your wellness.",
+    parametersCovered: pkg.ParametersCovered,
+  };
 
   return <>
-    <PackageDetails pkg={pkg} />
+    <DetailCard kind="package" data={entity} />
     <SimilarPackages currentSlug={slug} />
   </>;
 }
