@@ -99,7 +99,7 @@ export default function ReviewCarousel() {
               "_blank"
             )
           }
-           className="flex-1 md:flex-none px-5 md:px-10 py-4 bg-white border border-slate-200 text-black font-bold rounded-2xl shadow-sm hover:bg-slate-50 transition text-sm md:text-base">
+           className="flex-1 md:flex-none px-4 md:px-10 py-4 md:py-4 bg-white border border-slate-200 text-black font-bold rounded-2xl shadow-sm hover:bg-slate-50 transition text-sm md:text-base">
             View All Reviews
           </button>
         </div>

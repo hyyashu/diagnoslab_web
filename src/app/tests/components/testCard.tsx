@@ -128,7 +128,7 @@ export default function TestCard({
           >
             {showDetailsButton && (
               <Link href={`/tests/${slug}`}>
-                <button className="w-full py-2 border-[1.5px] border-background-primary text-background-primary rounded-xl text-base font-bold hover:bg-red-50 transition-colors font-heading">
+                <button className="w-full py-2 border-[1.5px] border-background-primary text-background-primary rounded-xl text-base font-bold font-heading">
                   Details
                 </button>
               </Link>

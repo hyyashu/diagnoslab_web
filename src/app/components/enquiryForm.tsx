@@ -80,7 +80,7 @@ const EnquiryForm: React.FC<EnquiryFormProps> = ({
               const digits = e.target.value.replace(/\D/g, "").slice(0, 10);
               setPhone(digits);
             }}
-            placeholder="Mobile Number"
+            placeholder="Your Number"
             required
             className="w-full text-black bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:border-red-500 outline-none transition-all"
           />

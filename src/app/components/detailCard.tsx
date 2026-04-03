@@ -20,7 +20,7 @@ export type DetailEntity = {
   tat?: string;
   sampleType?: string;
   whoShouldTake?: string;
-  parametersCovered?: number; 
+  parametersCovered?: number;
 };
 
 interface DetailCardProps {
@@ -174,13 +174,19 @@ export default function DetailCard({ kind, data }: DetailCardProps) {
             <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-6 w-full sm:w-auto">
               <div className="text-center sm:text-right">
                 <div className="flex items-center justify-center gap-2">
-                  <span className="text-2xl font-bold text-green-600 font-heading">
-                    ₹{data.discountedPrice}
-                  </span>
+                  <div className="flex items-center justify-center gap-2">
+                    {data.discountedPrice > 0 && (
+                      <span className="text-2xl font-bold text-green-600 font-heading">
+                        ₹{data.discountedPrice}
+                      </span>
+                    )}
 
-                  <span className="text-slate-400 line-through text-sm font-semibold font-heading">
-                    ₹{data.price}
-                  </span>
+                    {data.price > 0 && (
+                      <span className="text-slate-400 line-through text-sm font-semibold font-heading">
+                        ₹{data.price}
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
 

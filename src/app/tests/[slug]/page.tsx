@@ -1,6 +1,7 @@
 import data from "@/data/tests.json";
 import DetailCard from "../../components/detailCard";
 import { DetailEntity } from "../../components/detailCard";
+import SimilarTests from "../components/similarTests";
 
 export function generateStaticParams() {
   return data.tests.map((test) => ({
@@ -38,5 +39,6 @@ export default async function Page({
 
   return <>
     <DetailCard kind="test" data={entity} />
+    <SimilarTests currentSlug={slug} />
   </>;
 }

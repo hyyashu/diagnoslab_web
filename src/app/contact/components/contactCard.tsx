@@ -18,9 +18,9 @@ export default function ContactCard({
   return (
     <div className="bg-white text-black rounded-xl p-6 shadow-md text-center md:text-left">
       <h3 className="font-heading font-semibold text-2xl">{title}</h3>
-      <p className="font-body text-sm md:text-base text-black mt-1">{subtitle}</p>
+      <p className="font-body text-sm md:text-base text-gray-700 mt-1">{subtitle}</p>
 
-      <div className="my-8" />
+      <div className="my-6" />
 
       {/* Phone */}
       <div className="space-y-1 text-sm md:text-base ">
@@ -35,12 +35,14 @@ export default function ContactCard({
       {/* Email */}
       <div className="space-y-1 text-sm md:text-base">
         <p className="font-bold font-heading">Email Us</p>
+        <a href="mailto:care@diagnoslab.in">
         <p className="font-body text-gray-700">{email}</p>
+        </a>
       </div>
 
-      <button className="mt-6 w-full bg-background-primary text-white py-2 rounded-lg hover:bg-red-700 transition font-heading font-bold text-lg">
+      {/* <button className="mt-6 w-full bg-background-primary text-white py-2 rounded-lg hover:bg-red-700 transition font-heading font-bold text-lg">
         {buttonText}
-      </button>
+      </button> */}
     </div>
   );
 }

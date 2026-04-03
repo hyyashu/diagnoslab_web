@@ -205,7 +205,7 @@ export default function LeadForm(props: LeadFormProps) {
           {typeof testPrice === "number" && (
             <span className="mt-2 flex items-center gap-2 text-base font-heading font-semibold text-green-600">
               ₹{testPrice}
-              {typeof testOriginalPrice === "number" && (
+              {typeof testOriginalPrice === "number" && testOriginalPrice > 0 && (
                 <span className="text-sm font-medium font-heading text-slate-400 line-through">
                   ₹{testOriginalPrice}
                 </span>
@@ -292,14 +292,15 @@ export default function LeadForm(props: LeadFormProps) {
         >
           {submitting ? "Submitting…" : "Book"}
         </button>
-      </form>
-      {submitted && (
-        <div className="rounded-2xl border border-highlight-200 bg-highlight-50 p-4 text-center">
-          <p className="text-sm font-semibold text-highlight-800">
+        {submitted && (
+
+          <p className="text-sm font-semibold mt-2 text-green-600">
             Thank you! We’ll get in touch shortly.
           </p>
-        </div>
-      )}
+
+        )}
+      </form>
+
     </div>
   );
 

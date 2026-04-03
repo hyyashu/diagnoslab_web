@@ -2,7 +2,7 @@ import axios from "axios";
 import { LeadFormSubmitData } from "@/app/components/leadForm";
 
 export const api = axios.create({
-  baseURL: "https://api.diagnoslab.in",
+  baseURL: "http://diangos-api-jg2j3d-244a7b-91-108-111-112.traefik.me/",
   // baseURL: "http://localhost:3000",
   headers: {
     "Content-Type": "application/json",
