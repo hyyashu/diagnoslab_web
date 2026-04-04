@@ -29,13 +29,13 @@ const features = [
 
 const WhyPartner = () => {
   return (
-    <section className="bg-white py-12 flex flex-col items-center select-none overflow-hidden">
-      <h2 className="font-heading text-black text-2xl md:text-4xl font-extrabold mb-2 text-center">
+    <section className="bg-white py-8 flex flex-col items-center select-none overflow-hidden">
+      <h2 className="font-heading  mt-6 text-black text-2xl md:text-4xl font-extrabold md:mb-14 mb-2 px-2 text-center">
         Why Partner With Diagnos Lab
       </h2>
 
-      {/* MOBILE CONTAINER (Matches Image Precisely) */}
-      <div className="relative flex w-full max-w-lg px-4 lg:hidden min-h-[800px]">
+      {/* MOBILE CONTAINER */}
+      <div className="relative flex w-full  max-w-lg px-4 lg:hidden min-h-[900px]">
 
         {/* Left Side: The Vertical Arc */}
         <div className="relative w-1/4 flex items-center justify-start">

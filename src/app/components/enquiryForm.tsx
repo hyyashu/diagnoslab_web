@@ -9,26 +9,76 @@ interface EnquiryFormProps {
   formType?: EnquiryFormType;
 }
 
+const NAME_MIN_LENGTH = 2;
+const NAME_MAX_LENGTH = 100;
+const PHONE_LENGTH = 10;
+
+function validateName(name: string): string | null {
+  const trimmed = name.trim();
+  if (!trimmed) return "Name is required.";
+  if (trimmed.length < NAME_MIN_LENGTH)
+    return `Name must be at least ${NAME_MIN_LENGTH} characters.`;
+  if (trimmed.length > NAME_MAX_LENGTH)
+    return `Name must be at most ${NAME_MAX_LENGTH} characters.`;
+  if (!/^[\p{L}\p{M}\s.'-]+$/u.test(trimmed))
+    return "Name can only contain letters and valid characters.";
+  return null;
+}
+
+function normalizePhone(value: string): string {
+  return value.replace(/\D/g, "");
+}
+
+function sanitizeName(value: string): string {
+  return value.replace(/[^\p{L}\p{M}\s.'-]/gu, "");
+}
+
+function validatePhone(phone: string): string | null {
+  const digits = normalizePhone(phone);
+  if (!digits) return "Phone number is required.";
+  if (digits.length !== PHONE_LENGTH)
+    return "Enter a valid 10-digit phone number.";
+  if (!/^[6-9]\d{9}$/.test(digits))
+    return "Enter a valid Indian mobile number.";
+  return null;
+}
+
 const EnquiryForm: React.FC<EnquiryFormProps> = ({
   formType = "enquiry_form",
 }) => {
-  const [name, setName] = useState<string>("");
-  const [phone, setPhone] = useState<string>("");
-  const [submitted, setSubmitted] = useState<boolean>(false);
-  const [submitting, setSubmitting] = useState<boolean>(false);
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+
+  const [nameError, setNameError] = useState<string | null>(null);
+  const [phoneError, setPhoneError] = useState<string | null>(null);
+
+  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const source = useSource({ form_type: formType });
+
+  const validate = () => {
+    const nErr = validateName(name);
+    const pErr = validatePhone(phone);
+
+    setNameError(nErr);
+    setPhoneError(pErr);
+
+    return !nErr && !pErr;
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
 
+    if (!validate()) return;
+
     setSubmitting(true);
     try {
       await submitLeadForm({
         name: name.trim(),
-        phone: phone.replace(/\D/g, ""),
+        phone: normalizePhone(phone),
         source,
         lead_intent:
           formType === "home_collection"
@@ -54,54 +104,67 @@ const EnquiryForm: React.FC<EnquiryFormProps> = ({
       </h3>
 
       <form
-        className="grid grid-cols-1 md:grid-cols-3 gap-6 items-end"
+        className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start"
         onSubmit={handleSubmit}
       >
+        {/* NAME */}
         <div className="flex flex-col space-y-2">
-          <label className="font-body text-sm font-bold text-black">Name</label>
+          <label className="text-sm font-bold text-black">Name</label>
           <input
             type="text"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {
+              const value = sanitizeName(e.target.value);
+              setName(value);
+              if (nameError) setNameError(validateName(value));
+            }}
+            onBlur={() => setNameError(validateName(name))}
             placeholder="Your Name"
-            required
-            className="w-full text-black bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:border-red-500 outline-none transition-all"
+            className="w-full text-black bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none  focus:ring-1 focus:ring-background-primary"
           />
+          <p className="text-xs text-red-600 h-2">{nameError}</p>
         </div>
-
+        {/* PHONE */}
         <div className="flex flex-col space-y-2">
-          <label className="font-body text-sm font-bold text-black">
+          <label className="text-sm font-bold text-black">
             Phone Number
           </label>
           <input
             type="tel"
             value={phone}
             onChange={(e) => {
-              const digits = e.target.value.replace(/\D/g, "").slice(0, 10);
+              const digits = normalizePhone(e.target.value).slice(0, 10);
               setPhone(digits);
+              if (phoneError) setPhoneError(validatePhone(digits));
             }}
+            onBlur={() => setPhoneError(validatePhone(phone))}
             placeholder="Your Number"
-            required
-            className="w-full text-black bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:border-red-500 outline-none transition-all"
+            className="w-full text-black bg-slate-50 border border-slate-200 rounded-xl px-4 py-3"
           />
+          <p className="text-xs text-red-600 h-2">{phoneError}</p>
         </div>
 
-        <button
-          type="submit"
-          disabled={submitting}
-          className="font-heading w-full bg-background-primary hover:bg-red-700 text-white font-black py-4 rounded-xl shadow-lg transition-all active:scale-95 uppercase tracking-widest disabled:opacity-60 disabled:pointer-events-none"
-        >
-          {submitting ? "Submitting..." : "Book"}
-        </button>
+        {/* BUTTON */}
+        <div className="flex flex-col justify-start pt-0 md:pt-6">
+          <button
+            type="submit"
+            disabled={
+              submitting || !!validateName(name) || !!validatePhone(phone)
+            }
+            className="w-full bg-background-primary text-white font-black py-2 md:py-4 rounded-xl disabled:opacity-60"
+          >
+            {submitting ? "Submitting..." : "Submit"}
+          </button>
+        </div>
       </form>
 
       {submitted && (
-        <p className="text-green-600 mt-4 font-semibold">
-          Form submitted successfully!
+        <p className="text-green-600 mt-2 font-semibold">
+          Thank you! We’ll get in touch shortly.
         </p>
       )}
 
-      {error && <p className="text-red-600 mt-4 font-semibold">{error}</p>}
+      {error && <p className="text-red-600 mt-2 font-semibold">{error}</p>}
     </div>
   );
 };

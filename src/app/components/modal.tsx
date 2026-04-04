@@ -34,7 +34,7 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
       />
 
       {/* Modal Content */}
-      <div className="relative w-full max-w-xl mx-4 z-10">
+      <div className="relative w-full max-w-3xl mx-4 z-10">
         <button
           type="button"
           onClick={onClose}

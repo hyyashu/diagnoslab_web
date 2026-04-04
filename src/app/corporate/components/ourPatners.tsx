@@ -37,7 +37,7 @@ export default function OurPartners() {
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
 
   return (
-    <section className="bg-background-primary py-20 md:py-16 px-4 lg:px-0 overflow-hidden ">
+    <section className="bg-background-primary mt-68 md:mt-40 py-20 md:py-16 px-4 lg:px-0 overflow-hidden ">
       <div className="max-w-7xl mx-auto text-center">
         
         {/* Heading */}
