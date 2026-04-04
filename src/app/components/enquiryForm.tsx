@@ -139,7 +139,7 @@ const EnquiryForm: React.FC<EnquiryFormProps> = ({
             }}
             onBlur={() => setPhoneError(validatePhone(phone))}
             placeholder="Your Number"
-            className="w-full text-black bg-slate-50 border border-slate-200 rounded-xl px-4 py-3"
+            className="w-full text-black bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none  focus:ring-1 focus:ring-background-primary"
           />
           <p className="text-xs text-red-600 h-2">{phoneError}</p>
         </div>
