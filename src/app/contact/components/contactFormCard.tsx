@@ -166,7 +166,7 @@ export default function ContactFormCard() {
             placeholder="Your Name"
             className={`w-full border rounded-lg px-3 py-2 text-sm outline-none
               ${errors.name ? "border-red-500" : "border-slate-200"}
-              focus:ring-2 focus:ring-red-400`}
+              focus:ring-1 focus:ring-background-primary`}
           />
           <p className="text-xs text-red-600 h-2">
             {errors.name || "\u00A0"}
@@ -183,7 +183,7 @@ export default function ContactFormCard() {
             placeholder="10-Digit Mobile Number"
             className={`w-full border rounded-lg px-3 py-2 text-sm outline-none
               ${errors.phone ? "border-red-500" : "border-slate-200"}
-              focus:ring-2 focus:ring-red-400`}
+              focus:ring-1 focus:ring-background-primary`}
           />
           <p className="text-xs text-red-600 h-2">
             {errors.phone || "\u00A0"}
@@ -200,7 +200,7 @@ export default function ContactFormCard() {
             placeholder="How can we help?"
             className={`w-full border rounded-xl px-3 py-2 text-sm outline-none
               ${errors.message ? "border-red-500" : "border-slate-200"}
-              focus:ring-2 focus:ring-red-400`}
+              focus:ring-1 focus:ring-background-primary`}
           />
           <p className="text-xs text-red-600 h-2">
             {errors.message || "\u00A0"}
