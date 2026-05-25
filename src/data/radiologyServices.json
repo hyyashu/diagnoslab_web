@@ -32,7 +32,7 @@
     },
     {
       "id": "ecg",
-      "title": "ECG (Electrocardiogram)",
+      "title": "ECG ",
       "bookLabel": "Book ECG",
       "description": "Quick test to check heart rhythm and electrical activity.",
       "bullets": [

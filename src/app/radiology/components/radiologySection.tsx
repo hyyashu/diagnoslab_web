@@ -25,7 +25,7 @@ export default function RadiologySection() {
           Radiology Services
         </h1>
         <p className="font-body text-gray-700 font-medium text-sm md:text-lg">
-          Book a service below. Click "Book" to open the enquiry form.
+          Book a service below. Click "Book" to get an appointment.
         </p>
       </div>
 
@@ -40,6 +40,7 @@ export default function RadiologySection() {
             reportingTime={service.reportingTime}
             image={service.image}
             reverse={index === 1 || index === 3}
+            femaleRadiologist={index === 0}
           />
         ))}
       </div>

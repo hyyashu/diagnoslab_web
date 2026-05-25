@@ -30,7 +30,7 @@ export default function RadiologyCard({
   reportingTime,
   image,
   reverse = false,
-  femaleRadiologist = true,
+  femaleRadiologist = false,
 }: RadiologyCardProps) {
   const [showLeadForm, setShowLeadForm] = useState(false);
   const leadMeta = useMemo<leadMetaProps>(() => ({

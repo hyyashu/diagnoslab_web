@@ -70,15 +70,15 @@ const Footer = () => {
                 <div className="space-y-4 opacity-90">
                   <a href="tel:+918404802201" className="flex items-center gap-3 hover:opacity-100">
                     <Phone size={18} className="fill-white" />
-                    <span>+91 84048 02201</span>
+                    <span>+91 8404802201</span>
                   </a>
-                  <a href="https://wa.me/918404802201" className="flex items-center gap-3 hover:opacity-100">
+                  <a href="https://wa.me/8404802214" className="flex items-center gap-3 hover:opacity-100">
                     <MessageCircle size={18} className="fill-white" />
                     <span>Whatsapp Support</span>
                   </a>
-                  <a href="mailto:care@diagnoslab.in" className="flex items-center gap-3 hover:opacity-100">
+                  <a href="mailto:infor@diagnoslab.in" className="flex items-center gap-3 hover:opacity-100">
                     <Mail size={18} className="fill-white" />
-                    <span>care@diagnoslab.in</span>
+                    <span>infor@diagnoslab.in</span>
                   </a>
                 </div>
               </section>

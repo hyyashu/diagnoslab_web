@@ -26,10 +26,10 @@ export default function ContactSection() {
             title="Get in Touch"
             subtitle="We're here to help you anytime."
             phoneNumbers={[
-              "+91 84048 02201",
-              "+91 84048 02214",
+              "+91 8404802201",
+              "+91 8404802214",
             ]}
-            email="care@diagnoslab.in"
+            email="infor@diagnoslab.in"
             buttonText="Contact Now"
           />
 

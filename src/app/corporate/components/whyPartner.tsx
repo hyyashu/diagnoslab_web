@@ -7,7 +7,7 @@ import FeatureCard from "./featureCard";
 const features = [
   {
     title: "Comprehensive Diagnostic Solutions",
-    description: "Pathology, Radiology (X-ray), ECG, TMT, Eye, Audio & more.",
+    description: "Pathology, Radiology, X-ray, ECG, TMT, Eye, Audio & more.",
   },
   {
     title: "On-Site & Off-Site Testing",

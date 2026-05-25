@@ -65,8 +65,7 @@ export default function RadiologyCard({
 
       <button onClick={() => setShowLeadForm(true)} className="font-heading w-full text-sm md:text-base py-4 bg-background-primary hover:bg-red-700 text-white font-bold rounded-xl transition shadow-md active:scale-[0.98]">
         Book{" "}
-        {title.toLowerCase().charAt(0).toUpperCase() +
-          title.toLowerCase().slice(1)}
+        {title}
       </button>
       <LeadForm
         open={showLeadForm}
