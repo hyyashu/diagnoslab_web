@@ -72,7 +72,7 @@ const Footer = () => {
                     <Phone size={18} className="fill-white" />
                     <span>+91 8404802201</span>
                   </a>
-                  <a href="https://wa.me/8404802214" className="flex items-center gap-3 hover:opacity-100">
+                  <a href="https://wa.me/+918404802214" className="flex items-center gap-3 hover:opacity-100">
                     <MessageCircle size={18} className="fill-white" />
                     <span>Whatsapp Support</span>
                   </a>

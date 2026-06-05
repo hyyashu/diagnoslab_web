@@ -38,7 +38,7 @@ export default function RootLayout({
         <Navbar />
         <main className="pt-12 md:pt-24">
           {children}
-          <FloatingCTA phoneNumber="+91 8404802201" whatsappNumber="+91 8404802214" />
+          <FloatingCTA phoneNumber="+918404802201" whatsappNumber="+918404802214" />
           <FindUs />
           <ReviewCarousel />
           <ConditionalHowItWorks />
