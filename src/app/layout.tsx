@@ -10,6 +10,7 @@ import FindUs from "./components/findus";
 import AreasServed from "./components/areasServed";
 import ReviewCarousel from "./components/reviews/reviews";
 import ConditionalHowItWorks from "./components/conditionalHowItWorks";
+import JsonLd from "./components/JsonLd";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,6 +21,71 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "MedicalBusiness",
+  name: "Diagnos Lab",
+  alternateName: "Diagnos Laboratory Jamshedpur",
+  url: "https://diagnoslab.in",
+  logo: "https://diagnoslab.in/images/diagnoslogo.avif",
+  image: "https://diagnoslab.in/images/diagnoslogo.avif",
+  description:
+    "Diagnos Lab is a top-rated diagnostic centre in Sakchi, Jamshedpur offering blood tests, ultrasound, ECG, X-Ray, PFT, and health packages with home sample collection.",
+  telephone: "+918404802201",
+  email: "info@diagnoslab.in",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Sakchi",
+    addressLocality: "Jamshedpur",
+    addressRegion: "Jharkhand",
+    postalCode: "831001",
+    addressCountry: "IN",
+  },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: 22.8046,
+    longitude: 86.2029,
+  },
+  openingHoursSpecification: [
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      opens: "07:00",
+      closes: "20:00",
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: "Sunday",
+      opens: "08:00",
+      closes: "13:00",
+    },
+  ],
+  priceRange: "₹₹",
+  aggregateRating: {
+    "@type": "AggregateRating",
+    ratingValue: "4.9",
+    reviewCount: "2500",
+    bestRating: "5",
+  },
+  sameAs: [
+    "https://wa.me/918404802214",
+  ],
+  areaServed: [
+    "Jamshedpur", "Sakchi", "Bistupur", "Jugsalai", "Adityapur",
+    "Mango", "Kadma", "Golmuri", "Telco", "Baridih", "Sonari",
+  ],
+  medicalSpecialty: [
+    "Pathology", "Radiology", "Cardiology",
+  ],
+  availableService: [
+    { "@type": "MedicalTest", name: "Blood Test" },
+    { "@type": "MedicalTest", name: "Ultrasound (USG)" },
+    { "@type": "MedicalTest", name: "ECG" },
+    { "@type": "MedicalTest", name: "X-Ray" },
+    { "@type": "MedicalTest", name: "PFT" },
+  ],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://diagnoslab.in"),
@@ -82,6 +148,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <JsonLd data={localBusinessSchema} />
         <Navbar />
         <main className="pt-12 md:pt-24">
           {children}
