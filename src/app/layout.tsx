@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 import Navbar from "./components/navbar";
+import BottomNav from "./components/BottomNav";
 import FloatingCTA from "./components/floatingCTA";
 import Footer from "./components/footer";
 import FAQAccordion from "./components/faq";
@@ -27,7 +28,7 @@ const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "MedicalBusiness",
   name: "Diagnos Lab",
-  alternateName: "Diagnos Laboratory Jamshedpur",
+  alternateName: "Diagno Labs Jamshedpur",
   url: "https://diagnoslab.in",
   logo: "https://diagnoslab.in/images/diagnoslogo.avif",
   image: "https://diagnoslab.in/images/diagnoslogo.avif",
@@ -51,8 +52,16 @@ const localBusinessSchema = {
   openingHoursSpecification: [
     {
       "@type": "OpeningHoursSpecification",
-      dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-      opens: "07:00",
+      dayOfWeek: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday",
+      ],
+      opens: "07:30",
       closes: "20:00",
     },
     {
@@ -69,16 +78,21 @@ const localBusinessSchema = {
     reviewCount: "2500",
     bestRating: "5",
   },
-  sameAs: [
-    "https://wa.me/918404802214",
-  ],
+  sameAs: ["https://wa.me/918404802214"],
   areaServed: [
-    "Jamshedpur", "Sakchi", "Bistupur", "Jugsalai", "Adityapur",
-    "Mango", "Kadma", "Golmuri", "Telco", "Baridih", "Sonari",
+    "Jamshedpur",
+    "Sakchi",
+    "Bistupur",
+    "Jugsalai",
+    "Adityapur",
+    "Mango",
+    "Kadma",
+    "Golmuri",
+    "Telco",
+    "Baridih",
+    "Sonari",
   ],
-  medicalSpecialty: [
-    "Pathology", "Radiology", "Cardiology",
-  ],
+  medicalSpecialty: ["Pathology", "Radiology", "Cardiology"],
   availableService: [
     { "@type": "MedicalTest", name: "Blood Test" },
     { "@type": "MedicalTest", name: "Ultrasound (USG)" },
@@ -151,7 +165,7 @@ export default function RootLayout({
       >
         <JsonLd data={localBusinessSchema} />
         <Navbar />
-        <main className="pt-12 md:pt-24">
+        <main className="pt-12 md:pt-24 pb-16 md:pb-0">
           {children}
           <FloatingCTA
             phoneNumber="+918404802201"
@@ -165,6 +179,7 @@ export default function RootLayout({
           <FAQAccordion />
         </main>
         <Footer />
+        <BottomNav />
       </body>
     </html>
   );
