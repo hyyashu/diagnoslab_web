@@ -66,7 +66,7 @@ export default function TestCard({
         className={`bg-white rounded-2xl border border-gray-100 shadow-sm flex flex-col w-full overflow-hidden ${
           fillSlide ? "h-full max-w-none" : ""
         }`}
-        style={{ borderLeft: "3px solid #E73834" }}
+        style={{ borderTop: "3px solid #E73834" }}
       >
         {/* Top section */}
         <div className="p-4 md:p-5 flex flex-col flex-1">
