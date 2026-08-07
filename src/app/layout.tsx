@@ -6,6 +6,7 @@ import Navbar from "./components/navbar";
 import FloatingCTA from "./components/floatingCTA";
 import Footer from "./components/footer";
 import FAQAccordion from "./components/faq";
+import FaqJsonLd from "./components/FaqJsonLd";
 import FindUs from "./components/findus";
 import AreasServed from "./components/areasServed";
 import ReviewCarousel from "./components/reviews/reviews";
@@ -160,6 +161,7 @@ export default function RootLayout({
           <AreasServed />
           <ReviewCarousel />
           <ConditionalHowItWorks />
+          <FaqJsonLd />
           <FAQAccordion />
         </main>
         <Footer />
