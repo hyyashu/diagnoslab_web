@@ -16,21 +16,6 @@
       "image": "/images/radiology/USG.avif"
     },
     {
-      "id": "pft",
-      "title": "PFT",
-      "bookLabel": "Book PFT",
-      "description": "A breathing test used to evaluate lung capacity and airflow.",
-      "bullets": [
-        "Asthma",
-        "Chronic cough",
-        "Breathlessness",
-        "Pre-surgery lung assessment"
-      ],
-      "extra": "Performed by experienced doctors with clear reporting. Female Radiologist for female cases.",
-      "reportingTime": "1-2 hours",
-      "image": "/images/radiology/PFT.avif"
-    },
-    {
       "id": "ecg",
       "title": "ECG ",
       "bookLabel": "Book ECG",
@@ -41,7 +26,7 @@
         "Pre-surgery fitness",
         "Routine cardiac screening"
       ],
-      "extra": "Performed by experienced doctors with clear reporting. Female Radiologist for female cases.",
+      "extra": "Performed by experienced doctors with clear reporting.",
       "reportingTime": "1-2 hours",
       "image": "/images/radiology/ECG.avif"
     },
@@ -56,9 +41,24 @@
         "Back pain",
         "Joint problems"
       ],
-      "extra": "Performed by experienced doctors with clear reporting. Female Radiologist for female cases.",
+      "extra": "Performed by experienced technician with clear reporting.",
       "reportingTime": "1-2 hours",
       "image": "/images/radiology/XRAY.avif"
+    },
+    {
+      "id": "pft",
+      "title": "PFT",
+      "bookLabel": "Book PFT",
+      "description": "A breathing test used to evaluate lung capacity and airflow.",
+      "bullets": [
+        "Asthma",
+        "Chronic cough",
+        "Breathlessness",
+        "Pre-surgery lung assessment"
+      ],
+      "extra": "Performed by experienced doctors with clear reporting.",
+      "reportingTime": "1-2 hours",
+      "image": "/images/radiology/PFT.avif"
     }
   ]
 }

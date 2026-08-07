@@ -1,0 +1,62 @@
+{
+  "scanTypes": [
+    {
+      "id": "abdomen",
+      "title": "Abdominal Ultrasound",
+      "description": "Evaluates liver, gallbladder, pancreas, spleen, and abdominal organs for stones, swelling, or abnormalities.",
+      "preparation": "6–8 hours fasting recommended"
+    },
+    {
+      "id": "pelvic",
+      "title": "Pelvic Ultrasound",
+      "description": "Assesses uterus, ovaries, and bladder. Commonly used for gynecological complaints and fertility evaluation.",
+      "preparation": "Drink water and hold bladder before scan"
+    },
+    {
+      "id": "pregnancy",
+      "title": "Pregnancy (Obstetric) USG",
+      "description": "Monitors fetal growth, placenta, and amniotic fluid. Includes dating, NT, anomaly, and growth scans as advised.",
+      "preparation": "Follow your doctor's scan schedule"
+    },
+    {
+      "id": "kub",
+      "title": "KUB / Renal Ultrasound",
+      "description": "Examines kidneys, ureters, and bladder for stones, infections, or structural issues.",
+      "preparation": "Full bladder may be required"
+    },
+    {
+      "id": "thyroid",
+      "title": "Thyroid & Neck Ultrasound",
+      "description": "Checks thyroid gland size, nodules, and neck lymph nodes for swelling or abnormalities.",
+      "preparation": "No special preparation needed"
+    },
+    {
+      "id": "breast",
+      "title": "Breast Ultrasound",
+      "description": "Used to evaluate breast lumps, pain, or as a follow-up to mammography findings.",
+      "preparation": "No special preparation needed"
+    }
+  ],
+  "preparationSteps": [
+    {
+      "id": 1,
+      "title": "Follow fasting instructions",
+      "description": "For abdomen scans, avoid food for 6–8 hours. Clear fluids are usually allowed unless advised otherwise."
+    },
+    {
+      "id": 2,
+      "title": "Bladder preparation",
+      "description": "Pelvic and some KUB scans require a full bladder. Drink 4–5 glasses of water 1 hour before your appointment."
+    },
+    {
+      "id": 3,
+      "title": "Bring prior reports",
+      "description": "Carry previous ultrasound or related medical reports to help our radiologist compare findings accurately."
+    },
+    {
+      "id": 4,
+      "title": "Wear comfortable clothing",
+      "description": "Loose, easy-to-remove clothing helps the scan go quickly. You may be asked to change into a gown."
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "city": "Jamshedpur",
+  "state": "Jharkhand",
+  "intro": "Diagnos Lab in Sakchi serves patients across Jamshedpur with pathology tests, ultrasound (USG), X-ray, ECG, PFT, health packages, and home blood sample collection.",
+  "areas": [
+    "Sakchi",
+    "Baradwari",
+    "Ambagan",
+    "Bistupur",
+    "Kadma",
+    "Mango",
+    "Dimna",
+    "Sonari",
+    "Golmuri",
+    "Telco",
+    "Baridih",
+    "Birsanagar",
+    "Namda Basti",
+    "Agrico",
+    "Parsudih",
+    "Jugsalai"
+  ]
+}

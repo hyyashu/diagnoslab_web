@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import LeadForm from "../leadForm";
 
@@ -8,6 +9,7 @@ interface RadiologyCardProps {
   description: string;
   uses: string[];
   footerNote: string;
+  href?: string;
 }
 
 interface leadMetaProps {
@@ -22,6 +24,7 @@ export default function RadiologyCard({
   description,
   uses,
   footerNote,
+  href,
 }: RadiologyCardProps) {
   const [showLeadForm, setShowLeadForm] = useState(false);
   const leadMeta = useMemo<leadMetaProps>(() => ({
@@ -63,10 +66,22 @@ export default function RadiologyCard({
         {footerNote}
       </p>
 
-      <button onClick={() => setShowLeadForm(true)} className="font-heading w-full text-sm md:text-base py-4 bg-background-primary hover:bg-red-700 text-white font-bold rounded-xl transition shadow-md active:scale-[0.98]">
-        Book{" "}
-        {title}
-      </button>
+      <div className="flex flex-col gap-3">
+        {href && (
+          <Link
+            href={href}
+            className="font-heading w-full text-sm md:text-base py-3 text-center border-2 border-background-primary text-background-primary hover:bg-red-50 font-bold rounded-xl transition"
+          >
+            Learn More
+          </Link>
+        )}
+        <button
+          onClick={() => setShowLeadForm(true)}
+          className="font-heading w-full text-sm md:text-base py-4 bg-background-primary hover:bg-red-700 text-white font-bold rounded-xl transition shadow-md active:scale-[0.98]"
+        >
+          Book {title}
+        </button>
+      </div>
       <LeadForm
         open={showLeadForm}
         onOpenChange={setShowLeadForm}

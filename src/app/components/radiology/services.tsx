@@ -10,6 +10,12 @@ import Link from "next/link";
 import rawData from "@/data/radiologyServices.json";
 
 
+const serviceLinks: Record<string, string> = {
+  ultrasound: "/ultrasound-in-jamshedpur",
+  ecg: "/ecg",
+  xray: "/xray",
+};
+
 const RadiologyServices = () => {
   const services = rawData.radiologyServices.map((service: any) => ({
     id: service.id,
@@ -17,6 +23,7 @@ const RadiologyServices = () => {
     description: service.description,
     uses: service.bullets,
     footerNote: service.extra,
+    href: serviceLinks[service.id],
   }));
   return (
     <section id="radiology-services" className="py-12 px-4 bg-gray-50">
@@ -57,6 +64,7 @@ const RadiologyServices = () => {
                   description={service.description}
                   uses={service.uses}
                   footerNote={service.footerNote}
+                  href={service.href}
                 />
               </SwiperSlide>
             ))}

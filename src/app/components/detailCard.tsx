@@ -28,17 +28,13 @@ interface DetailCardProps {
   data: DetailEntity;
 }
 
-
 export default function DetailCard({ kind, data }: DetailCardProps) {
   const [showLeadForm, setShowLeadForm] = useState(false);
 
   const backHref =
-    kind === "test"
-      ? "/tests#tests-section"
-      : "/packages#packages-section";
+    kind === "test" ? "/tests#tests-section" : "/packages#packages-section";
 
-  const backLabel =
-    kind === "test" ? "Back" : "Back";
+  const backLabel = kind === "test" ? "Back" : "Back";
 
   const leadMeta = useMemo(() => {
     if (kind === "test") {
@@ -75,7 +71,7 @@ export default function DetailCard({ kind, data }: DetailCardProps) {
 
         {/* Title */}
         <h1 className="text-white font-heading text-2xl md:text-4xl text-center font-bold mb-8 px-4">
-          {data.name}
+          {data.name} Test in Jamshedpur
         </h1>
 
         {/* Enquiry Form */}
@@ -94,13 +90,11 @@ export default function DetailCard({ kind, data }: DetailCardProps) {
             )}
 
             <p className="text-black font-body">
-              <b className="font-heading">Fasting:</b>{" "}
-              {data.fasting ?? "—"}
+              <b className="font-heading">Fasting:</b> {data.fasting ?? "—"}
             </p>
 
             <p className="text-black font-body">
-              <b className="font-heading">Reporting:</b>{" "}
-              {data.reporting ?? "—"}
+              <b className="font-heading">Reporting:</b> {data.reporting ?? "—"}
             </p>
 
             {data.tat && (
@@ -111,8 +105,7 @@ export default function DetailCard({ kind, data }: DetailCardProps) {
 
             {data.sampleType && (
               <p className="text-black font-body">
-                <b className="font-heading">Sample:</b>{" "}
-                {data.sampleType}
+                <b className="font-heading">Sample:</b> {data.sampleType}
               </p>
             )}
           </div>
@@ -120,12 +113,12 @@ export default function DetailCard({ kind, data }: DetailCardProps) {
           {/* Overview */}
           {data.description && (
             <div className="bg-white rounded-2xl p-6 shadow-sm">
-              <h2 className="font-bold text-lg mb-2 text-black font-heading">
+              <p className="font-bold text-lg mb-2 text-black font-heading">
                 Overview
-              </h2>
-              <p className="text-black leading-relaxed text-sm font-body">
-                {data.description}
               </p>
+              <h2 className="text-black leading-relaxed text-sm font-body">
+                {data.description}
+              </h2>
             </div>
           )}
 
@@ -159,8 +152,7 @@ export default function DetailCard({ kind, data }: DetailCardProps) {
                 Who should take this test?
               </h2>
               <p className="text-black text-sm leading-relaxed font-body">
-                {data.whoShouldTake ??
-                  "Consult your doctor for suitability."}
+                {data.whoShouldTake ?? "Consult your doctor for suitability."}
               </p>
             </div>
           </div>
