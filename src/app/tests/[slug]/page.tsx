@@ -22,7 +22,7 @@ export async function generateMetadata({
 
   if (!test) {
     return {
-      title: "Test Not Found | Diagnos Lab",
+      title: { absolute: "Test Not Found | Diagnos Lab" },
     };
   }
 
