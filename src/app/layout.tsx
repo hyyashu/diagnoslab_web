@@ -91,8 +91,10 @@ const localBusinessSchema = {
   availableService: [
     { "@type": "MedicalTest", name: "Blood Test" },
     { "@type": "MedicalTest", name: "Ultrasound (USG)" },
-    { "@type": "MedicalTest", name: "ECG" },
+    { "@type": "MedicalTest", name: "Mammography" },
     { "@type": "MedicalTest", name: "X-Ray" },
+    { "@type": "MedicalTest", name: "Echocardiography" },
+    { "@type": "MedicalTest", name: "ECG" },
     { "@type": "MedicalTest", name: "PFT" },
   ],
 };

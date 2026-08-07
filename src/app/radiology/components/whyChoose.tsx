@@ -31,7 +31,7 @@ export default function FeaturesSection() {
         {/* Header */}
         <div className="text-center  mb-10 md:mb-12">
           <h2 className="font-heading text-white text-2xl md:text-4xl font-extrabold mb-3 md:mb-4">
-            Why Choose Radiology
+            Why Choose Us
           </h2>
         </div>
 
