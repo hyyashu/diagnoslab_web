@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import {
-  Menu, X, Home, FileText, Package,
+  Menu, Home, FileText, Package,
   Microscope, Handshake, Users, Phone
 } from 'lucide-react';
 import EnquiryForm from './enquiryForm';
@@ -79,7 +79,7 @@ const Navbar = () => {
     { name: 'Radiology', href: '/radiology#radiology-section', icon: <Microscope size={20} /> },
     { name: 'Corporate Tie-ups', href: '/corporate', icon: <Handshake size={20} /> },
     { name: 'About Us', href: '/aboutUs', icon: <Users size={20} /> },
-    { name: 'Contact Us', href: '/contact', icon: <Phone size={20} /> },
+    { name: 'Contact Us', href: '/contact-us', icon: <Phone size={20} /> },
   ];
 
   return (

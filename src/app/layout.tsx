@@ -13,6 +13,7 @@ import AreasServed from "./components/areasServed";
 import ReviewCarousel from "./components/reviews/reviews";
 import ConditionalHowItWorks from "./components/conditionalHowItWorks";
 import JsonLd from "./components/JsonLd";
+import HomeCollectionJsonLd from "./components/HomeCollectionJsonLd";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -71,6 +72,7 @@ const localBusinessSchema = {
     ratingValue: "4.9",
     reviewCount: "3000",
     bestRating: "5",
+    worstRating: "1",
   },
   sameAs: ["https://wa.me/918404802214"],
   areaServed: [
@@ -106,7 +108,7 @@ export const metadata: Metadata = {
     template: "%s | Diagnos Lab",
   },
   description:
-    "Diagnos Lab is Jamshedpur's top-rated diagnostic centre in Sakchi. Book blood tests, ultrasound (USG), ECG, X-Ray, and health packages with home sample collection and same-day reports.",
+    "Jamshedpur's top-rated diagnostic lab in Sakchi. Blood tests, ultrasound by female radiologist, ECG & X-Ray. Home sample collection across all areas. Same-day digital reports. Call 8404802201.",
   keywords: [
     "Blood Test in Jamshedpur",
     "Best Lab in Jamshedpur",
@@ -161,6 +163,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <JsonLd data={localBusinessSchema} />
+        <HomeCollectionJsonLd />
         <Navbar />
         <main className="pt-12 md:pt-24 pb-16 md:pb-0">
           {children}

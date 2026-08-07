@@ -9,7 +9,7 @@ import { Pagination } from "../../tests/components/pagination";
 
 const ITEMS_PER_PAGE = 9;
 
-const packages = rawData.packages.map((pkg: any) => ({
+const packages = rawData.packages.map((pkg) => ({
   id: pkg.Id,
   title: pkg.PackageName || "",
   description: pkg.Description || "",

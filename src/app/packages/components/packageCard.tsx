@@ -19,6 +19,7 @@ interface Props {
 }
 
 interface leadMetaProps {
+  [key: string]: unknown;
   package_name: string;
   package_description: string;
   package_price: number;

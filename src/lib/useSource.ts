@@ -9,10 +9,10 @@ interface SourceData {
   source?: string;
   referrer?: string;
   landing_page?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
-export function useSource(additionalData?: Record<string, any>) {
+export function useSource(additionalData?: Record<string, unknown>) {
   const [sourceData, setSourceData] = useState<SourceData>({});
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export function useSource(additionalData?: Record<string, any>) {
 
     // Filter out undefined values
     const cleanedData = Object.fromEntries(
-      Object.entries(utmParams).filter(([_, value]) => value !== undefined),
+      Object.entries(utmParams).filter(([, value]) => value !== undefined),
     ) as SourceData;
 
     // Merge with additional data

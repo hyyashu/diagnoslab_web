@@ -5,7 +5,6 @@ type ContactCardProps = {
   subtitle: string;
   phoneNumbers: string[];
   email: string;
-  buttonText: string;
 };
 
 export default function ContactCard({
@@ -13,7 +12,6 @@ export default function ContactCard({
   subtitle,
   phoneNumbers,
   email,
-  buttonText,
 }: ContactCardProps) {
   return (
     <div className="bg-white text-black rounded-xl p-6 shadow-md text-center md:text-left">

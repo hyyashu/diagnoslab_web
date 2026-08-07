@@ -6,10 +6,9 @@ import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import ReviewCard from "./ReviewCard";
 import rawData from "@/data/reviews.json";
 
-const REVIEWS = rawData.reviews.map((r: any) => ({
-  id: r.id,
+const REVIEWS = rawData.reviews.map((r, i) => ({
+  id: i,
   author: r.authorName,
-  stats: `${r.reviewCount} reviews`,
   rating: r.rating,
   time: r.date,
   text: r.text,
@@ -65,7 +64,6 @@ export default function ReviewCarousel() {
               >
                 <ReviewCard
                   author={review.author}
-                  stats={review.stats}
                   rating={review.rating}
                   time={review.time}
                   text={review.text}

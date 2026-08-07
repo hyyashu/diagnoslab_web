@@ -9,12 +9,12 @@ import "swiper/css/navigation";
 import Link from "next/link";
 import rawData from "@/data/packages.json";
 
-const packageData = rawData.packages.map((p: any) => ({
+const packageData = rawData.packages.map((p) => ({
   id: p.Id,
   title: p.PackageName,
   description: p.Description,
   price: p.DiscountedPrice,
-  originalPrice: p.Price,
+  originalPrice: Number(p.Price) || 0,
   parameters: p.ParametersCovered || 0,
   categories: p.Categories || "General",
 

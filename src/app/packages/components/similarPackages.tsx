@@ -16,7 +16,7 @@ type FormattedPackage = {
   slug: string;
 };
 
-function formatPackage(p: any): FormattedPackage {
+function formatPackage(p: typeof rawData.packages[number]): FormattedPackage {
   return {
     id: p.Id,
     title: p.PackageName,

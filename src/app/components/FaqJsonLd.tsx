@@ -25,6 +25,42 @@ const faqItems = [
     question: "Where is Diagnos Lab located in Jamshedpur?",
     answer: "Diagnos Lab is located in Sakchi, Jamshedpur, Jharkhand. We also serve Bistupur, Mango, Kadma, Jugsalai, Adityapur, Golmuri, Telco, and Baridih.",
   },
+  {
+    question: "How much does a blood test cost at Diagnos Lab?",
+    answer: "Blood tests at Diagnos Lab start from ₹99. Most common tests like CBC, thyroid, and blood sugar fall between ₹150–₹500. Full body health packages are available from ₹999. Call +91 8404802201 for specific test pricing.",
+  },
+  {
+    question: "Is there a female radiologist for ultrasound at Diagnos Lab?",
+    answer: "Yes, Diagnos Lab has an experienced female radiologist available for all ultrasound (USG) examinations including pregnancy scans, anomaly scans, pelvis, and abdomen ultrasounds.",
+  },
+  {
+    question: "How do I book a home sample collection in Jamshedpur?",
+    answer: "You can book home collection by calling +91 8404802201, messaging on WhatsApp at +91 8404802214, or filling the enquiry form on our website. A trained phlebotomist will visit your home at the scheduled time.",
+  },
+  {
+    question: "What areas in Jamshedpur does Diagnos Lab cover for home collection?",
+    answer: "We cover Sakchi, Bistupur, Mango, Kadma, Jugsalai, Agrico, Golmuri, Telco, Baridih, Sonari, Adityapur, Baradwari, Ambagan, Dimna, Birsanagar, Namda Basti, and Parsudih.",
+  },
+  {
+    question: "What is the turnaround time for ultrasound reports at Diagnos Lab?",
+    answer: "Ultrasound reports at Diagnos Lab are available within 1–2 hours of the scan.",
+  },
+  {
+    question: "Is Diagnos Lab open on Sundays?",
+    answer: "Yes, Diagnos Lab is open 7 days a week including Sundays and public holidays, from 7:30 AM to 8:00 PM.",
+  },
+  {
+    question: "Does Diagnos Lab provide ECG services?",
+    answer: "Yes, Diagnos Lab provides 12-lead ECG (electrocardiogram) tests for heart rhythm and electrical activity analysis. Reports are available within 1–2 hours.",
+  },
+  {
+    question: "What health packages does Diagnos Lab offer?",
+    answer: "Diagnos Lab offers several health packages including ND Plus (comprehensive full body checkup), Bio-T Plus (thyroid and metabolic panel), and disease-specific panels for diabetes, anaemia, arthritis, and antenatal care.",
+  },
+  {
+    question: "Can I get my reports on WhatsApp?",
+    answer: "Yes, all digital reports are delivered on WhatsApp and email within the committed turnaround time. You can also access reports through our patient portal.",
+  },
 ];
 
 export default function FaqJsonLd() {

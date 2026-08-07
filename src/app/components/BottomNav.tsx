@@ -18,7 +18,7 @@ const tabs: (Tab | null)[] = [
   { name: "Tests", href: "/tests", icon: FlaskConical },
   null,
   { name: "Packages", href: "/packages", icon: HeartPulse },
-  { name: "Contact", href: "/contact", icon: Phone },
+  { name: "Contact", href: "/contact-us", icon: Phone },
 ];
 
 export default function BottomNav() {
@@ -43,7 +43,7 @@ export default function BottomNav() {
             paddingBottom: "env(safe-area-inset-bottom, 0px)",
           }}
         >
-          {tabs.map((tab, i) => {
+          {tabs.map((tab) => {
             /* ── Center CTA ── */
             if (tab === null) {
               return (

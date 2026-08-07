@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://diagnoslab.in/policy",
   },
+  openGraph: {
+    url: "https://diagnoslab.in/policy",
+  },
   robots: {
     index: true,
     follow: false,

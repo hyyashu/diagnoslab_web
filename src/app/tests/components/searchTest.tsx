@@ -20,12 +20,12 @@ const filters = [
 
 
 const ITEMS_PER_PAGE = 6;
-const tests = rawData.tests.map((t: any) => ({
+const tests = rawData.tests.map((t) => ({
   id: t.Id,
   title: t.TestName,
   description: t.Description,
   price: t.DiscountedPrice,
-  originalPrice: t.Price,
+  originalPrice: Number(t.Price) || 0,
   category: t.Categories?.[0] || "General Health",
   fasting: t.Fasting || "Not Required",
   reporting: t.Reporting || "Same Day",

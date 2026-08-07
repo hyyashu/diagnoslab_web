@@ -3,7 +3,7 @@
 import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 import FeatureCard from "../../components/whyDiagnos/featureCard";
 
 const partners = [

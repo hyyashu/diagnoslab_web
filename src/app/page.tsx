@@ -4,11 +4,12 @@ import PopularTests from "./components/popularTests";
 import Packages from "./components/packages";
 import HeroSection from "./components/hero";
 import RadiologyServices from "./components/radiology/services";
+import JsonLd from "./components/JsonLd";
 
 export const metadata: Metadata = {
-  title: { absolute: "Diagnos Lab | Book Blood Test & Ultrasound in Jamshedpur" },
+  title: { absolute: "Diagnos Lab Jamshedpur | Blood Test, Ultrasound & Home Collection" },
   description:
-    "Diagnos Lab in Sakchi, Jamshedpur offers blood tests, ultrasound (USG), ECG, X-Ray, PFT, and health packages. Home sample collection available across Jamshedpur. Reports in 6–12 hours.",
+    "Jamshedpur's top-rated diagnostic lab in Sakchi. Blood tests, ultrasound by female radiologist, ECG & X-Ray. Home sample collection across all areas. Same-day digital reports. Call 8404802201.",
   keywords: [
     "Blood Test in Jamshedpur",
     "Diagnostic Center Jamshedpur",
@@ -30,9 +31,27 @@ export const metadata: Metadata = {
   },
 };
 
+const webPageSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "Diagnos Lab – Blood Test, Ultrasound & Diagnostic Centre Jamshedpur",
+  url: "https://diagnoslab.in",
+  speakable: {
+    "@type": "SpeakableSpecification",
+    cssSelector: ["h1", ".speakable-description"],
+  },
+  about: {
+    "@type": "MedicalBusiness",
+    name: "Diagnos Lab",
+    description:
+      "Diagnos Lab is Jamshedpur's top-rated diagnostic centre in Sakchi offering blood tests, ultrasound by female radiologist, ECG, X-Ray, and health packages with home sample collection and same-day digital reports.",
+  },
+};
+
 export default function Home() {
   return (
     <>
+      <JsonLd data={webPageSchema} />
       <HeroSection />
       <WhyDiagnosLab />
       <PopularTests />

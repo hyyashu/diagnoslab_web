@@ -17,7 +17,7 @@ const serviceLinks: Record<string, string> = {
 };
 
 const RadiologyServices = () => {
-  const services = rawData.radiologyServices.map((service: any) => ({
+  const services = rawData.radiologyServices.map((service) => ({
     id: service.id,
     title: service.title,
     description: service.description,

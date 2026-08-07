@@ -98,9 +98,12 @@ const EnquiryForm: React.FC<EnquiryFormProps> = ({
   };
 
   return (
-    <div id="enquiry-form" className="bg-white p-6 md:p-8 rounded-[2rem] shadow-2xl border border-slate-100">
+    <div
+      id="enquiry-form"
+      className="bg-white p-6 md:p-8 rounded-[2rem] shadow-2xl border border-slate-100"
+    >
       <h3 className="font-heading text-xl md:text-2xl font-black text-slate-900 mb-6">
-        Enquire Now
+        Request A Call Back
       </h3>
 
       <form
@@ -126,9 +129,7 @@ const EnquiryForm: React.FC<EnquiryFormProps> = ({
         </div>
         {/* PHONE */}
         <div className="flex flex-col space-y-2">
-          <label className="text-sm font-bold text-black">
-            Phone Number
-          </label>
+          <label className="text-sm font-bold text-black">Phone Number</label>
           <input
             type="tel"
             value={phone}

@@ -10,7 +10,7 @@ const HeroSection: React.FC = () => {
       <div className="absolute inset-0 z-0 overflow-hidden">
         <Image
           src="/images/radiology/USG.avif"
-          alt="Ultrasound in jamshedpur at Diagnos Lab"
+          alt="Ultrasound in Jamshedpur at Diagnos Lab"
           fill
           className="object-cover"
           priority

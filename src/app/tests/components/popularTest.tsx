@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 
 import React, { useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
@@ -8,25 +7,14 @@ import TestCard from "./testCard";
 import rawData from "@/data/tests.json";
 import { useSearchParams } from "next/navigation";
 
-type RawTest = {
-  Id: number;
-  TestName: string;
-  Description: string;
-  Price: number;
-  DiscountedPrice: number;
-  Categories?: string[];
-  Fasting?: string;
-  Reporting?: string;
-};
-
 const tests = rawData.tests
   .slice(0, 15)
-  .map((test: any) => ({
+  .map((test) => ({
     id: test.Id,
     title: test.TestName,
     description: test.Description,
     price: test.DiscountedPrice,
-    originalPrice: test.Price,
+    originalPrice: Number(test.Price) || 0,
     category: test.Categories?.[0] || "General Health",
     fasting: test.Fasting?.trim() || "Not Required",
     reporting: test.Reporting?.trim() || "Same Day",
@@ -84,7 +72,7 @@ export default function PopularTests() {
           {/* Carousel */}
           <div className="overflow-hidden" ref={emblaRef}>
             <div className="flex items-stretch gap-3 md:gap-5 py-4">
-              {tests.map((test: any) => (
+              {tests.map((test) => (
                 <div
                   key={test.id}
                   className="flex min-h-0 min-w-0 flex-[0_0_80%] flex-col sm:flex-[0_0_46%] lg:flex-[0_0_31%]"

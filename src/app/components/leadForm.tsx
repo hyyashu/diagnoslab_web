@@ -54,7 +54,7 @@ type LeadFormBaseProps = {
   testPrice?: number;
   testOriginalPrice?: number;
   onSuccess?: () => void;
-  additionalSourceData?: Record<string, any>;
+  additionalSourceData?: Record<string, unknown>;
 };
 
 type LeadFormInlineProps = LeadFormBaseProps & {
@@ -108,12 +108,12 @@ export default function LeadForm(props: LeadFormProps) {
   const phoneErrorId = `lead-phone-error-${inputIdsPrefix}`;
 
   useEffect(() => {
-    setMounted(true);
+    setMounted(true); // eslint-disable-line react-hooks/set-state-in-effect
   }, []);
 
   useEffect(() => {
     if (!isModal || isOpen) return;
-    setSubmitted(false);
+    setSubmitted(false); // eslint-disable-line react-hooks/set-state-in-effect
     setName("");
     setPhone("");
     setNameError(null);

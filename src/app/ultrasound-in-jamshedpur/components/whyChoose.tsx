@@ -1,4 +1,4 @@
-import { Monitor, Users, UserCheck, Clock, ShieldCheck } from "lucide-react";
+import { Monitor, Users, UserCheck, Clock } from "lucide-react";
 import FeatureCard from "../../components/whyDiagnos/featureCard";
 
 const features = [

@@ -19,6 +19,7 @@ interface TestCardProps {
 }
 
 interface leadMetaProps {
+  [key: string]: string | number;
   test_name: string;
   test_slug: string;
   test_price: number;

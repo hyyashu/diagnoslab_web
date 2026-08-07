@@ -123,11 +123,11 @@ const Footer = () => {
             <div className="flex gap-4 md:hidden">
               <Link href="/policy">Policy</Link>
               <span className="opacity-40">|</span>
-              <Link href="/contact">Contact Us</Link>
+              <Link href="/contact-us">Contact Us</Link>
             </div>
 
             <Link
-              href="/contact"
+              href="/contact-us"
               className="hidden md:block hover:underline opacity-80"
             >
               Contact Us

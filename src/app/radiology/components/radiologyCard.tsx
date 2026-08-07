@@ -7,6 +7,7 @@ import { useMemo, useState } from "react";
 import { Clock, CheckCircle2 } from "lucide-react";
 
 interface leadMetaProps {
+  [key: string]: unknown;
   radiology_name: string;
   radiology_description: string;
   radiology_facilities: string[];

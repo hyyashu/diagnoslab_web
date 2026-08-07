@@ -41,7 +41,7 @@ export default function FloatingCTA({
 
   return (
     <>
-      <div id="contact" className="fixed bottom-6 right-6 z-50 flex flex-col gap-3 items-end">
+      <div id="contact" className="fixed bottom-24 md:bottom-6 right-6 z-50 flex flex-col gap-3 items-end">
 
         {/* Call Button (Mobile Only) */}
         <button

@@ -4,7 +4,6 @@ import { Star, User } from "lucide-react";
 
 interface ReviewCardProps {
   author: string;
-  stats: string;
   rating: number;
   time: string;
   text: string;
@@ -12,7 +11,6 @@ interface ReviewCardProps {
 
 export default function ReviewCard({
   author,
-  stats,
   rating,
   time,
   text,

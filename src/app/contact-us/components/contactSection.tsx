@@ -28,7 +28,6 @@ export default function ContactSection() {
             subtitle="We're here to help you anytime."
             phoneNumbers={["+91 8404802201", "+91 8404802214"]}
             email="info@diagnoslab.in"
-            buttonText="Contact Now"
           />
 
           <ContactFormCard />

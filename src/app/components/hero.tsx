@@ -78,7 +78,7 @@ const HeroSection: React.FC = () => {
         >
           <div className="bg-white/70 backdrop-blur-md py-3 md:py-4">
             <div className="w-full max-w-7xl mx-auto px-4">
-              <p className="font-body text-sm md:text-xl font-bold text-slate-900 whitespace-nowrap">
+              <p className="speakable-description font-body text-sm md:text-xl font-bold text-slate-900 whitespace-nowrap">
                 Blood Tests | PFT | X-Ray | ECG | Ultrasound
               </p>
             </div>
