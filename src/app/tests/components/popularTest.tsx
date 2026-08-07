@@ -83,11 +83,11 @@ export default function PopularTests() {
 
           {/* Carousel */}
           <div className="overflow-hidden" ref={emblaRef}>
-            <div className="m-6 flex items-stretch gap-6">
+            <div className="flex items-stretch gap-3 md:gap-5 py-4">
               {tests.map((test: any) => (
                 <div
                   key={test.id}
-                  className="flex min-h-0 min-w-0 flex-[0_0_94%] flex-col sm:flex-[0_0_48%] lg:flex-[0_0_32%]"
+                  className="flex min-h-0 min-w-0 flex-[0_0_80%] flex-col sm:flex-[0_0_46%] lg:flex-[0_0_31%]"
                 >
                   <div className="flex min-h-0 flex-1 flex-col">
                     <TestCard

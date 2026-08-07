@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import LeadForm from "../../components/leadForm";
 import Link from "next/link";
+import { Clock, Utensils } from "lucide-react";
 
 interface TestCardProps {
   slug: string;
@@ -41,6 +42,11 @@ export default function TestCard({
 }: TestCardProps) {
   const [showLeadForm, setShowLeadForm] = useState(false);
 
+  const discount =
+    originalPrice > 0 && price > 0
+      ? Math.round(((originalPrice - price) / originalPrice) * 100)
+      : 0;
+
   const leadMeta = useMemo<leadMetaProps>(
     () => ({
       test_name: title,
@@ -57,65 +63,57 @@ export default function TestCard({
   return (
     <>
       <div
-        className={`bg-white rounded-3xl p-8 shadow-[0px_10px_30px_rgba(0,0,0,0.1)] border border-gray-50 flex flex-col w-full ${fillSlide ? "h-full max-w-none" : "max-w-[400px]"
-          }`}
+        className={`bg-white rounded-2xl border border-gray-100 shadow-sm flex flex-col w-full overflow-hidden ${
+          fillSlide ? "h-full max-w-none" : ""
+        }`}
+        style={{ borderLeft: "3px solid #E73834" }}
       >
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
-          <h3 className="text-xl md:text-2xl font-bold text-black leading-tight font-heading">
-            {title}
-          </h3>
-
-          <span className="mt-2 md:mt-0 md:ml-2 bg-background-primary text-white text-[10px] md:text-xs px-3 py-1 rounded-full font-medium shrink-0  w-fit">
-            {category}
-          </span>
-        </div>
-
-        <div
-          className={
-            fillSlide ? "flex min-h-0 flex-1 flex-col" : "contents"
-          }
-        >
-          {/* Middle content wrapper */}
-          <div className="flex flex-col flex-1">
-            {/* Description */}
-            <p
-              className={`text-gray-700 text-sm mb-4 md:mb-6 font-body ${fillSlide ? "line-clamp-4" : ""
-                }`}
-            >
-              {description}
-            </p>
-
-            {/* Info List */}
-            <div className="space-y-2 text-sm font-body">
-              <p className="text-black">
-                <span className="font-bold">Fasting:</span>{" "}
-                <span className="text-gray-700">{fasting}</span>
-              </p>
-              <p className="text-black">
-                <span className="font-bold">Reporting:</span>{" "}
-                <span className="text-gray-700">{reporting}</span>
-              </p>
-            </div>
+        {/* Top section */}
+        <div className="p-4 md:p-5 flex flex-col flex-1">
+          {/* Title + category row */}
+          <div className="flex items-start gap-2 mb-2">
+            <h3 className="font-heading font-bold text-black text-sm md:text-base leading-snug flex-1">
+              {title}
+            </h3>
+            <span className="shrink-0 bg-red-50 text-[#E73834] text-[10px] font-bold px-2 py-0.5 rounded-full font-body whitespace-nowrap">
+              {category}
+            </span>
           </div>
-        </div>
 
-        <div
-          className={fillSlide ? "mt-auto w-full pt-4" : "contents"}
-        >
-          {/* Pricing */}
+          {/* Description */}
+          <p className="text-gray-500 text-xs font-body leading-relaxed line-clamp-2 mb-3">
+            {description}
+          </p>
+
+          {/* Info chips */}
+          <div className="flex flex-wrap gap-1.5 mb-3">
+            <span className="flex items-center gap-1 bg-gray-50 text-gray-600 text-[11px] font-body font-medium px-2 py-1 rounded-lg">
+              <Clock size={11} className="shrink-0" />
+              {reporting}
+            </span>
+            <span className="flex items-center gap-1 bg-gray-50 text-gray-600 text-[11px] font-body font-medium px-2 py-1 rounded-lg">
+              <Utensils size={11} className="shrink-0" />
+              {fasting}
+            </span>
+          </div>
+
+          {/* Spacer pushes price + buttons to bottom */}
+          <div className="flex-1" />
+
+          {/* Price row */}
           {price > 0 && (
-            <div
-              className={`flex justify-end items-center gap-2 mb-4${fillSlide ? "" : "mt-6"
-                }`}
-            >
-              <span className="text-green-600 font-bold text-xl font-heading">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="font-heading font-black text-lg text-black">
                 ₹{price.toLocaleString()}
               </span>
-
               {originalPrice > 0 && (
-                <span className="text-gray-700 line-through text-sm md:text-base font-heading">
+                <span className="font-heading text-gray-400 line-through text-sm">
                   ₹{originalPrice.toLocaleString()}
+                </span>
+              )}
+              {discount >= 10 && (
+                <span className="ml-auto text-[11px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full font-body">
+                  {discount}% off
                 </span>
               )}
             </div>
@@ -123,22 +121,22 @@ export default function TestCard({
 
           {/* Buttons */}
           <div
-            className={`grid gap-3 ${showDetailsButton ? "grid-cols-2" : "grid-cols-1"
-              }`}
+            className={`grid gap-2 ${
+              showDetailsButton ? "grid-cols-2" : "grid-cols-1"
+            }`}
           >
             {showDetailsButton && (
               <Link href={`/tests/${slug}`}>
-                <button className="w-full py-2 border-[1.5px] border-background-primary text-background-primary rounded-xl text-base font-bold font-heading">
+                <button className="w-full py-2.5 border border-[#E73834] text-[#E73834] rounded-xl text-xs font-bold font-heading transition-colors hover:bg-red-50 active:scale-95">
                   Details
                 </button>
               </Link>
             )}
-
             <button
               onClick={() => setShowLeadForm(true)}
-              className="w-full py-2 bg-background-primary text-white rounded-xl text-base font-bold hover:bg-red-700 shadow-sm shadow-red-100 transition-all font-heading text-sm md:text-base"
+              className="w-full py-2.5 bg-[#E73834] text-white rounded-xl text-xs font-bold font-heading hover:bg-red-700 transition-all active:scale-95 shadow-sm"
             >
-              Book
+              Book Now
             </button>
           </div>
         </div>
