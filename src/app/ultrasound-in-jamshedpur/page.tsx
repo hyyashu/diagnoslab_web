@@ -19,10 +19,14 @@ export const metadata: Metadata = {
     "Diagnostic Center in Jamshedpur",
     "Diagnos Lab in Jamshedpur",
   ],
+  alternates: {
+    canonical: "https://diagnoslab.in/ultrasound-in-jamshedpur",
+  },
   openGraph: {
     title: "Diagnos Lab | Book Ultrasound (USG) in Jamshedpur",
     description:
       "Book ultrasound (USG) at Diagnos Lab in Jamshedpur. Safe, radiation-free imaging for abdomen, pelvis, pregnancy, thyroid, and more. Reports in 1–2 hours.",
+    url: "https://diagnoslab.in/ultrasound-in-jamshedpur",
     images: ["/images/diagnoslogo.avif"],
   },
 };

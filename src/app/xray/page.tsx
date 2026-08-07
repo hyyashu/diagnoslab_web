@@ -15,10 +15,14 @@ export const metadata: Metadata = {
     "Diagnostic Center in Jamshedpur",
     "Diagnos Lab in Jamshedpur",
   ],
+  alternates: {
+    canonical: "https://diagnoslab.in/xray",
+  },
   openGraph: {
     title: "Diagnos Lab | Book X-Ray in Jamshedpur",
     description:
       "Book digital X-Ray at Diagnos Lab in Jamshedpur. Fast, low-radiation imaging for bones, chest, spine, and joints with reports in 1–2 hours.",
+    url: "https://diagnoslab.in/xray",
     images: ["/images/diagnoslogo.avif"],
   },
 };

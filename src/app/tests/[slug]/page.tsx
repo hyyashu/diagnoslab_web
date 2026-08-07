@@ -42,6 +42,9 @@ export async function generateMetadata({
       "Home Collection",
       ...(test.Categories ?? []),
     ],
+    alternates: {
+      canonical: `https://diagnoslab.in/tests/${test.Slug}`,
+    },
     openGraph: {
       title,
       description,

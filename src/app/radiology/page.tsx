@@ -14,10 +14,14 @@ export const metadata: Metadata = {
     "ECG in Jamshedpur",
     "Diagnostic Center in Jamshedpur",
   ],
+  alternates: {
+    canonical: "https://diagnoslab.in/radiology",
+  },
   openGraph: {
     title: "Diagnos Lab | Radiology Services in Jamshedpur",
     description:
       "Book radiology services at Diagnos Lab in Jamshedpur — Ultrasound, X-Ray, ECG, and PFT with fast reporting and experienced specialists.",
+    url: "https://diagnoslab.in/radiology",
     images: ["/images/diagnoslogo.avif"],
   },
 };

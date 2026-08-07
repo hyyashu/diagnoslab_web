@@ -15,10 +15,14 @@ export const metadata: Metadata = {
     "Diagnostic Center in Jamshedpur",
     "Diagnos Lab in Jamshedpur",
   ],
+  alternates: {
+    canonical: "https://diagnoslab.in/ecg",
+  },
   openGraph: {
     title: "Diagnos Lab | Book ECG in Jamshedpur",
     description:
       "Book ECG at Diagnos Lab in Jamshedpur. Quick heart rhythm and electrical activity testing with reports in 1–2 hours.",
+    url: "https://diagnoslab.in/ecg",
     images: ["/images/diagnoslogo.avif"],
   },
 };
