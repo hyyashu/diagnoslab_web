@@ -1,6 +1,20 @@
 "use client";
 
+import type { Metadata } from "next";
 import React from "react";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy | Diagnos Lab Jamshedpur",
+  description:
+    "Read the privacy policy of Diagnos Lab, Jamshedpur. We are committed to protecting patient data and maintaining confidentiality.",
+  alternates: {
+    canonical: "https://diagnoslab.in/policy",
+  },
+  robots: {
+    index: true,
+    follow: false,
+  },
+};
 
 export default function PrivacyPolicyPage() {
   return (
