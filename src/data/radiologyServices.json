@@ -13,11 +13,12 @@
       ],
       "extra": "Performed by experienced doctors with clear reporting. Female Radiologist for female cases.",
       "reportingTime": "1-2 hours",
-      "image": "/images/radiology/USG.avif"
+      "image": "/images/radiology/USG.avif",
+      "href": "/ultrasound-in-jamshedpur"
     },
     {
       "id": "ecg",
-      "title": "ECG ",
+      "title": "ECG",
       "bookLabel": "Book ECG",
       "description": "Quick test to check heart rhythm and electrical activity.",
       "bullets": [
@@ -28,7 +29,8 @@
       ],
       "extra": "Performed by experienced doctors with clear reporting.",
       "reportingTime": "1-2 hours",
-      "image": "/images/radiology/ECG.avif"
+      "image": "/images/radiology/ECG.avif",
+      "href": "/ecg"
     },
     {
       "id": "xray",
@@ -43,7 +45,8 @@
       ],
       "extra": "Performed by experienced technician with clear reporting.",
       "reportingTime": "1-2 hours",
-      "image": "/images/radiology/XRAY.avif"
+      "image": "/images/radiology/XRAY.avif",
+      "href": "/xray"
     },
     {
       "id": "pft",
@@ -58,7 +61,8 @@
       ],
       "extra": "Performed by experienced doctors with clear reporting.",
       "reportingTime": "1-2 hours",
-      "image": "/images/radiology/PFT.avif"
+      "image": "/images/radiology/PFT.avif",
+      "href": null
     }
   ]
 }

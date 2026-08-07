@@ -12,6 +12,7 @@ type Service = {
   extra: string;
   reportingTime: string;
   image: string;
+  href: string | null;
 };
 
 export default function RadiologySection() {
@@ -43,6 +44,7 @@ export default function RadiologySection() {
             facilities={service.bullets}
             reportingTime={service.reportingTime}
             image={service.image}
+            href={service.href}
             femaleRadiologist={index === 0}
           />
         ))}

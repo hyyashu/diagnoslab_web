@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import LeadForm from "../../components/leadForm";
 import { useMemo, useState } from "react";
 import { Clock, CheckCircle2 } from "lucide-react";
@@ -18,6 +19,7 @@ interface RadiologyCardProps {
   facilities: string[];
   reportingTime: string;
   image: string;
+  href?: string | null;
   femaleRadiologist?: boolean;
 }
 
@@ -27,6 +29,7 @@ export default function RadiologyCard({
   facilities,
   reportingTime,
   image,
+  href,
   femaleRadiologist = false,
 }: RadiologyCardProps) {
   const [showLeadForm, setShowLeadForm] = useState(false);
@@ -99,13 +102,22 @@ export default function RadiologyCard({
           {/* Spacer */}
           <div className="flex-1" />
 
-          {/* Book button */}
-          <button
-            onClick={() => setShowLeadForm(true)}
-            className="w-full bg-[#E73834] hover:bg-red-700 active:scale-95 text-white font-bold font-heading text-sm py-3 rounded-xl transition-all shadow-sm mt-1"
-          >
-            Book {title}
-          </button>
+          {/* Buttons */}
+          <div className={`grid gap-2 mt-1 ${href ? "grid-cols-2" : "grid-cols-1"}`}>
+            {href && (
+              <Link href={href}>
+                <button className="w-full py-3 border border-[#E73834] text-[#E73834] rounded-xl text-xs font-bold font-heading hover:bg-red-50 active:scale-95 transition-all">
+                  View Details
+                </button>
+              </Link>
+            )}
+            <button
+              onClick={() => setShowLeadForm(true)}
+              className="w-full bg-[#E73834] hover:bg-red-700 active:scale-95 text-white font-bold font-heading text-xs py-3 rounded-xl transition-all shadow-sm"
+            >
+              Book Now
+            </button>
+          </div>
         </div>
       </div>
 
