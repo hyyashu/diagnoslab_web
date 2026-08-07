@@ -6,7 +6,7 @@ import HeroSection from "./components/hero";
 import RadiologyServices from "./components/radiology/services";
 
 export const metadata: Metadata = {
-  title: "Diagnos Lab | Book Blood Test & Ultrasound in Jamshedpur",
+  title: { absolute: "Diagnos Lab | Book Blood Test & Ultrasound in Jamshedpur" },
   description:
     "Diagnos Lab in Sakchi, Jamshedpur offers blood tests, ultrasound (USG), ECG, X-Ray, PFT, and health packages. Home sample collection available across Jamshedpur. Reports in 6–12 hours.",
   keywords: [

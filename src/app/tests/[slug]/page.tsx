@@ -31,7 +31,7 @@ export async function generateMetadata({
   const description = `Book ${test.TestName} test in Jamshedpur at Diagnos Lab. Home sample collection, same-day reports, affordable pricing, and trusted pathology lab in Sakchi.`;
 
   return {
-    title,
+    title: { absolute: title },
     description,
 
     keywords: [

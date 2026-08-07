@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Diagnos Lab Jamshedpur",
+  title: { absolute: "Privacy Policy | Diagnos Lab Jamshedpur" },
   description:
     "Read the privacy policy of Diagnos Lab, Jamshedpur. We are committed to protecting patient data and maintaining confidentiality.",
   alternates: {

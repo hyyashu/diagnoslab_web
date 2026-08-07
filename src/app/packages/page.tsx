@@ -4,7 +4,7 @@ import HeroSection from "../components/hero";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {
-  title: "Health Packages in Jamshedpur | Full Body Checkup | Diagnos Lab",
+  title: { absolute: "Health Packages in Jamshedpur | Full Body Checkup | Diagnos Lab" },
   description:
     "Book affordable health checkup packages at Diagnos Lab in Jamshedpur. Full body checkup, thyroid profile, diabetes panel, cardiac profile, and more with home collection.",
   keywords: [

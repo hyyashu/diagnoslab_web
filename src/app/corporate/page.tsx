@@ -4,7 +4,7 @@ import OurPartners from "./components/ourPatners";
 import WhyPartner from "./components/whyPartner";
 
 export const metadata: Metadata = {
-  title: "Corporate Health Testing in Jamshedpur | Diagnos Lab",
+  title: { absolute: "Corporate Health Testing in Jamshedpur | Diagnos Lab" },
   description:
     "Partner with Diagnos Lab for corporate wellness and employee health check programmes in Jamshedpur. Flexible on-site and in-lab testing for companies in Jharkhand.",
   keywords: [
