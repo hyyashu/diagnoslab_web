@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import tests from "@/data/tests.json";
+import areas from "@/data/areasServed.json";
 
 const BASE = "https://diagnoslab.in";
 
@@ -25,5 +26,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...testRoutes];
+  const areaRoutes: MetadataRoute.Sitemap = areas.areas.map((area) => ({
+    url: `${BASE}/area/${area.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  return [...staticRoutes, ...testRoutes, ...areaRoutes];
 }

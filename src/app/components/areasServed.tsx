@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { MapPin } from "lucide-react";
 import data from "@/data/areasServed.json";
 
@@ -23,23 +24,28 @@ export default function AreasServed() {
         <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 md:gap-4">
           {data.areas.map((area) => (
             <li
-              key={area}
-              className="flex items-center gap-2 bg-white rounded-xl px-3 py-3 md:px-4 md:py-3.5 border border-gray-100 shadow-sm"
+              key={area.slug}
+              className="bg-white rounded-xl border border-gray-100 shadow-sm hover:border-red-200 hover:shadow-md transition-all"
             >
-              <MapPin
-                size={16}
-                className="text-background-primary shrink-0"
-                aria-hidden
-              />
-              <span className="font-body text-sm md:text-base font-semibold text-black">
-                {area}
-              </span>
+              <Link
+                href={`/area/${area.slug}`}
+                className="flex items-center gap-2 px-3 py-3 md:px-4 md:py-3.5 w-full"
+              >
+                <MapPin
+                  size={16}
+                  className="text-background-primary shrink-0"
+                  aria-hidden
+                />
+                <span className="font-body text-sm md:text-base font-semibold text-black">
+                  {area.name}
+                </span>
+              </Link>
             </li>
           ))}
         </ul>
 
         <p className="font-body text-center text-xs md:text-sm text-gray-600 mt-8 max-w-3xl mx-auto">
-          Walk-in visits welcome at our Sakchi, Jugsalai, Adtiyapur centre. Home
+          Walk-in visits welcome at our Sakchi, Jugsalai, Adityapur centre. Home
           collection available across {data.city}.
         </p>
       </div>
