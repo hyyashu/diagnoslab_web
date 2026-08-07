@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Home, FlaskConical, CalendarCheck, Package, Phone } from "lucide-react";
+import { Home, FlaskConical, CalendarCheck, HeartPulse, Phone } from "lucide-react";
 import Modal from "./modal";
 import EnquiryForm from "./enquiryForm";
 
@@ -17,7 +17,7 @@ const tabs: (Tab | null)[] = [
   { name: "Home", href: "/", icon: Home },
   { name: "Tests", href: "/tests", icon: FlaskConical },
   null,
-  { name: "Packages", href: "/packages", icon: Package },
+  { name: "Packages", href: "/packages", icon: HeartPulse },
   { name: "Contact", href: "/contact", icon: Phone },
 ];
 
