@@ -49,6 +49,22 @@
       "href": "/xray"
     },
     {
+      "id": "echo",
+      "title": "ECHO",
+      "bookLabel": "Book Echo",
+      "description": "Echocardiography uses ultrasound to produce live images of the heart and detect cardiac conditions.",
+      "bullets": [
+        "Heart valve problems",
+        "Cardiac function assessment",
+        "Pre-surgery evaluation",
+        "Chest pain investigation"
+      ],
+      "extra": "Performed by experienced cardiologist with clear reporting.",
+      "reportingTime": "1-2 hours",
+      "image": "/images/radiology/USG.avif",
+      "href": null
+    },
+    {
       "id": "pft",
       "title": "PFT",
       "bookLabel": "Book PFT",
