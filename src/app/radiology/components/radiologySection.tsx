@@ -18,19 +18,23 @@ export default function RadiologySection() {
   const services: Service[] = data.radiologyServices;
 
   return (
-    <section id="radiology-section" className="bg-gray-100 py-12 px-4 md:px-10">
+    <section id="radiology-section" className="bg-gray-50 py-12 md:py-16 px-4 md:px-10">
+
       {/* Heading */}
-      <div className="text-center mb-8 md:mb-10">
-        <h1 className="font-heading text-2xl md:text-4xl text-black mb-3 tracking-tight font-bold">
+      <div className="text-center mb-10">
+        <p className="font-heading text-[#E73834] font-bold text-xs uppercase tracking-widest mb-2">
+          Our Services
+        </p>
+        <h1 className="font-heading text-2xl md:text-4xl font-black text-black tracking-tight mb-3">
           Radiology Services
         </h1>
-        <p className="font-body text-gray-700 font-medium text-sm md:text-lg">
-          Book a service below. Click "Book" to get an appointment.
+        <p className="font-body text-gray-500 text-sm md:text-base max-w-xl mx-auto">
+          Advanced imaging and diagnostic services with fast reporting and experienced specialists.
         </p>
       </div>
 
-      {/* Cards */}
-      <div className="max-w-6xl mx-auto mt-10 space-y-6">
+      {/* 2-col grid */}
+      <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6">
         {services.map((service, index) => (
           <RadiologyCard
             key={service.id}
@@ -39,7 +43,6 @@ export default function RadiologySection() {
             facilities={service.bullets}
             reportingTime={service.reportingTime}
             image={service.image}
-            reverse={index === 1 || index === 3}
             femaleRadiologist={index === 0}
           />
         ))}
