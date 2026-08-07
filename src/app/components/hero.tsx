@@ -17,10 +17,10 @@ const HeroSection: React.FC = () => {
   const [swiperRef, setSwiperRef] = useState<SwiperType | null>(null);
 
 
-  const carouselImages: string[] = [
-    "/images/hero/hero1.avif",
-    "/images/hero/hero2.avif",
-    "/images/hero/hero3.avif",
+  const carouselSlides = [
+    { src: "/images/hero/hero1.avif", alt: "Blood test home collection service in Jamshedpur – Diagnos Lab" },
+    { src: "/images/hero/hero2.avif", alt: "Ultrasound and radiology services at Diagnos Lab, Sakchi Jamshedpur" },
+    { src: "/images/hero/hero3.avif", alt: "Diagnostic centre in Jamshedpur – affordable tests with fast reports" },
   ];
 
   return (
@@ -39,12 +39,12 @@ const HeroSection: React.FC = () => {
           loop={true}
           className="h-full w-full"
         >
-          {carouselImages.map((src, index) => (
+          {carouselSlides.map((slide, index) => (
             <SwiperSlide key={index}>
               <div className="relative h-full w-full">
                 <Image
-                  src={src}
-                  alt={`Slide ${index + 1}`}
+                  src={slide.src}
+                  alt={slide.alt}
                   fill
                   className="object-cover"
                   priority={index === 0}
@@ -88,7 +88,7 @@ const HeroSection: React.FC = () => {
         {/* --- CUSTOM PAGINATION --- */}
         <div className="w-full max-w-7xl mx-auto px-4 mt-8 mb-8 md:mb-0" >
           <div className="flex items-center space-x-3">
-            {carouselImages.map((_, i) => (
+            {carouselSlides.map((_, i) => (
               <button
                 key={i}
                 onClick={() => swiperRef?.slideToLoop(i)}

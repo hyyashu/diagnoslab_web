@@ -164,7 +164,7 @@ const Navbar = () => {
               <div className="flex items-center pl-4 lg:pl-10 h-10">
                 <Image
                   src="/images/narayanalogo.avif"
-                  alt="Narayana Diagnostic"
+                  alt="Diagnos Lab – Diagnostic Centre in Jamshedpur"
                   width={140}
                   height={40}
                   className="h-30 md:h-30 w-auto object-contain"
