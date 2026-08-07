@@ -1,4 +1,27 @@
+import type { Metadata } from "next";
 import AboutCard from "./components/aboutCard";
+
+export const metadata: Metadata = {
+  title: "About Diagnos Lab | Diagnostic Centre in Jamshedpur Since 2009",
+  description:
+    "Learn about Diagnos Lab — Jamshedpur's trusted diagnostic centre for 15+ years. NABL-quality testing, 4.9-star Google rating, and a patient-first team in Sakchi.",
+  keywords: [
+    "About Diagnos Lab",
+    "Best Diagnostic Center Jamshedpur",
+    "Trusted Pathology Lab Jamshedpur",
+    "NABL Lab Jamshedpur",
+    "Diagnos Lab History",
+  ],
+  alternates: {
+    canonical: "https://diagnoslab.in/aboutUs",
+  },
+  openGraph: {
+    title: "About Diagnos Lab | Trusted Diagnostic Centre in Jamshedpur",
+    description:
+      "15+ years of diagnostic excellence in Jamshedpur. 4.9-star rating, in-house pathologist, same-day reports.",
+    url: "https://diagnoslab.in/aboutUs",
+  },
+};
 
 export default function AboutPage() {
   return (
