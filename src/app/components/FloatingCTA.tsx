@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { PhoneIcon } from "@heroicons/react/24/solid";
 import EnquiryForm from "./enquiryForm";
 import Modal from "./modal";
+import { usePathname } from "next/navigation";
 
 interface FloatingCTAProps {
   phoneNumber: string;      // +919876543210
@@ -16,6 +17,10 @@ export default function FloatingCTA({
 }: FloatingCTAProps) {
 
   const [openForm, setOpenForm] = useState(false);
+  const pathname = usePathname();
+  // Detail pages have their own sticky booking bar — hide mobile float buttons there
+  const isDetailPage =
+    /^\/(tests|packages)\/.+/.test(pathname);
 
 
   /* Scroll Lock */
@@ -41,7 +46,7 @@ export default function FloatingCTA({
 
   return (
     <>
-      <div id="contact" className="fixed bottom-24 md:bottom-6 right-6 z-50 flex flex-col gap-3 items-end">
+      <div id="contact" className={`fixed right-6 z-50 flex flex-col gap-3 items-end md:bottom-6 ${isDetailPage ? "bottom-40" : "bottom-24"}`}>
 
         {/* Call Button (Mobile Only) */}
         <button

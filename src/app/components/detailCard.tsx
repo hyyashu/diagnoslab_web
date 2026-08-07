@@ -1,9 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import EnquiryForm from "@/app/components/enquiryForm";
 import LeadForm from "./leadForm";
 import { useMemo, useState } from "react";
+import {
+  Clock,
+  Utensils,
+  FlaskConical,
+  Timer,
+  Home,
+  Zap,
+  Shield,
+  ChevronLeft,
+} from "lucide-react";
 
 export type DetailKind = "test" | "package";
 
@@ -28,13 +37,30 @@ interface DetailCardProps {
   data: DetailEntity;
 }
 
+function toTitleCase(str: string) {
+  return str.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+const TRUST_BADGES = [
+  { icon: Home, label: "Home Collection", sub: "" },
+  { icon: Zap, label: "Same-Day Reports", sub: "" },
+  { icon: Shield, label: "Trusted Lab", sub: "" },
+];
+
 export default function DetailCard({ kind, data }: DetailCardProps) {
   const [showLeadForm, setShowLeadForm] = useState(false);
 
+  const displayName = toTitleCase(data.name);
+  const discount =
+    data.price > 0 &&
+    data.discountedPrice > 0 &&
+    data.price > data.discountedPrice
+      ? Math.round(((data.price - data.discountedPrice) / data.price) * 100)
+      : 0;
+
   const backHref =
     kind === "test" ? "/tests#tests-section" : "/packages#packages-section";
-
-  const backLabel = kind === "test" ? "Back" : "Back";
+  const backLabel = kind === "test" ? "All Tests" : "All Packages";
 
   const leadMeta = useMemo(() => {
     if (kind === "test") {
@@ -46,7 +72,6 @@ export default function DetailCard({ kind, data }: DetailCardProps) {
         test_categories: data.categories,
       };
     }
-
     return {
       package_name: data.name,
       package_description: data.description,
@@ -57,143 +82,282 @@ export default function DetailCard({ kind, data }: DetailCardProps) {
     };
   }, [kind, data]);
 
+  const benefits = [
+    "Early disease detection",
+    "Lifestyle & diet monitoring",
+    "Doctor-recommended tracking",
+    ...(kind === "package" && data.parametersCovered
+      ? [`${data.parametersCovered}+ parameters covered`]
+      : []),
+  ];
+
   return (
     <>
-      <div className="bg-background-primary p-4 md:p-8">
-        {/* Back Button */}
-        <div className="max-w-6xl mx-auto mb-6 mt-10 md:mt-12">
-          <Link href={backHref}>
-            <button className="bg-white text-background-primary px-4 py-2 rounded-full text-sm font-medium font-heading flex items-center gap-2 shadow-sm hover:bg-gray-100 transition-all">
-              <span>←</span> {backLabel}
-            </button>
-          </Link>
-        </div>
-
-        {/* Title */}
-        <h1 className="text-white font-heading text-2xl md:text-4xl text-center font-bold mb-8 px-4">
-          {data.name} Test in Jamshedpur
-        </h1>
-
-        {/* Enquiry Form */}
-        <div className="mx-auto w-full max-w-[90%] md:max-w-6xl mb-8">
-          <EnquiryForm formType="enquiry_form" />
-        </div>
-
-        {/* Info Section */}
-        <div className="max-w-6xl mx-auto space-y-4">
-          <div className="bg-white rounded-2xl p-6 flex flex-col md:flex-row flex-wrap justify-between gap-4 text-sm shadow-sm">
-            {data.categories.length > 0 && (
-              <p className="text-black font-body">
-                <b className="font-heading">Category:</b>{" "}
-                {data.categories.join(", ")}
-              </p>
+      {/* ── Mobile sticky CTA ── */}
+      <div className="fixed bottom-16 left-0 right-0 z-40 md:hidden bg-white border-t border-slate-100 shadow-[0_-4px_24px_rgba(0,0,0,0.10)] px-4 py-3 flex items-center justify-between gap-3">
+        <div>
+          <div className="flex items-baseline gap-1.5">
+            {data.discountedPrice > 0 && (
+              <span className="text-xl font-black text-[#E73834] font-heading">
+                ₹{data.discountedPrice}
+              </span>
             )}
-
-            <p className="text-black font-body">
-              <b className="font-heading">Fasting:</b> {data.fasting ?? "—"}
-            </p>
-
-            <p className="text-black font-body">
-              <b className="font-heading">Reporting:</b> {data.reporting ?? "—"}
-            </p>
-
-            {data.tat && (
-              <p className="text-black font-body">
-                <b className="font-heading">TAT:</b> {data.tat}
-              </p>
-            )}
-
-            {data.sampleType && (
-              <p className="text-black font-body">
-                <b className="font-heading">Sample:</b> {data.sampleType}
-              </p>
+            {data.price > data.discountedPrice && data.price > 0 && (
+              <span className="text-xs text-slate-400 line-through font-heading">
+                ₹{data.price}
+              </span>
             )}
           </div>
+          <p className="text-[10px] text-slate-400 font-body">
+            Home collection available
+          </p>
+        </div>
+        <button
+          onClick={() => setShowLeadForm(true)}
+          className="bg-[#E73834] text-white font-bold font-heading px-6 py-2.5 rounded-xl text-sm shrink-0 shadow-md active:scale-95 transition-transform"
+        >
+          Book Now
+        </button>
+      </div>
 
-          {/* Overview */}
-          {data.description && (
-            <div className="bg-white rounded-2xl p-6 shadow-sm">
-              <p className="font-bold text-lg mb-2 text-black font-heading">
-                Overview
-              </p>
-              <h2 className="text-black leading-relaxed text-sm font-body">
-                {data.description}
-              </h2>
+      <div className="bg-slate-50 min-h-screen pb-28 md:pb-12">
+        {/* ── Header ── */}
+        <div className="bg-white border-b border-slate-100 shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+          <div className="max-w-6xl mx-auto px-4 pt-6 pb-5">
+            <Link
+              href={backHref}
+              className="inline-flex items-center gap-1.5 text-[#E73834] text-sm font-heading font-semibold mb-5 group"
+            >
+              <ChevronLeft
+                size={15}
+                className="group-hover:-translate-x-0.5 transition-transform"
+              />
+              {backLabel}
+            </Link>
+
+            {/* Title with red accent bar */}
+            <div className="flex items-start gap-4">
+              <div
+                className="w-1 shrink-0 rounded-full mt-1"
+                style={{
+                  background: "#E73834",
+                  height: "3.5rem",
+                  minHeight: "3rem",
+                }}
+              />
+              <div>
+                <p className="text-[10px] font-heading font-bold text-[#E73834] uppercase tracking-[0.15em] mb-1">
+                  {kind === "test" ? "Diagnostic Test" : "Health Package"} ·
+                  Jamshedpur
+                </p>
+                <h1 className="font-heading text-2xl md:text-3xl lg:text-4xl font-black text-slate-900 leading-tight">
+                  {displayName}
+                  {kind === "test" && (
+                    <span className="text-slate-400 font-light"> Test</span>
+                  )}
+                </h1>
+              </div>
             </div>
-          )}
 
-          {/* Two Column Section */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Benefits */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm">
-              <h2 className="font-bold text-lg mb-4 text-black font-heading">
-                Key Benefits
-              </h2>
-              <ul className="space-y-2 text-sm text-black font-body">
-                <li className="flex items-center gap-2 before:content-['✓'] before:text-green-600 before:font-bold">
-                  Early detection
-                </li>
-
-                {kind === "package" && (
-                  <li className="flex items-center gap-2 before:content-['✓'] before:text-green-600 before:font-bold">
-                    {data.parametersCovered || "70+"} Parameters Covered
-                  </li>
-                )}
-
-                <li className="flex items-center gap-2 before:content-['✓'] before:text-green-600 before:font-bold">
-                  Lifestyle tracking
-                </li>
-              </ul>
-            </div>
-
-            {/* Who Should Take */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm">
-              <h2 className="font-bold text-lg mb-4 text-black font-heading">
-                Who should take this test?
-              </h2>
-              <p className="text-black text-sm leading-relaxed font-body">
-                {data.whoShouldTake ?? "Consult your doctor for suitability."}
-              </p>
+            {/* Attribute chips */}
+            <div className="flex flex-wrap gap-2 mt-4 pl-5">
+              {data.fasting && data.fasting.trim() && (
+                <span className="inline-flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-full px-3 py-1 text-[11px] font-body font-medium text-slate-600">
+                  <Utensils size={10} className="text-slate-400" />
+                  Fasting: {data.fasting}
+                </span>
+              )}
+              {data.reporting && data.reporting.trim() && (
+                <span className="inline-flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-full px-3 py-1 text-[11px] font-body font-medium text-slate-600">
+                  <Clock size={10} className="text-slate-400" />
+                  Reports: {data.reporting}
+                </span>
+              )}
+              {data.sampleType && data.sampleType.trim() && (
+                <span className="inline-flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-full px-3 py-1 text-[11px] font-body font-medium text-slate-600">
+                  <FlaskConical size={10} className="text-slate-400" />
+                  {data.sampleType}
+                </span>
+              )}
+              {data.categories.slice(0, 2).map((cat) => (
+                <span
+                  key={cat}
+                  className="inline-flex items-center bg-red-50 border border-red-100 rounded-full px-3 py-1 text-[11px] font-body font-medium text-[#E73834]"
+                >
+                  {cat}
+                </span>
+              ))}
             </div>
           </div>
+        </div>
 
-          {/* Pricing */}
-          <div className="bg-white rounded-2xl p-4 flex flex-col sm:flex-row justify-between items-center shadow-lg gap-4">
-            <p className="font-bold text-black sm:ml-4 font-heading text-center sm:text-left">
-              Home Collection Available
-            </p>
+        {/* ── Body ── */}
+        <div className="max-w-6xl mx-auto px-4 py-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Left column */}
+          <div className="lg:col-span-2 space-y-4">
+            {/* Trust badges */}
+            <div className="grid grid-cols-3 gap-3">
+              {TRUST_BADGES.map(({ icon: Icon, label, sub }) => (
+                <div
+                  key={label}
+                  className="bg-white rounded-2xl p-3 md:p-4 text-center shadow-sm border border-slate-50"
+                >
+                  <div className="w-7 h-7 md:w-8 md:h-8 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-2">
+                    <Icon size={13} className="text-[#E73834]" />
+                  </div>
+                  <p className="font-heading text-[10px] md:text-xs font-bold text-slate-900 leading-tight">
+                    {label}
+                  </p>
+                  <p className="font-body text-[9px] md:text-[10px] text-slate-400 mt-0.5">
+                    {sub}
+                  </p>
+                </div>
+              ))}
+            </div>
 
-            <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-6 w-full sm:w-auto">
-              <div className="text-center sm:text-right">
-                <div className="flex items-center justify-center gap-2">
-                  <div className="flex items-center justify-center gap-2">
-                    {data.discountedPrice > 0 && (
-                      <span className="text-2xl font-bold text-green-600 font-heading">
-                        ₹{data.discountedPrice}
+            {/* Overview */}
+            {data.description && (
+              <div className="bg-white rounded-2xl p-5 md:p-6 shadow-sm">
+                <h2 className="font-heading font-bold text-sm md:text-base text-slate-900 mb-3">
+                  About This {kind === "test" ? "Test" : "Package"}
+                </h2>
+                <p className="font-body text-sm text-slate-600 leading-relaxed">
+                  {data.description}
+                </p>
+              </div>
+            )}
+
+            {/* Benefits + Who Should Take */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="bg-white rounded-2xl p-5 md:p-6 shadow-sm">
+                <h2 className="font-heading font-bold text-sm md:text-base text-slate-900 mb-4">
+                  Key Benefits
+                </h2>
+                <ul className="space-y-2.5">
+                  {benefits.map((b) => (
+                    <li
+                      key={b}
+                      className="flex items-start gap-2.5 text-sm text-slate-700 font-body"
+                    >
+                      <span className="w-4 h-4 bg-green-100 rounded-full flex items-center justify-center shrink-0 mt-0.5">
+                        <span className="text-green-600 text-[8px] font-black">
+                          ✓
+                        </span>
                       </span>
-                    )}
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-                    {data.price > 0 && (
-                      <span className="text-slate-400 line-through text-sm font-semibold font-heading">
-                        ₹{data.price}
-                      </span>
-                    )}
+              <div className="bg-white rounded-2xl p-5 md:p-6 shadow-sm flex flex-col justify-between">
+                <div>
+                  <h2 className="font-heading font-bold text-sm md:text-base text-slate-900 mb-3">
+                    Who Should Take This?
+                  </h2>
+                  <p className="font-body text-sm text-slate-600 leading-relaxed">
+                    {data.whoShouldTake ??
+                      "Anyone monitoring related symptoms or advised by their doctor may benefit from this test."}
+                  </p>
+                </div>
+
+                {/* Mini how-it-works */}
+                <div className="mt-5 pt-4 border-t border-slate-100">
+                  <p className="font-heading text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-2.5">
+                    How it works
+                  </p>
+                  <div className="flex items-center gap-1.5 text-[11px] font-body text-slate-500">
+                    {["Book", "Collect", "Reports"].map((step, i) => (
+                      <>
+                        <span key={step} className="flex items-center gap-1.5">
+                          <span
+                            className="w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-black text-white shrink-0"
+                            style={{ background: "#E73834" }}
+                          >
+                            {i + 1}
+                          </span>
+                          {step}
+                        </span>
+                        {i < 2 && (
+                          <span className="flex-1 border-t border-dashed border-slate-200" />
+                        )}
+                      </>
+                    ))}
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
 
-              <button
-                onClick={() => setShowLeadForm(true)}
-                className="bg-background-primary hover:bg-red-700 text-white w-full sm:w-auto px-10 py-3 rounded-xl font-bold transition-all shadow-md font-heading"
-              >
-                Book Now
-              </button>
+          {/* Right: sticky booking card (desktop only) */}
+          <div className="hidden lg:block">
+            <div className="sticky top-28 bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden">
+              {/* Price header */}
+              <div className="bg-[#E73834] px-6 py-5">
+                <p className="font-heading text-white/70 text-[10px] font-bold uppercase tracking-widest">
+                  Price
+                </p>
+                <div className="flex items-baseline gap-2.5 mt-1">
+                  {data.discountedPrice > 0 && (
+                    <span className="font-heading text-3xl font-black text-white">
+                      ₹{data.discountedPrice}
+                    </span>
+                  )}
+                  {data.price > data.discountedPrice && data.price > 0 && (
+                    <span className="font-heading text-base text-white/50 line-through">
+                      ₹{data.price}
+                    </span>
+                  )}
+                  {discount >= 10 && (
+                    <span className="bg-white/20 text-white text-[10px] font-bold font-heading px-2 py-0.5 rounded-full">
+                      {discount}% off
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              <div className="p-6 space-y-4">
+                <ul className="space-y-2.5">
+                  {[
+                    { icon: Home, text: "Home collection available" },
+                    {
+                      icon: Clock,
+                      text: `${data.reporting || "Same-day"} reports`,
+                    },
+                    { icon: Timer, text: "Book in under 2 minutes" },
+                  ].map(({ icon: Icon, text }) => (
+                    <li
+                      key={text}
+                      className="flex items-center gap-2 text-sm text-slate-600 font-body"
+                    >
+                      <Icon size={13} className="text-[#E73834] shrink-0" />
+                      {text}
+                    </li>
+                  ))}
+                </ul>
+
+                <button
+                  onClick={() => setShowLeadForm(true)}
+                  className="w-full bg-[#E73834] hover:bg-red-700 text-white font-black font-heading py-4 rounded-xl transition-all text-base shadow-md hover:shadow-lg active:scale-[0.98]"
+                >
+                  Book Now
+                </button>
+
+                <p className="text-center text-xs text-slate-400 font-body">
+                  Or call{" "}
+                  <a
+                    href="tel:+918404802201"
+                    className="text-[#E73834] font-semibold"
+                  >
+                    +91 8404802201
+                  </a>
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Lead Form */}
       <LeadForm
         open={showLeadForm}
         onOpenChange={setShowLeadForm}
