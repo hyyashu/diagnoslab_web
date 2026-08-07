@@ -6,18 +6,19 @@ import ContactFormCard from "./contactFormCard";
 export default function ContactSection() {
   return (
     <section className="relative mt-8  bg-background-primary text-white py-12 px-4 overflow-hidden">
-
       <div className="max-w-6xl mx-auto text-center relative z-10">
         {/* Heading */}
-        <p className="font-heading text-sm md:text-base font-extrabold ">Contact Us</p>
+        <p className="font-heading text-sm md:text-base font-extrabold ">
+          Contact Us
+        </p>
 
-        <h2 className="font-heading text-3xl md:text-4xl font-extrabold mt-2">
-          Talk to Diagnos Labs
-        </h2>
+        <h1 className="font-heading text-3xl md:text-4xl font-extrabold mt-2">
+          Contact Diagnos Lab in Jamshedpur
+        </h1>
 
         <p className="font-body text-sm md:text-base mt-2 opacity-90 max-w-xl mx-auto">
-          For bookings, corporate wellness, home collection support,
-          or report queries.
+          For bookings, corporate wellness, home collection support, or report
+          queries.
         </p>
 
         {/* Cards */}
@@ -25,11 +26,8 @@ export default function ContactSection() {
           <ContactCard
             title="Get in Touch"
             subtitle="We're here to help you anytime."
-            phoneNumbers={[
-              "+91 8404802201",
-              "+91 8404802214",
-            ]}
-            email="infor@diagnoslab.in"
+            phoneNumbers={["+91 8404802201", "+91 8404802214"]}
+            email="info@diagnoslab.in"
             buttonText="Contact Now"
           />
 
