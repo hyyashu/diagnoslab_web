@@ -41,22 +41,23 @@ export default function PopularHealthPackages() {
         </div>
 
         {/* Carousel */}
-        <div className="relative w-[90%] md:w-full mx-auto">
+        <div className="relative w-full mx-auto">
 
           <Swiper
             modules={[Navigation]}
-            spaceBetween={20}
-            slidesPerView={1}
+            spaceBetween={12}
+            slidesPerView={1.15}
             navigation={{
               prevEl: ".prev-btn-packages",
               nextEl: ".next-btn-packages",
             }}
             breakpoints={{
-              640: { slidesPerView: 1 },
-              768: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
+              480: { slidesPerView: 1.3, spaceBetween: 14 },
+              640: { slidesPerView: 1.8, spaceBetween: 16 },
+              768: { slidesPerView: 2.2, spaceBetween: 18 },
+              1024: { slidesPerView: 3, spaceBetween: 20 },
             }}
-            className="py-6"
+            className="py-4"
           >
             {packageData.map((pkg, index) => (
               <SwiperSlide key={`${pkg.id}-${index}`} className="h-auto">

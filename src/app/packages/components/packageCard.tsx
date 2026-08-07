@@ -2,6 +2,7 @@
 import Link from "next/link";
 import LeadForm from "../../components/leadForm";
 import { useMemo, useState } from "react";
+import { Clock, Utensils, FlaskConical } from "lucide-react";
 
 interface Props {
   title: string;
@@ -34,7 +35,7 @@ export default function PackageCard({
   price,
   originalPrice,
   parameters = 75,
-  categories = "A, B, C",
+  categories = "General",
   fasting = "Not Required",
   reporting = "Same Day",
   slug = "",
@@ -42,80 +43,115 @@ export default function PackageCard({
   fillSlide = false,
 }: Props) {
   const [showLeadForm, setShowLeadForm] = useState(false);
-  const leadMeta = useMemo<leadMetaProps>(() => ({
-    package_name: title,
-    package_description: description,
-    package_price: price ?? 0,
-    package_original_price: originalPrice,
-    package_parameters: parameters,
-    package_categories: categories.split(","),
-    package_fasting: fasting ?? "",
-    package_reporting: reporting ?? "",
-  }), [title, description, price, originalPrice, parameters, categories, fasting, reporting]);
+
+  const discount =
+    originalPrice > 0 && price && price > 0
+      ? Math.round(((originalPrice - price) / originalPrice) * 100)
+      : 0;
+
+  const leadMeta = useMemo<leadMetaProps>(
+    () => ({
+      package_name: title,
+      package_description: description,
+      package_price: price ?? 0,
+      package_original_price: originalPrice,
+      package_parameters: parameters,
+      package_categories: categories.split(","),
+      package_fasting: fasting ?? "",
+      package_reporting: reporting ?? "",
+    }),
+    [title, description, price, originalPrice, parameters, categories, fasting, reporting]
+  );
+
   return (
-    <div className={`bg-white rounded-3xl p-8 shadow-[0px_10px_30px_rgba(0,0,0,0.1)] border border-gray-50 relative flex flex-col w-full ${fillSlide ? "h-full max-w-none" : "max-w-[400px]"}`}>
+    <>
+      <div
+        className={`bg-white rounded-2xl border border-gray-100 shadow-sm flex flex-col w-full overflow-hidden ${
+          fillSlide ? "h-full max-w-none" : ""
+        }`}
+        style={{ borderTop: "3px solid #E73834" }}
+      >
+        <div className="p-4 md:p-5 flex flex-col flex-1">
 
-      {/* Header */}
-      <div className="flex justify-between items-start mb-4">
-        <h3 className="text-xl md:text-2xl font-bold text-black leading-tight font-heading">{title}</h3>
-        <span className="bg-background-primary text-white text-xs  px-3 py-1 rounded-full font-medium shrink-0 ml-2">
-          {parameters} parameters
-        </span>
-      </div>
-
-      <div className="flex flex-col flex-1">
-        {/* Description */}
-        <p className="text-gray-700 text-sm mb-6 font-body line-clamp-4">
-          {description}
-        </p>
-
-        {/* Info List */}
-        <div className="space-y-2 text-sm font-body">
-          <p className="text-black">
-            <span className="font-bold ">Categories :</span> <span className="text-gray-700 ">{categories}</span>
-          </p>
-          <p className="text-black">
-            <span className="font-bold ">Fasting:</span> <span className="text-gray-700 ">{fasting}</span>
-          </p>
-          <p className="text-black">
-            <span className="font-bold ">Reporting:</span> <span className="text-gray-700">{reporting}</span>
-          </p>
-        </div>
-      </div>
-
-      <div className={fillSlide ? "mt-auto w-full pt-4" : "contents"}>
-        {/* Pricing */}
-        {price && price > 0 && (
-          <div
-            className={`flex justify-end items-center gap-2 mb-4 ${fillSlide ? "" : "mt-6"
-              }`}
-          >
-            <span className="text-green-600 font-bold text-xl font-heading">
-              ₹{price.toLocaleString()}
+          {/* Parameters badge + title */}
+          <div className="flex items-start gap-2 mb-2">
+            <h3 className="font-heading font-bold text-black text-sm md:text-base leading-snug flex-1">
+              {title}
+            </h3>
+            <span className="shrink-0 bg-red-50 text-[#E73834] text-[10px] font-bold px-2 py-0.5 rounded-full font-body whitespace-nowrap">
+              {parameters} params
             </span>
+          </div>
 
-            {originalPrice > 0 && (
-              <span className="text-gray-700 line-through text-sm md:text-base font-heading">
-                ₹{originalPrice.toLocaleString()}
+          {/* Description */}
+          <p className="text-gray-500 text-xs font-body leading-relaxed line-clamp-2 mb-3">
+            {description}
+          </p>
+
+          {/* Chips */}
+          <div className="flex flex-wrap gap-1.5 mb-3">
+            <span className="flex items-center gap-1 bg-gray-50 text-gray-600 text-[11px] font-body font-medium px-2 py-1 rounded-lg">
+              <Clock size={11} className="shrink-0" />
+              {reporting}
+            </span>
+            <span className="flex items-center gap-1 bg-gray-50 text-gray-600 text-[11px] font-body font-medium px-2 py-1 rounded-lg">
+              <Utensils size={11} className="shrink-0" />
+              {fasting}
+            </span>
+            {categories && (
+              <span className="flex items-center gap-1 bg-gray-50 text-gray-600 text-[11px] font-body font-medium px-2 py-1 rounded-lg max-w-[160px] truncate">
+                <FlaskConical size={11} className="shrink-0" />
+                {categories.split(",")[0].trim()}
+                {categories.split(",").length > 1 && ` +${categories.split(",").length - 1}`}
               </span>
             )}
           </div>
-        )}
 
-        {/* Compact Buttons */}
-        <div className={`grid gap-3 ${showDetailsButton ? "grid-cols-2" : "grid-cols-1"}`}>
-          {showDetailsButton && (
-            <Link href={`/packages/${slug}`}>
-              <button className="w-full py-2 border-[1.5px] border-background-primary text-background-primary rounded-xl text-base font-bold font-heading">
-                Details
-              </button>
-            </Link>
+          {/* Spacer */}
+          <div className="flex-1" />
+
+          {/* Price */}
+          {price && price > 0 && (
+            <div className="flex items-center gap-2 mb-3">
+              <span className="font-heading font-black text-lg text-black">
+                ₹{price.toLocaleString()}
+              </span>
+              {originalPrice > 0 && (
+                <span className="font-heading text-gray-400 line-through text-sm">
+                  ₹{originalPrice.toLocaleString()}
+                </span>
+              )}
+              {discount >= 10 && (
+                <span className="ml-auto text-[11px] font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full font-body">
+                  {discount}% off
+                </span>
+              )}
+            </div>
           )}
-          <button onClick={() => setShowLeadForm(true)} className="w-full py-2 bg-background-primary text-white rounded-xl text-base font-bold hover:bg-red-700 shadow-sm shadow-red-100 transition-all font-heading text-sm md:text-base">
-            Book
-          </button>
+
+          {/* Buttons */}
+          <div
+            className={`grid gap-2 ${
+              showDetailsButton ? "grid-cols-2" : "grid-cols-1"
+            }`}
+          >
+            {showDetailsButton && (
+              <Link href={`/packages/${slug}`}>
+                <button className="w-full py-2.5 border border-[#E73834] text-[#E73834] rounded-xl text-xs font-bold font-heading transition-colors hover:bg-red-50 active:scale-95">
+                  Details
+                </button>
+              </Link>
+            )}
+            <button
+              onClick={() => setShowLeadForm(true)}
+              className="w-full py-2.5 bg-[#E73834] text-white rounded-xl text-xs font-bold font-heading hover:bg-red-700 transition-all active:scale-95 shadow-sm"
+            >
+              Book Now
+            </button>
+          </div>
         </div>
       </div>
+
       <LeadForm
         open={showLeadForm}
         onOpenChange={setShowLeadForm}
@@ -126,6 +162,6 @@ export default function PackageCard({
         testOriginalPrice={originalPrice}
         additionalSourceData={leadMeta}
       />
-    </div>
+    </>
   );
 }
