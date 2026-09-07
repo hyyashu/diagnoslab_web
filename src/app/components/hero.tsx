@@ -23,6 +23,19 @@ const HeroSection: React.FC = () => {
     { src: "/images/hero/hero3.avif", alt: "Diagnostic centre in Jamshedpur – affordable tests with fast reports" },
   ];
 
+  const renderDots = () =>
+    carouselSlides.map((_, i) => (
+      <button
+        key={i}
+        onClick={() => swiperRef?.slideToLoop(i)}
+        className={`transition-all duration-500 ease-in-out rounded-full bg-white shadow-lg h-2 ${activeIndex === i
+            ? "w-16 opacity-100"
+            : "w-2 opacity-40 hover:opacity-70"
+          }`}
+        aria-label={`Go to slide ${i + 1}`}
+      />
+    ));
+
   return (
     <section className="relative w-full h-[600px] md:h-[700px] flex flex-col items-center justify-center overflow-visible mb-[180px] md:mb-[120px] z-10 ">
 
@@ -57,8 +70,9 @@ const HeroSection: React.FC = () => {
       </div>
 
       {/* --- TEXT CONTENT --- */}
-      <div className="relative z-10 w-full flex flex-col items-start">
-        <div className="w-full max-w-7xl mx-auto px-4 mb-6 md:-mt-20">
+      {/* Bottom padding lifts the centred group clear of the floating form below. */}
+      <div className="relative z-10 w-full flex flex-col items-start pb-24 md:pb-12">
+        <div className="w-full max-w-7xl mx-auto px-4 mb-8 md:mb-10">
           <h1 className="font-heading text-3xl md:text-4xl lg:text-6xl font-black text-white uppercase ">
             All Test <br />
             Under <br />
@@ -66,40 +80,35 @@ const HeroSection: React.FC = () => {
           </h1>
         </div>
 
-        {/* --- SERVICES BAR --- */}
-        <div
-          className="relative w-full overflow-x-hidden"
-          style={{
-            WebkitMaskImage:
-              "linear-gradient(to right, black 0%, black 40%, transparent 95%)",
-            maskImage:
-              "linear-gradient(to right, black 0%, black 40%, transparent 95%)",
-          }}
-        >
-          <div className="bg-white/70 backdrop-blur-md py-3 md:py-4">
-            <div className="w-full max-w-7xl mx-auto px-4">
-              <p className="speakable-description font-body text-sm md:text-xl font-bold text-slate-900 whitespace-nowrap">
-                Blood Tests | PFT | X-Ray | ECG | Ultrasound
-              </p>
+        {/* --- SERVICES BAR + PAGINATION --- */}
+        <div className="relative w-full overflow-x-hidden">
+          {/* The mask sits on the band itself so the content above it stays opaque. */}
+          <div
+            className="absolute inset-0"
+            style={{
+              WebkitMaskImage:
+                "linear-gradient(to right, black 0%, black 40%, transparent 95%)",
+              maskImage:
+                "linear-gradient(to right, black 0%, black 40%, transparent 95%)",
+            }}
+          >
+            <div className="h-full w-full bg-white/70 backdrop-blur-md" />
+          </div>
+
+          <div className="relative w-full max-w-7xl mx-auto px-4 py-3 md:py-4 flex items-center justify-between gap-6">
+            <p className="speakable-description font-body text-sm md:text-xl font-bold text-slate-900 whitespace-nowrap">
+              Blood Tests | PFT | X-Ray | ECG | Ultrasound
+            </p>
+            {/* Pagination rides the faded end of the band, where it reads against the image. */}
+            <div className="hidden sm:flex items-center space-x-3 shrink-0">
+              {renderDots()}
             </div>
           </div>
         </div>
 
-        {/* --- CUSTOM PAGINATION --- */}
-        <div className="w-full max-w-7xl mx-auto px-4 mt-8 mb-8 md:mb-0" >
-          <div className="flex items-center space-x-3">
-            {carouselSlides.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => swiperRef?.slideToLoop(i)}
-                className={`transition-all duration-500 ease-in-out rounded-full bg-white shadow-lg h-2 ${activeIndex === i
-                    ? "w-16 opacity-100"
-                    : "w-2 opacity-40 hover:opacity-70"
-                  }`}
-                aria-label={`Go to slide ${i + 1}`}
-              />
-            ))}
-          </div>
+        {/* --- PAGINATION (mobile: no room alongside the services bar) --- */}
+        <div className="w-full max-w-7xl mx-auto px-4 mt-6 sm:hidden">
+          <div className="flex items-center space-x-3">{renderDots()}</div>
         </div>
       </div>
 
