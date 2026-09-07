@@ -1,6 +1,6 @@
 "use client";
 
-import PackageCard from "@/components/packageCard";
+import PackageCard from "@/components/cards/packageCard";
 import rawData from "@/data/packages.json";
 
 type FormattedPackage = {

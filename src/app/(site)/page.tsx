@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import WhyDiagnosLab from "@/components/whyDiagnos/whyDiagnos";
-import PopularTests from "@/components/popularTests";
-import Packages from "@/components/packages";
-import HeroSection from "@/components/hero";
-import RadiologyServices from "@/components/radiology/services";
-import JsonLd from "@/components/jsonLd";
+import WhyDiagnosLab from "@/components/sections/whyDiagnos";
+import PopularTests from "@/components/sections/popularTests";
+import Packages from "@/components/sections/packages";
+import HeroSection from "@/components/sections/hero";
+import RadiologyServices from "@/components/sections/radiologyServices";
+import JsonLd from "@/components/seo/jsonLd";
 
 export const metadata: Metadata = {
   title: { absolute: "Diagnos Lab Jamshedpur | Blood Test, Ultrasound & Home Collection" },

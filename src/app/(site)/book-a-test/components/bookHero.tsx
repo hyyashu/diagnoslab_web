@@ -1,5 +1,5 @@
 import Image from "next/image";
-import EnquiryForm from "@/components/enquiryForm";
+import EnquiryForm from "@/components/forms/enquiryForm";
 
 export default function BookHero() {
   return (

@@ -1,8 +1,8 @@
 import data from "@/data/tests.json";
-import DetailCard from "@/components/detailCard";
-import { DetailEntity } from "@/components/detailCard";
+import DetailCard from "@/components/cards/detailCard";
+import { DetailEntity } from "@/components/cards/detailCard";
 import SimilarTests from "../components/similarTests";
-import JsonLd from "@/components/jsonLd";
+import JsonLd from "@/components/seo/jsonLd";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 

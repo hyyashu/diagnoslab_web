@@ -2,7 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
-import EnquiryForm from "@/components/enquiryForm";
+import EnquiryForm from "@/components/forms/enquiryForm";
 
 /* Shared by the ECG, X-Ray and Ultrasound pages, which previously kept three
    byte-identical copies of this markup differing only in these five values. */

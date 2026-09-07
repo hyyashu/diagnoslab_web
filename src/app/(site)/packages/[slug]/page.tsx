@@ -1,9 +1,9 @@
 import data from "@/data/packages.json";
 import DetailCard, {
   DetailEntity,
-} from "@/components/detailCard";
+} from "@/components/cards/detailCard";
 import SimilarPackages from "../components/similarPackages";
-import JsonLd from "@/components/jsonLd";
+import JsonLd from "@/components/seo/jsonLd";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 

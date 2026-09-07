@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import LeadForm from "./leadForm";
+import LeadForm from "@/components/forms/leadForm";
 import { Fragment, useMemo, useState } from "react";
 import {
   Clock,

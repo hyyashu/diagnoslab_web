@@ -3,7 +3,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import RadiologyCard from "./radiologyCard";
+import RadiologyCard from "@/components/cards/radiologyCard";
 import "swiper/css";
 import "swiper/css/navigation";
 import Link from "next/link";

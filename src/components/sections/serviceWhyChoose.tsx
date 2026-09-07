@@ -1,5 +1,5 @@
 import React from "react";
-import FeatureCard from "@/components/whyDiagnos/featureCard";
+import FeatureCard from "@/components/cards/featureCard";
 
 /* The ECG, X-Ray and Ultrasound pages shared this block verbatim; only the
    heading, the four features and an optional standfirst ever differed. */

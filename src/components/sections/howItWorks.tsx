@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Modal from "./modal";
-import EnquiryForm from "./enquiryForm";
+import Modal from "@/components/ui/modal";
+import EnquiryForm from "@/components/forms/enquiryForm";
 
 type EnquiryFormType = "enquiry_form" | "home_collection";
 

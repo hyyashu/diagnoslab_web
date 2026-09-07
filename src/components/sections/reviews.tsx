@@ -3,7 +3,7 @@
 import React, { useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
-import ReviewCard from "./reviewCard";
+import ReviewCard from "@/components/cards/reviewCard";
 import rawData from "@/data/reviews.json";
 
 const REVIEWS = rawData.reviews.map((r, i) => ({

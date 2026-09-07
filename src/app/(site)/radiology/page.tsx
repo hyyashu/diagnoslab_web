@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import RadiologySection from "./components/radiologySection";
 import WhyChoose from "./components/whyChoose";
-import HeroSection from "@/components/hero";
+import HeroSection from "@/components/sections/hero";
 
 export const metadata: Metadata = {
   title: { absolute: "Radiology in Jamshedpur | Ultrasound, X-Ray, ECG, Echo | Diagnos Lab" },

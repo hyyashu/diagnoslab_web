@@ -1,6 +1,6 @@
 "use client";
 
-import FeatureCard from "./featureCard";
+import FeatureCard from "@/components/cards/featureCard";
 import { FileText, Clock, Layers, Users } from "lucide-react";
 
 export default function WhyDiagnosLab() {

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import LeadForm from "../leadForm";
+import LeadForm from "@/components/forms/leadForm";
 
 interface RadiologyCardProps {
   title: string;

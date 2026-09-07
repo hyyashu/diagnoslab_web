@@ -1,6 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
-import HowItWorks from "./howItWorks";
+import HowItWorks from "@/components/sections/howItWorks";
 export default function ConditionalHowItWorks() {
   const pathname = usePathname();
   if (pathname.startsWith("/corporate")) {

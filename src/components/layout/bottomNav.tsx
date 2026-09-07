@@ -4,8 +4,8 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, FlaskConical, CalendarCheck, HeartPulse, Phone } from "lucide-react";
-import Modal from "./modal";
-import EnquiryForm from "./enquiryForm";
+import Modal from "@/components/ui/modal";
+import EnquiryForm from "@/components/forms/enquiryForm";
 
 type Tab = {
   name: string;

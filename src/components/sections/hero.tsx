@@ -10,7 +10,7 @@ import type { Swiper as SwiperType } from "swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/effect-fade";
-import EnquiryForm from "./enquiryForm";
+import EnquiryForm from "@/components/forms/enquiryForm";
 
 const HeroSection: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);

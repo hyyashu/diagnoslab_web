@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Activity, Users, Clock, HeartPulse } from "lucide-react";
-import ServiceHero from "@/components/service/serviceHero";
-import ServiceWhyChoose from "@/components/service/serviceWhyChoose";
+import ServiceHero from "@/components/sections/serviceHero";
+import ServiceWhyChoose from "@/components/sections/serviceWhyChoose";
 import EcgSection from "./components/ecgSection";
-import JsonLd from "@/components/jsonLd";
-import RelatedServices from "@/components/relatedServices";
+import JsonLd from "@/components/seo/jsonLd";
+import RelatedServices from "@/components/sections/relatedServices";
 
 export const metadata: Metadata = {
   title: { absolute: "Diagnos Lab | Book ECG in Jamshedpur" },

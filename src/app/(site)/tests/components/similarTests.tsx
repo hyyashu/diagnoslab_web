@@ -1,6 +1,6 @@
 "use client";
 
-import TestCard from "@/components/testCard";
+import TestCard from "@/components/cards/testCard";
 import rawData from "@/data/tests.json";
 
 type RawTest = (typeof rawData.tests)[number];

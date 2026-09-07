@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import LeadForm from "@/components/leadForm";
+import LeadForm from "@/components/forms/leadForm";
 import { useMemo, useState } from "react";
 import { Clock, Utensils, FlaskConical } from "lucide-react";
 

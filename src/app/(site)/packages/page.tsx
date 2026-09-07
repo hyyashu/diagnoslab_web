@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import PackagesScreen from "./components/packagesScreen";
-import HeroSection from "@/components/hero";
+import HeroSection from "@/components/sections/hero";
 import { Suspense } from "react";
 
 export const metadata: Metadata = {

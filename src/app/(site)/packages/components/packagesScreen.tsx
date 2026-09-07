@@ -4,7 +4,7 @@ import rawData from "@/data/packages.json";
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Search from "./search";
-import PackageCard from "@/components/packageCard";
+import PackageCard from "@/components/cards/packageCard";
 import { Pagination } from "../../tests/components/pagination";
 
 const ITEMS_PER_PAGE = 9;

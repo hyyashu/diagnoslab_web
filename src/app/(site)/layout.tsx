@@ -1,15 +1,15 @@
-import JsonLd from "@/components/jsonLd";
-import HomeCollectionJsonLd from "@/components/homeCollectionJsonLd";
-import Navbar from "@/components/navbar";
-import BottomNav from "@/components/bottomNav";
-import FloatingCTA from "@/components/floatingCTA";
-import Footer from "@/components/footer";
-import FAQAccordion from "@/components/faq";
-import FaqJsonLd from "@/components/faqJsonLd";
-import FindUs from "@/components/findus";
-import AreasServed from "@/components/areasServed";
-import ReviewCarousel from "@/components/reviews/reviews";
-import ConditionalHowItWorks from "@/components/conditionalHowItWorks";
+import JsonLd from "@/components/seo/jsonLd";
+import HomeCollectionJsonLd from "@/components/seo/homeCollectionJsonLd";
+import Navbar from "@/components/layout/navbar";
+import BottomNav from "@/components/layout/bottomNav";
+import FloatingCTA from "@/components/layout/floatingCTA";
+import Footer from "@/components/layout/footer";
+import FAQAccordion from "@/components/sections/faq";
+import FaqJsonLd from "@/components/seo/faqJsonLd";
+import FindUs from "@/components/sections/findus";
+import AreasServed from "@/components/sections/areasServed";
+import ReviewCarousel from "@/components/sections/reviews";
+import ConditionalHowItWorks from "@/components/sections/conditionalHowItWorks";
 
 const localBusinessSchema = {
   "@context": "https://schema.org",

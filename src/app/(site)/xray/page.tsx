@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Monitor, Users, Clock, ShieldCheck } from "lucide-react";
-import ServiceHero from "@/components/service/serviceHero";
-import ServiceWhyChoose from "@/components/service/serviceWhyChoose";
+import ServiceHero from "@/components/sections/serviceHero";
+import ServiceWhyChoose from "@/components/sections/serviceWhyChoose";
 import XraySection from "./components/xraySection";
-import JsonLd from "@/components/jsonLd";
-import RelatedServices from "@/components/relatedServices";
+import JsonLd from "@/components/seo/jsonLd";
+import RelatedServices from "@/components/sections/relatedServices";
 
 export const metadata: Metadata = {
   title: { absolute: "Diagnos Lab | Book X-Ray in Jamshedpur" },

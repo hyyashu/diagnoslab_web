@@ -4,7 +4,7 @@ import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback } from "react";
-import FeatureCard from "@/components/whyDiagnos/featureCard";
+import FeatureCard from "@/components/cards/featureCard";
 
 const partners = [
   { name: "Provident Fund", image: "/images/tie-ups/provident.avif" },

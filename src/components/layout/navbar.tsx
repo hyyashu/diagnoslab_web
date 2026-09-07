@@ -8,8 +8,8 @@ import {
   Menu, Home, FileText, Package,
   Microscope, Handshake, Users, Phone
 } from 'lucide-react';
-import EnquiryForm from './enquiryForm';
-import Modal from './modal';
+import EnquiryForm from '@/components/forms/enquiryForm';
+import Modal from '@/components/ui/modal';
 
 
 const Navbar = () => {

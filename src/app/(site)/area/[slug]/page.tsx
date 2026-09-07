@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import areasData from "@/data/areasServed.json";
 import AreaHero from "../components/areaHero";
-import WhyDiagnosLab from "@/components/whyDiagnos/whyDiagnos";
-import PopularTests from "@/components/popularTests";
-import PopularHealthPackages from "@/components/packages";
-import JsonLd from "@/components/jsonLd";
+import WhyDiagnosLab from "@/components/sections/whyDiagnos";
+import PopularTests from "@/components/sections/popularTests";
+import PopularHealthPackages from "@/components/sections/packages";
+import JsonLd from "@/components/seo/jsonLd";
 
 const areas = areasData.areas;
 

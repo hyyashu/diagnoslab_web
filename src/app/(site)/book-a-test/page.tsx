@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import BookHero from "./components/bookHero";
-import WhyDiagnosLab from "@/components/whyDiagnos/whyDiagnos";
-import PopularTests from "@/components/popularTests";
-import PopularHealthPackages from "@/components/packages";
-import JsonLd from "@/components/jsonLd";
+import WhyDiagnosLab from "@/components/sections/whyDiagnos";
+import PopularTests from "@/components/sections/popularTests";
+import PopularHealthPackages from "@/components/sections/packages";
+import JsonLd from "@/components/seo/jsonLd";
 
 export const metadata: Metadata = {
   title: { absolute: "Book Blood Test in Jamshedpur | Home Collection | Diagnos Lab" },

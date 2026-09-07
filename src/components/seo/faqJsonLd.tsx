@@ -1,4 +1,4 @@
-import JsonLd from "./jsonLd";
+import JsonLd from "@/components/seo/jsonLd";
 
 const faqItems = [
   {

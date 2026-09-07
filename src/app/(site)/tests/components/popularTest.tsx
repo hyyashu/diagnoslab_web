@@ -3,7 +3,7 @@
 import React, { useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import TestCard from "@/components/testCard";
+import TestCard from "@/components/cards/testCard";
 import rawData from "@/data/tests.json";
 import { useSearchParams } from "next/navigation";
 

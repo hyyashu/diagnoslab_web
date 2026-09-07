@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { Monitor, Users, UserCheck, Clock } from "lucide-react";
-import ServiceHero from "@/components/service/serviceHero";
-import ServiceWhyChoose from "@/components/service/serviceWhyChoose";
+import ServiceHero from "@/components/sections/serviceHero";
+import ServiceWhyChoose from "@/components/sections/serviceWhyChoose";
 import UltrasoundSection from "./components/ultrasoundSection";
 import ScanTypes from "./components/scanTypes";
 import Preparation from "./components/preparation";
-import JsonLd from "@/components/jsonLd";
-import RelatedServices from "@/components/relatedServices";
+import JsonLd from "@/components/seo/jsonLd";
+import RelatedServices from "@/components/sections/relatedServices";
 
 export const metadata: Metadata = {
   title: {

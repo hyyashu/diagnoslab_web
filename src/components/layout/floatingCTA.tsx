@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import { PhoneIcon } from "@heroicons/react/24/solid";
-import EnquiryForm from "./enquiryForm";
-import Modal from "./modal";
+import EnquiryForm from "@/components/forms/enquiryForm";
+import Modal from "@/components/ui/modal";
 import { usePathname } from "next/navigation";
 
 interface FloatingCTAProps {

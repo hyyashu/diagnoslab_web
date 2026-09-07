@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import FilterChips from "./filterChips";
 import { Pagination } from "./pagination";
 import SearchBar from "./searchBar";
-import TestCard from "@/components/testCard";
+import TestCard from "@/components/cards/testCard";
 
 const filters = [
   "All",
