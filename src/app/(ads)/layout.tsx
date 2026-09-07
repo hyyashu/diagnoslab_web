@@ -18,10 +18,10 @@ export default function AdsLayout({
           <Image
             src="/images/diagnoslogo.avif"
             alt="Diagnos Lab"
-            width={132}
-            height={40}
+            width={100}
+            height={100}
             priority
-            className="h-9 w-auto"
+            className="h-14 md:h-16 w-auto object-contain"
           />
           <CallLink className="flex items-center gap-2 font-heading text-sm font-bold text-slate-900 md:text-base" />
         </div>
