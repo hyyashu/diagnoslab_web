@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import tests from "@/data/tests.json";
 import areas from "@/data/areasServed.json";
+import packages from "@/data/packages.json";
 
 const BASE = "https://diagnoslab.in";
 
@@ -34,5 +35,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticRoutes, ...testRoutes, ...areaRoutes];
+  const packageRoutes: MetadataRoute.Sitemap = packages.packages.map((pkg) => ({
+    url: `${BASE}/packages/${pkg.Slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  return [...staticRoutes, ...testRoutes, ...areaRoutes, ...packageRoutes];
 }
