@@ -62,19 +62,21 @@ export default async function AreaPage({
 
   const areaSchema = {
     "@context": "https://schema.org",
-    "@type": "MedicalBusiness",
-    name: "Diagnos Lab",
+    /* An area page describes a service Diagnos Lab offers there - not a
+       separate location. Declaring MedicalBusiness here made every area page
+       look like another branch with an incomplete address. */
+    "@type": "Service",
+    name: `Blood Tests & Diagnostics in ${area.name}`,
+    serviceType: "Diagnostic laboratory services",
     url: `https://diagnoslab.in/area/${area.slug}`,
-    telephone: "+918404802201",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Jamshedpur",
-      addressRegion: "Jharkhand",
-      addressCountry: "IN",
+    areaServed: {
+      "@type": "Place",
+      name: `${area.name}, Jamshedpur`,
     },
-    areaServed: `${area.name}, Jamshedpur`,
+    provider: { "@id": "https://diagnoslab.in/#organization" },
     description: `Diagnos Lab provides blood tests, ultrasound, ECG, X-Ray, and home sample collection services in ${area.name}, Jamshedpur.`,
   };
+
 
   return (
     <>

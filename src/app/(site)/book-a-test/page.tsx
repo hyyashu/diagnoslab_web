@@ -31,17 +31,9 @@ export const metadata: Metadata = {
 
 const bookingSchema = {
   "@context": "https://schema.org",
-  "@type": "MedicalBusiness",
-  name: "Diagnos Lab",
-  telephone: "+918404802201",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Sakchi",
-    addressLocality: "Jamshedpur",
-    addressRegion: "Jharkhand",
-    addressCountry: "IN",
-  },
-  areaServed: "Jamshedpur",
+  /* Attaches the booking action to the existing business node rather than
+     declaring a second Diagnos Lab. */
+  "@id": "https://diagnoslab.in/#organization",
   potentialAction: {
     "@type": "ReserveAction",
     target: "https://diagnoslab.in/book-a-test",

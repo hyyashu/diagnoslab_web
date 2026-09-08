@@ -14,6 +14,10 @@ import ConditionalHowItWorks from "@/components/sections/conditionalHowItWorks";
 const localBusinessSchema = {
   "@context": "https://schema.org",
   "@type": "MedicalBusiness",
+  /* Canonical identifier for the business. Every other block that talks about
+     Diagnos Lab references this @id instead of describing it again, so search
+     engines resolve one entity rather than one per page. */
+  "@id": "https://diagnoslab.in/#organization",
   name: "Diagnos Lab",
   alternateName: "Diagno Labs Jamshedpur",
   url: "https://diagnoslab.in",
@@ -60,7 +64,11 @@ const localBusinessSchema = {
     bestRating: "5",
     worstRating: "1",
   },
-  sameAs: ["https://wa.me/918404802214"],
+  sameAs: [
+    /* Profiles that identify the same business elsewhere on the web. */
+    "https://www.google.com/search?kgmid=/g/1260h0qk1",
+    "https://www.instagram.com/diagnoslab.in/",
+  ],
   areaServed: [
     "Jamshedpur",
     "Sakchi",
