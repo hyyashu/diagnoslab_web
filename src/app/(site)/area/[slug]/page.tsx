@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import areasData from "@/data/areasServed.json";
+import { areas } from "@/lib/catalog";
 import AreaHero from "../components/areaHero";
 import WhyDiagnosLab from "@/components/sections/whyDiagnos";
 import PopularTests from "@/components/sections/popularTests";
 import PopularHealthPackages from "@/components/sections/packages";
 import JsonLd from "@/components/seo/jsonLd";
 
-const areas = areasData.areas;
 
 export function generateStaticParams() {
   return areas.map((area) => ({ slug: area.slug }));

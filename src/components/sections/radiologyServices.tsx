@@ -7,7 +7,7 @@ import RadiologyCard from "@/components/cards/radiologyCard";
 import "swiper/css";
 import "swiper/css/navigation";
 import Link from "next/link";
-import rawData from "@/data/radiologyServices.json";
+import { radiologyServices } from "@/lib/catalog";
 
 
 const serviceLinks: Record<string, string> = {
@@ -17,7 +17,7 @@ const serviceLinks: Record<string, string> = {
 };
 
 const RadiologyServices = () => {
-  const services = rawData.radiologyServices.map((service) => ({
+  const services = radiologyServices.map((service) => ({
     id: service.id,
     title: service.title,
     description: service.description,

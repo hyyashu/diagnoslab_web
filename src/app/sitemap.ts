@@ -1,7 +1,5 @@
 import type { MetadataRoute } from "next";
-import tests from "@/data/tests.json";
-import areas from "@/data/areasServed.json";
-import packages from "@/data/packages.json";
+import { getTestSlugs, getPackageSlugs, areas } from "@/lib/catalog";
 
 const BASE = "https://diagnoslab.in";
 
@@ -21,22 +19,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/policy`, lastModified: new Date(), changeFrequency: "yearly", priority: 0.3 },
   ];
 
-  const testRoutes: MetadataRoute.Sitemap = tests.tests.map((test) => ({
-    url: `${BASE}/tests/${test.Slug}`,
+  const testRoutes: MetadataRoute.Sitemap = getTestSlugs().map((slug) => ({
+    url: `${BASE}/tests/${slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly",
     priority: 0.7,
   }));
 
-  const areaRoutes: MetadataRoute.Sitemap = areas.areas.map((area) => ({
+  const areaRoutes: MetadataRoute.Sitemap = areas.map((area) => ({
     url: `${BASE}/area/${area.slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly",
     priority: 0.7,
   }));
 
-  const packageRoutes: MetadataRoute.Sitemap = packages.packages.map((pkg) => ({
-    url: `${BASE}/packages/${pkg.Slug}`,
+  const packageRoutes: MetadataRoute.Sitemap = getPackageSlugs().map((slug) => ({
+    url: `${BASE}/packages/${slug}`,
     lastModified: new Date(),
     changeFrequency: "monthly",
     priority: 0.7,

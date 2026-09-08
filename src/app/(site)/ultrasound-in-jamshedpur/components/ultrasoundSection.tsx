@@ -1,9 +1,9 @@
 "use client";
 
 import RadiologyCard from "../../radiology/components/radiologyCard";
-import data from "@/data/radiologyServices.json";
+import { radiologyServices } from "@/lib/catalog";
 
-const ultrasoundService = data.radiologyServices.find(
+const ultrasoundService = radiologyServices.find(
   (service) => service.id === "ultrasound"
 );
 

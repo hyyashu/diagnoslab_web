@@ -1,22 +1,11 @@
 "use client";
 
 import RadiologyCard from "./radiologyCard";
-import data from "@/data/radiologyServices.json";
+import { radiologyServices, type RadiologyService } from "@/lib/catalog";
 
-type Service = {
-  id: string;
-  title: string;
-  bookLabel: string;
-  description: string;
-  bullets: string[];
-  extra: string;
-  reportingTime: string;
-  image: string;
-  href: string | null;
-};
 
 export default function RadiologySection() {
-  const services: Service[] = data.radiologyServices;
+  const services: RadiologyService[] = radiologyServices;
 
   return (
     <section id="radiology-section" className="bg-gray-50 py-12 md:py-16 px-4 md:px-10">

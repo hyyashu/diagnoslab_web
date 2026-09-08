@@ -1,7 +1,6 @@
-import data from "@/data/ultrasoundScans.json";
+import { ultrasoundScans as scanTypes } from "@/lib/catalog";
 
 export default function ScanTypes() {
-  const { scanTypes } = data;
 
   return (
     <section className="bg-white py-12 md:py-16 px-4 md:px-10">

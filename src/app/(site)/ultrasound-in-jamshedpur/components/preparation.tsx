@@ -1,7 +1,6 @@
-import data from "@/data/ultrasoundScans.json";
+import { ultrasoundPreparationSteps as preparationSteps } from "@/lib/catalog";
 
 export default function Preparation() {
-  const { preparationSteps } = data;
 
   return (
     <section className="bg-gray-100 py-12 md:py-16 px-4 md:px-10">
