@@ -3,7 +3,9 @@ import Link from "next/link";
 import AboutCard from "./components/aboutCard";
 
 export const metadata: Metadata = {
-  title: { absolute: "About Diagnos Lab | Diagnostic Centre in Jamshedpur Since 2009" },
+  title: {
+    absolute: "About Diagnos Lab | Diagnostic Centre in Jamshedpur Since 2009",
+  },
   description:
     "Learn about Diagnos Lab — Jamshedpur's trusted diagnostic centre for 15+ years. NABL-quality testing, 4.9-star Google rating, and a patient-first team in Sakchi.",
   keywords: [
@@ -28,7 +30,6 @@ export default function AboutPage() {
   return (
     <div className="bg-background-primary relative overflow-hidden py-14  px-4 md:px-12">
       <div className="max-w-5xl mx-auto space-y-10 relative z-10">
-
         {/* Who We Are */}
         <AboutCard
           as="h1"
@@ -52,7 +53,7 @@ export default function AboutPage() {
           title="Why Patients Trust Diagnos Lab"
           description={[
             "15+ years of diagnostic excellence",
-            "4.9-star Google rating with 2500+ reviews",
+            "4.9-star Google rating with 3000+ reviews",
             "In-house pathologist for quality control",
             "Experienced medical and technical team",
             "Fast turnaround time for most tests",
@@ -63,7 +64,9 @@ export default function AboutPage() {
 
         {/* Our Presence */}
         <div className="bg-white rounded-2xl p-6 text-center shadow-md">
-          <h2 className="font-heading text-black text-2xl md:text-4xl font-extrabold ">Our Presence</h2>
+          <h2 className="font-heading text-black text-2xl md:text-4xl font-extrabold ">
+            Our Presence
+          </h2>
           <p className="font-body text-gray-700 text-sm md:text-base">
             We receive samples from all over Jharkhand.
           </p>

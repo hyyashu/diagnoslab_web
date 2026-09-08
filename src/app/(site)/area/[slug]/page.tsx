@@ -77,7 +77,6 @@ export default async function AreaPage({
     description: `Diagnos Lab provides blood tests, ultrasound, ECG, X-Ray, and home sample collection services in ${area.name}, Jamshedpur.`,
   };
 
-
   return (
     <>
       <JsonLd data={areaSchema} />

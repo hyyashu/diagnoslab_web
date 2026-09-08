@@ -1,16 +1,21 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 import {
-  Menu, Home, FileText, Package,
-  Microscope, Handshake, Users, Phone
-} from 'lucide-react';
-import EnquiryForm from '@/components/forms/enquiryForm';
-import Modal from '@/components/ui/modal';
-
+  Menu,
+  Home,
+  FileText,
+  Package,
+  Microscope,
+  Handshake,
+  Users,
+  Phone,
+} from "lucide-react";
+import EnquiryForm from "@/components/forms/enquiryForm";
+import Modal from "@/components/ui/modal";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,12 +25,12 @@ const Navbar = () => {
   const isActive = (href: string) => {
     const cleanHref = href.split("#")[0];
 
-    // Route match 
+    // Route match
     if (pathname === cleanHref || pathname.startsWith(cleanHref + "/")) {
       return true;
     }
 
-    // Section match 
+    // Section match
     if (href.includes("#")) {
       const sectionId = href.split("#")[1];
       return activeSection === sectionId;
@@ -34,22 +39,17 @@ const Navbar = () => {
     return false;
   };
 
-
   // Content for the marquee
   const tickerItems = [
     "ISO certified",
-    "2500+ verified reviews",
+    "3000+ verified reviews",
     "15+ Years of trust",
   ];
 
   const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
-    const sections = [
-      "tests-section",
-      "packages-section",
-      "radiology-section",
-    ];
+    const sections = ["tests-section", "packages-section", "radiology-section"];
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -61,7 +61,7 @@ const Navbar = () => {
       },
       {
         threshold: 0.5,
-      }
+      },
     );
 
     sections.forEach((id) => {
@@ -73,19 +73,34 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '/', icon: <Home size={20} /> },
-    { name: 'Tests', href: '/tests#tests-section', icon: <FileText size={20} /> },
-    { name: 'Packages', href: '/packages#packages-section', icon: <Package size={20} /> },
-    { name: 'Radiology', href: '/radiology#radiology-section', icon: <Microscope size={20} /> },
-    { name: 'Corporate Tie-ups', href: '/corporate', icon: <Handshake size={20} /> },
-    { name: 'About Us', href: '/aboutUs', icon: <Users size={20} /> },
-    { name: 'Contact Us', href: '/contact-us', icon: <Phone size={20} /> },
+    { name: "Home", href: "/", icon: <Home size={20} /> },
+    {
+      name: "Tests",
+      href: "/tests#tests-section",
+      icon: <FileText size={20} />,
+    },
+    {
+      name: "Packages",
+      href: "/packages#packages-section",
+      icon: <Package size={20} />,
+    },
+    {
+      name: "Radiology",
+      href: "/radiology#radiology-section",
+      icon: <Microscope size={20} />,
+    },
+    {
+      name: "Corporate Tie-ups",
+      href: "/corporate",
+      icon: <Handshake size={20} />,
+    },
+    { name: "About Us", href: "/aboutUs", icon: <Users size={20} /> },
+    { name: "Contact Us", href: "/contact-us", icon: <Phone size={20} /> },
   ];
 
   return (
     <>
       <nav className="w-full bg-white shadow-sm fixed left-0 right-0 z-[100] font-body">
-
         {/* --- MARQUEE --- */}
         <div className="block w-full bg-[#C62828] overflow-hidden py-2">
           <div className="flex whitespace-nowrap animate-marquee w-max">
@@ -106,7 +121,6 @@ const Navbar = () => {
 
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-14 md:h-20">
-
             {/* Mobile */}
             <div className="flex items-center space-x-3 md:hidden">
               <button
@@ -128,7 +142,10 @@ const Navbar = () => {
             </div>
 
             {/* Desktop Logo */}
-            <Link href="/" className="hidden md:flex flex-shrink-0 items-center">
+            <Link
+              href="/"
+              className="hidden md:flex flex-shrink-0 items-center"
+            >
               <Image
                 src="/images/diagnoslogo.avif"
                 alt="Diagnos Labs"
@@ -145,10 +162,11 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`text-[15px] font-bold transition-colors relative pb-1 ${isActive(link.href)
-                      ? 'text-black border-b-2 border-red-600'
-                      : 'text-black hover:text-red-600'
-                    }`}
+                  className={`text-[15px] font-bold transition-colors relative pb-1 ${
+                    isActive(link.href)
+                      ? "text-black border-b-2 border-red-600"
+                      : "text-black hover:text-red-600"
+                  }`}
                 >
                   {link.name}
                 </Link>
@@ -157,7 +175,10 @@ const Navbar = () => {
 
             {/* Right Side */}
             <div className="flex items-center space-x-4 lg:space-x-10">
-              <button onClick={() => setOpenForm(true)} className="hidden xl:block bg-background-primary text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-red-700 transition-all shadow-md">
+              <button
+                onClick={() => setOpenForm(true)}
+                className="hidden xl:block bg-background-primary text-white px-5 py-2.5 rounded-xl font-bold text-sm hover:bg-red-700 transition-all shadow-md"
+              >
                 Book Home Collection
               </button>
 
@@ -183,11 +204,16 @@ const Navbar = () => {
         )}
 
         {/* Side Menu */}
-        <aside className={`fixed top-0 left-0 h-full w-[280px] bg-white z-[70] shadow-2xl transform transition-transform duration-300 ease-in-out md:hidden ${isOpen ? 'translate-x-0' : '-translate-x-full'
-          }`}>
-
+        <aside
+          className={`fixed top-0 left-0 h-full w-[280px] bg-white z-[70] shadow-2xl transform transition-transform duration-300 ease-in-out md:hidden ${
+            isOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
+        >
           <div className="flex items-center h-16 px-4 border-b border-slate-100">
-            <button onClick={() => setIsOpen(false)} className="text-background-primary mr-4">
+            <button
+              onClick={() => setIsOpen(false)}
+              className="text-background-primary mr-4"
+            >
               <Menu size={30} />
             </button>
             <span className="font-bold text-black text-lg">Menu</span>
@@ -201,17 +227,23 @@ const Navbar = () => {
                 onClick={() => setIsOpen(false)}
                 className="flex items-center px-6 py-4 space-x-5 hover:bg-slate-50 transition-colors group"
               >
-                <span className={`${isActive(link.href)
-                    ? 'text-background-primary'
-                    : 'text-black group-hover:text-background-primary'
-                  }`}>
+                <span
+                  className={`${
+                    isActive(link.href)
+                      ? "text-background-primary"
+                      : "text-black group-hover:text-background-primary"
+                  }`}
+                >
                   {link.icon}
                 </span>
 
-                <span className={`text-[15px] font-bold ${isActive(link.href)
-                    ? 'text-background-primary border-b-2 border-background-primary'
-                    : 'text-black'
-                  }`}>
+                <span
+                  className={`text-[15px] font-bold ${
+                    isActive(link.href)
+                      ? "text-background-primary border-b-2 border-background-primary"
+                      : "text-black"
+                  }`}
+                >
                   {link.name}
                 </span>
               </Link>

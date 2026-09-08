@@ -82,15 +82,24 @@ export default function BloodTestAtHomePage() {
 
             <ul className="mt-8 grid grid-cols-2 gap-x-6 gap-y-3 font-body text-sm text-slate-700 sm:grid-cols-3">
               <li className="flex items-center gap-2">
-                <ShieldCheck className="h-4 w-4 shrink-0 text-background-primary" aria-hidden="true" />
+                <ShieldCheck
+                  className="h-4 w-4 shrink-0 text-background-primary"
+                  aria-hidden="true"
+                />
                 ISO certified
               </li>
               <li className="flex items-center gap-2">
-                <Star className="h-4 w-4 shrink-0 text-background-primary" aria-hidden="true" />
-                2500+ reviews
+                <Star
+                  className="h-4 w-4 shrink-0 text-background-primary"
+                  aria-hidden="true"
+                />
+                3000+ reviews
               </li>
               <li className="flex items-center gap-2">
-                <Clock className="h-4 w-4 shrink-0 text-background-primary" aria-hidden="true" />
+                <Clock
+                  className="h-4 w-4 shrink-0 text-background-primary"
+                  aria-hidden="true"
+                />
                 15+ years
               </li>
             </ul>
@@ -111,7 +120,10 @@ export default function BloodTestAtHomePage() {
           {steps.map((step, i) => (
             <li key={step.title} className="flex gap-4">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-background-primary/10">
-                <step.icon className="h-5 w-5 text-background-primary" aria-hidden="true" />
+                <step.icon
+                  className="h-5 w-5 text-background-primary"
+                  aria-hidden="true"
+                />
               </div>
               <div>
                 <p className="font-body text-sm font-bold text-slate-400">
@@ -191,7 +203,10 @@ export default function BloodTestAtHomePage() {
               key={area.slug}
               className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-3 py-2 font-body text-sm text-slate-700"
             >
-              <MapPin className="h-3.5 w-3.5 shrink-0 text-slate-400" aria-hidden="true" />
+              <MapPin
+                className="h-3.5 w-3.5 shrink-0 text-slate-400"
+                aria-hidden="true"
+              />
               {area.name}
             </li>
           ))}

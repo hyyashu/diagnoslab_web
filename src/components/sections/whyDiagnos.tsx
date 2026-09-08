@@ -23,7 +23,7 @@ export default function WhyDiagnosLab() {
     {
       icon: <Users className="w-8 h-8 md:w-12 md:h-12" strokeWidth={1.2} />,
       title: "Experienced Medical Team",
-      description: "15+ years of trust with 2500+ verified reviews.",
+      description: "15+ years of trust with 3000+ verified reviews.",
     },
   ];
 
@@ -37,7 +37,8 @@ export default function WhyDiagnosLab() {
           </h2>
 
           <p className="font-heading text-white font-medium text-base md:text-lg max-w-2xl mx-auto">
-            We combine accuracy, care and convenience so you get diagnostics you can rely on.
+            We combine accuracy, care and convenience so you get diagnostics you
+            can rely on.
           </p>
         </div>
 
