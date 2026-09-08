@@ -37,8 +37,8 @@ const localBusinessSchema = {
   },
   geo: {
     "@type": "GeoCoordinates",
-    latitude: 22.8046,
-    longitude: 86.2029,
+    latitude: 22.8088744,
+    longitude: 86.2029601,
   },
   openingHoursSpecification: [
     {
@@ -66,7 +66,7 @@ const localBusinessSchema = {
   },
   sameAs: [
     /* Profiles that identify the same business elsewhere on the web. */
-    "https://www.google.com/search?kgmid=/g/1260h0qk1",
+    "https://maps.google.com/?cid=5050796909999792755",
     "https://www.instagram.com/diagnoslab.in/",
   ],
   areaServed: [
