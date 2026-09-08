@@ -1,7 +1,6 @@
 "use client";
 import rawData from "@/data/tests.json";
 import { useMemo, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import FilterChips from "./filterChips";
 import { Pagination } from "./pagination";
 import SearchBar from "./searchBar";
@@ -36,8 +35,7 @@ export default function SearchTests() {
   const [active, setActive] = useState("All");
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
-  const searchParams = useSearchParams();
-  const showDetailsButton = searchParams.get("details") !== "hidden";
+  const showDetailsButton = true;
 
   // FILTER LOGIC
   const filteredTests = useMemo(() => {
@@ -60,6 +58,11 @@ export default function SearchTests() {
   const paginatedTests = filteredTests.slice(
     (page - 1) * ITEMS_PER_PAGE,
     page * ITEMS_PER_PAGE
+  );
+
+  const visibleIds = useMemo(
+    () => new Set(paginatedTests.map((t) => t.id)),
+    [paginatedTests]
   );
 
   //  CHIP CLICK
@@ -113,9 +116,16 @@ export default function SearchTests() {
 
       {/* Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mt-6 md:mt-10 max-w-6xl mx-auto">
-        {paginatedTests.length > 0 ? (
-          paginatedTests.map((test) => (
-            <TestCard key={test.id} {...test} showDetailsButton={showDetailsButton} />
+        {/* Every test is rendered so the static build contains a crawlable link
+            for all of them; the current page/filter only controls visibility. */}
+        {filteredTests.length > 0 ? (
+          tests.map((test) => (
+            <div
+              key={test.id}
+              className={visibleIds.has(test.id) ? "flex" : "hidden"}
+            >
+              <TestCard {...test} showDetailsButton={showDetailsButton} />
+            </div>
           ))
         ) : (
           <div className="col-span-full py-16 text-center">

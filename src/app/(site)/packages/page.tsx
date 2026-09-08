@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import PackagesScreen from "./components/packagesScreen";
 import HeroSection from "@/components/sections/hero";
-import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: { absolute: "Health Packages in Jamshedpur | Full Body Checkup | Diagnos Lab" },
@@ -37,8 +36,6 @@ export default function Page() {
           </>
         }
       />
-    <Suspense fallback={<div>Loading packages…</div>}>
       <PackagesScreen />
-    </Suspense>
   </>;
 }

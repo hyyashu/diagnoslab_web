@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import SearchTests from "./components/searchTest";
 import PopularTests from "./components/popularTest";
 import HeroSection from "@/components/sections/hero";
-import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: { absolute: "Book Blood Tests in Jamshedpur | All Lab Tests | Diagnos Lab" },
@@ -39,9 +38,7 @@ export default function Page() {
           </>
         }
       />
-    <Suspense fallback={<div>Loading tests…</div>}>
       <PopularTests />
       <SearchTests />
-      </Suspense>
   </>;
 }

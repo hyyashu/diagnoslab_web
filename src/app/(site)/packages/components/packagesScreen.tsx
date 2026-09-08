@@ -2,7 +2,6 @@
 
 import rawData from "@/data/packages.json";
 import { useMemo, useState } from "react";
-import { useSearchParams } from "next/navigation";
 import Search from "./search";
 import PackageCard from "@/components/cards/packageCard";
 import { Pagination } from "../../tests/components/pagination";
@@ -25,8 +24,7 @@ const packages = rawData.packages.map((pkg) => ({
 export default function PackagesScreen() {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
-  const searchParams = useSearchParams();
-  const showDetailsButton = searchParams.get("details") !== "hidden";
+  const showDetailsButton = true;
 
   // FILTER LOGIC 
   const filteredPackages = useMemo(() => {
@@ -69,6 +67,11 @@ export default function PackagesScreen() {
     page * ITEMS_PER_PAGE
   );
 
+  const visibleIds = useMemo(
+    () => new Set(paginatedPackages.map((p) => p.id)),
+    [paginatedPackages]
+  );
+
   return (
     <div id="packages-section" className="bg-white min-h-screen">
 
@@ -86,9 +89,13 @@ export default function PackagesScreen() {
         {paginatedPackages.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
 
-            {paginatedPackages.map((pkg) => (
-              <PackageCard
+            {/* All packages render into the static HTML; paging only hides them. */}
+            {packages.map((pkg) => (
+              <div
                 key={pkg.id}
+                className={visibleIds.has(pkg.id) ? "flex" : "hidden"}
+              >
+                <PackageCard
                 title={pkg.title}
                 description={pkg.description}
                 price={pkg.price}
@@ -100,6 +107,7 @@ export default function PackagesScreen() {
                 slug={pkg.slug}
                 showDetailsButton={showDetailsButton}
               />
+              </div>
             ))}
 
           </div>

@@ -5,7 +5,6 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import TestCard from "@/components/cards/testCard";
 import rawData from "@/data/tests.json";
-import { useSearchParams } from "next/navigation";
 
 const tests = rawData.tests
   .slice(0, 15)
@@ -22,8 +21,7 @@ const tests = rawData.tests
   }));
 
 export default function PopularTests() {
-  const searchParams = useSearchParams();
-  const showDetailsButton = searchParams.get("details") !== "hidden";
+  const showDetailsButton = true;
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     containScroll: "trimSnaps",
