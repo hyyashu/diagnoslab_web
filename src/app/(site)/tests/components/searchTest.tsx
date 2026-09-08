@@ -93,9 +93,9 @@ export default function SearchTests() {
 
       {/* Heading Section */}
       <div className="text-center mb-8 md:mb-10">
-        <h1 className="font-heading text-2xl md:text-4xl font-extrabold text-black mb-3 tracking-tight">
+        <h2 className="font-heading text-2xl md:text-4xl font-extrabold text-black mb-3 tracking-tight">
           Search tests
-        </h1>
+        </h2>
         <p className="font-body text-gray-500 font-medium text-sm md:text-lg">
           Search by test name or description to find more tests.
         </p>

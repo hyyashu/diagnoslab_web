@@ -31,6 +31,7 @@ export default function AboutPage() {
 
         {/* Who We Are */}
         <AboutCard
+          as="h1"
           title="Who We Are"
           description={`Diagnos Lab is a trusted diagnostic centre in Jamshedpur, built on accuracy, transparency, and patient care. For over 15 years, we have supported doctors, families, and organisations with reliable diagnostic services that help in early detection and better treatment decisions.
                         From routine blood tests to advanced radiology and cardiac diagnostics, we bring all essential diagnostic services under one roof.`}

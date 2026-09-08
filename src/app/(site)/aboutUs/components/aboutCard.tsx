@@ -6,6 +6,8 @@ type AboutCardProps = {
   description: string | string[];
   image: string;
   reverse?: boolean;
+  /* The first card on a page carries its h1; the rest stay h2. */
+  as?: "h1" | "h2";
 };
 
 export default function AboutCard({
@@ -13,6 +15,7 @@ export default function AboutCard({
   description,
   image,
   reverse = false,
+  as: Heading = "h2",
 }: AboutCardProps) {
   return (
     <div
@@ -25,9 +28,9 @@ export default function AboutCard({
         className={`flex-1 ${reverse ? "md:order-2" : "md:order-1"
           }`}
       >
-        <h2 className="font-heading text-black text-2xl md:text-4xl font-extrabold mb-4 md:mb-6">
+        <Heading className="font-heading text-black text-2xl md:text-4xl font-extrabold mb-4 md:mb-6">
           {title}
-        </h2>
+        </Heading>
 
         {Array.isArray(description) ? (
           <ul className="font-body list-disc pl-5 space-y-1 text-gray-700 text-sm md:text-base">

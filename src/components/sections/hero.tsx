@@ -12,7 +12,13 @@ import "swiper/css/pagination";
 import "swiper/css/effect-fade";
 import EnquiryForm from "@/components/forms/enquiryForm";
 
-const HeroSection: React.FC = () => {
+/* Reused on /, /radiology, /tests and /packages. Each of those needs its own
+   h1: a shared heading made four pages claim the same topic. */
+type HeroSectionProps = {
+  title?: React.ReactNode;
+};
+
+const HeroSection: React.FC<HeroSectionProps> = ({ title }) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [swiperRef, setSwiperRef] = useState<SwiperType | null>(null);
 
@@ -74,9 +80,13 @@ const HeroSection: React.FC = () => {
       <div className="relative z-10 w-full flex flex-col items-start pb-24 md:pb-12">
         <div className="w-full max-w-7xl mx-auto px-4 mb-8 md:mb-10">
           <h1 className="font-heading text-3xl md:text-4xl lg:text-6xl font-black text-white uppercase ">
-            All Test <br />
-            Under <br />
-            One Roof
+            {title ?? (
+              <>
+                All Test <br />
+                Under <br />
+                One Roof
+              </>
+            )}
           </h1>
         </div>
 

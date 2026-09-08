@@ -31,7 +31,14 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return <>
-    <HeroSection />
+    <HeroSection
+        title={
+          <>
+            Blood Tests <br />
+            in Jamshedpur
+          </>
+        }
+      />
     <Suspense fallback={<div>Loading tests…</div>}>
       <PopularTests />
       <SearchTests />

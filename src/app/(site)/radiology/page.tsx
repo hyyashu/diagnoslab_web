@@ -29,7 +29,14 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <HeroSection />
+      <HeroSection
+        title={
+          <>
+            Radiology <br />
+            in Jamshedpur
+          </>
+        }
+      />
       <WhyChoose />
       <RadiologySection />
     </>
