@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { MapPin, ExternalLink } from "lucide-react";
+import MapEmbed from "@/components/sections/mapEmbed";
 
 const FindUs = () => {
   return (
@@ -55,12 +56,10 @@ const FindUs = () => {
 
           {/* Google Map */}
           <div className="rounded-2xl overflow-hidden border border-gray-200 h-[400px] md:h-[320px]">
-            <iframe
+            <MapEmbed
+              title="Diagnos Lab on Google Maps"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d229.86435722095376!2d86.2028780830967!3d22.808772796468762!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f5e3088f40bb2b%3A0x46180907852da273!2sDiagnos%20Lab!5e0!3m2!1sen!2sin!4v1772863062022!5m2!1sen!2sin"
-              className="w-full h-full border-0"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+            />
           </div>
         </div>
       </div>
