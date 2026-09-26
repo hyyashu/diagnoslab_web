@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import Fade from "embla-carousel-fade";
@@ -29,15 +28,29 @@ const HeroSection: React.FC<HeroSectionProps> = ({ title }) => {
     };
   }, [emblaApi]);
 
+  /* Slides 2 and 3 are hidden behind slide 1 until autoplay reaches them,
+     so their images wait until the page has loaded instead of competing
+     with the first (LCP) image. */
+  const [loadRest, setLoadRest] = useState(false);
+  useEffect(() => {
+    const go = () => setLoadRest(true);
+    if (document.readyState === "complete") go();
+    else window.addEventListener("load", go, { once: true });
+    return () => window.removeEventListener("load", go);
+  }, []);
+
   const goTo = (i: number) => {
+    setLoadRest(true);
     emblaApi?.scrollTo(i);
     emblaApi?.plugins().autoplay?.reset();
   };
 
+  /* Each slide has a 1920px landscape file and a 900px portrait crop for
+     phones, where object-cover only ever shows the centre strip. */
   const carouselSlides = [
-    { src: "/images/hero/hero1.avif", alt: "Blood test home collection service in Jamshedpur – Diagnos Lab" },
-    { src: "/images/hero/hero2.avif", alt: "Ultrasound and radiology services at Diagnos Lab, Sakchi Jamshedpur" },
-    { src: "/images/hero/hero3.avif", alt: "Diagnostic centre in Jamshedpur – affordable tests with fast reports" },
+    { src: "/images/hero/hero1.avif", mobile: "/images/hero/hero1-mobile.avif", alt: "Blood test home collection service in Jamshedpur – Diagnos Lab" },
+    { src: "/images/hero/hero2.avif", mobile: "/images/hero/hero2-mobile.avif", alt: "Ultrasound and radiology services at Diagnos Lab, Sakchi Jamshedpur" },
+    { src: "/images/hero/hero3.avif", mobile: "/images/hero/hero3-mobile.avif", alt: "Diagnostic centre in Jamshedpur – affordable tests with fast reports" },
   ];
 
   const renderDots = () =>
@@ -45,7 +58,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ title }) => {
       <button
         key={i}
         onClick={() => goTo(i)}
-        className={`transition-all duration-500 ease-in-out rounded-full bg-white shadow-lg h-2 ${activeIndex === i
+        className={`relative before:absolute before:-inset-x-1.5 before:-inset-y-4 before:content-[''] transition-all duration-500 ease-in-out rounded-full bg-white shadow-lg h-2 ${activeIndex === i
             ? "w-16 opacity-100"
             : "w-2 opacity-40 hover:opacity-70"
           }`}
@@ -63,13 +76,18 @@ const HeroSection: React.FC<HeroSectionProps> = ({ title }) => {
           {carouselSlides.map((slide, index) => (
             <div key={index} className="relative h-full min-w-0 flex-[0_0_100%]">
               <div className="relative h-full w-full">
-                <Image
-                  src={slide.src}
-                  alt={slide.alt}
-                  fill
-                  className="object-cover"
-                  priority={index === 0}
-                />
+                {(index === 0 || loadRest) && (
+                  <picture>
+                    <source media="(max-width: 767px)" srcSet={slide.mobile} type="image/avif" />
+                    <img
+                      src={slide.src}
+                      alt={slide.alt}
+                      className="absolute inset-0 h-full w-full object-cover"
+                      decoding="async"
+                      fetchPriority={index === 0 ? "high" : "low"}
+                    />
+                  </picture>
+                )}
                 <div className="absolute inset-0 bg-slate-900/60" />
               </div>
             </div>
