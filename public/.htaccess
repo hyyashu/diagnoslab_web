@@ -8,6 +8,13 @@
 
 ErrorDocument 404 /404.html
 
+# Something outside public_html (not in hPanel's Redirects list; most likely
+# a parent-folder .htaccess) sends exactly /book-a-test to the home page,
+# which is the URL Google has indexed for this page. A matching rule here
+# takes precedence, so /book-a-test goes to /book-a-test/ like every other
+# page. Verified against a simulated parent RedirectMatch/Redirect in Apache.
+RedirectMatch 301 ^/book-a-test$ https://diagnoslab.in/book-a-test/
+
 # Caching. Every .js/.css/.woff2 is a Next build file under /_next/static
 # whose name changes with its content, so it can be cached for a year.
 # Images keep their names across deploys, so they get 30 days. HTML, the
