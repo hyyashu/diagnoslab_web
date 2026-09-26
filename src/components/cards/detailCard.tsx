@@ -1,8 +1,6 @@
-"use client";
-
 import Link from "next/link";
-import LeadForm from "@/components/forms/leadForm";
-import { Fragment, useMemo, useState } from "react";
+import BookButton from "@/components/cards/bookButton";
+import { Fragment } from "react";
 import {
   Clock,
   Utensils,
@@ -48,8 +46,6 @@ const TRUST_BADGES = [
 ];
 
 export default function DetailCard({ kind, data }: DetailCardProps) {
-  const [showLeadForm, setShowLeadForm] = useState(false);
-
   const displayName = toTitleCase(data.name);
   const discount =
     data.price > 0 &&
@@ -62,25 +58,33 @@ export default function DetailCard({ kind, data }: DetailCardProps) {
     kind === "test" ? "/tests#tests-section" : "/packages#packages-section";
   const backLabel = kind === "test" ? "All Tests" : "All Packages";
 
-  const leadMeta = useMemo(() => {
-    if (kind === "test") {
-      return {
-        test_name: data.name,
-        test_slug: data.slug,
-        test_price: data.discountedPrice,
-        test_original_price: data.price,
-        test_categories: data.categories,
-      };
-    }
-    return {
-      package_name: data.name,
-      package_description: data.description,
-      package_price: data.discountedPrice,
-      package_original_price: data.price,
-      package_parameters: data.parametersCovered,
-      package_categories: data.categories,
-    };
-  }, [kind, data]);
+  const leadMeta =
+    kind === "test"
+      ? {
+          test_name: data.name,
+          test_slug: data.slug,
+          test_price: data.discountedPrice,
+          test_original_price: data.price,
+          test_categories: data.categories,
+        }
+      : {
+          package_name: data.name,
+          package_description: data.description,
+          package_price: data.discountedPrice,
+          package_original_price: data.price,
+          package_parameters: data.parametersCovered,
+          package_categories: data.categories,
+        };
+
+  /* Both Book Now buttons (mobile sticky bar and sidebar) open the same form. */
+  const bookForm = {
+    title: "Book",
+    testName: data.name,
+    testDescription: data.description,
+    testPrice: data.discountedPrice,
+    testOriginalPrice: data.price,
+    additionalSourceData: leadMeta,
+  };
 
   const benefits = [
     "Early disease detection",
@@ -112,12 +116,12 @@ export default function DetailCard({ kind, data }: DetailCardProps) {
             Home collection available
           </p>
         </div>
-        <button
-          onClick={() => setShowLeadForm(true)}
+        <BookButton
           className="bg-[#E73834] text-white font-bold font-heading px-6 py-2.5 rounded-xl text-sm shrink-0 shadow-md active:scale-95 transition-transform"
+          form={bookForm}
         >
           Book Now
-        </button>
+        </BookButton>
       </div>
 
       <div className="bg-slate-50 min-h-screen pb-28 md:pb-12">
@@ -337,12 +341,12 @@ export default function DetailCard({ kind, data }: DetailCardProps) {
                   ))}
                 </ul>
 
-                <button
-                  onClick={() => setShowLeadForm(true)}
+                <BookButton
                   className="w-full bg-[#E73834] hover:bg-red-700 text-white font-black font-heading py-4 rounded-xl transition-all text-base shadow-md hover:shadow-lg active:scale-[0.98]"
+                  form={bookForm}
                 >
                   Book Now
-                </button>
+                </BookButton>
 
                 <p className="text-center text-xs text-slate-400 font-body">
                   Or call{" "}
@@ -358,17 +362,6 @@ export default function DetailCard({ kind, data }: DetailCardProps) {
           </div>
         </div>
       </div>
-
-      <LeadForm
-        open={showLeadForm}
-        onOpenChange={setShowLeadForm}
-        title="Book"
-        testName={data.name}
-        testDescription={data.description}
-        testPrice={data.discountedPrice}
-        testOriginalPrice={data.price}
-        additionalSourceData={leadMeta}
-      />
     </>
   );
 }

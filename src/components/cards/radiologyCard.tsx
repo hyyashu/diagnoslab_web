@@ -1,8 +1,5 @@
-"use client";
-
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import LeadForm from "@/components/forms/leadForm";
+import BookButton from "@/components/cards/bookButton";
 
 interface RadiologyCardProps {
   title: string;
@@ -27,13 +24,12 @@ export default function RadiologyCard({
   footerNote,
   href,
 }: RadiologyCardProps) {
-  const [showLeadForm, setShowLeadForm] = useState(false);
-  const leadMeta = useMemo<leadMetaProps>(() => ({
+  const leadMeta: leadMetaProps = {
     radiology_name: title,
     radiology_description: description,
     radiology_uses: uses,
     radiology_footer_note: footerNote,
-  }), [title, description, uses, footerNote]);
+  };
   return (
     <div className="bg-white rounded-3xl p-6 md:p-8 shadow-lg border border-gray-100 h-full flex flex-col">
 
@@ -76,21 +72,18 @@ export default function RadiologyCard({
             Learn More
           </Link>
         )}
-        <button
-          onClick={() => setShowLeadForm(true)}
+        <BookButton
           className="font-heading w-full text-sm md:text-base py-4 bg-background-primary hover:bg-red-700 text-white font-bold rounded-xl transition shadow-md active:scale-[0.98]"
+          form={{
+            title: "Book",
+            testName: title,
+            testDescription: description,
+            additionalSourceData: leadMeta,
+          }}
         >
           Book {title}
-        </button>
+        </BookButton>
       </div>
-      <LeadForm
-        open={showLeadForm}
-        onOpenChange={setShowLeadForm}
-        title="Book"
-        testName={title}
-        testDescription={description}
-        additionalSourceData={leadMeta}
-      />
     </div>
   );
 }

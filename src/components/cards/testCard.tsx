@@ -1,7 +1,4 @@
-"use client";
-
-import { useMemo, useState } from "react";
-import LeadForm from "@/components/forms/leadForm";
+import BookButton from "@/components/cards/bookButton";
 import Link from "next/link";
 import { Clock, Utensils } from "lucide-react";
 
@@ -41,25 +38,20 @@ export default function TestCard({
   fasting,
   reporting,
 }: TestCardProps) {
-  const [showLeadForm, setShowLeadForm] = useState(false);
-
   const discount =
     originalPrice > 0 && price > 0
       ? Math.round(((originalPrice - price) / originalPrice) * 100)
       : 0;
 
-  const leadMeta = useMemo<leadMetaProps>(
-    () => ({
-      test_name: title,
-      test_slug: slug,
-      test_price: price,
-      test_original_price: originalPrice,
-      test_category: category,
-      test_fasting: fasting,
-      test_reporting: reporting,
-    }),
-    [title, slug, price, originalPrice, category, fasting, reporting]
-  );
+  const leadMeta: leadMetaProps = {
+    test_name: title,
+    test_slug: slug,
+    test_price: price,
+    test_original_price: originalPrice,
+    test_category: category,
+    test_fasting: fasting,
+    test_reporting: reporting,
+  };
 
   return (
     <>
@@ -133,26 +125,22 @@ export default function TestCard({
                 </button>
               </Link>
             )}
-            <button
-              onClick={() => setShowLeadForm(true)}
+            <BookButton
               className="w-full py-2.5 bg-[#E73834] text-white rounded-xl text-xs font-bold font-heading hover:bg-red-700 transition-all active:scale-95 shadow-sm"
+              form={{
+                title: "Book",
+                testName: title,
+                testDescription: description,
+                testPrice: price,
+                testOriginalPrice: originalPrice,
+                additionalSourceData: leadMeta,
+              }}
             >
               Book Now
-            </button>
+            </BookButton>
           </div>
         </div>
       </div>
-
-      <LeadForm
-        open={showLeadForm}
-        onOpenChange={setShowLeadForm}
-        title="Book"
-        testName={title}
-        testDescription={description}
-        testPrice={price}
-        testOriginalPrice={originalPrice}
-        additionalSourceData={leadMeta}
-      />
     </>
   );
 }

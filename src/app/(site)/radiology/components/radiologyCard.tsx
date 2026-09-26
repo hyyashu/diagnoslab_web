@@ -1,9 +1,6 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import LeadForm from "@/components/forms/leadForm";
-import { useMemo, useState } from "react";
+import BookButton from "@/components/cards/bookButton";
 import { Clock, CheckCircle2 } from "lucide-react";
 
 interface leadMetaProps {
@@ -33,17 +30,12 @@ export default function RadiologyCard({
   href,
   femaleRadiologist = false,
 }: RadiologyCardProps) {
-  const [showLeadForm, setShowLeadForm] = useState(false);
-
-  const leadMeta = useMemo<leadMetaProps>(
-    () => ({
-      radiology_name: title,
-      radiology_description: description,
-      radiology_facilities: facilities,
-      radiology_reporting_time: reportingTime,
-    }),
-    [title, description, facilities, reportingTime]
-  );
+  const leadMeta: leadMetaProps = {
+    radiology_name: title,
+    radiology_description: description,
+    radiology_facilities: facilities,
+    radiology_reporting_time: reportingTime,
+  };
 
   return (
     <>
@@ -112,24 +104,20 @@ export default function RadiologyCard({
                 </button>
               </Link>
             )}
-            <button
-              onClick={() => setShowLeadForm(true)}
+            <BookButton
               className="w-full bg-[#E73834] hover:bg-red-700 active:scale-95 text-white font-bold font-heading text-xs py-3 rounded-xl transition-all shadow-sm"
+              form={{
+                title: "Book",
+                testName: title,
+                testDescription: description,
+                additionalSourceData: leadMeta,
+              }}
             >
               Book Now
-            </button>
+            </BookButton>
           </div>
         </div>
       </div>
-
-      <LeadForm
-        open={showLeadForm}
-        onOpenChange={setShowLeadForm}
-        title="Book"
-        testName={title}
-        testDescription={description}
-        additionalSourceData={leadMeta}
-      />
     </>
   );
 }

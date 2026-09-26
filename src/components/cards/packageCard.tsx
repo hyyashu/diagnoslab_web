@@ -1,7 +1,5 @@
-"use client";
 import Link from "next/link";
-import LeadForm from "@/components/forms/leadForm";
-import { useMemo, useState } from "react";
+import BookButton from "@/components/cards/bookButton";
 import { Clock, Utensils, FlaskConical } from "lucide-react";
 
 interface Props {
@@ -43,26 +41,21 @@ export default function PackageCard({
   showDetailsButton = true,
   fillSlide = false,
 }: Props) {
-  const [showLeadForm, setShowLeadForm] = useState(false);
-
   const discount =
     originalPrice > 0 && price && price > 0
       ? Math.round(((originalPrice - price) / originalPrice) * 100)
       : 0;
 
-  const leadMeta = useMemo<leadMetaProps>(
-    () => ({
-      package_name: title,
-      package_description: description,
-      package_price: price ?? 0,
-      package_original_price: originalPrice,
-      package_parameters: parameters,
-      package_categories: categories.split(","),
-      package_fasting: fasting ?? "",
-      package_reporting: reporting ?? "",
-    }),
-    [title, description, price, originalPrice, parameters, categories, fasting, reporting]
-  );
+  const leadMeta: leadMetaProps = {
+    package_name: title,
+    package_description: description,
+    package_price: price ?? 0,
+    package_original_price: originalPrice,
+    package_parameters: parameters,
+    package_categories: categories.split(","),
+    package_fasting: fasting ?? "",
+    package_reporting: reporting ?? "",
+  };
 
   return (
     <>
@@ -143,26 +136,22 @@ export default function PackageCard({
                 </button>
               </Link>
             )}
-            <button
-              onClick={() => setShowLeadForm(true)}
+            <BookButton
               className="w-full py-2.5 bg-[#E73834] text-white rounded-xl text-xs font-bold font-heading hover:bg-red-700 transition-all active:scale-95 shadow-sm"
+              form={{
+                title: "Book",
+                testName: title,
+                testDescription: description,
+                testPrice: price ?? 0,
+                testOriginalPrice: originalPrice,
+                additionalSourceData: leadMeta,
+              }}
             >
               Book Now
-            </button>
+            </BookButton>
           </div>
         </div>
       </div>
-
-      <LeadForm
-        open={showLeadForm}
-        onOpenChange={setShowLeadForm}
-        title="Book"
-        testName={title}
-        testDescription={description}
-        testPrice={price ?? 0}
-        testOriginalPrice={originalPrice}
-        additionalSourceData={leadMeta}
-      />
     </>
   );
 }
