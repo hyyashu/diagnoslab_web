@@ -49,7 +49,7 @@ export default function OurPartners() {
         <div className="relative">
           
           {/* Left Arrow */}
-          <button
+          <button aria-label="Previous partners"
           onClick={scrollPrev}
           className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 bg-white text-background-primary rounded-full flex items-center justify-center shadow-lg z-20  transition"
         >
@@ -58,7 +58,7 @@ export default function OurPartners() {
             
 
           {/* Right Arrow */}
-          <button
+          <button aria-label="Next partners"
           onClick={scrollNext}
           className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 bg-white text-background-primary rounded-full flex items-center justify-center shadow-lg z-20  transition"
         >

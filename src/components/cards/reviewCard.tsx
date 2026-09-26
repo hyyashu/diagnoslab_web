@@ -31,9 +31,9 @@ export default function ReviewCard({
           </div>
 
           <div className="text-left">
-            <h4 className="font-heading font-bold text-base leading-tight text-black">
+            <h3 className="font-heading font-bold text-base leading-tight text-black">
               {author}
-            </h4>
+            </h3>
             {/*<p className="text-[12px] text-slate-400 mt-0.5">
               {stats}
             </p>*/}

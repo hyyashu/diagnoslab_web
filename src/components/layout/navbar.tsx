@@ -125,6 +125,8 @@ const Navbar = () => {
             <div className="flex items-center space-x-3 md:hidden">
               <button
                 onClick={() => setIsOpen(true)}
+                aria-label="Open menu"
+                aria-expanded={isOpen}
                 className="text-red-600 focus:outline-none"
               >
                 <Menu size={30} strokeWidth={2.5} />
@@ -212,6 +214,7 @@ const Navbar = () => {
           <div className="flex items-center h-16 px-4 border-b border-slate-100">
             <button
               onClick={() => setIsOpen(false)}
+              aria-label="Close menu"
               className="text-background-primary mr-4"
             >
               <Menu size={30} />

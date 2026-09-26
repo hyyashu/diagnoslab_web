@@ -41,14 +41,14 @@ export default function ReviewCarousel() {
       {/* Carousel */}
       <div className="relative max-w-7xl mx-auto px-4 md:px-16">
 
-        <button
+        <button aria-label="Previous reviews"
           onClick={scrollPrev}
           className="absolute left-0 top-1/2 -translate-y-1/2 w-10 h-10 bg-background-primary text-white rounded-full flex items-center justify-center shadow-lg z-20 hover:bg-red-600 transition"
         >
           <ChevronLeft size={18} />
         </button>
 
-        <button
+        <button aria-label="Next reviews"
           onClick={scrollNext}
           className="absolute right-0 top-1/2 -translate-y-1/2 w-10 h-10 bg-background-primary text-white rounded-full flex items-center justify-center shadow-lg z-20 hover:bg-red-600 transition"
         >

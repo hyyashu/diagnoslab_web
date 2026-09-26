@@ -74,9 +74,9 @@ const EnquiryForm: React.FC<EnquiryFormProps> = ({
       id="enquiry-form"
       className="bg-white p-6 md:p-8 rounded-[2rem] shadow-2xl border border-slate-100"
     >
-      <h3 className="font-heading text-xl md:text-2xl font-black text-slate-900 mb-6">
+      <h2 className="font-heading text-xl md:text-2xl font-black text-slate-900 mb-6">
         Request A Call Back
-      </h3>
+      </h2>
 
       <form
         className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start"

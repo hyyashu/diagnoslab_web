@@ -52,7 +52,7 @@ export default function PopularTests() {
         <div className="relative px-4 md:px-8 lg:px-20">
 
           {/* Left Arrow */}
-          <button
+          <button aria-label="Previous tests"
             onClick={scrollPrev}
             className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 rounded-full bg-background-primary text-white shadow-xl hover:bg-red-600 active:scale-95 transition-all flex"
           >
@@ -60,7 +60,7 @@ export default function PopularTests() {
           </button>
 
           {/* Right Arrow */}
-          <button
+          <button aria-label="Next tests"
             onClick={scrollNext}
             className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 md:p-3 rounded-full bg-background-primary text-white shadow-xl hover:bg-red-600 active:scale-95 transition-all flex"
           >
