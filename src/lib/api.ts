@@ -1,6 +1,8 @@
 import { LeadFormSubmitData } from "@/components/forms/leadForm";
 
-const BASE_URL = "http://diangos-api-jg2j3d-244a7b-91-108-111-112.traefik.me/";
+// const BASE_URL = "http://diangos-api-jg2j3d-244a7b-91-108-111-112.traefik.me/";
+const BASE_URL = "https://api.diagnoslab.in/leads";
+
 // const BASE_URL = "http://localhost:3000";
 
 /* Thrown for any non-2xx response, as axios did, so callers' catch blocks
@@ -68,8 +70,11 @@ export const api = {
     request<T>("POST", path, body, options),
   put: <T = unknown>(path: string, body?: unknown, options?: RequestOptions) =>
     request<T>("PUT", path, body, options),
-  patch: <T = unknown>(path: string, body?: unknown, options?: RequestOptions) =>
-    request<T>("PATCH", path, body, options),
+  patch: <T = unknown>(
+    path: string,
+    body?: unknown,
+    options?: RequestOptions,
+  ) => request<T>("PATCH", path, body, options),
   delete: <T = unknown>(path: string, options?: RequestOptions) =>
     request<T>("DELETE", path, undefined, options),
 };
