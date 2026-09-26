@@ -5,23 +5,24 @@ import React, { useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import TestCard from "@/components/cards/testCard";
-import rawData from "@/data/tests.json";
 
-const tests = rawData.tests
-  .slice(0, 15)
-  .map((test) => ({
-    id: test.Id,
-    title: test.TestName,
-    description: test.Description,
-    price: test.DiscountedPrice,
-    originalPrice: Number(test.Price) || 0,
-    category: test.Categories?.[0] || "General Health",
-    fasting: test.Fasting?.trim() || "Not Required",
-    reporting: test.Reporting?.trim() || "Same Day",
-    slug: test.Slug,
-  }));
+export type PopularTestItem = {
+  id: number;
+  slug: string;
+  title: string;
+  description: string;
+  price: number;
+  originalPrice: number;
+  category: string;
+  fasting: string;
+  reporting: string;
+};
 
-export default function PopularTests() {
+export default function PopularTestsCarousel({
+  tests,
+}: {
+  tests: PopularTestItem[];
+}) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     containScroll: "trimSnaps",
