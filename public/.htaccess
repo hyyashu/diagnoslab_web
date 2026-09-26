@@ -1,0 +1,27 @@
+# Diagnos Lab — static export served by LiteSpeed (Apache-compatible).
+# `next build` copies this file from public/ into out/.
+#
+# The host already forces https, strips www and adds trailing slashes. The
+# https/www rules below repeat that so the site stays correct if this file
+# replaces an existing one on the server; when the host has already
+# redirected, their conditions don't match and they do nothing.
+
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # http -> https (X-Forwarded-Proto guard avoids a loop behind a proxy/CDN)
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://diagnoslab.in%{REQUEST_URI} [R=301,L]
+
+  # www -> apex
+  RewriteCond %{HTTP_HOST} ^www\.diagnoslab\.in$ [NC]
+  RewriteRule ^ https://diagnoslab.in%{REQUEST_URI} [R=301,L]
+
+  # URLs from the previous site that Google still has indexed.
+  RewriteRule ^about-us/?$ /aboutUs/ [R=301,L]
+  RewriteRule ^corporate-tieups/?$ /corporate/ [R=301,L]
+  RewriteRule ^center-locator/?$ /contact-us/ [R=301,L]
+</IfModule>

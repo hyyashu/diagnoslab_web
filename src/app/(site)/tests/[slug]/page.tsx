@@ -54,12 +54,12 @@ export async function generateMetadata({
       ...(test.Categories ?? []),
     ],
     alternates: {
-      canonical: `https://diagnoslab.in/tests/${test.Slug}`,
+      canonical: `https://diagnoslab.in/tests/${test.Slug}/`,
     },
     openGraph: {
       title,
       description,
-      url: `https://diagnoslab.in/tests/${test.Slug}`,
+      url: `https://diagnoslab.in/tests/${test.Slug}/`,
       type: "website",
     },
     robots: { index: true, follow: true },
@@ -96,7 +96,7 @@ export default async function Page({
     "@context": "https://schema.org",
     "@type": "MedicalTest",
     name: toTitleCase(test.TestName),
-    url: `https://diagnoslab.in/tests/${test.Slug}`,
+    url: `https://diagnoslab.in/tests/${test.Slug}/`,
     description: `${toTitleCase(test.TestName)} test available at Diagnos Lab, Sakchi Jamshedpur. Home sample collection and same-day digital reports.`,
     usedToDiagnose: test.Categories?.join(", ") ?? "",
     provider: {
@@ -127,13 +127,13 @@ export default async function Page({
         "@type": "ListItem",
         position: 2,
         name: "Tests",
-        item: "https://diagnoslab.in/tests",
+        item: "https://diagnoslab.in/tests/",
       },
       {
         "@type": "ListItem",
         position: 3,
         name: `${toTitleCase(test.TestName)} Test`,
-        item: `https://diagnoslab.in/tests/${test.Slug}`,
+        item: `https://diagnoslab.in/tests/${test.Slug}/`,
       },
     ],
   };

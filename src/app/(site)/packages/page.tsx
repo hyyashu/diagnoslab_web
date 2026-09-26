@@ -16,13 +16,13 @@ export const metadata: Metadata = {
     "Affordable Health Test Jamshedpur",
   ],
   alternates: {
-    canonical: "https://diagnoslab.in/packages",
+    canonical: "https://diagnoslab.in/packages/",
   },
   openGraph: {
     title: "Health Packages in Jamshedpur | Diagnos Lab",
     description:
       "Affordable full body checkup and health packages with home collection at Diagnos Lab, Jamshedpur.",
-    url: "https://diagnoslab.in/packages",
+    url: "https://diagnoslab.in/packages/",
   },
 };
 

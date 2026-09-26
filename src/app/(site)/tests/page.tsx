@@ -18,13 +18,13 @@ export const metadata: Metadata = {
     "Home Sample Collection Jamshedpur",
   ],
   alternates: {
-    canonical: "https://diagnoslab.in/tests",
+    canonical: "https://diagnoslab.in/tests/",
   },
   openGraph: {
     title: "Book Blood Tests in Jamshedpur | Diagnos Lab",
     description:
       "Browse 500+ lab tests. Book with home sample collection at Diagnos Lab, Sakchi, Jamshedpur.",
-    url: "https://diagnoslab.in/tests",
+    url: "https://diagnoslab.in/tests/",
   },
 };
 

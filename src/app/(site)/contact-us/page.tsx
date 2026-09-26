@@ -13,13 +13,13 @@ export const metadata: Metadata = {
     "Lab Phone Number Jamshedpur",
   ],
   alternates: {
-    canonical: "https://diagnoslab.in/contact-us",
+    canonical: "https://diagnoslab.in/contact-us/",
   },
   openGraph: {
     title: "Contact Diagnos Lab | Book Tests in Jamshedpur",
     description:
       "Reach Diagnos Lab in Sakchi, Jamshedpur for bookings and queries.",
-    url: "https://diagnoslab.in/contact-us",
+    url: "https://diagnoslab.in/contact-us/",
   },
 };
 

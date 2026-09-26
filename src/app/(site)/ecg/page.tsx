@@ -19,13 +19,13 @@ export const metadata: Metadata = {
     "Diagnos Lab in Jamshedpur",
   ],
   alternates: {
-    canonical: "https://diagnoslab.in/ecg",
+    canonical: "https://diagnoslab.in/ecg/",
   },
   openGraph: {
     title: "Diagnos Lab | Book ECG in Jamshedpur",
     description:
       "Book ECG at Diagnos Lab in Jamshedpur. Quick heart rhythm and electrical activity testing with reports in 1–2 hours.",
-    url: "https://diagnoslab.in/ecg",
+    url: "https://diagnoslab.in/ecg/",
     images: ["/images/diagnoslogo.avif"],
   },
 };
@@ -34,7 +34,7 @@ const ecgSchema = {
   "@context": "https://schema.org",
   "@type": "MedicalProcedure",
   name: "ECG Test in Jamshedpur",
-  url: "https://diagnoslab.in/ecg",
+  url: "https://diagnoslab.in/ecg/",
   description:
     "12-lead ECG (electrocardiogram) for heart rhythm and electrical activity analysis at Diagnos Lab, Sakchi Jamshedpur. Reports available within 1–2 hours.",
   procedureType: "Diagnostic",
@@ -57,7 +57,7 @@ const ecgBreadcrumb = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: "https://diagnoslab.in" },
-    { "@type": "ListItem", position: 2, name: "ECG Test in Jamshedpur", item: "https://diagnoslab.in/ecg" },
+    { "@type": "ListItem", position: 2, name: "ECG Test in Jamshedpur", item: "https://diagnoslab.in/ecg/" },
   ],
 };
 

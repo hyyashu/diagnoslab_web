@@ -48,12 +48,12 @@ export async function generateMetadata({
       ...(pkg.Categories ? pkg.Categories.split(", ") : []),
     ],
     alternates: {
-      canonical: `https://diagnoslab.in/packages/${pkg.Slug}`,
+      canonical: `https://diagnoslab.in/packages/${pkg.Slug}/`,
     },
     openGraph: {
       title,
       description,
-      url: `https://diagnoslab.in/packages/${pkg.Slug}`,
+      url: `https://diagnoslab.in/packages/${pkg.Slug}/`,
       type: "website",
     },
     robots: { index: true, follow: true },
@@ -91,14 +91,14 @@ export default async function Page({
     "@context": "https://schema.org",
     "@type": "Product",
     name: `${pkg.PackageName} Health Package`,
-    url: `https://diagnoslab.in/packages/${pkg.Slug}`,
+    url: `https://diagnoslab.in/packages/${pkg.Slug}/`,
     description: pkg.Description,
     offers: {
       "@type": "Offer",
       price: pkg.DiscountedPrice,
       priceCurrency: "INR",
       availability: "https://schema.org/InStock",
-      url: `https://diagnoslab.in/packages/${pkg.Slug}`,
+      url: `https://diagnoslab.in/packages/${pkg.Slug}/`,
     },
     provider: {
       "@type": "MedicalBusiness",
@@ -128,13 +128,13 @@ export default async function Page({
         "@type": "ListItem",
         position: 2,
         name: "Packages",
-        item: "https://diagnoslab.in/packages",
+        item: "https://diagnoslab.in/packages/",
       },
       {
         "@type": "ListItem",
         position: 3,
         name: `${pkg.PackageName} Health Package`,
-        item: `https://diagnoslab.in/packages/${pkg.Slug}`,
+        item: `https://diagnoslab.in/packages/${pkg.Slug}/`,
       },
     ],
   };

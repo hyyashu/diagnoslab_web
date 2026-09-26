@@ -26,13 +26,13 @@ export const metadata: Metadata = {
     "Diagnos Lab in Jamshedpur",
   ],
   alternates: {
-    canonical: "https://diagnoslab.in/ultrasound-in-jamshedpur",
+    canonical: "https://diagnoslab.in/ultrasound-in-jamshedpur/",
   },
   openGraph: {
     title: "Diagnos Lab | Book Ultrasound (USG) in Jamshedpur",
     description:
       "Book ultrasound (USG) at Diagnos Lab in Jamshedpur. Safe, radiation-free imaging for abdomen, pelvis, pregnancy, thyroid, and more. Reports in 1–2 hours.",
-    url: "https://diagnoslab.in/ultrasound-in-jamshedpur",
+    url: "https://diagnoslab.in/ultrasound-in-jamshedpur/",
     images: ["/images/diagnoslogo.avif"],
   },
 };
@@ -41,7 +41,7 @@ const ultrasoundSchema = {
   "@context": "https://schema.org",
   "@type": "MedicalProcedure",
   name: "Ultrasound (USG) in Jamshedpur",
-  url: "https://diagnoslab.in/ultrasound-in-jamshedpur",
+  url: "https://diagnoslab.in/ultrasound-in-jamshedpur/",
   description:
     "Ultrasound imaging performed by an experienced female radiologist at Diagnos Lab, Sakchi, Jamshedpur. Services include pregnancy scans, anomaly scan, abdomen, pelvis, thyroid, and Doppler ultrasound.",
   procedureType: "Diagnostic",
@@ -65,7 +65,7 @@ const ultrasoundBreadcrumb = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: "https://diagnoslab.in" },
-    { "@type": "ListItem", position: 2, name: "Ultrasound in Jamshedpur", item: "https://diagnoslab.in/ultrasound-in-jamshedpur" },
+    { "@type": "ListItem", position: 2, name: "Ultrasound in Jamshedpur", item: "https://diagnoslab.in/ultrasound-in-jamshedpur/" },
   ],
 };
 

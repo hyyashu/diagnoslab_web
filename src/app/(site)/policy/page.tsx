@@ -5,10 +5,10 @@ export const metadata: Metadata = {
   description:
     "Read the privacy policy of Diagnos Lab, Jamshedpur. We are committed to protecting patient data and maintaining confidentiality.",
   alternates: {
-    canonical: "https://diagnoslab.in/policy",
+    canonical: "https://diagnoslab.in/policy/",
   },
   openGraph: {
-    url: "https://diagnoslab.in/policy",
+    url: "https://diagnoslab.in/policy/",
   },
   robots: {
     index: true,

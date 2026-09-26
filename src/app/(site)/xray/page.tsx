@@ -19,13 +19,13 @@ export const metadata: Metadata = {
     "Diagnos Lab in Jamshedpur",
   ],
   alternates: {
-    canonical: "https://diagnoslab.in/xray",
+    canonical: "https://diagnoslab.in/xray/",
   },
   openGraph: {
     title: "Diagnos Lab | Book X-Ray in Jamshedpur",
     description:
       "Book digital X-Ray at Diagnos Lab in Jamshedpur. Fast, low-radiation imaging for bones, chest, spine, and joints with reports in 1–2 hours.",
-    url: "https://diagnoslab.in/xray",
+    url: "https://diagnoslab.in/xray/",
     images: ["/images/diagnoslogo.avif"],
   },
 };
@@ -34,7 +34,7 @@ const xraySchema = {
   "@context": "https://schema.org",
   "@type": "MedicalProcedure",
   name: "X-Ray in Jamshedpur",
-  url: "https://diagnoslab.in/xray",
+  url: "https://diagnoslab.in/xray/",
   description:
     "Digital X-Ray for bones, chest, spine, and joints at Diagnos Lab, Sakchi Jamshedpur. Low-radiation imaging with same-day reports.",
   procedureType: "Diagnostic",
@@ -57,7 +57,7 @@ const xrayBreadcrumb = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: "https://diagnoslab.in" },
-    { "@type": "ListItem", position: 2, name: "X-Ray in Jamshedpur", item: "https://diagnoslab.in/xray" },
+    { "@type": "ListItem", position: 2, name: "X-Ray in Jamshedpur", item: "https://diagnoslab.in/xray/" },
   ],
 };
 

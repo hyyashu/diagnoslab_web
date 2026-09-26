@@ -19,13 +19,13 @@ export const metadata: Metadata = {
     "full body checkup booking jamshedpur",
   ],
   alternates: {
-    canonical: "https://diagnoslab.in/book-a-test",
+    canonical: "https://diagnoslab.in/book-a-test/",
   },
   openGraph: {
     title: "Book Blood Test in Jamshedpur | Home Collection | Diagnos Lab",
     description:
       "Home sample collection across all Jamshedpur areas. Same-day reports.",
-    url: "https://diagnoslab.in/book-a-test",
+    url: "https://diagnoslab.in/book-a-test/",
   },
 };
 
@@ -36,7 +36,7 @@ const bookingSchema = {
   "@id": "https://diagnoslab.in/#organization",
   potentialAction: {
     "@type": "ReserveAction",
-    target: "https://diagnoslab.in/book-a-test",
+    target: "https://diagnoslab.in/book-a-test/",
     name: "Book a Blood Test",
   },
 };
@@ -46,7 +46,7 @@ const bookingBreadcrumb = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: "https://diagnoslab.in" },
-    { "@type": "ListItem", position: 2, name: "Book a Blood Test in Jamshedpur", item: "https://diagnoslab.in/book-a-test" },
+    { "@type": "ListItem", position: 2, name: "Book a Blood Test in Jamshedpur", item: "https://diagnoslab.in/book-a-test/" },
   ],
 };
 

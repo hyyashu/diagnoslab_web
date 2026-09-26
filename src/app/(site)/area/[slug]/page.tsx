@@ -39,12 +39,12 @@ export async function generateMetadata({
       `blood test ${area.name} Jamshedpur`,
     ],
     alternates: {
-      canonical: `https://diagnoslab.in/area/${area.slug}`,
+      canonical: `https://diagnoslab.in/area/${area.slug}/`,
     },
     openGraph: {
       title,
       description,
-      url: `https://diagnoslab.in/area/${area.slug}`,
+      url: `https://diagnoslab.in/area/${area.slug}/`,
     },
   };
 }
@@ -67,7 +67,7 @@ export default async function AreaPage({
     "@type": "Service",
     name: `Blood Tests & Diagnostics in ${area.name}`,
     serviceType: "Diagnostic laboratory services",
-    url: `https://diagnoslab.in/area/${area.slug}`,
+    url: `https://diagnoslab.in/area/${area.slug}/`,
     areaServed: {
       "@type": "Place",
       name: `${area.name}, Jamshedpur`,

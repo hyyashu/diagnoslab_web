@@ -16,13 +16,13 @@ export const metadata: Metadata = {
     "Corporate Lab Partner Jamshedpur",
   ],
   alternates: {
-    canonical: "https://diagnoslab.in/corporate",
+    canonical: "https://diagnoslab.in/corporate/",
   },
   openGraph: {
     title: "Corporate Health Testing in Jamshedpur | Diagnos Lab",
     description:
       "Employee health check and corporate wellness programmes at Diagnos Lab, Jamshedpur.",
-    url: "https://diagnoslab.in/corporate",
+    url: "https://diagnoslab.in/corporate/",
   },
 };
 
