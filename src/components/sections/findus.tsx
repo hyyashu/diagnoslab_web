@@ -5,7 +5,7 @@ import MapEmbed from "@/components/sections/mapEmbed";
 const FindUs = () => {
   return (
     <section className="relative py-10 md:py-12 px-4 mb-2 md:mb-6 overflow-hidden">
-      <div className="absolute  w-[500px] h-[500px]  rounded-full blur-3xl"></div>
+      <div className="absolute  w-125 h-125  rounded-full blur-3xl"></div>
 
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Title */}
@@ -44,7 +44,7 @@ const FindUs = () => {
           </div>
 
           {/* Location Diagram */}
-          <div className="rounded-2xl overflow-hidden bg-gray-300 border border-gray-200 h-[400px] md:h-[320px]">
+          <div className="rounded-2xl overflow-hidden bg-gray-300 border border-gray-200 h-100 md:h-80">
             <Image
               src="/images/map.avif"
               alt="Location Map"
@@ -55,7 +55,7 @@ const FindUs = () => {
           </div>
 
           {/* Google Map */}
-          <div className="rounded-2xl overflow-hidden border border-gray-200 h-[400px] md:h-[320px]">
+          <div className="rounded-2xl overflow-hidden border border-gray-200 h-100 md:h-80">
             <MapEmbed
               title="Diagnos Lab on Google Maps"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d229.86435722095376!2d86.2028780830967!3d22.808772796468762!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f5e3088f40bb2b%3A0x46180907852da273!2sDiagnos%20Lab!5e0!3m2!1sen!2sin!4v1772863062022!5m2!1sen!2sin"
