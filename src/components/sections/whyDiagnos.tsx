@@ -1,5 +1,3 @@
-"use client";
-
 import FeatureCard from "@/components/cards/featureCard";
 import { FileText, Clock, Layers, Users } from "lucide-react";
 

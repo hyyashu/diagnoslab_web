@@ -1,5 +1,3 @@
-"use client";
-
 type ContactCardProps = {
   title: string;
   subtitle: string;

@@ -1,5 +1,3 @@
-"use client";
-
 import PackageCard from "@/components/cards/packageCard";
 import rawData from "@/data/packages.json";
 

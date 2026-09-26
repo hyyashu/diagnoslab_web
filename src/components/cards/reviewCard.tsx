@@ -1,5 +1,3 @@
-"use client";
-
 import { Star, User } from "lucide-react";
 
 interface ReviewCardProps {

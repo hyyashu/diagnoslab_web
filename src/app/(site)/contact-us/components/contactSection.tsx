@@ -1,5 +1,3 @@
-"use client";
-
 import ContactCard from "./contactCard";
 import ContactFormCard from "./contactFormCard";
 

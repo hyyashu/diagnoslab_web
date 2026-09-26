@@ -1,5 +1,3 @@
-"use client";
-
 import TestCard from "@/components/cards/testCard";
 import rawData from "@/data/tests.json";
 

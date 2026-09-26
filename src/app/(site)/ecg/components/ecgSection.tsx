@@ -1,5 +1,3 @@
-"use client";
-
 import RadiologyCard from "../../radiology/components/radiologyCard";
 import { radiologyServices } from "@/lib/catalog";
 
