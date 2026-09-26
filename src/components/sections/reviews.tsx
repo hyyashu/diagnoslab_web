@@ -86,7 +86,7 @@ export default function ReviewCarousel() {
               "_blank"
             )
           }
-           className="flex-1 md:flex-none px-5 md:px-10 py-4 bg-background-primary text-white font-bold rounded-2xl shadow-md hover:bg-red-700 transition text-sm md:text-base">
+           className="flex-1 md:flex-none whitespace-nowrap md:whitespace-normal px-2 md:px-10 py-4 bg-background-primary text-white font-bold rounded-2xl shadow-md hover:bg-red-700 transition text-sm md:text-base">
             Write A Review
           </button>
 
@@ -97,12 +97,12 @@ export default function ReviewCarousel() {
               "_blank"
             )
           }
-           className="flex-1 md:flex-none px-4 md:px-10 py-4 md:py-4 bg-white border border-slate-200 text-black font-bold rounded-2xl shadow-sm hover:bg-slate-50 transition text-sm md:text-base">
+           className="flex-1 md:flex-none whitespace-nowrap md:whitespace-normal px-2 md:px-10 py-4 md:py-4 bg-white border border-slate-200 text-black font-bold rounded-2xl shadow-sm hover:bg-slate-50 transition text-sm md:text-base">
             View All Reviews
           </button>
         </div>
 
-        <div className="flex items-center gap-4 bg-white px-6 py-4 rounded-2xl shadow-[0_4px_25px_rgba(0,0,0,0.08)] border border-slate-50">
+        <div className="flex items-center gap-3 md:gap-4 bg-white px-4 md:px-6 py-4 rounded-2xl shadow-[0_4px_25px_rgba(0,0,0,0.08)] border border-slate-50">
           <div className="flex text-orange-400">
             {[...Array(5)].map((_, i) => (
               <Star key={i} size={20} fill="currentColor" />
@@ -113,7 +113,7 @@ export default function ReviewCarousel() {
             <span className="font-bold text-2xl text-black leading-none">
               4.9
             </span>
-            <span className="text-gray-700 text-sm font-medium leading-none mt-1">
+            <span className="whitespace-nowrap md:whitespace-normal text-gray-700 text-xs md:text-sm font-medium leading-none mt-1">
               (2,500+ reviews)
             </span>
           </div>

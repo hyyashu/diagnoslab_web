@@ -2,6 +2,7 @@
 
 @theme {
   --color-background-primary: #E73834;
+  --font-sans: var(--font-poppins), sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -11,15 +12,15 @@
   }
 }
 
+/* Poppins is the only typeface; everything inherits it from body. */
 body {
   background: var(--background);
   color: var(--foreground);
+  font-family: var(--font-poppins), sans-serif;
 }
-.font-heading {
-  font-family: var(--font-poppins), sans-serif ;
-}
+.font-heading,
 .font-body {
-  font-family: var(--font-inter), sans-serif ;
+  font-family: var(--font-poppins), sans-serif ;
 }
 @theme {
   /* Define the keyframes first */
