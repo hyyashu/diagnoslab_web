@@ -8,6 +8,12 @@
 
 ErrorDocument 404 /404.html
 
+# The host has no MIME type for .avif and serves it as text/plain, which
+# the CDN then brotli-compresses like text. Declare it.
+<IfModule mod_mime.c>
+  AddType image/avif .avif
+</IfModule>
+
 # Caching. Every .js/.css/.woff2 is a Next build file under /_next/static
 # whose name changes with its content, so it can be cached for a year.
 # Images keep their names across deploys, so they get 30 days. HTML, the
