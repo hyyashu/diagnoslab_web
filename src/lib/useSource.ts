@@ -15,6 +15,13 @@ interface SourceData {
 export function useSource(additionalData?: Record<string, unknown>) {
   const [sourceData, setSourceData] = useState<SourceData>({});
 
+  /* Callers pass an inline object ({ form_type: "..." }), which is a new
+     identity on every render. Depending on it directly re-ran the effect,
+     whose setState re-rendered the caller, which made a new object: an
+     endless render loop on every page with an enquiry form. Keying on the
+     serialised contents runs the effect only when the data really changes. */
+  const additionalKey = JSON.stringify(additionalData ?? {});
+
   useEffect(() => {
     // Get URL params
     const params = new URLSearchParams(window.location.search);
@@ -37,12 +44,10 @@ export function useSource(additionalData?: Record<string, unknown>) {
     ) as SourceData;
 
     // Merge with additional data
-    const finalData = { ...cleanedData, ...additionalData };
+    const finalData = { ...cleanedData, ...JSON.parse(additionalKey) };
 
-    setTimeout(() => {
-      setSourceData(finalData);
-    }, 0);
-  }, [additionalData]);
+    setSourceData(finalData); // eslint-disable-line react-hooks/set-state-in-effect
+  }, [additionalKey]);
 
   return sourceData;
 }
