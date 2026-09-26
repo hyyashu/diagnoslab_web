@@ -2,14 +2,18 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 
-/* The site's only typeface, self-hosted by next/font. Only latin is
-   preloaded; the rupee sign lives in latin-ext, which still loads on demand
-   via unicode-range. 800/900 are synthesised from 700, as they always were. */
+/* The site's only typeface, self-hosted by next/font. The rupee sign lives
+   in latin-ext, which loads on demand via unicode-range. 800/900 are
+   synthesised from 700, as they always were. */
 const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   display: "swap",
+  /* Not preloaded: with display swap the text paints in the metric-matched
+     fallback straight away, and five preloaded font files were competing
+     with the hero image (the LCP element) for bandwidth on slow 4G. */
+  preload: false,
 });
 
 export const metadata: Metadata = {

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { preload } from "react-dom";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import Fade from "embla-carousel-fade";
@@ -12,7 +13,14 @@ type HeroSectionProps = {
   title?: React.ReactNode;
 };
 
+/* The first slide is the LCP element. Preloading it from <head> lets the
+   browser start it before the async Next scripts that precede the body; the
+   media queries mirror the <picture> sources so each device fetches one. */
+const MOBILE_HERO = "(max-width: 767px)";
+
 const HeroSection: React.FC<HeroSectionProps> = ({ title }) => {
+  preload("/images/hero/hero1-mobile.avif", { as: "image", type: "image/avif", fetchPriority: "high", media: MOBILE_HERO });
+  preload("/images/hero/hero1.avif", { as: "image", type: "image/avif", fetchPriority: "high", media: "(min-width: 768px)" });
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     Fade(),
@@ -78,7 +86,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ title }) => {
               <div className="relative h-full w-full">
                 {(index === 0 || loadRest) && (
                   <picture>
-                    <source media="(max-width: 767px)" srcSet={slide.mobile} type="image/avif" />
+                    <source media={MOBILE_HERO} srcSet={slide.mobile} type="image/avif" />
                     <img
                       src={slide.src}
                       alt={slide.alt}
