@@ -1,7 +1,7 @@
 import { LeadFormSubmitData } from "@/components/forms/leadForm";
 
 // const BASE_URL = "http://diangos-api-jg2j3d-244a7b-91-108-111-112.traefik.me/";
-const BASE_URL = "https://api.diagnoslab.in/leads";
+const BASE_URL = "https://api.diagnoslab.in";
 
 // const BASE_URL = "http://localhost:3000";
 
