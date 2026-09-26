@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { PhoneIcon } from "@heroicons/react/24/solid";
+import { Phone } from "lucide-react";
 import EnquiryForm from "@/components/forms/enquiryForm";
 import Modal from "@/components/ui/modal";
 import { usePathname } from "next/navigation";
@@ -54,7 +54,7 @@ export default function FloatingCTA({
           className="md:hidden flex items-center justify-center w-14 h-14 rounded-full bg-blue-600 text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300"
           aria-label="Call"
         >
-          <PhoneIcon className="w-6 h-6" />
+          <Phone className="w-6 h-6" fill="currentColor" />
         </button>
 
         {/* WhatsApp Button */}
