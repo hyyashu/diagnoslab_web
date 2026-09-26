@@ -1,11 +1,9 @@
 "use client";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { useCallback } from "react";
+import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import RadiologyCard from "@/components/cards/radiologyCard";
-import "swiper/css";
-import "swiper/css/navigation";
 import Link from "next/link";
 import { radiologyServices } from "@/lib/catalog";
 
@@ -17,6 +15,14 @@ const serviceLinks: Record<string, string> = {
 };
 
 const RadiologyServices = () => {
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: "start",
+    containScroll: "trimSnaps",
+  });
+
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+
   const services = radiologyServices.map((service) => ({
     id: service.id,
     title: service.title,
@@ -42,23 +48,13 @@ const RadiologyServices = () => {
         {/* Slider */}
         <div className="relative px-4 md:px-12">
 
-          <Swiper
-            modules={[Navigation, Pagination]}
-            spaceBetween={24}
-            slidesPerView={1}
-            navigation={{
-              prevEl: ".prev-btn",
-              nextEl: ".next-btn",
-            }}
-            breakpoints={{
-              640: { slidesPerView: 1 },
-              768: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-            }}
-            className="py-6"
-          >
+          <div className="overflow-hidden py-6" ref={emblaRef}>
+            <div className="flex -ml-6">
             {services.map((service) => (
-              <SwiperSlide key={service.id} className="py-4">
+              <div
+                key={service.id}
+                className="min-w-0 shrink-0 grow-0 basis-full pl-6 py-4 md:basis-1/2 lg:basis-1/3"
+              >
                 <RadiologyCard
                   title={service.title}
                   description={service.description}
@@ -66,16 +62,17 @@ const RadiologyServices = () => {
                   footerNote={service.footerNote}
                   href={service.href}
                 />
-              </SwiperSlide>
+              </div>
             ))}
-          </Swiper>
+            </div>
+          </div>
 
           {/* Navigation */}
-          <button className="font-heading prev-btn absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-background-primary rounded-full flex items-center justify-center text-white shadow-lg hover:bg-red-700 transition">
+          <button onClick={scrollPrev} aria-label="Previous service" className="font-heading absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-background-primary rounded-full flex items-center justify-center text-white shadow-lg hover:bg-red-700 transition">
             <ChevronLeft size={18} />
           </button>
 
-          <button className="font-heading next-btn absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-background-primary rounded-full flex items-center justify-center text-white shadow-lg hover:bg-red-700 transition">
+          <button onClick={scrollNext} aria-label="Next service" className="font-heading absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-background-primary rounded-full flex items-center justify-center text-white shadow-lg hover:bg-red-700 transition">
             <ChevronRight size={18} />
           </button>
 

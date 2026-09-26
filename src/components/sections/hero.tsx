@@ -1,15 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, EffectFade } from "swiper/modules";
-import type { Swiper as SwiperType } from "swiper";
-
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/effect-fade";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
+import Fade from "embla-carousel-fade";
 import EnquiryForm from "@/components/forms/enquiryForm";
 
 /* Reused on /, /radiology, /tests and /packages. Each of those needs its own
@@ -20,8 +15,24 @@ type HeroSectionProps = {
 
 const HeroSection: React.FC<HeroSectionProps> = ({ title }) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
-  const [swiperRef, setSwiperRef] = useState<SwiperType | null>(null);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
+    Fade(),
+    Autoplay({ delay: 5000, stopOnInteraction: false }),
+  ]);
 
+  useEffect(() => {
+    if (!emblaApi) return;
+    const onSelect = () => setActiveIndex(emblaApi.selectedScrollSnap());
+    emblaApi.on("select", onSelect);
+    return () => {
+      emblaApi.off("select", onSelect);
+    };
+  }, [emblaApi]);
+
+  const goTo = (i: number) => {
+    emblaApi?.scrollTo(i);
+    emblaApi?.plugins().autoplay?.reset();
+  };
 
   const carouselSlides = [
     { src: "/images/hero/hero1.avif", alt: "Blood test home collection service in Jamshedpur – Diagnos Lab" },
@@ -33,7 +44,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ title }) => {
     carouselSlides.map((_, i) => (
       <button
         key={i}
-        onClick={() => swiperRef?.slideToLoop(i)}
+        onClick={() => goTo(i)}
         className={`transition-all duration-500 ease-in-out rounded-full bg-white shadow-lg h-2 ${activeIndex === i
             ? "w-16 opacity-100"
             : "w-2 opacity-40 hover:opacity-70"
@@ -47,19 +58,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ title }) => {
 
       {/* --- BACKGROUND CAROUSEL --- */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <Swiper
-          onSwiper={setSwiperRef}
-          onSlideChange={(swiper: SwiperType) =>
-            setActiveIndex(swiper.realIndex)
-          }
-          modules={[Autoplay, Pagination, EffectFade]}
-          effect="fade"
-          autoplay={{ delay: 5000, disableOnInteraction: false }}
-          loop={true}
-          className="h-full w-full"
-        >
+        <div className="h-full w-full overflow-hidden" ref={emblaRef}>
+          <div className="flex h-full touch-pan-y">
           {carouselSlides.map((slide, index) => (
-            <SwiperSlide key={index}>
+            <div key={index} className="relative h-full min-w-0 flex-[0_0_100%]">
               <div className="relative h-full w-full">
                 <Image
                   src={slide.src}
@@ -70,9 +72,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ title }) => {
                 />
                 <div className="absolute inset-0 bg-slate-900/60" />
               </div>
-            </SwiperSlide>
+            </div>
           ))}
-        </Swiper>
+          </div>
+        </div>
       </div>
 
       {/* --- TEXT CONTENT --- */}

@@ -1,11 +1,9 @@
 "use client";
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import { useCallback } from "react";
+import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import PackageCard from "@/components/cards/packageCard";
-import "swiper/css";
-import "swiper/css/navigation";
 import Link from "next/link";
 import rawData from "@/data/packages.json";
 
@@ -24,6 +22,14 @@ const packageData = rawData.packages.map((p) => ({
 }));
 
 export default function PopularHealthPackages() {
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: "start",
+    containScroll: "trimSnaps",
+  });
+
+  const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+
   return (
     <section className="relative w-full py-12 bg-white overflow-hidden">
       <div className="absolute inset-0 bg-background-primary" />
@@ -43,37 +49,29 @@ export default function PopularHealthPackages() {
         {/* Carousel */}
         <div className="relative w-full mx-auto">
 
-          <Swiper
-            modules={[Navigation]}
-            spaceBetween={12}
-            slidesPerView={1.15}
-            navigation={{
-              prevEl: ".prev-btn-packages",
-              nextEl: ".next-btn-packages",
-            }}
-            breakpoints={{
-              480: { slidesPerView: 1.3, spaceBetween: 14 },
-              640: { slidesPerView: 1.8, spaceBetween: 16 },
-              768: { slidesPerView: 2.2, spaceBetween: 18 },
-              1024: { slidesPerView: 3, spaceBetween: 20 },
-            }}
-            className="py-4"
-          >
+          {/* Slide basis is 100% / slides-per-view; the gap is slide padding
+              offset by the container's negative margin. */}
+          <div className="overflow-hidden py-4" ref={emblaRef}>
+            <div className="flex -ml-3 min-[480px]:-ml-[14px] sm:-ml-4 md:-ml-[18px] lg:-ml-5">
             {packageData.map((pkg, index) => (
-              <SwiperSlide key={`${pkg.id}-${index}`} className="h-auto">
+              <div
+                key={`${pkg.id}-${index}`}
+                className="min-w-0 shrink-0 grow-0 basis-[86.9565%] pl-3 min-[480px]:basis-[76.9231%] min-[480px]:pl-[14px] sm:basis-[55.5556%] sm:pl-4 md:basis-[45.4545%] md:pl-[18px] lg:basis-1/3 lg:pl-5"
+              >
                 <div className="flex h-full min-h-0 flex-col">
                   <PackageCard {...pkg} fillSlide />
                 </div>
-              </SwiperSlide>
+              </div>
             ))}
-          </Swiper>
+            </div>
+          </div>
 
           {/* Arrows */}
-          <button className="prev-btn-packages absolute -left-6 md:-left-12 top-1/2 -translate-y-1/2 z-20 w-9 h-9 md:w-10 md:h-10 rounded-full bg-white text-background-primary shadow-md flex items-center justify-center hover:scale-105 transition-all">
+          <button onClick={scrollPrev} aria-label="Previous packages" className="absolute -left-6 md:-left-12 top-1/2 -translate-y-1/2 z-20 w-9 h-9 md:w-10 md:h-10 rounded-full bg-white text-background-primary shadow-md flex items-center justify-center hover:scale-105 transition-all">
             <ChevronLeft size={18} strokeWidth={2.5} />
           </button>
 
-          <button className="next-btn-packages absolute -right-6 md:-right-12 top-1/2 -translate-y-1/2 z-20 w-9 h-9 md:w-10 md:h-10 rounded-full bg-white text-background-primary shadow-md flex items-center justify-center hover:scale-105 transition-all">
+          <button onClick={scrollNext} aria-label="Next packages" className="absolute -right-6 md:-right-12 top-1/2 -translate-y-1/2 z-20 w-9 h-9 md:w-10 md:h-10 rounded-full bg-white text-background-primary shadow-md flex items-center justify-center hover:scale-105 transition-all">
             <ChevronRight size={18} strokeWidth={2.5} />
           </button>
 
