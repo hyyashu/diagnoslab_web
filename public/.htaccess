@@ -8,6 +8,23 @@
 
 ErrorDocument 404 /404.html
 
+# Caching. Every .js/.css/.woff2 is a Next build file under /_next/static
+# whose name changes with its content, so it can be cached for a year.
+# Images keep their names across deploys, so they get 30 days. HTML, the
+# RSC .txt payloads and sitemaps keep their names but change on every
+# deploy, so browsers revalidate them.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(js|css|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(avif|webp|png|jpe?g|svg|ico)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+  <FilesMatch "\.(html|txt|xml)$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
