@@ -1,47 +1,32 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Plus } from "lucide-react";
 
 type LogoProps = {
-  /* "dark" is for use on the ink footer: white mark, red cross. */
+  /* "dark" is for the ink footer: the logo's grey wordmark needs a white
+     tile behind it there. */
   tone?: "light" | "dark";
-  showTagline?: boolean;
+  priority?: boolean;
   className?: string;
 };
 
-export default function Logo({
-  tone = "light",
-  showTagline = true,
-  className = "",
-}: LogoProps) {
-  const dark = tone === "dark";
-
+/* The brand logo. diagnoslogo.avif is a 400x400 canvas with the artwork in
+   its middle band (about 380x190), so the box is 2:1 and object-cover crops
+   the empty top and bottom away. */
+export default function Logo({ tone = "light", priority = false, className = "" }: LogoProps) {
   return (
     <Link
       href="/"
       aria-label="Diagnos Lab home"
-      className={`inline-flex items-center gap-2.5 ${className}`}
+      className={`inline-flex shrink-0 ${tone === "dark" ? "rounded-xl bg-white px-3 py-2" : ""} ${className}`}
     >
-      <span
-        className={`flex size-8 md:size-[38px] shrink-0 items-center justify-center rounded-[9px] md:rounded-[11px] ${
-          dark ? "bg-white text-dl-red" : "bg-dl-red text-white"
-        }`}
-      >
-        <Plus className="size-[18px] md:size-[22px]" strokeWidth={3} aria-hidden />
-      </span>
-      <span className="flex flex-col gap-px">
-        <span
-          className={`font-display text-[17px] md:text-xl font-extrabold leading-tight tracking-[-0.03em] ${
-            dark ? "text-white" : "text-dl-ink"
-          }`}
-        >
-          Diagnos Lab
-        </span>
-        {showTagline && (
-          <span className="text-[8px] md:text-[9.5px] font-semibold tracking-[0.12em] text-dl-muted">
-            JAMSHEDPUR · SINCE 2010
-          </span>
-        )}
-      </span>
+      <Image
+        src="/images/diagnoslogo.avif"
+        alt="Diagnos Lab"
+        width={400}
+        height={400}
+        priority={priority}
+        className="h-11 w-[88px] object-cover md:h-14 md:w-28"
+      />
     </Link>
   );
 }

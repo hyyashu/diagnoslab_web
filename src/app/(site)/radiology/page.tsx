@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
+import RadiologyHero from "./components/radiologyHero";
 import RadiologySection from "./components/radiologySection";
 import WhyChoose from "./components/whyChoose";
-import HeroSection from "@/components/sections/hero";
+import FindUsPanel from "@/components/sections/findUsPanel";
+import PatientReviews from "@/components/sections/patientReviews";
+import FAQAccordion from "@/components/sections/faq";
+import FaqJsonLd from "@/components/seo/faqJsonLd";
+import { radiologyFaq } from "@/lib/faq";
+import { scanServices } from "./content";
 
 export const metadata: Metadata = {
   title: { absolute: "Radiology in Jamshedpur | Ultrasound, X-Ray, ECG, Echo | Diagnos Lab" },
@@ -29,16 +35,18 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <HeroSection
-        title={
-          <>
-            Radiology <br />
-            in Jamshedpur
-          </>
-        }
-      />
-      <WhyChoose />
+      <RadiologyHero services={scanServices.map((s) => s.title)} />
       <RadiologySection />
+      <WhyChoose />
+      <FindUsPanel />
+      <PatientReviews tone="white" />
+      <FaqJsonLd items={radiologyFaq} />
+      <FAQAccordion
+        title="Radiology FAQs"
+        items={radiologyFaq}
+        intro="Still unsure? Message us on WhatsApp and our team will help you pick the right scan."
+        tone="muted"
+      />
     </>
   );
 }

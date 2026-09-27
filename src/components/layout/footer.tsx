@@ -86,7 +86,7 @@ export default function Footer() {
         {/* Columns */}
         <div className="flex flex-col gap-7 md:grid md:grid-cols-[minmax(0,360px)_repeat(4,minmax(0,1fr))] md:gap-12">
           <div className="flex flex-col gap-3.5 md:gap-[18px]">
-            <Logo tone="dark" showTagline={false} />
+            <Logo tone="dark" className="self-start" />
             <p className="text-[13px] leading-relaxed text-white/65 md:text-sm">
               Accurate diagnostics since 2010. Pathology, ultrasound, X-ray, ECG, ECHO and PFT under one roof in Jamshedpur.
             </p>

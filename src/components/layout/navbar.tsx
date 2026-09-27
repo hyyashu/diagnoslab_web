@@ -68,7 +68,7 @@ export default function Navbar() {
       <header className="relative z-30 bg-white">
         {/* Utility row */}
         <div className="mx-auto flex max-w-[1440px] items-center gap-7 px-4 pt-3.5 pb-3 md:px-10 md:py-[18px] xl:px-20">
-          <Logo />
+          <Logo priority />
 
           <div className="hidden items-center gap-2.5 rounded-full bg-dl-bg py-2 pl-3 pr-4 md:flex">
             <span className="flex size-[30px] items-center justify-center rounded-full bg-white">
@@ -205,7 +205,7 @@ export default function Navbar() {
         }`}
       >
         <div className="flex items-center justify-between border-b border-dl-line px-5 py-4">
-          <Logo showTagline={false} />
+          <Logo />
           <button
             type="button"
             onClick={() => setMenuOpen(false)}

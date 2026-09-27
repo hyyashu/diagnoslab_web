@@ -6,7 +6,7 @@ import MostBookedTests from "@/components/home/mostBookedTests";
 import RadiologyImaging from "@/components/home/radiologyImaging";
 import CollectionSteps from "@/components/home/collectionSteps";
 import TrustBand from "@/components/home/trustBand";
-import PatientReviews from "@/components/home/patientReviews";
+import PatientReviews from "@/components/sections/patientReviews";
 import JsonLd from "@/components/seo/jsonLd";
 
 export const metadata: Metadata = {

@@ -1,77 +1,54 @@
-import { Monitor, Users, UserCheck, Clock, FileText } from "lucide-react";
+import Icon from "@/components/ui/icon";
+import { shell } from "@/components/ui/shell";
+import { whyPoints } from "../content";
 
-const features = [
-  {
-    icon: Monitor,
-    title: "Modern Digital Equipment",
-    detail: "High-resolution imaging with the latest diagnostic technology.",
-  },
-  {
-    icon: Users,
-    title: "Experienced Specialists",
-    detail: "Qualified radiologists and technicians with years of expertise.",
-  },
-  {
-    icon: UserCheck,
-    title: "Female Radiologist",
-    detail: "Dedicated female radiologist available for female patients.",
-  },
-  {
-    icon: Clock,
-    title: "Reports in 1–2 Hours",
-    detail: "Fast turnaround so you and your doctor can act quickly.",
-  },
-  {
-    icon: FileText,
-    title: "Clear, Accurate Reports",
-    detail: "Detailed digital reports delivered on WhatsApp and email.",
-  },
-];
-
+/* DL.pen radiology "Why Choose": five points in one divided card on
+   desktop, a list on phones. */
 export default function WhyChoose() {
   return (
-    <section className="bg-[#E73834] py-12 md:py-16 px-4 md:px-8">
-      <div className="max-w-6xl mx-auto">
-
-        {/* Header */}
-        <div className="text-center mb-10">
-          <h2 className="font-heading text-white text-2xl md:text-4xl font-black tracking-tight mb-2">
-            Why Choose Diagnos Lab
+    <section aria-labelledby="why-heading" className="bg-dl-bg py-10 md:py-24">
+      <div className={`${shell} flex flex-col gap-5 md:gap-10`}>
+        <div className="flex flex-col gap-1.5 md:flex-row md:items-end md:justify-between md:gap-16">
+          <h2
+            id="why-heading"
+            className="font-display text-[21px] font-extrabold leading-[1.15] tracking-[-0.03em] text-dl-ink md:max-w-[620px] md:text-[38px] md:leading-[1.1]"
+          >
+            <span className="md:hidden">Why patients choose us for imaging</span>
+            <span className="hidden md:inline">Why patients in Jamshedpur choose us for imaging</span>
           </h2>
-          <p className="font-body text-red-100 text-sm md:text-base">
-            Trusted by thousands of patients in Jamshedpur for accurate radiology services.
+          <p className="text-[13px] leading-normal text-dl-ink-2 md:max-w-[460px] md:text-[15px] md:leading-relaxed">
+            <span className="md:hidden">Trusted by thousands of patients across Jamshedpur.</span>
+            <span className="hidden md:inline">
+              Trusted by thousands of patients for accurate radiology services — with reports your doctor can act on the same day.
+            </span>
           </p>
         </div>
 
-        {/* Features */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-5">
-          {features.map((f, i) => {
-            const Icon = f.icon;
-            return (
-              <div
-                key={i}
-                className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-5 flex flex-col gap-3 hover:bg-white/15 transition-colors"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
-                    <Icon size={20} color="white" strokeWidth={2} />
-                  </div>
-                  <span className="font-heading text-white/50 text-3xl font-black leading-none">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                </div>
-                <div>
-                  <p className="font-heading text-white font-bold text-sm leading-snug mb-1">
-                    {f.title}
-                  </p>
-                  <p className="font-body text-red-100 text-xs leading-relaxed">
-                    {f.detail}
-                  </p>
-                </div>
+        <ol className="flex flex-col gap-px overflow-hidden rounded-[20px] border border-dl-line bg-dl-line md:grid md:grid-cols-5 md:rounded-3xl">
+          {whyPoints.map((p, i) => (
+            <li key={p.title} className="flex items-start gap-3.5 bg-white p-4 md:flex-col md:gap-5 md:p-6">
+              <div className="flex items-center justify-between md:w-full">
+                <span
+                  className={`flex size-10 items-center justify-center rounded-xl md:size-11 ${
+                    p.highlight ? "bg-dl-red text-white" : "bg-dl-red-soft text-dl-red"
+                  }`}
+                >
+                  <Icon name={p.icon} className="size-5" />
+                </span>
+                <span className="hidden font-display text-sm font-extrabold text-dl-muted/60 md:block" aria-hidden>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
               </div>
-            );
-          })}
-        </div>
+              <div className="flex flex-col gap-1 md:gap-2">
+                <h3 className="font-display text-[14.5px] font-bold text-dl-ink md:text-base">{p.title}</h3>
+                <p className="text-[12.5px] leading-normal text-dl-ink-2 md:text-[13.5px]">
+                  <span className="md:hidden">{p.mobileText}</span>
+                  <span className="hidden md:inline">{p.text}</span>
+                </p>
+              </div>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );

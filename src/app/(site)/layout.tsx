@@ -10,7 +10,7 @@ import FindUs from "@/components/sections/findus";
 import AreasServed from "@/components/sections/areasServed";
 import ReviewCarousel from "@/components/sections/reviews";
 import ConditionalHowItWorks from "@/components/sections/conditionalHowItWorks";
-import HideOnHome from "@/components/layout/hideOnHome";
+import HideOn from "@/components/layout/hideOn";
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
@@ -115,14 +115,17 @@ export default function SiteLayout({
           phoneNumber="+918404802201"
           whatsappNumber="+918404802214"
         />
-        <HideOnHome>
+        <HideOn paths={["/", "/radiology"]}>
           <FindUs />
           <AreasServed />
           <ReviewCarousel />
           <ConditionalHowItWorks />
-        </HideOnHome>
-        <FaqJsonLd />
-        <FAQAccordion />
+        </HideOn>
+        {/* Radiology has its own FAQ (and schema). */}
+        <HideOn paths={["/radiology"]}>
+          <FaqJsonLd />
+          <FAQAccordion />
+        </HideOn>
       </main>
       <Footer />
       <BottomNav />
