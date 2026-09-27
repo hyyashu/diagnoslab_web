@@ -8,13 +8,20 @@ import { normalizePhone, sanitizeName, validateName, validatePhone } from "@/lib
 import { buttonClass } from "@/components/ui/button";
 
 type CallbackFormProps = {
+  subtitle?: string;
   /* Options for the "Service" select; leave out to hide the field. */
   services?: string[];
+  /* Sent with the lead when there is no Service select. */
+  service?: string;
 };
 
 /* DL.pen "Call Back Card". Sends the same lead as the enquiry form, plus
    the chosen service under the key the radiology cards already use. */
-export default function CallbackForm({ services }: CallbackFormProps) {
+export default function CallbackForm({
+  subtitle = "Share your details and our team will call you to book a slot.",
+  services,
+  service: fixedService,
+}: CallbackFormProps) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [service, setService] = useState("");
@@ -26,7 +33,7 @@ export default function CallbackForm({ services }: CallbackFormProps) {
 
   const source = useSource({
     form_type: "enquiry_form",
-    ...(service && { radiology_name: service }),
+    ...((service || fixedService) && { radiology_name: service || fixedService }),
   });
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -71,7 +78,7 @@ export default function CallbackForm({ services }: CallbackFormProps) {
           Request a call back
         </h2>
         <p className="text-[13px] leading-normal text-dl-ink-2 md:text-sm">
-          Share your details and our team will call you to book a slot.
+          {subtitle}
         </p>
       </div>
 

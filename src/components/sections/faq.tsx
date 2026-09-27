@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { MessageCircle, Minus, Plus } from 'lucide-react';
+import Link from 'next/link';
+import { ArrowUpRight, MessageCircle, Minus, Plus } from 'lucide-react';
 import { generalFaq, type FaqItem } from '@/lib/faq';
 import { buttonClass } from '@/components/ui/button';
 import { WHATSAPP_HREF } from '@/lib/contact';
@@ -12,6 +13,8 @@ type FAQAccordionProps = {
   /* Desktop-only line under the title, with a WhatsApp button. */
   intro?: string;
   tone?: 'white' | 'muted';
+  /* "You may also need" links under the intro. */
+  related?: { label: string; href: string }[];
 };
 
 /* DL.pen "FAQ" / "FAQ Item". Pair it with <FaqJsonLd items={...} /> using
@@ -21,13 +24,14 @@ export default function FAQAccordion({
   items = generalFaq,
   intro,
   tone = 'white',
+  related,
 }: FAQAccordionProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
 
   return (
     <section aria-labelledby="faq-heading" className={`${tone === 'muted' ? 'bg-dl-bg' : 'bg-white'} py-10 md:py-24`}>
       <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-[18px] px-4 md:flex-row md:gap-16 md:px-10 xl:px-20">
-        <div className="flex flex-col gap-4 md:w-[380px] md:shrink-0">
+        <div className="contents md:flex md:w-[380px] md:shrink-0 md:flex-col md:gap-4">
           <h2
             id="faq-heading"
             className="font-display text-[22px] font-extrabold tracking-[-0.03em] text-dl-ink md:text-[38px] md:leading-[1.1]"
@@ -41,6 +45,24 @@ export default function FAQAccordion({
                 <MessageCircle className="size-4" aria-hidden />
                 Chat with us
               </a>
+            </div>
+          )}
+          {related && (
+            <div className="order-last flex flex-col gap-3 pt-2 md:order-none">
+              <p className="text-[11px] font-bold tracking-[0.14em] text-dl-muted">YOU MAY ALSO NEED</p>
+              <ul className="flex flex-wrap gap-2">
+                {related.map((r) => (
+                  <li key={r.label}>
+                    <Link
+                      href={r.href}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-dl-line bg-white px-3.5 py-2 text-[13px] font-semibold text-dl-ink hover:border-dl-ink"
+                    >
+                      {r.label}
+                      <ArrowUpRight className="size-3.5" aria-hidden />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           )}
         </div>

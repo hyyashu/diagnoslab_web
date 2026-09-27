@@ -59,3 +59,37 @@ export const radiologyFaq: FaqItem[] = [
     desktopOnly: true,
   },
 ];
+
+/* Answers come from the ultrasound page's own copy (preparation and what to
+   expect) and the general FAQ, so nothing here is new information. */
+export const ultrasoundFaq: FaqItem[] = [
+  {
+    question: "Is there a female radiologist for ultrasound at Diagnos Lab?",
+    mobileQuestion: "Is there a female radiologist for ultrasound?",
+    answer:
+      "Yes. A dedicated female radiologist is available for female patients. Mention it when you book and we'll schedule your slot accordingly.",
+  },
+  {
+    question: "What is the turnaround time for ultrasound reports?",
+    answer: byQuestion("What is the turnaround time for ultrasound reports at Diagnos Lab?"),
+  },
+  {
+    question: "Do I need to fast before an ultrasound?",
+    answer:
+      "For abdomen scans, avoid food for 6–8 hours. Clear fluids are usually allowed unless advised otherwise. Pelvic and some KUB scans need a full bladder instead; most other scans need no special preparation.",
+  },
+  {
+    question: "Is ultrasound safe during pregnancy?",
+    answer: "Yes. Ultrasound is painless, non-invasive and uses no radiation — safe for all ages including pregnancy.",
+  },
+  {
+    question: "How long does an ultrasound scan take?",
+    answer:
+      "A gel is applied to the skin and a probe is moved over the area being examined. The scan usually takes 15–30 minutes.",
+  },
+  {
+    question: "Can I get my ultrasound report on WhatsApp?",
+    answer: byQuestion("Can I get my reports on WhatsApp?"),
+    desktopOnly: true,
+  },
+];

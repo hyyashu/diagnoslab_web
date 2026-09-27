@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
-import { Monitor, Users, UserCheck, Clock } from "lucide-react";
-import ServiceHero from "@/components/sections/serviceHero";
-import ServiceWhyChoose from "@/components/sections/serviceWhyChoose";
-import UltrasoundSection from "./components/ultrasoundSection";
-import ScanTypes from "./components/scanTypes";
-import Preparation from "./components/preparation";
+import ServicePageHero from "@/components/sections/servicePageHero";
+import WhyPoints from "@/components/sections/whyPoints";
+import FindUsPanel from "@/components/sections/findUsPanel";
+import PatientReviews from "@/components/sections/patientReviews";
+import FAQAccordion from "@/components/sections/faq";
+import FaqJsonLd from "@/components/seo/faqJsonLd";
 import JsonLd from "@/components/seo/jsonLd";
-import RelatedServices from "@/components/sections/relatedServices";
+import ScansOffered from "./components/scansOffered";
+import PrepareSection from "./components/prepareSection";
+import { relatedServices, whyPoints } from "./content";
+import { ultrasoundFaq } from "@/lib/faq";
 
 export const metadata: Metadata = {
   title: {
@@ -65,38 +68,49 @@ const ultrasoundBreadcrumb = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: "https://diagnoslab.in" },
-    { "@type": "ListItem", position: 2, name: "Ultrasound in Jamshedpur", item: "https://diagnoslab.in/ultrasound-in-jamshedpur/" },
+    { "@type": "ListItem", position: 2, name: "Radiology", item: "https://diagnoslab.in/radiology/" },
+    { "@type": "ListItem", position: 3, name: "Ultrasound in Jamshedpur", item: "https://diagnoslab.in/ultrasound-in-jamshedpur/" },
   ],
 };
-
-const features = [
-  { icon: <Monitor size={32} />, title: "Advanced USG Equipment" },
-  { icon: <Users size={32} />, title: "Experienced Radiology Team" },
-  { icon: <UserCheck size={32} />, title: "Female Radiologist for female cases" },
-  { icon: <Clock size={32} />, title: "Same Day Reports" },
-];
 
 export default function Page() {
   return (
     <>
       <JsonLd data={ultrasoundSchema} />
       <JsonLd data={ultrasoundBreadcrumb} />
-      <ServiceHero
-        imageSrc="/images/radiology/USG.avif"
-        imageAlt="Ultrasound in Jamshedpur at Diagnos Lab"
-        titleTop="Ultrasound (USG)"
-        titleBottom="in Jamshedpur"
-        services="Abdomen | Pelvis | Pregnancy | Thyroid | Reports in 1–2 hours"
+      <ServicePageHero
+        breadcrumb={[
+          { label: "Home", href: "/" },
+          { label: "Radiology", href: "/radiology/" },
+          { label: "Ultrasound" },
+        ]}
+        eyebrow="Ultrasound in Jamshedpur · Walk-ins welcome"
+        title="Ultrasound (USG) in Jamshedpur — reports in 1–2 hours"
+        subtitle="Abdomen, pelvis, pregnancy, thyroid, kidney and breast scans on modern digital machines — with a female radiologist available for female patients."
+        chips={["Abdomen", "Pelvis", "Pregnancy", "Thyroid", "KUB", "Breast"]}
+        cta={{ label: "Book ultrasound", href: "#ultrasound-section" }}
+        form={{
+          subtitle: "Share your details and our team will call you to book your ultrasound slot.",
+          service: "Ultrasound",
+        }}
       />
-      <ServiceWhyChoose
-        title="Why Choose Ultrasound at Diagnos Lab"
-        description="Trusted ultrasound imaging in Jamshedpur with clear reports, experienced radiologists, and same-day turnaround."
-        features={features}
+      <ScansOffered />
+      <WhyPoints
+        title="Why patients choose Diagnos Lab for ultrasound"
+        subtitle="Trusted ultrasound imaging in Jamshedpur with clear reports, experienced radiologists and same-day turnaround."
+        points={whyPoints}
       />
-      <UltrasoundSection />
-      <ScanTypes />
-      <Preparation />
-      <RelatedServices current="ultrasound" pageTitle="Ultrasound" />
+      <PrepareSection />
+      <FindUsPanel tone="muted" />
+      <PatientReviews tone="white" />
+      <FaqJsonLd items={ultrasoundFaq} />
+      <FAQAccordion
+        title="Ultrasound FAQs"
+        items={ultrasoundFaq}
+        intro="Still unsure? Message us on WhatsApp and our team will help you pick the right scan."
+        related={relatedServices}
+        tone="muted"
+      />
     </>
   );
 }

@@ -14,9 +14,9 @@ const details = [
 
 /* DL.pen "Find Us": address, directions and the areas we collect from,
    beside the live map (which loads only when scrolled near). */
-export default function FindUsPanel() {
+export default function FindUsPanel({ tone = "white" }: { tone?: "white" | "muted" }) {
   return (
-    <section aria-labelledby="find-us-heading" className="bg-white py-10 md:py-24">
+    <section aria-labelledby="find-us-heading" className={`${tone === "muted" ? "bg-dl-bg" : "bg-white"} py-10 md:py-24`}>
       <div className={`${shell} grid gap-5 md:grid-cols-[minmax(0,400px)_minmax(0,1fr)] md:gap-12 xl:grid-cols-[440px_minmax(0,1fr)]`}>
         <div className="flex flex-col gap-1.5 md:gap-3">
           <h2 id="find-us-heading" className="font-display text-[21px] font-extrabold tracking-[-0.03em] text-dl-ink md:text-[38px]">

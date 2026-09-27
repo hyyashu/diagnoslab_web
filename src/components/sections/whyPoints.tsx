@@ -1,10 +1,34 @@
 import Icon from "@/components/ui/icon";
 import { shell } from "@/components/ui/shell";
-import { whyPoints } from "../content";
+export type WhyPoint = {
+  icon: string;
+  title: string;
+  text: string;
+  mobileText?: string;
+  highlight?: boolean;
+};
 
-/* DL.pen radiology "Why Choose": five points in one divided card on
-   desktop, a list on phones. */
-export default function WhyChoose() {
+type WhyPointsProps = {
+  title: string;
+  mobileTitle?: string;
+  subtitle: string;
+  mobileSubtitle?: string;
+  points: WhyPoint[];
+};
+
+function Responsive({ desktop, mobile }: { desktop: string; mobile?: string }) {
+  if (!mobile) return <>{desktop}</>;
+  return (
+    <>
+      <span className="md:hidden">{mobile}</span>
+      <span className="hidden md:inline">{desktop}</span>
+    </>
+  );
+}
+
+/* DL.pen "Why Choose": five points in one divided card on desktop, a list
+   on phones. */
+export default function WhyPoints({ title, mobileTitle, subtitle, mobileSubtitle, points }: WhyPointsProps) {
   return (
     <section aria-labelledby="why-heading" className="bg-dl-bg py-10 md:py-24">
       <div className={`${shell} flex flex-col gap-5 md:gap-10`}>
@@ -13,19 +37,15 @@ export default function WhyChoose() {
             id="why-heading"
             className="font-display text-[21px] font-extrabold leading-[1.15] tracking-[-0.03em] text-dl-ink md:max-w-[620px] md:text-[38px] md:leading-[1.1]"
           >
-            <span className="md:hidden">Why patients choose us for imaging</span>
-            <span className="hidden md:inline">Why patients in Jamshedpur choose us for imaging</span>
+            <Responsive desktop={title} mobile={mobileTitle} />
           </h2>
           <p className="text-[13px] leading-normal text-dl-ink-2 md:max-w-[460px] md:text-[15px] md:leading-relaxed">
-            <span className="md:hidden">Trusted by thousands of patients across Jamshedpur.</span>
-            <span className="hidden md:inline">
-              Trusted by thousands of patients for accurate radiology services — with reports your doctor can act on the same day.
-            </span>
+            <Responsive desktop={subtitle} mobile={mobileSubtitle} />
           </p>
         </div>
 
         <ol className="flex flex-col gap-px overflow-hidden rounded-[20px] border border-dl-line bg-dl-line md:grid md:grid-cols-5 md:rounded-3xl">
-          {whyPoints.map((p, i) => (
+          {points.map((p, i) => (
             <li key={p.title} className="flex items-start gap-3.5 bg-white p-4 md:flex-col md:gap-5 md:p-6">
               <div className="flex items-center justify-between md:w-full">
                 <span
@@ -42,8 +62,7 @@ export default function WhyChoose() {
               <div className="flex flex-col gap-1 md:gap-2">
                 <h3 className="font-display text-[14.5px] font-bold text-dl-ink md:text-base">{p.title}</h3>
                 <p className="text-[12.5px] leading-normal text-dl-ink-2 md:text-[13.5px]">
-                  <span className="md:hidden">{p.mobileText}</span>
-                  <span className="hidden md:inline">{p.text}</span>
+                  <Responsive desktop={p.text} mobile={p.mobileText} />
                 </p>
               </div>
             </li>

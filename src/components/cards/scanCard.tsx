@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Check, CircleCheck, Clock3, UserRoundCheck } from "lucide-react";
+import { Check, CircleCheck, ClipboardList, Clock3, UserRoundCheck } from "lucide-react";
 import BookButton from "@/components/cards/bookButton";
 import Icon from "@/components/ui/icon";
 import { buttonClass } from "@/components/ui/button";
@@ -18,6 +18,9 @@ export type ScanService = {
   mobileUsedFor?: string;
   href?: string;
   femaleRadiologist?: boolean;
+  /* Featured card only: the label over the chips, and a preparation line. */
+  usedForLabel?: string;
+  preparation?: string;
 };
 
 /* DL.pen radiology "Ultrasound — Featured" (featured) and "Service Cards"
@@ -100,7 +103,9 @@ export default function ScanCard({
             )}
           </p>
           <div className="flex flex-col gap-2.5">
-            <p className="hidden text-[11px] font-bold tracking-[0.14em] text-dl-muted md:block">USED FOR</p>
+            <p className="hidden text-[11px] font-bold tracking-[0.14em] text-dl-muted md:block">
+              {scan.usedForLabel ?? "USED FOR"}
+            </p>
             <ul className="grid grid-cols-2 gap-2 md:flex md:flex-wrap">
               {scan.usedFor.map((u) => (
                 <li
@@ -113,6 +118,15 @@ export default function ScanCard({
               ))}
             </ul>
           </div>
+          {scan.preparation && (
+            <p className="flex items-start gap-2 text-[13px] md:text-[13.5px]">
+              <ClipboardList className="mt-0.5 size-4 shrink-0 text-dl-red" aria-hidden />
+              <span>
+                <span className="font-bold text-dl-ink">Preparation:</span>{" "}
+                <span className="text-dl-ink-2">{scan.preparation}</span>
+              </span>
+            </p>
+          )}
           <div className="flex gap-2.5 pt-1">
             {details}
             {book(buttonClass("primary", "sm", "flex-1 md:flex-none md:px-6"))}

@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import RadiologyHero from "./components/radiologyHero";
+import ServicePageHero from "@/components/sections/servicePageHero";
 import RadiologySection from "./components/radiologySection";
-import WhyChoose from "./components/whyChoose";
+import WhyPoints from "@/components/sections/whyPoints";
 import FindUsPanel from "@/components/sections/findUsPanel";
 import PatientReviews from "@/components/sections/patientReviews";
 import FAQAccordion from "@/components/sections/faq";
 import FaqJsonLd from "@/components/seo/faqJsonLd";
 import { radiologyFaq } from "@/lib/faq";
-import { scanServices } from "./content";
+import { scanServices, whyPoints } from "./content";
 
 export const metadata: Metadata = {
   title: { absolute: "Radiology in Jamshedpur | Ultrasound, X-Ray, ECG, Echo | Diagnos Lab" },
@@ -35,9 +35,22 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <>
-      <RadiologyHero services={scanServices.map((s) => s.title)} />
+      <ServicePageHero
+        breadcrumb={[{ label: "Home", href: "/" }, { label: "Radiology" }]}
+        eyebrow="Radiology in Jamshedpur · Walk-ins welcome"
+        title="Ultrasound, X-Ray, ECG, ECHO & PFT — reports in 1–2 hours"
+        subtitle="Modern digital equipment, experienced radiologists and a dedicated female radiologist — all under one roof in Sakchi."
+        cta={{ label: "Book a scan", href: "#radiology-section" }}
+        form={{ services: scanServices.map((s) => s.title) }}
+      />
       <RadiologySection />
-      <WhyChoose />
+      <WhyPoints
+        title="Why patients in Jamshedpur choose us for imaging"
+        mobileTitle="Why patients choose us for imaging"
+        subtitle="Trusted by thousands of patients for accurate radiology services — with reports your doctor can act on the same day."
+        mobileSubtitle="Trusted by thousands of patients across Jamshedpur."
+        points={whyPoints}
+      />
       <FindUsPanel />
       <PatientReviews tone="white" />
       <FaqJsonLd items={radiologyFaq} />

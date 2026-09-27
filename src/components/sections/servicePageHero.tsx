@@ -11,35 +11,63 @@ const proofPoints = [
   { icon: Star, value: "4.9", label: "3,000+ Google reviews", mobileLabel: "Google rating" },
 ];
 
-/* DL.pen radiology "Hero Band". */
-export default function RadiologyHero({ services }: { services: string[] }) {
+type ServicePageHeroProps = {
+  /* The last crumb is the current page. */
+  breadcrumb: { label: string; href?: string }[];
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  /* Scan types shown as chips under the subtitle. */
+  chips?: string[];
+  cta: { label: string; href: string };
+  form: React.ComponentProps<typeof CallbackForm>;
+};
+
+/* DL.pen "Hero Band" of the radiology and ultrasound pages: copy, proof
+   points and CTAs beside a call-back form. */
+export default function ServicePageHero({ breadcrumb, eyebrow, title, subtitle, chips, cta, form }: ServicePageHeroProps) {
   return (
     <section className="bg-linear-to-b from-dl-red-soft to-dl-bg">
       <div className={`${shell} grid gap-6 pt-5 pb-9 md:grid-cols-[minmax(0,1fr)_minmax(0,400px)] md:items-center md:gap-10 md:py-16 xl:grid-cols-[minmax(0,1fr)_440px] xl:gap-16`}>
         <div className="flex flex-col gap-5 md:gap-7">
           <nav aria-label="Breadcrumb">
-            <ol className="flex items-center gap-1.5 text-xs text-dl-muted md:text-[13px]">
-              <li>
-                <Link href="/" className="hover:text-dl-ink">Home</Link>
-              </li>
-              <li aria-hidden>
-                <ChevronRight className="size-3.5" />
-              </li>
-              <li aria-current="page" className="font-semibold text-dl-ink">Radiology</li>
+            <ol className="flex flex-wrap items-center gap-1.5 text-xs text-dl-muted md:text-[13px]">
+              {breadcrumb.map((crumb, i) => {
+                const last = i === breadcrumb.length - 1;
+                return (
+                  <li key={crumb.label} className="flex items-center gap-1.5">
+                    {last ? (
+                      <span aria-current="page" className="font-semibold text-dl-ink">{crumb.label}</span>
+                    ) : (
+                      <>
+                        <Link href={crumb.href ?? "/"} className="hover:text-dl-ink">{crumb.label}</Link>
+                        <ChevronRight className="size-3.5" aria-hidden />
+                      </>
+                    )}
+                  </li>
+                );
+              })}
             </ol>
           </nav>
 
           <div className="flex flex-col gap-3 md:gap-5">
             <p className="inline-flex w-fit items-center gap-2 rounded-full border border-dl-line bg-white py-1.5 pl-2.5 pr-3 text-xs font-semibold text-dl-ink-2 md:py-[7px] md:pr-3.5 md:text-[13px]">
               <span className="size-[7px] rounded-full bg-dl-green md:size-2" aria-hidden />
-              Radiology in Jamshedpur · Walk-ins welcome
+              {eyebrow}
             </p>
             <h1 className="font-display text-[27px] font-extrabold leading-[1.12] tracking-[-0.03em] text-dl-ink md:text-[40px] xl:text-[46px] xl:leading-[1.08]">
-              Ultrasound, X-Ray, ECG, ECHO &amp; PFT — reports in 1–2 hours
+              {title}
             </h1>
-            <p className="max-w-[600px] text-sm leading-normal text-dl-ink-2 md:text-[17px] md:leading-[1.55]">
-              Modern digital equipment, experienced radiologists and a dedicated female radiologist — all under one roof in Sakchi.
-            </p>
+            <p className="max-w-[600px] text-sm leading-normal text-dl-ink-2 md:text-[17px] md:leading-[1.55]">{subtitle}</p>
+            {chips && (
+              <ul className="flex flex-wrap gap-2">
+                {chips.map((c) => (
+                  <li key={c} className="rounded-full border border-dl-line bg-white px-3 py-1.5 text-xs font-semibold text-dl-ink-2 md:text-[13px]">
+                    {c}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
 
           <ul className="grid grid-cols-3 gap-2 md:flex md:flex-wrap md:gap-8">
@@ -60,8 +88,8 @@ export default function RadiologyHero({ services }: { services: string[] }) {
           </ul>
 
           <div className="hidden gap-3 md:flex">
-            <a href="#radiology-section" className={buttonClass("primary", "lg")}>
-              Book a scan
+            <a href={cta.href} className={buttonClass("primary", "lg")}>
+              {cta.label}
               <ArrowRight className="size-4" aria-hidden />
             </a>
             <a href={PHONE_HREF} className={buttonClass("neutral", "lg")}>
@@ -71,7 +99,7 @@ export default function RadiologyHero({ services }: { services: string[] }) {
           </div>
         </div>
 
-        <CallbackForm services={services} />
+        <CallbackForm {...form} />
       </div>
     </section>
   );

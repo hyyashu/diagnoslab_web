@@ -3,31 +3,31 @@
     {
       "id": "abdomen",
       "title": "Abdominal Ultrasound",
-      "description": "Evaluates liver, gallbladder, pancreas, spleen, and abdominal organs for stones, swelling, or abnormalities.",
+      "description": "Evaluates liver, gallbladder, pancreas, spleen and abdominal organs for stones, swelling or abnormalities.",
       "preparation": "6–8 hours fasting recommended"
     },
     {
       "id": "pelvic",
       "title": "Pelvic Ultrasound",
-      "description": "Assesses uterus, ovaries, and bladder. Commonly used for gynecological complaints and fertility evaluation.",
+      "description": "Assesses uterus, ovaries and bladder. Commonly used for gynaecological complaints and fertility evaluation.",
       "preparation": "Drink water and hold bladder before scan"
     },
     {
       "id": "pregnancy",
       "title": "Pregnancy (Obstetric) USG",
-      "description": "Monitors fetal growth, placenta, and amniotic fluid. Includes dating, NT, anomaly, and growth scans as advised.",
+      "description": "Monitors fetal growth, placenta and amniotic fluid. Includes dating, NT, anomaly and growth scans as advised by your doctor — performed by a female radiologist.",
       "preparation": "Follow your doctor's scan schedule"
     },
     {
       "id": "kub",
       "title": "KUB / Renal Ultrasound",
-      "description": "Examines kidneys, ureters, and bladder for stones, infections, or structural issues.",
+      "description": "Examines kidneys, ureters and bladder for stones, infections or structural issues.",
       "preparation": "Full bladder may be required"
     },
     {
       "id": "thyroid",
       "title": "Thyroid & Neck Ultrasound",
-      "description": "Checks thyroid gland size, nodules, and neck lymph nodes for swelling or abnormalities.",
+      "description": "Checks thyroid gland size, nodules and neck lymph nodes for swelling or abnormalities.",
       "preparation": "No special preparation needed"
     },
     {
@@ -46,12 +46,12 @@
     {
       "id": 2,
       "title": "Bladder preparation",
-      "description": "Pelvic and some KUB scans require a full bladder. Drink 4–5 glasses of water 1 hour before your appointment."
+      "description": "Pelvic and some KUB scans need a full bladder. Drink 4–5 glasses of water 1 hour before your appointment."
     },
     {
       "id": 3,
       "title": "Bring prior reports",
-      "description": "Carry previous ultrasound or related medical reports to help our radiologist compare findings accurately."
+      "description": "Carry previous ultrasound or related reports so our radiologist can compare findings accurately."
     },
     {
       "id": 4,
