@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import { Monitor, Users, Clock, ShieldCheck } from "lucide-react";
-import ServiceHero from "@/components/sections/serviceHero";
-import ServiceWhyChoose from "@/components/sections/serviceWhyChoose";
-import XraySection from "./components/xraySection";
+import { Clock3, ShieldCheck, Star } from "lucide-react";
 import JsonLd from "@/components/seo/jsonLd";
-import RelatedServices from "@/components/sections/relatedServices";
+import ScanServicePage from "@/components/sections/scanServicePage";
+import { xrayFaq } from "@/lib/faq";
 
 export const metadata: Metadata = {
   title: { absolute: "Diagnos Lab | Book X-Ray in Jamshedpur" },
@@ -57,35 +55,60 @@ const xrayBreadcrumb = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: "https://diagnoslab.in" },
-    { "@type": "ListItem", position: 2, name: "X-Ray in Jamshedpur", item: "https://diagnoslab.in/xray/" },
+    { "@type": "ListItem", position: 2, name: "Radiology", item: "https://diagnoslab.in/radiology/" },
+    { "@type": "ListItem", position: 3, name: "X-Ray in Jamshedpur", item: "https://diagnoslab.in/xray/" },
   ],
 };
-
-const features = [
-  { icon: <Monitor size={32} />, title: "Modern X-Ray Equipment" },
-  { icon: <Users size={32} />, title: "Experienced Radiology Team" },
-  { icon: <ShieldCheck size={32} />, title: "Low-radiation imaging" },
-  { icon: <Clock size={32} />, title: "Reports Same Day" },
-];
 
 export default function Page() {
   return (
     <>
       <JsonLd data={xraySchema} />
       <JsonLd data={xrayBreadcrumb} />
-      <ServiceHero
-        imageSrc="/images/radiology/XRAY.avif"
-        imageAlt="X-Ray at Diagnos Lab"
-        titleTop="Digital X-Ray"
-        titleBottom="in Jamshedpur"
-        services="Fractures | Chest | Spine | Joints | Reports in 1–2 hours"
+      <ScanServicePage
+        hero={{
+          crumb: "X-Ray",
+          eyebrow: "X-Ray in Jamshedpur · Walk-ins welcome",
+          title: "Digital X-Ray in Jamshedpur — reports in 1–2 hours",
+          subtitle: "Fast, low-radiation imaging for bones, chest, spine and joints at our Sakchi centre.",
+          chips: ["Fractures", "Chest", "Spine", "Joints"],
+          proofPoints: [
+            { icon: Clock3, value: "1–2 hrs", label: "Report turnaround", mobileLabel: "Reports" },
+            { icon: ShieldCheck, value: "Low-dose", label: "Low-radiation imaging", mobileLabel: "Radiation" },
+            { icon: Star, value: "4.9", label: "3,000+ Google reviews", mobileLabel: "Google rating" },
+          ],
+        }}
+        scan={{
+          id: "xray",
+          title: "X-Ray",
+          image: "/images/radiology/XRAY.avif",
+          icon: "bone",
+          reportingTime: "1–2 hours",
+          description: "Fast, low-radiation imaging for bones, chest, spine, joints and more. Performed by an experienced technician with clear reporting.",
+          usedFor: ["Fractures", "Chest infections", "Back pain", "Joint problems"],
+        }}
+        section={{
+          id: "xray-section",
+          title: "X-Ray services",
+          subtitle: "Fast digital imaging for bones, chest, spine, and joints. Click Book to schedule your appointment.",
+        }}
+        why={{
+          title: "Why choose X-Ray at Diagnos Lab",
+          points: [
+            { icon: "monitor", title: "Modern X-Ray equipment" },
+            { icon: "users", title: "Experienced radiology team" },
+            { icon: "shield-check", title: "Low-radiation imaging", highlight: true },
+            { icon: "clock-3", title: "Reports same day" },
+          ],
+        }}
+        faq={{ title: "X-Ray FAQs", items: xrayFaq }}
+        related={[
+          { label: "Ultrasound", href: "/ultrasound-in-jamshedpur/" },
+          { label: "ECG", href: "/ecg/" },
+          { label: "2D ECHO", href: "/radiology/" },
+          { label: "All radiology services", href: "/radiology/" },
+        ]}
       />
-      <ServiceWhyChoose
-        title="Why Choose X-Ray at Diagnos Lab"
-        features={features}
-      />
-      <XraySection />
-      <RelatedServices current="xray" pageTitle="X-Ray" />
     </>
   );
 }

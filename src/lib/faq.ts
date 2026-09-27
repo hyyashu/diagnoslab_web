@@ -93,3 +93,25 @@ export const ultrasoundFaq: FaqItem[] = [
     desktopOnly: true,
   },
 ];
+
+const reuse = (question: string, from = question, extra: Partial<FaqItem> = {}): FaqItem => ({
+  question,
+  answer: byQuestion(from),
+  ...extra,
+});
+
+export const ecgFaq: FaqItem[] = [
+  reuse("Does Diagnos Lab provide ECG services?"),
+  reuse("Do I need an appointment for an ECG?", "Do I need an appointment?"),
+  reuse("Is Diagnos Lab open on Sundays?"),
+  reuse("Can I get my reports on WhatsApp?"),
+  reuse("Where is Diagnos Lab located in Jamshedpur?", undefined, { desktopOnly: true }),
+];
+
+export const xrayFaq: FaqItem[] = [
+  reuse("Do I need an appointment for an X-Ray?", "Do I need an appointment?"),
+  reuse("What services do you provide in Jamshedpur?"),
+  reuse("Is Diagnos Lab open on Sundays?"),
+  reuse("Can I get my reports on WhatsApp?"),
+  reuse("Where is Diagnos Lab located in Jamshedpur?", undefined, { desktopOnly: true }),
+];

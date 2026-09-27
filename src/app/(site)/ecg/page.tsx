@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import { Activity, Users, Clock, HeartPulse } from "lucide-react";
-import ServiceHero from "@/components/sections/serviceHero";
-import ServiceWhyChoose from "@/components/sections/serviceWhyChoose";
-import EcgSection from "./components/ecgSection";
+import { Clock3, HeartPulse, Star } from "lucide-react";
 import JsonLd from "@/components/seo/jsonLd";
-import RelatedServices from "@/components/sections/relatedServices";
+import ScanServicePage from "@/components/sections/scanServicePage";
+import { ecgFaq } from "@/lib/faq";
 
 export const metadata: Metadata = {
   title: { absolute: "Diagnos Lab | Book ECG in Jamshedpur" },
@@ -57,35 +55,60 @@ const ecgBreadcrumb = {
   "@type": "BreadcrumbList",
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Home", item: "https://diagnoslab.in" },
-    { "@type": "ListItem", position: 2, name: "ECG Test in Jamshedpur", item: "https://diagnoslab.in/ecg/" },
+    { "@type": "ListItem", position: 2, name: "Radiology", item: "https://diagnoslab.in/radiology/" },
+    { "@type": "ListItem", position: 3, name: "ECG Test in Jamshedpur", item: "https://diagnoslab.in/ecg/" },
   ],
 };
-
-const features = [
-  { icon: <Activity size={32} />, title: "Modern ECG Equipment" },
-  { icon: <Users size={32} />, title: "Experienced Cardiac Team" },
-  { icon: <HeartPulse size={32} />, title: "Quick & painless test" },
-  { icon: <Clock size={32} />, title: "Reports Same Day" },
-];
 
 export default function Page() {
   return (
     <>
       <JsonLd data={ecgSchema} />
       <JsonLd data={ecgBreadcrumb} />
-      <ServiceHero
-        imageSrc="/images/radiology/ECG.avif"
-        imageAlt="ECG at Diagnos Lab"
-        titleTop="ECG Test"
-        titleBottom="in Jamshedpur"
-        services="Chest Pain | Irregular Heartbeat | Pre-Surgery | Reports Same Day"
+      <ScanServicePage
+        hero={{
+          crumb: "ECG",
+          eyebrow: "ECG in Jamshedpur · Walk-ins welcome",
+          title: "ECG Test in Jamshedpur — reports in 1–2 hours",
+          subtitle: "12-lead ECG (electrocardiogram) for heart rhythm and electrical activity analysis at our Sakchi centre.",
+          chips: ["Chest pain", "Irregular heartbeat", "Pre-surgery", "Routine cardiac screening"],
+          proofPoints: [
+            { icon: Clock3, value: "1–2 hrs", label: "Report turnaround", mobileLabel: "Reports" },
+            { icon: HeartPulse, value: "Painless", label: "Quick & painless test", mobileLabel: "Quick test" },
+            { icon: Star, value: "4.9", label: "3,000+ Google reviews", mobileLabel: "Google rating" },
+          ],
+        }}
+        scan={{
+          id: "ecg",
+          title: "ECG",
+          image: "/images/radiology/ECG.avif",
+          icon: "heart-pulse",
+          reportingTime: "1–2 hours",
+          description: "Quick test to check heart rhythm and electrical activity. Performed by experienced doctors with clear reporting.",
+          usedFor: ["Chest pain", "Irregular heartbeat", "Pre-surgery fitness", "Routine cardiac screening"],
+        }}
+        section={{
+          id: "ecg-section",
+          title: "ECG services",
+          subtitle: "Quick heart rhythm and electrical activity testing. Click Book to schedule your appointment.",
+        }}
+        why={{
+          title: "Why choose ECG at Diagnos Lab",
+          points: [
+            { icon: "activity", title: "Modern ECG equipment" },
+            { icon: "users", title: "Experienced cardiac team" },
+            { icon: "heart-pulse", title: "Quick & painless test", highlight: true },
+            { icon: "clock-3", title: "Reports same day" },
+          ],
+        }}
+        faq={{ title: "ECG FAQs", items: ecgFaq }}
+        related={[
+          { label: "Ultrasound", href: "/ultrasound-in-jamshedpur/" },
+          { label: "X-Ray", href: "/xray/" },
+          { label: "2D ECHO", href: "/radiology/" },
+          { label: "All radiology services", href: "/radiology/" },
+        ]}
       />
-      <ServiceWhyChoose
-        title="Why Choose ECG at Diagnos Lab"
-        features={features}
-      />
-      <EcgSection />
-      <RelatedServices current="ecg" pageTitle="ECG" />
     </>
   );
 }

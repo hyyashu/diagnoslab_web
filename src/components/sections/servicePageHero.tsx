@@ -1,11 +1,13 @@
 import Link from "next/link";
-import { ArrowRight, ChevronRight, Clock3, Phone, Star, UserRoundCheck } from "lucide-react";
+import { ArrowRight, ChevronRight, Clock3, Phone, Star, UserRoundCheck, type LucideIcon } from "lucide-react";
 import CallbackForm from "@/components/forms/callbackForm";
 import { buttonClass } from "@/components/ui/button";
 import { shell } from "@/components/ui/shell";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
 
-const proofPoints = [
+export type ProofPoint = { icon: LucideIcon; value: string; label: string; mobileLabel: string };
+
+const defaultProofPoints: ProofPoint[] = [
   { icon: Clock3, value: "1–2 hrs", label: "Report turnaround", mobileLabel: "Reports" },
   { icon: UserRoundCheck, value: "Female", label: "Radiologist available", mobileLabel: "Radiologist" },
   { icon: Star, value: "4.9", label: "3,000+ Google reviews", mobileLabel: "Google rating" },
@@ -21,11 +23,21 @@ type ServicePageHeroProps = {
   chips?: string[];
   cta: { label: string; href: string };
   form: React.ComponentProps<typeof CallbackForm>;
+  proofPoints?: ProofPoint[];
 };
 
 /* DL.pen "Hero Band" of the radiology and ultrasound pages: copy, proof
    points and CTAs beside a call-back form. */
-export default function ServicePageHero({ breadcrumb, eyebrow, title, subtitle, chips, cta, form }: ServicePageHeroProps) {
+export default function ServicePageHero({
+  breadcrumb,
+  eyebrow,
+  title,
+  subtitle,
+  chips,
+  cta,
+  form,
+  proofPoints = defaultProofPoints,
+}: ServicePageHeroProps) {
   return (
     <section className="bg-linear-to-b from-dl-red-soft to-dl-bg">
       <div className={`${shell} grid gap-6 pt-5 pb-9 md:grid-cols-[minmax(0,1fr)_minmax(0,400px)] md:items-center md:gap-10 md:py-16 xl:grid-cols-[minmax(0,1fr)_440px] xl:gap-16`}>

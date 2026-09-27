@@ -3,7 +3,7 @@ import { shell } from "@/components/ui/shell";
 export type WhyPoint = {
   icon: string;
   title: string;
-  text: string;
+  text?: string;
   mobileText?: string;
   highlight?: boolean;
 };
@@ -11,7 +11,7 @@ export type WhyPoint = {
 type WhyPointsProps = {
   title: string;
   mobileTitle?: string;
-  subtitle: string;
+  subtitle?: string;
   mobileSubtitle?: string;
   points: WhyPoint[];
 };
@@ -39,14 +39,20 @@ export default function WhyPoints({ title, mobileTitle, subtitle, mobileSubtitle
           >
             <Responsive desktop={title} mobile={mobileTitle} />
           </h2>
-          <p className="text-[13px] leading-normal text-dl-ink-2 md:max-w-[460px] md:text-[15px] md:leading-relaxed">
-            <Responsive desktop={subtitle} mobile={mobileSubtitle} />
-          </p>
+          {subtitle && (
+            <p className="text-[13px] leading-normal text-dl-ink-2 md:max-w-[460px] md:text-[15px] md:leading-relaxed">
+              <Responsive desktop={subtitle} mobile={mobileSubtitle} />
+            </p>
+          )}
         </div>
 
-        <ol className="flex flex-col gap-px overflow-hidden rounded-[20px] border border-dl-line bg-dl-line md:grid md:grid-cols-5 md:rounded-3xl">
+        <ol
+          className={`flex flex-col gap-px overflow-hidden rounded-[20px] border border-dl-line bg-dl-line md:grid md:rounded-3xl ${
+            points.length === 4 ? "md:grid-cols-4" : "md:grid-cols-5"
+          }`}
+        >
           {points.map((p, i) => (
-            <li key={p.title} className="flex items-start gap-3.5 bg-white p-4 md:flex-col md:gap-5 md:p-6">
+            <li key={p.title} className={`flex gap-3.5 bg-white p-4 md:flex-col md:gap-5 md:p-6 ${p.text ? "items-start" : "items-center md:items-start"}`}>
               <div className="flex items-center justify-between md:w-full">
                 <span
                   className={`flex size-10 items-center justify-center rounded-xl md:size-11 ${
@@ -61,9 +67,11 @@ export default function WhyPoints({ title, mobileTitle, subtitle, mobileSubtitle
               </div>
               <div className="flex flex-col gap-1 md:gap-2">
                 <h3 className="font-display text-[14.5px] font-bold text-dl-ink md:text-base">{p.title}</h3>
-                <p className="text-[12.5px] leading-normal text-dl-ink-2 md:text-[13.5px]">
-                  <Responsive desktop={p.text} mobile={p.mobileText} />
-                </p>
+                {p.text && (
+                  <p className="text-[12.5px] leading-normal text-dl-ink-2 md:text-[13.5px]">
+                    <Responsive desktop={p.text} mobile={p.mobileText} />
+                  </p>
+                )}
               </div>
             </li>
           ))}
