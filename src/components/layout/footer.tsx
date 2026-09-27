@@ -1,142 +1,172 @@
-import Image from "next/image";
 import Link from "next/link";
-import { Phone, MessageCircle, Mail } from "lucide-react";
+import { Award, Clock3, Instagram, Mail, MapPin, MessageCircle, ShieldCheck } from "lucide-react";
+import Logo from "@/components/ui/logo";
+import FooterLinkGroup from "@/components/layout/footerLinkGroup";
+import { buttonClass } from "@/components/ui/button";
+import { areas } from "@/lib/catalog";
+import { EMAIL, INSTAGRAM_HREF, WHATSAPP_DISPLAY, WHATSAPP_HREF } from "@/lib/contact";
 
-const Footer = () => {
-  const quickLinks = [
-    { name: "Home", href: "/" },
-    { name: "About us", href: "/aboutUs" },
-    { name: "Radiology", href: "/radiology" },
-    { name: "Ultrasound", href: "/ultrasound-in-jamshedpur" },
-    { name: "Packages", href: "/packages" },
-    { name: "Tests", href: "/tests#tests-section" },
-    { name: "Book a test", href: "/tests#enquiry-form" },
-    { name: "Policy", href: "/policy" },
-  ];
+/* DL.pen "Site Footer" / "Mobile Footer". */
 
+const linkGroups = [
+  {
+    title: "Tests",
+    links: [
+      { name: "Complete Blood Count", href: "/tests/complete-blood-count/" },
+      { name: "Thyroid profile", href: "/tests/thyroid-function-profile-tft-free/" },
+      { name: "HbA1c", href: "/tests/hba1c-test/" },
+      { name: "Vitamin D", href: "/tests/vitamin-d/" },
+      { name: "Lipid profile", href: "/tests/" },
+    ],
+  },
+  {
+    title: "Services",
+    links: [
+      { name: "Health packages", href: "/packages/" },
+      { name: "Ultrasound", href: "/ultrasound-in-jamshedpur/" },
+      { name: "Digital X-Ray", href: "/xray/" },
+      { name: "ECG & 2D ECHO", href: "/ecg/" },
+      { name: "Home collection", href: "/book-a-test/" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { name: "About us", href: "/aboutUs/" },
+      { name: "Corporate tie-ups", href: "/corporate/" },
+      { name: "Privacy policy", href: "/policy/" },
+      { name: "Contact us", href: "/contact-us/" },
+    ],
+  },
+];
+
+const visit = [
+  { icon: MapPin, text: "Sakchi · Jugsalai · Adityapur" },
+  { icon: Clock3, text: "Mon–Sun, 7:30 AM – 7:30 PM" },
+  { icon: Mail, text: EMAIL, href: `mailto:${EMAIL}` },
+];
+
+/* The design's list, in its order. The last five only fit on desktop. */
+const servedAreas = [
+  "Sakchi", "Bistupur", "Sonari", "Kadma", "Mango", "Telco", "Golmuri", "Jugsalai", "Adityapur",
+  "Dimna", "Baridih", "Birsanagar", "Agrico", "Parsudih",
+];
+const areaSlug = new Map(areas.map((a) => [a.name, a.slug]));
+
+export default function Footer() {
   return (
-    <footer className="w-full font-sans bg-white font-heading">
-      {/* 1. Logo Section (Line Top) */}
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
-        <hr className="border-gray-300 w-full" />
-        <div className="flex flex-col items-center py-2 md:py-8">
-          {/* Logo Image */}
-          <div className="flex items-center gap-2">
-            <Image
-              src="/images/diagnoslogo.avif"
-              alt="Diagnos Labs Logo"
-              width={500}
-              height={500}
-              className="object-contain h-30 w-auto"
-            />
-            <div className="flex flex-col">
-              <p className="text-xs text-black  font-bold uppercase tracking-wider">
-                Accurate Diagnostics since 2010
+    <footer className="bg-dl-ink text-white">
+      <div className="mx-auto flex max-w-[1440px] flex-col gap-7 px-4 pt-8 pb-7 md:gap-12 md:px-10 md:pt-16 md:pb-8 xl:px-20">
+        {/* WhatsApp strip */}
+        <div className="flex flex-col gap-4 rounded-[20px] border border-white/10 bg-white/[0.04] p-[18px] md:flex-row md:items-center md:justify-between md:rounded-3xl md:px-7 md:py-6">
+          <div className="flex items-center gap-3 md:gap-[18px]">
+            <span className="flex size-11 shrink-0 items-center justify-center rounded-[13px] bg-dl-whatsapp md:size-[52px] md:rounded-2xl">
+              <MessageCircle className="size-5 md:size-6" aria-hidden />
+            </span>
+            <span className="flex flex-col gap-1">
+              <span className="font-display text-[15px] font-bold leading-snug md:text-xl md:tracking-[-0.015em]">
+                Book, track and get reports on WhatsApp
+              </span>
+              <span className="hidden text-sm text-white/65 md:block">
+                Message us any time — our team replies from 7:30 AM to 7:30 PM, every day.
+              </span>
+            </span>
+          </div>
+          <a
+            href={WHATSAPP_HREF}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={buttonClass("whatsapp", "md", "w-full md:w-auto")}
+          >
+            Chat on {WHATSAPP_DISPLAY}
+            <MessageCircle className="size-4" aria-hidden />
+          </a>
+        </div>
+
+        {/* Columns */}
+        <div className="flex flex-col gap-7 md:grid md:grid-cols-[minmax(0,360px)_repeat(4,minmax(0,1fr))] md:gap-12">
+          <div className="flex flex-col gap-3.5 md:gap-[18px]">
+            <Logo tone="dark" showTagline={false} />
+            <p className="text-[13px] leading-relaxed text-white/65 md:text-sm">
+              Accurate diagnostics since 2010. Pathology, ultrasound, X-ray, ECG, ECHO and PFT under one roof in Jamshedpur.
+            </p>
+            <ul className="hidden gap-2 md:flex">
+              {[
+                { icon: ShieldCheck, text: "ISO certified" },
+                { icon: Award, text: "15+ years" },
+              ].map(({ icon: Icon, text }) => (
+                <li
+                  key={text}
+                  className="flex items-center gap-1.5 rounded-full border border-white/20 px-3 py-1.5 text-[12.5px] text-white/85"
+                >
+                  <Icon className="size-3.5 text-white" aria-hidden />
+                  {text}
+                </li>
+              ))}
+            </ul>
+            <ul className="flex flex-col gap-2 md:hidden">
+              {visit.map(({ icon: Icon, text, href }) => (
+                <li key={text} className="flex items-center gap-2 text-[13px] text-white/90">
+                  <Icon className="size-3.5 text-white/50" aria-hidden />
+                  {href ? <a href={href}>{text}</a> : text}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="flex flex-col md:contents">
+            {linkGroups.map((group) => (
+              <FooterLinkGroup key={group.title} {...group} />
+            ))}
+          </div>
+
+          <div className="hidden flex-col gap-3 md:flex">
+            <p className="pb-0 text-[13px] font-bold tracking-[0.1em] text-white/50">Visit us</p>
+            {visit.map(({ text, href }) => (
+              <p key={text} className="text-[14.5px] text-white/90">
+                {href ? <a href={href} className="hover:underline">{text}</a> : text}
               </p>
-            </div>
+            ))}
           </div>
         </div>
-      </div>
 
-      {/* 2. Red Content Section */}
-      <div className="bg-background-primary text-white">
-        <div className="max-w-7xl mx-auto px-6 pt-12 pb-8 md:px-12 lg:px-24">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
-            {/* Tagline */}
-            <div className="text-sm md:text-base leading-relaxed">
-              <p className="max-w-[280px]">
-                Book tests and packages online, choose home collection, and
-                access your reports securely anytime.
-              </p>
-            </div>
-
-            {/* Quick Links */}
-            <div className="md:pl-10">
-              <h3 className="text-lg font-bold mb-6">Quick Links</h3>
-              <ul className="space-y-3 opacity-90">
-                {quickLinks.map((link) => (
-                  <li key={link.name}>
-                    <Link href={link.href} className="hover:underline">
-                      {link.name}
+        {/* Areas */}
+        <div className="flex flex-col gap-3 md:gap-3.5 md:border-t md:border-white/10 md:pt-8">
+          <p className="text-sm font-semibold text-white/70 md:text-[13px]">Home collection across Jamshedpur</p>
+          <ul className="flex flex-wrap gap-2">
+            {servedAreas.map((name, i) => {
+              const slug = areaSlug.get(name);
+              const chip =
+                "block rounded-full border border-white/20 px-3 py-1.5 text-xs text-white/85 md:px-3.5 md:py-[7px] md:text-[13px]";
+              return (
+                <li key={name} className={i >= 9 ? "hidden md:block" : ""}>
+                  {slug ? (
+                    <Link href={`/area/${slug}/`} className={`${chip} hover:border-white/50 hover:text-white`}>
+                      {name}
                     </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
+                  ) : (
+                    <span className={chip}>{name}</span>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
 
-            {/* Contact & Hours */}
-            <div className="space-y-10">
-              <section>
-                <h3 className="text-lg font-bold mb-6">Contact Details</h3>
-                <div className="space-y-4 opacity-90">
-                  <a
-                    href="tel:+918404802201"
-                    className="flex items-center gap-3 hover:opacity-100"
-                  >
-                    <Phone size={18} className="fill-white" />
-                    <span>+91 8404802201</span>
-                  </a>
-                  <a
-                    href="https://wa.me/+918404802214"
-                    className="flex items-center gap-3 hover:opacity-100"
-                  >
-                    <MessageCircle size={18} className="fill-white" />
-                    <span>Whatsapp Support</span>
-                  </a>
-                  <a
-                    href="mailto:info@diagnoslab.in"
-                    className="flex items-center gap-3 hover:opacity-100"
-                  >
-                    <Mail size={18} className="fill-white" />
-                    <span>info@diagnoslab.in</span>
-                  </a>
-                </div>
-              </section>
-
-              <section>
-                <h3 className="text-lg font-bold mb-3">Working Hours</h3>
-                <p className="text-sm opacity-90">Mon–Sun: 7:30 AM – 7:30 PM</p>
-                <p className="text-sm mt-4 italic ">
-                  Home collection slots available daily.
-                </p>
-              </section>
-            </div>
-          </div>
-
-          {/* 3. Bottom Line (Mirroring Top Line length) */}
-          <hr className="border-red-400 w-full mb-6" />
-
-          {/* Copyright Bar */}
-          <div className="flex flex-col md:flex-row justify-between items-center text-xs md:text-sm gap-4">
-            <Link
-              href="/policy"
-              className="hidden md:block hover:underline opacity-80"
-            >
-              Policy
-            </Link>
-
-            <p className="text-center opacity-80 font-light">
-              © 2026 Diagnos Labs. All rights reserved.
-            </p>
-
-            {/* Mobile Footer Links */}
-            <div className="flex gap-4 md:hidden">
-              <Link href="/policy">Policy</Link>
-              <span className="opacity-40">|</span>
-              <Link href="/contact-us">Contact Us</Link>
-            </div>
-
-            <Link
-              href="/contact-us"
-              className="hidden md:block hover:underline opacity-80"
-            >
-              Contact Us
-            </Link>
-          </div>
+        {/* Bottom */}
+        <div className="flex flex-col-reverse gap-3.5 border-t border-white/10 pt-5 md:flex-row md:items-center md:justify-between md:pt-6">
+          <p className="text-xs text-white/50 md:text-[13px]">© 2026 Diagnos Labs. All rights reserved.</p>
+          <a
+            href={INSTAGRAM_HREF}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Diagnos Lab on Instagram"
+            className="flex size-9 items-center justify-center rounded-full border border-white/20 hover:border-white/50"
+          >
+            <Instagram className="size-4" aria-hidden />
+          </a>
         </div>
       </div>
     </footer>
   );
-};
-
-export default Footer;
+}

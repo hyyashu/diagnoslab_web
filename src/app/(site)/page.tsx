@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
-import WhyDiagnosLab from "@/components/sections/whyDiagnos";
-import PopularTests from "@/components/sections/popularTests";
-import Packages from "@/components/sections/packages";
-import HeroSection from "@/components/sections/hero";
-import RadiologyServices from "@/components/sections/radiologyServices";
+import HomeHero from "@/components/home/homeHero";
+import CheckupPackages from "@/components/home/checkupPackages";
+import HealthConcerns from "@/components/home/healthConcerns";
+import MostBookedTests from "@/components/home/mostBookedTests";
+import RadiologyImaging from "@/components/home/radiologyImaging";
+import CollectionSteps from "@/components/home/collectionSteps";
+import TrustBand from "@/components/home/trustBand";
+import PatientReviews from "@/components/home/patientReviews";
 import JsonLd from "@/components/seo/jsonLd";
 
 export const metadata: Metadata = {
@@ -52,11 +55,14 @@ export default function Home() {
   return (
     <>
       <JsonLd data={webPageSchema} />
-      <HeroSection />
-      <WhyDiagnosLab />
-      <PopularTests />
-      <Packages />
-      <RadiologyServices />
+      <HomeHero />
+      <CheckupPackages />
+      <HealthConcerns />
+      <MostBookedTests />
+      <RadiologyImaging />
+      <CollectionSteps />
+      <TrustBand />
+      <PatientReviews />
     </>
   );
 }

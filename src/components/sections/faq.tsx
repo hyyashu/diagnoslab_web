@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { Minus, Plus } from 'lucide-react';
 
 // --- Data ---
 const faqData = [
@@ -22,37 +22,47 @@ const faqData = [
   { question: "Can I get my reports on WhatsApp?", answer: "Yes, all digital reports are delivered on WhatsApp and email within the committed turnaround time. You can also access reports through our patient portal." },
 ];
 
+/* DL.pen "FAQ Item" list. The questions match FaqJsonLd, which promises
+   them to search engines, so they stay as they are. */
 export default function FAQAccordion() {
-  const [activeIndex, setActiveIndex] = useState<number | null>(4);
+  const [activeIndex, setActiveIndex] = useState<number | null>(0);
 
   return (
-
-    <div className="w-full bg-white px-6">
-      <div className="max-w-6xl mx-auto py-8">
-        <h2 className="font-heading text-2xl md:text-4xl md:mt-6 font-extrabold text-center mb-8  text-black uppercase">
-          FAQ
+    <section aria-labelledby="faq-heading" className="bg-white py-10 md:py-24">
+      <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-[18px] px-4 md:flex-row md:gap-16 md:px-10 xl:px-20">
+        <h2
+          id="faq-heading"
+          className="font-display text-[22px] font-extrabold tracking-[-0.03em] text-dl-ink md:w-[380px] md:shrink-0 md:text-[38px] md:leading-[1.1]"
+        >
+          Questions, answered
         </h2>
 
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-1 flex-col gap-2.5">
           {faqData.map((item, index) => {
             const isOpen = activeIndex === index;
 
             return (
               <div
                 key={index}
-                className="bg-white border border-slate-200 rounded-[1.5rem] shadow-sm transition-all duration-200"
+                className={`rounded-2xl border bg-white transition-colors ${
+                  isOpen ? "border-dl-red" : "border-dl-line"
+                }`}
               >
                 <button
                   onClick={() => setActiveIndex(isOpen ? null : index)}
                   aria-expanded={isOpen}
-                  className="w-full flex items-center justify-between px-10 py-3 text-left focus:outline-none group"
+                  className="flex w-full items-center gap-3 px-[18px] py-[18px] text-left md:px-6"
                 >
-                  <span className="font-heading text-sm font-body md:text-base font-bold text-black py-1">
+                  <span className="flex-1 font-display text-[15px] font-bold text-dl-ink md:text-base">
                     {item.question}
                   </span>
-                  <ChevronDown
-                    className={`w-5 h-5 text-slate-400 transition-transform duration-300 ${isOpen ? 'rotate-180 text-slate-600' : ''}`}
-                  />
+                  <span
+                    className={`flex size-7 shrink-0 items-center justify-center rounded-full transition-colors ${
+                      isOpen ? "bg-dl-red text-white" : "bg-dl-bg text-dl-ink"
+                    }`}
+                  >
+                    {isOpen ? <Minus className="size-4" aria-hidden /> : <Plus className="size-4" aria-hidden />}
+                  </span>
                 </button>
 
                 {/* Answers stay in the HTML (the FAQ schema promises them);
@@ -62,9 +72,9 @@ export default function FAQAccordion() {
                   className={`grid transition-[grid-template-rows,opacity] duration-200 ease-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
                 >
                   <div className="overflow-hidden">
-                    <div className="px-10 pb-4 font-medium text-sm font-body text-gray-700 leading-relaxed">
+                    <p className="px-[18px] pb-[18px] text-[13.5px] leading-relaxed text-dl-ink-2 md:px-6 md:text-[15px]">
                       {item.answer}
-                    </div>
+                    </p>
                   </div>
                 </div>
               </div>
@@ -72,6 +82,6 @@ export default function FAQAccordion() {
           })}
         </div>
       </div>
-    </div>
+    </section>
   );
 }

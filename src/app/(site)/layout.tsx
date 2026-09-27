@@ -10,6 +10,7 @@ import FindUs from "@/components/sections/findus";
 import AreasServed from "@/components/sections/areasServed";
 import ReviewCarousel from "@/components/sections/reviews";
 import ConditionalHowItWorks from "@/components/sections/conditionalHowItWorks";
+import HideOnHome from "@/components/layout/hideOnHome";
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
@@ -108,16 +109,18 @@ export default function SiteLayout({
       <JsonLd data={localBusinessSchema} />
       <HomeCollectionJsonLd />
       <Navbar />
-      <main className="pt-12 md:pt-24 pb-16 md:pb-0">
+      <main className="pb-20 md:pb-0">
         {children}
         <FloatingCTA
           phoneNumber="+918404802201"
           whatsappNumber="+918404802214"
         />
-        <FindUs />
-        <AreasServed />
-        <ReviewCarousel />
-        <ConditionalHowItWorks />
+        <HideOnHome>
+          <FindUs />
+          <AreasServed />
+          <ReviewCarousel />
+          <ConditionalHowItWorks />
+        </HideOnHome>
         <FaqJsonLd />
         <FAQAccordion />
       </main>
