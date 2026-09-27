@@ -115,3 +115,39 @@ export const xrayFaq: FaqItem[] = [
   reuse("Can I get my reports on WhatsApp?"),
   reuse("Where is Diagnos Lab located in Jamshedpur?", undefined, { desktopOnly: true }),
 ];
+
+export const labTestsFaq: FaqItem[] = [
+  {
+    question: "How fast will I get my reports?",
+    answer: "Most reports are delivered within 6 to 12 hours depending on the test type, and shared on WhatsApp.",
+  },
+  reuse("Do you provide home sample collection?"),
+  {
+    question: "Do I need to fast before a blood test?",
+    answer:
+      "Only for some tests. Blood Sugar Fasting, for example, needs overnight fasting, while tests like CBC need none. Each test card shows whether fasting is needed.",
+  },
+  reuse("Do I need an appointment?"),
+  reuse("How much does a blood test cost at Diagnos Lab?"),
+  reuse("Where is Diagnos Lab located in Jamshedpur?", undefined, { desktopOnly: true }),
+];
+
+export const packagesFaq: FaqItem[] = [
+  {
+    question: "Which health package should I choose?",
+    answer:
+      "For a routine yearly checkup, ND Plus covers most essentials. Choose ND Max Plus for a more detailed check, or a focused panel like PCOD or Diabetes if your doctor advised it.",
+  },
+  {
+    question: "Do I need to fast before a full body checkup?",
+    answer:
+      "Yes. ND Plus, ND Max Plus, BIO T Plus and BIO T D Plus need overnight fasting of 10–12 hours. Water is allowed.",
+  },
+  reuse("Do you provide home sample collection for packages?", "Do you provide home sample collection?"),
+  reuse("How fast will I get my package reports?", "How fast will I get my reports?"),
+  {
+    question: "Can I customise a health package?",
+    answer: "Yes. Call us or message us on WhatsApp with the tests you need, and our team will help you put them together.",
+  },
+  reuse("Where is Diagnos Lab located in Jamshedpur?", undefined, { desktopOnly: true }),
+];

@@ -115,14 +115,14 @@ export default function SiteLayout({
           phoneNumber="+918404802201"
           whatsappNumber="+918404802214"
         />
-        <HideOn paths={["/", "/radiology", "/ultrasound-in-jamshedpur", "/ecg", "/xray"]}>
+        <HideOn paths={["/", "/radiology", "/ultrasound-in-jamshedpur", "/ecg", "/xray", "/tests", "/packages"]}>
           <FindUs />
           <AreasServed />
           <ReviewCarousel />
           <ConditionalHowItWorks />
         </HideOn>
         {/* These pages have their own FAQ (and schema). */}
-        <HideOn paths={["/radiology", "/ultrasound-in-jamshedpur", "/ecg", "/xray"]}>
+        <HideOn paths={["/radiology", "/ultrasound-in-jamshedpur", "/ecg", "/xray", "/tests", "/packages"]}>
           <FaqJsonLd />
           <FAQAccordion />
         </HideOn>

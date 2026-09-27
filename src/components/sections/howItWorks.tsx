@@ -1,130 +1,124 @@
 "use client";
 
 import { useState } from "react";
+import { ArrowRight, Building2, House } from "lucide-react";
 import Modal from "@/components/ui/modal";
 import EnquiryForm from "@/components/forms/enquiryForm";
+import { buttonClass } from "@/components/ui/button";
+import { shell } from "@/components/ui/shell";
 
 type EnquiryFormType = "enquiry_form" | "home_collection";
 
-interface Step {
-  id: number;
-  title: string;
-  description: string;
-}
+const options = [
+  {
+    key: "lab",
+    icon: Building2,
+    title: "Lab visit",
+    subtitle: "Visit any centre — Sakchi, Jugsalai or Adityapur",
+    steps: [
+      { title: "Visit the lab", text: "Walk in or arrive at your appointment time." },
+      { title: "Tested by experts", text: "Our trained technicians collect and process your sample." },
+      { title: "Reports on WhatsApp", text: "Digital reports are shared directly on your phone." },
+    ],
+    cta: "Get an appointment",
+    form: "enquiry_form" as EnquiryFormType,
+    dark: false,
+  },
+  {
+    key: "home",
+    icon: House,
+    title: "Home collection",
+    subtitle: "Available across Jamshedpur",
+    steps: [
+      { title: "Book home collection", text: "Submit the form or call us with your address." },
+      { title: "Sample collected at home", text: "Our phlebotomist visits you at your chosen slot." },
+      { title: "Tested at our lab", text: "Samples processed using modern equipment." },
+      { title: "Reports on WhatsApp", text: "Reports shared digitally once ready." },
+    ],
+    cta: "Book home collection",
+    form: "home_collection" as EnquiryFormType,
+    dark: true,
+  },
+];
 
-interface CardProps {
-  title: string;
-  steps: Step[];
-  buttonText: string;
-  onButtonClick: () => void;
-}
-
-
-const InfoCard = ({
-  title,
-  steps,
-  buttonText,
-  onButtonClick,
-}: CardProps) => {
-  return (
-    <div className="bg-white rounded-[2.5rem] p-8 md:p-10 lg:p-12 flex flex-col h-full shadow-xl">
-
-      {/* Title */}
-      <h3 className="text-2xl md:text-3xl font-bold text-black mb-6 md:mb-8">
-        {title}
-      </h3>
-
-      {/* Steps */}
-      <div className="flex-grow space-y-8">
-        {steps.map((step) => (
-          <div key={step.id} className="flex gap-5 items-start">
-
-            <div className="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 rounded-full bg-background-primary flex items-center justify-center text-white font-bold">
-              {step.id}
-            </div>
-
-            <div>
-              <h4 className="font-bold text-black text-sm md:text-lg">
-                Step {step.id}: {step.title}
-              </h4>
-              <p className="text-gray-700 text-sm md:text-base mt-2">
-                {step.description}
-              </p>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Button */}
-      <div className="mt-10">
-        <button
-          onClick={onButtonClick}
-          className="w-full sm:w-fit bg-background-primary hover:bg-red-700 text-white font-bold py-4 px-8 rounded-2xl transition-all active:scale-95"
-        >
-          {buttonText}
-        </button>
-      </div>
-    </div>
-  );
-};
-
-
+/* DL.pen "How It Works": lab visit and home collection side by side. */
 export default function HowItWorks() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [formType, setFormType] = useState<EnquiryFormType>("enquiry_form");
-
-  const labVisitSteps: Step[] = [
-    { id: 1, title: "Visit the lab", description: "Walk in or arrive at your appointment time." },
-    { id: 2, title: "Test by Experts", description: "Our trained technicians perform your test." },
-    { id: 3, title: "Get Reports on WhatsApp", description: "Digital reports are shared directly on your phone." },
-  ];
-
-  const homeCollectionSteps: Step[] = [
-    { id: 1, title: "Book Home Collection", description: "Submit the form or call with your address." },
-    { id: 2, title: "Sample Collected at Home", description: "Our phlebotomist visits you." },
-    { id: 3, title: "Testing at Lab", description: "Samples processed using modern equipment." },
-    { id: 4, title: "Reports on WhatsApp", description: "Reports shared digitally once ready." },
-  ];
+  const [form, setForm] = useState<EnquiryFormType | null>(null);
 
   return (
     <>
-      <section className="bg-background-primary py-6 md:py-12 mb-2 md:mb-6 px-4 flex items-center">
-        <div className="max-w-7xl mx-auto w-full">
+      <section aria-labelledby="how-heading" className="bg-white py-10 md:py-24">
+        <div className={`${shell} flex flex-col gap-6 md:gap-10`}>
+          <div className="flex flex-col gap-1.5 md:flex-row md:items-end md:justify-between md:gap-16">
+            <div className="flex flex-col gap-1.5 md:gap-3">
+              <p className="hidden items-center gap-2.5 text-xs font-bold tracking-[0.13em] text-dl-red md:flex">
+                <span className="h-0.5 w-5 bg-dl-red" aria-hidden />
+                HOW IT WORKS
+              </p>
+              <h2
+                id="how-heading"
+                className="font-display text-[22px] font-extrabold tracking-[-0.03em] text-dl-ink md:text-[38px] md:leading-[1.1]"
+              >
+                Two easy ways to get tested
+              </h2>
+            </div>
+            <p className="text-[13.5px] leading-normal text-dl-ink-2 md:max-w-[440px] md:text-[15px] md:leading-relaxed">
+              Walk in to any of our centres, or book a home collection and we&apos;ll come to you.
+            </p>
+          </div>
 
-          {/* Heading */}
-          <h2 className="text-2xl md:text-4xl font-extrabold text-center text-white mb-12">
-            How It Works
-          </h2>
+          <div className="grid gap-4 md:grid-cols-2 md:gap-5">
+            {options.map(({ key, icon: Icon, title, subtitle, steps, cta, form: formType, dark }) => (
+              <div
+                key={key}
+                className={`flex flex-col gap-6 rounded-3xl p-6 md:gap-7 md:p-8 ${
+                  dark ? "bg-dl-ink text-white" : "border border-dl-line bg-white text-dl-ink"
+                }`}
+              >
+                <div className="flex items-center gap-4">
+                  <span
+                    className={`flex size-12 shrink-0 items-center justify-center rounded-2xl ${
+                      dark ? "bg-dl-red text-white" : "bg-dl-red-soft text-dl-red"
+                    }`}
+                  >
+                    <Icon className="size-[22px]" aria-hidden />
+                  </span>
+                  <span className="flex flex-col gap-0.5">
+                    <h3 className="font-display text-xl font-extrabold tracking-[-0.02em] md:text-2xl">{title}</h3>
+                    <span className={`text-[13.5px] ${dark ? "text-white/70" : "text-dl-ink-2"}`}>{subtitle}</span>
+                  </span>
+                </div>
 
-          {/* Cards */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <ol className="flex flex-col gap-5">
+                  {steps.map((s, i) => (
+                    <li key={s.title} className="flex gap-3.5">
+                      <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-dl-red text-[13px] font-bold text-white">
+                        {i + 1}
+                      </span>
+                      <span className="flex flex-col gap-1">
+                        <span className="font-display text-base font-bold">{s.title}</span>
+                        <span className={`text-sm leading-normal ${dark ? "text-white/70" : "text-dl-ink-2"}`}>{s.text}</span>
+                      </span>
+                    </li>
+                  ))}
+                </ol>
 
-            <InfoCard
-              title="Lab Visit"
-              steps={labVisitSteps}
-              buttonText="Get An Appointment"
-              onButtonClick={() => {
-                setFormType("enquiry_form");
-                setIsOpen(true);
-              }}
-            />
-
-            <InfoCard
-              title="Home Collection"
-              steps={homeCollectionSteps}
-              buttonText="Book Home Collection"
-              onButtonClick={() => {
-                setFormType("home_collection");
-                setIsOpen(true);
-              }}
-            />
+                <button
+                  type="button"
+                  onClick={() => setForm(formType)}
+                  className={buttonClass("primary", "lg", "mt-auto w-full md:w-fit")}
+                >
+                  {cta}
+                  <ArrowRight className="size-4" aria-hidden />
+                </button>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Modal */}
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <EnquiryForm formType={formType} />
+      <Modal isOpen={form !== null} onClose={() => setForm(null)}>
+        {form && <EnquiryForm formType={form} />}
       </Modal>
     </>
   );

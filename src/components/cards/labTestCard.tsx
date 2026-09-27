@@ -21,7 +21,18 @@ const fastingLabel = (fasting: string) => {
   return fasting;
 };
 
-export default function LabTestCard({ test }: { test: LabTest }) {
+/* "home": the most-booked card (Book only). "catalog": the Lab Tests page
+   card, with a category pill and a Details link. */
+export default function LabTestCard({
+  test,
+  variant = "home",
+  categoryLabel = test.category,
+}: {
+  test: LabTest;
+  variant?: "home" | "catalog";
+  categoryLabel?: string;
+}) {
+  const catalog = variant === "catalog";
   const { slug, title, description, price, originalPrice } = test;
   const discount =
     originalPrice > 0 && price > 0
@@ -41,15 +52,22 @@ export default function LabTestCard({ test }: { test: LabTest }) {
 
   return (
     <article className="flex h-full flex-col gap-[18px] rounded-[20px] border border-dl-line bg-white p-5 md:p-6">
-      <div className="flex items-center justify-between gap-2 text-[12.5px]">
-        <span className="inline-flex items-center gap-[7px] font-semibold text-dl-ink-2">
-          <span className="size-1.5 rounded-full bg-dl-red" aria-hidden />
-          {test.category}
-        </span>
-        {discount > 0 && (
-          <span className="font-bold text-dl-green">{discount}% off</span>
-        )}
-      </div>
+      {catalog ? (
+        <div className="flex items-center justify-between gap-2 text-xs font-bold">
+          <span className="rounded-md bg-dl-red-soft px-2 py-1 text-dl-red-dark">{categoryLabel}</span>
+          {discount > 0 && <span className="rounded-md bg-dl-green/10 px-2 py-1 text-dl-green">{discount}% off</span>}
+        </div>
+      ) : (
+        <div className="flex items-center justify-between gap-2 text-[12.5px]">
+          <span className="inline-flex items-center gap-[7px] font-semibold text-dl-ink-2">
+            <span className="size-1.5 rounded-full bg-dl-red" aria-hidden />
+            {categoryLabel}
+          </span>
+          {discount > 0 && (
+            <span className="font-bold text-dl-green">{discount}% off</span>
+          )}
+        </div>
+      )}
 
       <div className="flex flex-col gap-1.5">
         <h3 className="font-display text-[19px] md:text-xl font-bold tracking-[-0.02em] text-dl-ink">
@@ -84,20 +102,27 @@ export default function LabTestCard({ test }: { test: LabTest }) {
             </s>
           )}
         </div>
-        <BookButton
-          className={buttonClass("outline", "sm")}
-          form={{
-            title: "Book",
-            testName: title,
-            testDescription: description,
-            testPrice: price,
-            testOriginalPrice: originalPrice,
-            additionalSourceData: leadMeta,
-          }}
-        >
-          Book
-          <Plus className="size-4" aria-hidden />
-        </BookButton>
+        <div className="flex shrink-0 items-center gap-2">
+          {catalog && (
+            <Link href={`/tests/${slug}`} className={buttonClass("neutral", "sm")}>
+              Details
+            </Link>
+          )}
+          <BookButton
+            className={catalog ? buttonClass("primary", "sm") : buttonClass("outline", "sm")}
+            form={{
+              title: "Book",
+              testName: title,
+              testDescription: description,
+              testPrice: price,
+              testOriginalPrice: originalPrice,
+              additionalSourceData: leadMeta,
+            }}
+          >
+            {catalog ? "Book now" : "Book"}
+            {!catalog && <Plus className="size-4" aria-hidden />}
+          </BookButton>
+        </div>
       </div>
     </article>
   );
