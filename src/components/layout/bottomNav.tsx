@@ -4,8 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { CalendarPlus, FlaskConical, House, Package, Phone } from "lucide-react";
-import Modal from "@/components/ui/modal";
-import EnquiryForm from "@/components/forms/enquiryForm";
+import ContactSheet from "@/components/forms/contactSheet";
 
 /* DL.pen "Bottom Nav". The design's Reports and Account tabs wait on
    features the site doesn't have yet; Packages and Contact hold their
@@ -81,9 +80,7 @@ export default function BottomNav() {
         </ul>
       </nav>
 
-      <Modal isOpen={openForm} onClose={() => setOpenForm(false)}>
-        <EnquiryForm formType="home_collection" />
-      </Modal>
+      <ContactSheet isOpen={openForm} onClose={() => setOpenForm(false)} topic="Home collection" />
     </>
   );
 }

@@ -1,96 +1,93 @@
-import PackageCard from "@/components/cards/packageCard";
-import rawData from "@/data/packages.json";
+import Link from "next/link";
+import { ArrowRight, ChevronRight } from "lucide-react";
+import CheckupPackageCard, { type CheckupPackage } from "@/components/cards/checkupPackageCard";
+import { featuredPackages } from "@/components/home/content";
+import { shell } from "@/components/ui/shell";
+import { getPackages, type Package } from "@/lib/catalog";
 
-type FormattedPackage = {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  originalPrice: number;
-  parameters: number;
-  categories: string[];
-  fasting: string;
-  reporting: string;
-  slug: string;
-};
+const areasOf = (categories: string) =>
+  categories.split(",").map((c) => c.trim().toLowerCase()).filter(Boolean);
 
-function formatPackage(p: typeof rawData.packages[number]): FormattedPackage {
-  return {
-    id: p.Id,
-    title: p.PackageName,
-    description: p.Description,
-    price: p.DiscountedPrice,
-    originalPrice: Number(p.Price) || 0,
-    parameters: p.ParametersCovered || 0,
-    categories: [],
-    fasting: p.Fasting?.trim() || "Not Required",
-    reporting: p.Reporting?.trim() || "Same Day",
-    slug: p.Slug?.toLowerCase() || "",
-  };
-}
-
-
-function getSlugWords(slug: string) {
-  return slug.split("-").map((w) => w.trim());
-}
-
-export default function SimilarPackages({
-  currentSlug,
-}: {
-  currentSlug: string;
-}) {
-  
-  const allPackages: FormattedPackage[] =
-    rawData.packages.map(formatPackage);
-
-  // find current
-  const current = allPackages.find(
-    (p) => p.slug === currentSlug
-  );
-
-  if (!current) return null;
-
-  const currentWords = getSlugWords(current.slug);
-
-
-  const similar = allPackages
-    .filter((p) => p.slug !== currentSlug)
-    .map((p) => {
-      const words = getSlugWords(p.slug);
-
-      const matchCount = words.filter((w) =>
-        currentWords.includes(w)
-      ).length;
-
-      return { p, matchCount };
-    })
-    .filter((x) => x.matchCount > 0) 
-    .sort((a, b) => b.matchCount - a.matchCount) 
+/* The design's pick when the package names one; otherwise the three that
+   share the most health areas. */
+function pick(all: Package[], current: Package, compare?: string[]) {
+  if (compare) return compare.map((s) => all.find((p) => p.slug === s)).filter((p): p is Package => !!p);
+  const mine = new Set(areasOf(current.categories));
+  return all
+    .filter((p) => p.slug !== current.slug)
+    .map((p) => ({ p, shared: areasOf(p.categories).filter((a) => mine.has(a)).length }))
+    .filter((x) => x.shared > 0)
+    .sort((a, b) => b.shared - a.shared)
     .slice(0, 3)
     .map((x) => x.p);
+}
 
-  if (similar.length === 0) return null;
+/* DL.pen "Other Packages": "Compare with other packages". A row of package
+   cards on desktop, a swipeable strip on phones; the first card is outlined. */
+export default function SimilarPackages({
+  currentSlug,
+  compare,
+  subtitle = "Other checkups that cover the same health areas.",
+  mobileSubtitle,
+}: {
+  currentSlug: string;
+  compare?: string[];
+  subtitle?: string;
+  mobileSubtitle?: string;
+}) {
+  const all = getPackages();
+  const current = all.find((p) => p.slug === currentSlug);
+  if (!current) return null;
+
+  const cards: CheckupPackage[] = pick(all, current, compare).map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    description: p.description,
+    price: p.price,
+    originalPrice: p.originalPrice,
+    parameters: p.parameters,
+    categories: p.categories,
+    fasting: p.fasting,
+    reporting: p.reporting,
+    ...featuredPackages[p.slug],
+    mostBooked: false,
+  }));
+  if (cards.length === 0) return null;
 
   return (
-    <div className="mt-16 max-w-6xl mx-auto px-4">
-      <h2 className="text-2xl md:text-4xl font-bold text-center mb-10 font-heading">
-        Similar Packages
-      </h2>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {similar.map((pkg) => (
-          <PackageCard key={pkg.id} 
-          title={pkg.title} 
-          description={pkg.description} 
-          price={pkg.price} 
-          originalPrice={pkg.originalPrice} 
-          parameters={pkg.parameters} 
-          categories={pkg.categories.join(", ")} 
-          fasting={pkg.fasting} 
-          reporting={pkg.reporting} 
-          slug={pkg.slug} />
-        ))}
+    <section aria-labelledby="compare-heading" className="bg-white py-10 md:py-20">
+      <div className="flex flex-col gap-5 md:gap-8">
+        <div className={`${shell} flex items-end justify-between gap-4`}>
+          <div className="flex flex-col gap-1 md:gap-2">
+            <h2
+              id="compare-heading"
+              className="font-display text-[22px] font-extrabold tracking-[-0.03em] text-dl-ink md:text-[32px]"
+            >
+              <span className="md:hidden">Compare other packages</span>
+              <span className="hidden md:inline">Compare with other packages</span>
+            </h2>
+            <p className="text-[13.5px] text-dl-muted md:text-base md:text-dl-ink-2">
+              <span className="md:hidden">{mobileSubtitle ?? subtitle}</span>
+              <span className="hidden md:inline">{subtitle}</span>
+            </p>
+          </div>
+          <Link href="/packages/" className="flex shrink-0 items-center gap-1 text-sm font-bold text-dl-red md:gap-1.5 md:text-[15px]">
+            <span className="md:hidden">See all</span>
+            <span className="hidden md:inline">See all packages</span>
+            <ChevronRight className="size-4 md:hidden" aria-hidden />
+            <ArrowRight className="hidden size-4 md:block" aria-hidden />
+          </Link>
+        </div>
+        <ul
+          className={`${shell} flex snap-x snap-mandatory gap-3 overflow-x-auto pb-1 [scrollbar-width:none] md:grid md:grid-cols-3 md:gap-5 md:overflow-visible`}
+        >
+          {cards.map((pkg, i) => (
+            <li key={pkg.slug} className="w-[290px] shrink-0 snap-start md:w-auto">
+              <CheckupPackageCard pkg={pkg} highlight={i === 0} />
+            </li>
+          ))}
+        </ul>
       </div>
-    </div>
+    </section>
   );
 }

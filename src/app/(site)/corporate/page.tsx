@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import HeroSection from "./components/hero";
 import OurPartners from "./components/ourPatners";
 import WhyPartner from "./components/whyPartner";
+import FindUsAreas from "@/components/sections/findUsAreas";
+import FaqCards from "@/components/sections/faqCards";
+import PatientReviews from "@/components/sections/patientReviews";
+import FaqJsonLd from "@/components/seo/faqJsonLd";
+import { generalFaq } from "@/lib/faq";
 
 export const metadata: Metadata = {
   title: { absolute: "Corporate Health Testing in Jamshedpur | Diagnos Lab" },
@@ -26,39 +30,17 @@ export const metadata: Metadata = {
   },
 };
 
+/* DL.pen "Corporate" (desktop and mobile). */
 export default function Page() {
   return (
     <>
       <HeroSection />
       <OurPartners />
       <WhyPartner />
-
-      {/* Get Started */}
-      <section className="bg-white py-12 px-4 text-center">
-        <h2 className="font-heading text-black text-xl md:text-2xl font-extrabold mb-5">
-          Get Started With Corporate Testing
-        </h2>
-        <div className="flex flex-wrap justify-center gap-3">
-          <Link
-            href="/packages"
-            className="inline-flex items-center bg-slate-50 border border-slate-200 rounded-full px-4 py-2 text-sm font-heading font-semibold text-slate-700 hover:border-[#E73834] hover:text-[#E73834] transition-colors"
-          >
-            Health Packages
-          </Link>
-          <Link
-            href="/tests"
-            className="inline-flex items-center bg-slate-50 border border-slate-200 rounded-full px-4 py-2 text-sm font-heading font-semibold text-slate-700 hover:border-[#E73834] hover:text-[#E73834] transition-colors"
-          >
-            Browse Tests
-          </Link>
-          <Link
-            href="/contact-us"
-            className="inline-flex items-center bg-[#E73834] text-white rounded-full px-4 py-2 text-sm font-heading font-semibold hover:bg-red-700 transition-colors"
-          >
-            Contact Us
-          </Link>
-        </div>
-      </section>
+      <FindUsAreas />
+      <PatientReviews tone="white" />
+      <FaqJsonLd items={generalFaq} />
+      <FaqCards items={generalFaq} intro="Can't find what you're looking for? Our corporate desk is a call away." />
     </>
   );
 }

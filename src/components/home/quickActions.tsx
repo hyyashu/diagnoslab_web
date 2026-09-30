@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import { ArrowUpRight, House, MessageCircle, Phone } from "lucide-react";
-import Modal from "@/components/ui/modal";
-import EnquiryForm from "@/components/forms/enquiryForm";
+import ContactSheet from "@/components/forms/contactSheet";
 import { PHONE_HREF, WHATSAPP_HREF } from "@/lib/contact";
 
 /* DL.pen hero "Quick Actions": three shortcuts in one divided bar.
@@ -76,9 +75,7 @@ export default function QuickActions() {
         </a>
       </div>
 
-      <Modal isOpen={open} onClose={() => setOpen(false)}>
-        {open && <EnquiryForm formType="home_collection" />}
-      </Modal>
+      <ContactSheet isOpen={open} onClose={() => setOpen(false)} topic="Home collection" />
     </>
   );
 }

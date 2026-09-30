@@ -1,171 +1,122 @@
-import React from "react";
-import Image from "next/image";
-import FeatureCard from "./featureCard";
+import Link from "next/link";
+import { ArrowRight, Building, ClipboardList, FlaskConical, Headset, Microscope, Package, Zap, type LucideIcon } from "lucide-react";
+import { shell } from "@/components/ui/shell";
 
-const features = [
-  {
-    title: "Comprehensive Diagnostic Solutions",
-    description: "Pathology, Radiology, X-ray, ECG, TMT, Eye, Audio & more.",
-  },
-  {
-    title: "On-Site & Off-Site Testing",
-    description: "Flexible options for sample collection at your premises or at our lab.",
-  },
-  {
-    title: "Dedicated Corporate Support",
-    description: "Seamless coordination, priority booking, and exclusive discounts.",
-  },
-  {
-    title: "Custom Corporate Health Packages",
-    description: "Customizable plans for employees & executives.",
-  },
-  {
-    title: "Fast & Accurate Reporting",
-    description: "Digital reports with same-day results.",
-  },
+const services = ["Pathology", "Radiology", "X-ray", "ECG", "TMT", "Eye check-up", "Audiometry"];
+
+const points: { n: string; icon: LucideIcon; title: string; text: string }[] = [
+  { n: "02", icon: Building, title: "On-site & off-site testing", text: "Flexible sample collection at your premises or at our lab." },
+  { n: "03", icon: Headset, title: "Dedicated corporate support", text: "Seamless coordination, priority booking and exclusive discounts." },
+  { n: "04", icon: ClipboardList, title: "Custom corporate health packages", text: "Customisable plans for employees and executives." },
+  { n: "05", icon: Zap, title: "Fast & accurate reporting", text: "Digital reports with same-day results on most tests." },
 ];
 
-const WhyPartner = () => {
+/* DL.pen corporate "Why Partner" bento plus the "Get Started" band. On
+   phones the point cards turn into rows and the band closes the list. */
+export default function WhyPartner() {
   return (
-    <section className="bg-white py-8 flex flex-col items-center select-none overflow-hidden">
-      <h2 className="font-heading  mt-6 text-black text-2xl md:text-4xl font-extrabold md:mb-14 mb-2 px-2 text-center">
-        Why Partner With Diagnos Lab
-      </h2>
+    <section aria-labelledby="why-heading" className="bg-dl-bg py-10 md:py-20">
+      <div className={`${shell} flex flex-col gap-5 md:gap-9`}>
+        <div className="flex flex-col gap-1.5 md:flex-row md:items-end md:justify-between md:gap-10">
+          <div className="flex flex-col gap-1.5 md:gap-2">
+            <p className="text-[11.5px] font-bold tracking-[0.11em] text-dl-red md:text-[12.5px]">WHY DIAGNOS LAB</p>
+            <h2 id="why-heading" className="font-display text-2xl font-extrabold tracking-[-0.03em] text-dl-ink md:text-[38px]">
+              Why partner with Diagnos Lab
+            </h2>
+          </div>
+          <p className="text-[13.5px] leading-normal text-dl-ink-2 md:max-w-[440px] md:text-base md:leading-[1.55]">
+            <span className="md:hidden">One partner for every test your workforce needs.</span>
+            <span className="hidden md:inline">
+              One partner for every test your workforce needs, from the pre-employment check to the annual screening camp.
+            </span>
+          </p>
+        </div>
 
-      {/* MOBILE CONTAINER */}
-      <div className="relative flex w-full  max-w-lg px-4 lg:hidden min-h-[900px]">
-
-        {/* Left Side: The Vertical Arc */}
-        <div className="relative w-1/4 flex items-center justify-start">
-          <svg viewBox="0 0 100 600" className="h-full w-full overflow-visible" style={{ filter: "drop-shadow(2px 4px 6px rgba(0,0,0,0.1))" }}>
-            {/*ONLY MOBILE SHIFT */}
-            <g transform="translate(0, 80)">
-
-              <path
-                d="M 0 50 A 175 175 0 0 1 0 400"
-                fill="none"
-                stroke="#E1352A"
-                strokeWidth="8"
-                strokeLinecap="round"
-              />
-
-              <circle cx="15" cy="50" r="7" fill="white" stroke="white" strokeWidth="1" />
-              <circle cx="124" cy="101.3" r="7" fill="white" stroke="white" strokeWidth="1" />
-              <circle cx="175" cy="225" r="7" fill="white" stroke="white" strokeWidth="1" />
-              <circle cx="124" cy="348.7" r="7" fill="white" stroke="white" strokeWidth="1" />
-              <circle cx="15" cy="400" r="7" fill="white" stroke="white" strokeWidth="1" />
-
-            </g>
-          </svg>
-
-          {/* Logo overlayed on the arc center */}
-          <div className="absolute left-[-10px] top-1/2 -translate-y-1/2 z-10">
-            <div className="relative w-20 h-20  flex items-center justify-center ">
-              <Image
-                src="/images/logo.avif"
-                alt="Logo"
-                width={100}
-                height={100}
-                className="object-contain"
-              />
+        <div className="grid gap-3 md:grid-cols-[minmax(0,470px)_minmax(0,1fr)] md:gap-4">
+          <div className="flex flex-col gap-5 self-start rounded-[22px] bg-linear-to-b from-dl-red to-dl-red-dark p-6 text-white md:gap-7 md:rounded-[24px] md:p-8">
+            <div className="flex flex-col gap-3 md:gap-4">
+              <span className="flex size-11 items-center justify-center rounded-[14px] bg-white/15 md:size-[52px]">
+                <Microscope className="size-5 md:size-6" aria-hidden />
+              </span>
+              <h3 className="font-display text-xl font-extrabold leading-tight tracking-[-0.02em] md:text-[28px]">
+                Comprehensive diagnostic solutions
+              </h3>
+              <p className="text-[13.5px] leading-normal text-white/85 md:text-[15px]">
+                <span className="md:hidden">Every test your workforce needs under one roof.</span>
+                <span className="hidden md:inline">Every test your workforce needs under one roof, with no juggling multiple labs or vendors.</span>
+              </p>
             </div>
+            <ul className="flex flex-wrap gap-2">
+              {[...services, "& more"].map((s, i) => (
+                <li
+                  key={s}
+                  className={`rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-xs font-semibold md:text-[13px] ${
+                    i === services.length ? "hidden md:block" : ""
+                  }`}
+                >
+                  {s}
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
 
-
-        <div className="w-3/4 flex flex-col justify-between py-20 gap-0">
-          {features.map((item, i) => {
-
-            const offsets = [
-              "-80px",    // Top Card
-              "50px",   // Slightly indented
-              "80px",   // Middle Card (Max indentation)
-              "50px",   // Slightly indented
-              "-80px"     // Bottom Card
-            ];
-
-            return (
-              <div
-                key={i}
-                className="transition-all duration-500 ease-in-out"
-                style={{ marginLeft: offsets[i] }}
+          <ul className="grid gap-3 md:grid-cols-2 md:gap-4">
+            {points.map(({ n, icon: Icon, title, text }) => (
+              <li
+                key={title}
+                className="flex items-start gap-3.5 rounded-[18px] border border-dl-line bg-white p-4 md:flex-col md:gap-3.5 md:rounded-[24px] md:p-7"
               >
-                <FeatureCard
-                  title={item.title}
-                  description={item.description}
-                />
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* DESKTOP CONTAINER */}
-      <div className="relative w-full max-w-[550px] h-[280px] hidden lg:block mt-52">
-        {/* Arc */}
-        <div className="absolute inset-0 flex justify-center items-end">
-          <svg viewBox="0 0 500 250" className="w-full h-full overflow-hidden">
-            <path
-              d="M 50 250 A 200 200 0 0 1 450 250"
-              fill="none"
-              stroke="#E1352A"
-              strokeWidth="10"
-              strokeLinecap="round"
-            />
-            <circle cx="50" cy="220" r="10" fill="white" />
-            <circle cx="100" cy="115" r="10" fill="white" />
-            <circle cx="250" cy="50" r="10" fill="white" />
-            <circle cx="400" cy="115" r="10" fill="white" />
-            <circle cx="450" cy="220" r="10" fill="white" />
-          </svg>
+                <div className="flex shrink-0 items-center justify-between md:w-full">
+                  <span className="flex size-10 items-center justify-center rounded-xl bg-dl-red-soft text-dl-red md:size-[46px]">
+                    <Icon className="size-[18px] md:size-5" aria-hidden />
+                  </span>
+                  <span className="hidden text-[13px] font-bold text-dl-muted md:block">{n}</span>
+                </div>
+                <div className="flex flex-col gap-1 md:gap-2">
+                  <h3 className="font-display text-[15.5px] font-bold text-dl-ink md:text-xl">{title}</h3>
+                  <p className="text-[13.5px] leading-normal text-dl-ink-2 md:text-[14.5px]">{text}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        {/* Logo */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10">
-          <div className="relative w-[120px] h-[120px]">
-            <Image
-              src="/images/logo.avif"
-              alt="Diagnos Lab Logo"
-              fill
-              className="object-contain"
-              priority
-            />
-          </div>
-        </div>
-
-        {/* Cards */}
-        <FeatureCard
-          title={features[0].title}
-          description={features[0].description}
-          className="absolute bottom-2 left-0 -translate-x-full -ml-12"
-        />
-
-        <FeatureCard
-          title={features[1].title}
-          description={features[1].description}
-          className="absolute top-0 left-2 -translate-x-[70%] -translate-y-1/2"
-        />
-
-        <FeatureCard
-          title={features[2].title}
-          description={features[2].description}
-          className="absolute -top-16 left-1/2 -translate-x-1/2 -translate-y-full"
-        />
-
-        <FeatureCard
-          title={features[3].title}
-          description={features[3].description}
-          className="absolute top-0 right-4 translate-x-[70%] -translate-y-1/2"
-        />
-
-        <FeatureCard
-          title={features[4].title}
-          description={features[4].description}
-          className="absolute bottom-2 right-0 translate-x-full -mr-12"
-        />
+        <GetStarted />
       </div>
     </section>
   );
-};
+}
 
-export default WhyPartner;
+function GetStarted() {
+  const ghost =
+    "flex h-12 items-center justify-center gap-2 rounded-[14px] border border-white/20 bg-white/[0.08] px-4 text-sm font-semibold text-white transition-colors hover:bg-white/15 md:h-[50px] md:px-[22px] md:text-[15px]";
+  return (
+    <div className="flex flex-col gap-5 rounded-[22px] bg-dl-ink p-6 md:mt-5 md:flex-row md:items-center md:justify-between md:gap-8 md:rounded-[24px] md:px-10 md:py-9">
+      <div className="flex flex-col gap-1.5">
+        <h2 className="font-display text-xl font-extrabold tracking-[-0.02em] text-white md:text-[28px]">
+          Get started with corporate testing
+        </h2>
+        <p className="hidden text-[15px] text-white/70 md:block">
+          Explore our packages, browse individual tests, or talk to our corporate desk.
+        </p>
+      </div>
+      <div className="grid grid-cols-2 gap-2.5 md:flex">
+        <Link href="/packages/" className={ghost}>
+          <Package className="size-[17px]" aria-hidden />
+          Health packages
+        </Link>
+        <Link href="/tests/" className={ghost}>
+          <FlaskConical className="size-[17px]" aria-hidden />
+          Browse tests
+        </Link>
+        <Link
+          href="/contact-us/"
+          className="col-span-2 flex h-12 items-center justify-center gap-2 rounded-[14px] bg-dl-red px-[22px] text-[15px] font-semibold text-white transition-colors hover:bg-dl-red-dark md:h-[50px]"
+        >
+          Contact us
+          <ArrowRight className="size-[17px]" aria-hidden />
+        </Link>
+      </div>
+    </div>
+  );
+}

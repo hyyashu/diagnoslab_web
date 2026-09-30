@@ -2,19 +2,28 @@
 
 import { useState, type ReactNode } from "react";
 import dynamic from "next/dynamic";
-import type { LeadFormProps } from "@/components/forms/leadForm";
 
-/* The only client-side part of a card. The lead form is mounted when the
-   button is pressed rather than once per card, so a page of 100 cards no
-   longer runs 100 closed forms' hooks on load. Its code is fetched on first
+/* The only client-side part of a card. The contact sheet is mounted when
+   the button is pressed rather than once per card, so a page of 100 cards
+   doesn't run 100 closed forms' hooks on load. Its code is fetched on first
    hover/touch/focus, so it is usually ready before the click lands. */
-const loadLeadForm = () => import("@/components/forms/leadForm");
-const LeadForm = dynamic(loadLeadForm, { ssr: false });
+const loadSheet = () => import("@/components/forms/contactSheet");
+const ContactSheet = dynamic(loadSheet, { ssr: false });
+
+/* What the card is booking; shown in the sheet and sent with the lead. */
+type BookForm = {
+  title?: string;
+  testName?: string;
+  testDescription?: string;
+  testPrice?: number;
+  testOriginalPrice?: number;
+  additionalSourceData?: Record<string, unknown>;
+};
 
 type BookButtonProps = {
   children: ReactNode;
   className?: string;
-  form: Omit<LeadFormProps, "open" | "onOpenChange">;
+  form: BookForm;
 };
 
 export default function BookButton({ children, className, form }: BookButtonProps) {
@@ -24,14 +33,26 @@ export default function BookButton({ children, className, form }: BookButtonProp
     <>
       <button
         onClick={() => setOpen(true)}
-        onPointerEnter={loadLeadForm}
-        onTouchStart={loadLeadForm}
-        onFocus={loadLeadForm}
+        onPointerEnter={loadSheet}
+        onTouchStart={loadSheet}
+        onFocus={loadSheet}
         className={className}
       >
         {children}
       </button>
-      {open && <LeadForm {...form} open onOpenChange={setOpen} />}
+      {open && (
+        <ContactSheet
+          isOpen
+          onClose={() => setOpen(false)}
+          topic="Book a test"
+          item={
+            form.testName
+              ? { name: form.testName, price: form.testPrice, originalPrice: form.testOriginalPrice }
+              : undefined
+          }
+          sourceData={form.additionalSourceData}
+        />
+      )}
     </>
   );
 }

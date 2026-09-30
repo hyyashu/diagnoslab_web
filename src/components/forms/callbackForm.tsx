@@ -13,6 +13,7 @@ type CallbackFormProps = {
   services?: string[];
   /* Sent with the lead when there is no Service select. */
   service?: string;
+  formType?: "enquiry_form" | "home_collection";
 };
 
 /* DL.pen "Call Back Card". Sends the same lead as the enquiry form, plus
@@ -21,6 +22,7 @@ export default function CallbackForm({
   subtitle = "Share your details and our team will call you to book a slot.",
   services,
   service: fixedService,
+  formType = "enquiry_form",
 }: CallbackFormProps) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -32,7 +34,7 @@ export default function CallbackForm({
   const [error, setError] = useState<string | null>(null);
 
   const source = useSource({
-    form_type: "enquiry_form",
+    form_type: formType,
     ...((service || fixedService) && { radiology_name: service || fixedService }),
   });
 
@@ -51,7 +53,7 @@ export default function CallbackForm({
         name: name.trim(),
         phone: normalizePhone(phone),
         source,
-        lead_intent: "general_enquiry",
+        lead_intent: formType === "home_collection" ? "book_home_collection" : "general_enquiry",
       });
       setName("");
       setPhone("");

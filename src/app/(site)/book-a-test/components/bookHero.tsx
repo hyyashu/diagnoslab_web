@@ -1,9 +1,9 @@
 import Image from "next/image";
-import EnquiryForm from "@/components/forms/enquiryForm";
+import CallbackForm from "@/components/forms/callbackForm";
 
 export default function BookHero() {
   return (
-    <section className="relative w-full h-[600px] md:h-[700px] flex flex-col items-center justify-center overflow-visible mb-[180px] md:mb-[120px] z-10">
+    <section className="relative w-full h-[600px] md:h-[700px] flex flex-col items-center justify-center overflow-visible mb-[230px] md:mb-[250px] z-10">
 
       {/* Background image */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -53,8 +53,8 @@ export default function BookHero() {
       </div>
 
       {/* Floating enquiry form */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-20 w-full max-w-[90%] md:max-w-5xl">
-        <EnquiryForm formType="home_collection" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-20 w-full max-w-[90%] md:max-w-md">
+        <CallbackForm formType="home_collection" />
       </div>
     </section>
   );

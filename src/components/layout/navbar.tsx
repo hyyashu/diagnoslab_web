@@ -21,8 +21,7 @@ import {
 } from "lucide-react";
 import Logo from "@/components/ui/logo";
 import SiteSearch from "@/components/search/siteSearch";
-import Modal from "@/components/ui/modal";
-import EnquiryForm from "@/components/forms/enquiryForm";
+import ContactSheet from "@/components/forms/contactSheet";
 import { buttonClass } from "@/components/ui/button";
 import { GOOGLE_REVIEWS_HREF, PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
 
@@ -253,9 +252,7 @@ export default function Navbar() {
         </div>
       </aside>
 
-      <Modal isOpen={formOpen} onClose={() => setFormOpen(false)}>
-        <EnquiryForm formType="home_collection" />
-      </Modal>
+      <ContactSheet isOpen={formOpen} onClose={() => setFormOpen(false)} topic="Home collection" />
     </>
   );
 }

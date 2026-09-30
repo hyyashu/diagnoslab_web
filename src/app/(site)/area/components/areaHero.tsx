@@ -1,5 +1,5 @@
 import Image from "next/image";
-import EnquiryForm from "@/components/forms/enquiryForm";
+import CallbackForm from "@/components/forms/callbackForm";
 
 interface AreaHeroProps {
   areaName: string;
@@ -7,7 +7,7 @@ interface AreaHeroProps {
 
 export default function AreaHero({ areaName }: AreaHeroProps) {
   return (
-    <section className="relative w-full h-[600px] md:h-[700px] flex flex-col items-center justify-center overflow-visible mb-[180px] md:mb-[120px] z-10">
+    <section className="relative w-full h-[600px] md:h-[700px] flex flex-col items-center justify-center overflow-visible mb-[230px] md:mb-[250px] z-10">
 
       {/* Background image */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -52,8 +52,8 @@ export default function AreaHero({ areaName }: AreaHeroProps) {
       </div>
 
       {/* Floating enquiry form */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-20 w-full max-w-[90%] md:max-w-5xl">
-        <EnquiryForm formType="enquiry_form" />
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-20 w-full max-w-[90%] md:max-w-md">
+        <CallbackForm formType="enquiry_form" />
       </div>
     </section>
   );

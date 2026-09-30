@@ -29,10 +29,13 @@ export default function LabTestCard({
   categoryLabel = test.category,
 }: {
   test: LabTest;
-  variant?: "home" | "catalog";
+  variant?: "home" | "catalog" | "related";
   categoryLabel?: string;
 }) {
   const catalog = variant === "catalog";
+  /* "related": the detail pages' "Often booked with" card: grey category
+     pill, green discount pill and a dark "+ Book" button. */
+  const related = variant === "related";
   const { slug, title, description, price, originalPrice } = test;
   const discount =
     originalPrice > 0 && price > 0
@@ -52,10 +55,22 @@ export default function LabTestCard({
 
   return (
     <article className="flex h-full flex-col gap-[18px] rounded-[20px] border border-dl-line bg-white p-5 md:p-6">
-      {catalog ? (
+      {catalog || related ? (
         <div className="flex items-center justify-between gap-2 text-xs font-bold">
-          <span className="rounded-md bg-dl-red-soft px-2 py-1 text-dl-red-dark">{categoryLabel}</span>
-          {discount > 0 && <span className="rounded-md bg-dl-green/10 px-2 py-1 text-dl-green">{discount}% off</span>}
+          <span
+            className={
+              related
+                ? "rounded-full bg-dl-bg px-2.5 py-1 font-semibold text-dl-ink-2"
+                : "rounded-md bg-dl-red-soft px-2 py-1 text-dl-red-dark"
+            }
+          >
+            {categoryLabel}
+          </span>
+          {discount > 0 && (
+            <span className={`bg-dl-green/10 px-2 py-1 text-dl-green ${related ? "rounded-full px-2.5" : "rounded-md"}`}>
+              {discount}% off
+            </span>
+          )}
         </div>
       ) : (
         <div className="flex items-center justify-between gap-2 text-[12.5px]">
@@ -109,7 +124,9 @@ export default function LabTestCard({
             </Link>
           )}
           <BookButton
-            className={catalog ? buttonClass("primary", "sm") : buttonClass("outline", "sm")}
+            className={
+              catalog ? buttonClass("primary", "sm") : related ? buttonClass("dark", "sm") : buttonClass("outline", "sm")
+            }
             form={{
               title: "Book",
               testName: title,
@@ -119,8 +136,9 @@ export default function LabTestCard({
               additionalSourceData: leadMeta,
             }}
           >
+            {related && <Plus className="size-4" aria-hidden />}
             {catalog ? "Book now" : "Book"}
-            {!catalog && <Plus className="size-4" aria-hidden />}
+            {variant === "home" && <Plus className="size-4" aria-hidden />}
           </BookButton>
         </div>
       </div>

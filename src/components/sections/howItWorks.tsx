@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import { ArrowRight, Building2, House } from "lucide-react";
-import Modal from "@/components/ui/modal";
-import EnquiryForm from "@/components/forms/enquiryForm";
+import ContactSheet from "@/components/forms/contactSheet";
 import { buttonClass } from "@/components/ui/button";
 import { shell } from "@/components/ui/shell";
 
@@ -117,9 +116,11 @@ export default function HowItWorks() {
         </div>
       </section>
 
-      <Modal isOpen={form !== null} onClose={() => setForm(null)}>
-        {form && <EnquiryForm formType={form} />}
-      </Modal>
+      <ContactSheet
+        isOpen={form !== null}
+        onClose={() => setForm(null)}
+        topic={form === "home_collection" ? "Home collection" : "Book a test"}
+      />
     </>
   );
 }

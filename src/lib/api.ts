@@ -1,4 +1,4 @@
-import { LeadFormSubmitData } from "@/components/forms/leadForm";
+import type { useSource } from "@/lib/useSource";
 
 // const BASE_URL = "http://diangos-api-jg2j3d-244a7b-91-108-111-112.traefik.me/";
 const BASE_URL = "https://api.diagnoslab.in";
@@ -77,6 +77,15 @@ export const api = {
   ) => request<T>("PATCH", path, body, options),
   delete: <T = unknown>(path: string, options?: RequestOptions) =>
     request<T>("DELETE", path, undefined, options),
+};
+
+/* Every site form posts this shape. `source` carries the UTM parameters,
+   referrer and landing page from useSource, plus the form's own details. */
+export type LeadFormSubmitData = {
+  name: string;
+  phone: string;
+  source: ReturnType<typeof useSource>;
+  lead_intent?: "book_home_collection" | "general_enquiry";
 };
 
 export const submitLeadForm = (data: LeadFormSubmitData) =>

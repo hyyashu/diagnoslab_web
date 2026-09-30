@@ -16,7 +16,9 @@ export type CheckupPackage = Pick<
   mostBooked?: boolean;
 };
 
-export default function CheckupPackageCard({ pkg }: { pkg: CheckupPackage }) {
+/* `highlight`: the red border without the Most Booked tag (detail page
+   comparison). */
+export default function CheckupPackageCard({ pkg, highlight = false }: { pkg: CheckupPackage; highlight?: boolean }) {
   const { title, description, price, originalPrice, parameters, slug } = pkg;
   const discount =
     originalPrice > 0 && price > 0
@@ -39,7 +41,7 @@ export default function CheckupPackageCard({ pkg }: { pkg: CheckupPackage }) {
   return (
     <article
       className={`flex h-full flex-col gap-[18px] md:gap-5 rounded-[20px] bg-white p-5 md:p-6 ${
-        pkg.mostBooked
+        pkg.mostBooked || highlight
           ? "border-[1.5px] border-dl-red"
           : "border border-dl-line"
       }`}

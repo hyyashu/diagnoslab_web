@@ -16,14 +16,14 @@ export type ListingPackage = Pick<
   includes?: string[];
 };
 
-const discountOf = (p: ListingPackage) =>
+export const discountOf = (p: ListingPackage) =>
   p.originalPrice > 0 && p.price > 0 ? Math.round(((p.originalPrice - p.price) / p.originalPrice) * 100) : 0;
 
-const reportLabel = (r: string) => (/same\s*day/i.test(r) ? "Same-day report" : `Report in ${r.toLowerCase()}`);
-const fastingLabel = (f: string) =>
+export const reportLabel = (r: string) => (/same\s*day/i.test(r) ? "Same-day report" : `Report in ${r.toLowerCase()}`);
+export const fastingLabel = (f: string) =>
   /over[\s-]*night/i.test(f) ? "Overnight fasting" : /not\s*required/i.test(f) ? "No fasting" : f;
 
-const rupees = (n: number) => `₹${n.toLocaleString("en-IN")}`;
+export const rupees = (n: number) => `₹${n.toLocaleString("en-IN")}`;
 
 /* Same lead payload as the classic PackageCard. */
 function Book({ pkg, className }: { pkg: ListingPackage; className: string }) {

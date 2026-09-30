@@ -1,8 +1,14 @@
 import data from "@/data/packages.json";
-import DetailCard, {
-  DetailEntity,
-} from "@/components/cards/detailCard";
 import SimilarPackages from "../components/similarPackages";
+import { PackageMain, resolveDetails } from "../components/packageDetail";
+import { DetailBreadcrumb } from "@/components/detail/detailParts";
+import type { BookingItem } from "@/components/detail/detailClient";
+import { categoryLabel, featured, summaries } from "../content";
+import { packageDetails } from "../details";
+import type { ListingPackage } from "@/components/cards/packageListingCards";
+import CollectionSteps from "@/components/home/collectionSteps";
+import FaqJsonLd from "@/components/seo/faqJsonLd";
+import { getPackageBySlug } from "@/lib/catalog";
 import JsonLd from "@/components/seo/jsonLd";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -73,18 +79,41 @@ export default async function Page({
 
   if (!pkg) notFound();
 
-  const entity: DetailEntity = {
-    id: pkg.Id,
-    name: pkg.PackageName,
-    slug: pkg.Slug,
-    description: pkg.Description,
-    price: Number(pkg.Price),
-    discountedPrice: pkg.DiscountedPrice,
-    categories: pkg.Categories?.split(", ") ?? [],
-    fasting: pkg.Fasting,
-    reporting: pkg.Reporting,
-    whoShouldTake: "A comprehensive full-body health check-up designed to assess your wellness.",
-    parametersCovered: pkg.ParametersCovered,
+  const p = getPackageBySlug(slug);
+  if (!p) notFound();
+  const extra = featured[p.slug as keyof typeof featured];
+  const listing: ListingPackage = {
+    slug: p.slug,
+    title: p.title,
+    description: p.description,
+    price: p.price,
+    originalPrice: p.originalPrice,
+    parameters: p.parameters,
+    categories: p.categories,
+    fasting: p.fasting,
+    reporting: p.reporting,
+    categoryLabel: categoryLabel(p.slug, p.categories),
+    summary: extra?.summary ?? summaries[p.slug],
+    includes: extra ? [...extra.includes] : undefined,
+  };
+
+  const content = packageDetails[p.slug];
+  const details = resolveDetails(listing, content);
+  /* Same lead payload as the package cards. */
+  const item: BookingItem = {
+    name: p.title,
+    price: p.price,
+    originalPrice: p.originalPrice,
+    sourceData: {
+      package_name: p.title,
+      package_description: p.description,
+      package_price: p.price,
+      package_original_price: p.originalPrice,
+      package_parameters: p.parameters,
+      package_categories: p.categories.split(","),
+      package_fasting: p.fasting,
+      package_reporting: p.reporting,
+    },
   };
 
   const packageSchema = {
@@ -139,10 +168,17 @@ export default async function Page({
     ],
   };
 
-  return <>
-    <JsonLd data={packageSchema} />
-    <JsonLd data={breadcrumbSchema} />
-    <DetailCard kind="package" data={entity} />
-    <SimilarPackages currentSlug={slug} />
-  </>;
+  return (
+    <div className="pb-24 md:pb-0">
+      <JsonLd data={packageSchema} />
+      <JsonLd data={breadcrumbSchema} />
+      <FaqJsonLd items={details.faq} />
+      <DetailBreadcrumb parent={{ label: "Health packages", href: "/packages/" }} title={p.title} />
+      <PackageMain pkg={listing} d={details} item={item} />
+      <CollectionSteps variant="cards" />
+      <SimilarPackages currentSlug={p.slug} compare={content?.compare} subtitle={content?.compareSubtitle}
+        mobileSubtitle={content?.compareSubtitleMobile}
+      />
+    </div>
+  );
 }

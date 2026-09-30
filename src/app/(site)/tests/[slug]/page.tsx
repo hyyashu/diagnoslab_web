@@ -1,7 +1,12 @@
 import data from "@/data/tests.json";
-import DetailCard from "@/components/cards/detailCard";
-import { DetailEntity } from "@/components/cards/detailCard";
 import SimilarTests from "../components/similarTests";
+import { TestMain } from "../components/testDetail";
+import { testDetails } from "../details";
+import { DetailBreadcrumb } from "@/components/detail/detailParts";
+import CollectionSteps from "@/components/home/collectionSteps";
+import FaqJsonLd from "@/components/seo/faqJsonLd";
+import { labTestsFaq } from "@/lib/faq";
+import { getTestBySlug } from "@/lib/catalog";
 import JsonLd from "@/components/seo/jsonLd";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -76,21 +81,9 @@ export default async function Page({
 
   if (!test) notFound();
 
-  const entity: DetailEntity = {
-    id: test.Id,
-    name: test.TestName,
-    slug: test.Slug,
-    description: test.Description,
-    price: Number(test.Price),
-    discountedPrice: test.DiscountedPrice,
-    categories: test.Categories ?? [],
-    fasting: test.Fasting,
-    reporting: test.Reporting,
-    tat: test.Tat,
-    sampleType: test.SampleType,
-    whoShouldTake:
-      "Anyone monitoring related symptoms or advised by their doctor may benefit from this test.",
-  };
+  const t = getTestBySlug(slug);
+  if (!t) notFound();
+  const content = testDetails[t.slug];
 
   const testSchema = {
     "@context": "https://schema.org",
@@ -139,11 +132,20 @@ export default async function Page({
   };
 
   return (
-    <>
+    <div className="pb-24 md:pb-0">
       <JsonLd data={testSchema} />
       <JsonLd data={breadcrumbSchema} />
-      <DetailCard kind="test" data={entity} />
-      <SimilarTests currentSlug={slug} />
-    </>
+      <FaqJsonLd items={content?.faq ?? labTestsFaq.filter((f) => !f.desktopOnly)} />
+      <DetailBreadcrumb parent={{ label: "Lab tests", href: "/tests/" }} title={t.title} />
+      <TestMain test={t} d={content} />
+      <CollectionSteps variant="cards" />
+      <SimilarTests
+        currentSlug={t.slug}
+        name={content?.shortName ?? t.title}
+        related={content?.related}
+        subtitle={content?.relatedSubtitle}
+        mobileSubtitle={content?.relatedSubtitleMobile}
+      />
+    </div>
   );
 }

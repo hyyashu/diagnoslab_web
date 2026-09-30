@@ -6,7 +6,7 @@ import MostBookedTests from "@/components/home/mostBookedTests";
 import RadiologyImaging from "@/components/home/radiologyImaging";
 import CollectionSteps from "@/components/home/collectionSteps";
 import TrustBand from "@/components/home/trustBand";
-import FindUsPanel from "@/components/sections/findUsPanel";
+import FindUsAreas from "@/components/sections/findUsAreas";
 import PatientReviews from "@/components/sections/patientReviews";
 import JsonLd from "@/components/seo/jsonLd";
 
@@ -61,11 +61,9 @@ export default function Home() {
       <HealthConcerns />
       <MostBookedTests />
       <RadiologyImaging />
-      <CollectionSteps />
+      <CollectionSteps variant="cards" />
       <TrustBand />
-      {/* Muted, with white reviews after it, so neither sits flush against
-          the white CollectionSteps on desktop (TrustBand is phone-only). */}
-      <FindUsPanel tone="muted" />
+      <FindUsAreas bordered />
       <PatientReviews tone="white" />
     </>
   );
