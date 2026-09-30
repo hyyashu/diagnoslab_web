@@ -98,7 +98,7 @@ export default function DetailCard({ kind, data }: DetailCardProps) {
   return (
     <>
       {/* ── Mobile sticky CTA ── */}
-      <div className="fixed bottom-16 left-0 right-0 z-40 md:hidden bg-white border-t border-slate-100 shadow-[0_-4px_24px_rgba(0,0,0,0.10)] px-4 py-3 flex items-center justify-between gap-3">
+      <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white border-t border-slate-100 shadow-[0_-4px_24px_rgba(0,0,0,0.10)] px-4 py-3 flex items-center justify-between gap-3">
         <div>
           <div className="flex items-baseline gap-1.5">
             {data.discountedPrice > 0 && (

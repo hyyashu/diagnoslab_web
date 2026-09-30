@@ -69,7 +69,7 @@ export default function Page() {
         hero={{
           crumb: "X-Ray",
           eyebrow: "X-Ray in Jamshedpur · Walk-ins welcome",
-          title: "Digital X-Ray in Jamshedpur — reports in 1–2 hours",
+          title: "Digital X-Ray in Jamshedpur, reports in 1–2 hours",
           subtitle: "Fast, low-radiation imaging for bones, chest, spine and joints at our Sakchi centre.",
           chips: ["Fractures", "Chest", "Spine", "Joints"],
           proofPoints: [

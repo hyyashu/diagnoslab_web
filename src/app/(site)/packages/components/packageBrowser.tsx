@@ -59,7 +59,7 @@ export default function PackageBrowser({
             id="choose-package-heading"
             eyebrow="HEALTH PACKAGES"
             title="Choose your health package"
-            subtitle="Save more by booking tests together — reports in 6–12 hours."
+            subtitle="Save more by booking tests together. Reports in 6–12 hours."
           />
           <CatalogSearch
             value={query}
@@ -85,8 +85,9 @@ export default function PackageBrowser({
 
         {showFeatured && page === 1 && (
           <div className="grid gap-4 md:gap-5 lg:grid-cols-2">
-            <FeaturedPackageCard pkg={featured[0]} />
-            <FeaturedPackageCard pkg={featured[1]} tone="dark" bestValue />
+            {/* The first featured package (ND Plus) is the one we promote. */}
+            <FeaturedPackageCard pkg={featured[0]} tone="dark" bestValue />
+            <FeaturedPackageCard pkg={featured[1]} />
           </div>
         )}
 

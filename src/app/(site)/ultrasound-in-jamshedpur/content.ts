@@ -45,7 +45,7 @@ export const whyPoints: WhyPoint[] = [
     highlight: true,
   },
   { icon: "clock-3", title: "Same-day reports", text: "Reports in 1–2 hours, shared digitally on WhatsApp." },
-  { icon: "shield-check", title: "Painless & radiation-free", text: "Non-invasive and safe for all ages — including during pregnancy." },
+  { icon: "shield-check", title: "Painless & radiation-free", text: "Non-invasive and safe for all ages, including during pregnancy." },
 ];
 
 export const prepIcons: Record<number, string> = {
@@ -62,7 +62,7 @@ export const expectStats = [
 ];
 
 export const expectPoints = [
-  "Painless, non-invasive and uses no radiation — safe for all ages including pregnancy.",
+  "Painless, non-invasive and uses no radiation. Safe for all ages including pregnancy.",
   "A gel is applied to the skin and a probe is moved over the area being examined.",
   "Female patients can request a female radiologist for pelvic, obstetric and breast scans.",
   "Digital reports are shared on WhatsApp and available through our portal.",

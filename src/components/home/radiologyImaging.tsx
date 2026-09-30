@@ -15,7 +15,7 @@ export default function RadiologyImaging() {
           id="radiology-heading"
           tone="dark"
           title="Radiology & imaging"
-          subtitle="Walk in or book a slot — reports reviewed by experienced doctors"
+          subtitle="Walk in or book a slot. Reports reviewed by experienced doctors"
           mobileSubtitle="Walk in or book a slot"
           link={{ href: "/radiology/", label: "All services", desktopOnly: true }}
         />

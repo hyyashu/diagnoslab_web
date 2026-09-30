@@ -85,8 +85,8 @@ export default function Page() {
           { label: "Ultrasound" },
         ]}
         eyebrow="Ultrasound in Jamshedpur · Walk-ins welcome"
-        title="Ultrasound (USG) in Jamshedpur — reports in 1–2 hours"
-        subtitle="Abdomen, pelvis, pregnancy, thyroid, kidney and breast scans on modern digital machines — with a female radiologist available for female patients."
+        title="Ultrasound (USG) in Jamshedpur, reports in 1–2 hours"
+        subtitle="Abdomen, pelvis, pregnancy, thyroid, kidney and breast scans on modern digital machines, with a female radiologist available for female patients."
         chips={["Abdomen", "Pelvis", "Pregnancy", "Thyroid", "KUB", "Breast"]}
         cta={{ label: "Book ultrasound", href: "#ultrasound-section" }}
         form={{

@@ -27,9 +27,9 @@ export default function HomeHero() {
             Looking for a test?
           </h1>
           <p className="speakable-description max-w-[540px] text-[14.5px] leading-normal text-dl-ink-2 md:text-lg md:leading-[1.55]">
-            <span className="md:hidden">1,000+ tests, packages &amp; scans — reports on WhatsApp.</span>
+            <span className="md:hidden">1,000+ tests, packages &amp; scans. Reports on WhatsApp.</span>
             <span className="hidden md:inline">
-              Search 1,000+ blood tests, packages and scans — reports straight to your WhatsApp.
+              Search 1,000+ blood tests, packages and scans, with reports straight to your WhatsApp.
             </span>
           </p>
         </div>

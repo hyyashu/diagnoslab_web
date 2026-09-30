@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Clock3, Flame, House, TestTubes } from "lucide-react";
+import { ArrowRight, Clock3, Flame, TestTubes } from "lucide-react";
 import BookButton from "@/components/cards/bookButton";
 import { buttonClass } from "@/components/ui/button";
 import type { Package } from "@/lib/catalog";
@@ -99,10 +99,12 @@ export default function CheckupPackageCard({ pkg }: { pkg: CheckupPackage }) {
           <Clock3 className="size-3.5 text-dl-muted" aria-hidden />
           Reports in 24 hrs
         </span>
-        <span className="inline-flex items-center gap-1.5">
-          <House className="size-3.5 text-dl-muted" aria-hidden />
-          Free pickup
-        </span>
+        {parameters > 0 && (
+          <span className="inline-flex items-center gap-1.5">
+            <TestTubes className="size-3.5 text-dl-muted" aria-hidden />
+            {parameters} parameters
+          </span>
+        )}
       </div>
 
       <div className="mt-auto flex items-end justify-between gap-3 border-t border-dl-line pt-5">

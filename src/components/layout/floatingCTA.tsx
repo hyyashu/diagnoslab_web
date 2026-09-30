@@ -1,9 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
 import { Phone } from "lucide-react";
-import EnquiryForm from "@/components/forms/enquiryForm";
-import Modal from "@/components/ui/modal";
 import { usePathname } from "next/navigation";
 
 interface FloatingCTAProps {
@@ -16,25 +13,11 @@ export default function FloatingCTA({
   whatsappNumber,
 }: FloatingCTAProps) {
 
-  const [openForm, setOpenForm] = useState(false);
   const pathname = usePathname();
-  // Detail pages have their own sticky booking bar — hide mobile float buttons there
+  // Detail pages have their own sticky booking bar; hide mobile float buttons there
   const isDetailPage =
     /^\/(tests|packages)\/.+/.test(pathname);
 
-
-  /* Scroll Lock */
-  useEffect(() => {
-    if (openForm) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [openForm]);
 
   const handleCall = () => {
     window.location.href = `tel:${phoneNumber}`;
@@ -46,7 +29,7 @@ export default function FloatingCTA({
 
   return (
     <>
-      <div id="contact" className={`fixed right-6 z-50 flex flex-col gap-3 items-end md:bottom-6 ${isDetailPage ? "bottom-40" : "bottom-24"}`}>
+      <div id="contact" className={`fixed left-6 z-50 flex flex-col gap-3 items-start md:bottom-6 ${isDetailPage ? "bottom-24" : "bottom-6"}`}>
 
         {/* Call Button (Mobile Only) */}
         <button
@@ -74,21 +57,6 @@ export default function FloatingCTA({
 
       </div>
 
-      {/* Vertical Request a Call CTA */}
-      <button
-        onClick={() => setOpenForm(true)}
-        className="fixed left-0 top-1/2 -translate-y-1/2 z-50 bg-orange-500 text-white px-3 py-6 rounded-r-lg shadow-lg hover:bg-orange-600 transition"
-      >
-        <span className="[writing-mode:vertical-rl] rotate-180 text-sm font-medium tracking-wide">
-          Request a Call
-        </span>
-      </button>
-
-      {/* Popup Form */}
-      <Modal isOpen={openForm} onClose={() => setOpenForm(false)}>
-
-        <EnquiryForm formType="enquiry_form" />
-      </Modal>
     </>
   );
 }

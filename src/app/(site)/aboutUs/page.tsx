@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     absolute: "About Diagnos Lab | Diagnostic Centre in Jamshedpur Since 2009",
   },
   description:
-    "Learn about Diagnos Lab — Jamshedpur's trusted diagnostic centre for 15+ years. NABL-quality testing, 4.9-star Google rating, and a patient-first team in Sakchi.",
+    "Learn about Diagnos Lab, Jamshedpur's trusted diagnostic centre for 15+ years. NABL-quality testing, 4.9-star Google rating, and a patient-first team in Sakchi.",
   keywords: [
     "About Diagnos Lab",
     "Best Diagnostic Center Jamshedpur",

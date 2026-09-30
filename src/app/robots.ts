@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-/* Required for output: "export" — written to out/robots.txt at build time. */
+/* Required for output: "export", written to out/robots.txt at build time. */
 export const dynamic = "force-static";
 
 export default function robots(): MetadataRoute.Robots {

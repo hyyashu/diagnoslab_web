@@ -69,8 +69,8 @@ export default function Page() {
       <ServicePageHero
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Health Packages" }]}
         eyebrow="Health packages in Jamshedpur · Home collection available"
-        title="Full body checkups & health packages — from ₹1,100"
-        subtitle="Bundled tests for full body, diabetes, thyroid, PCOD and pregnancy care — at a fraction of the individual test price."
+        title="Full body checkups & health packages from ₹1,100"
+        subtitle="Bundled tests for full body, diabetes, thyroid, PCOD and pregnancy care, at a fraction of the individual test price."
         proofPoints={[
           { icon: BadgePercent, value: "Up to 80%", label: "Off on packages", mobileLabel: "Off" },
           { icon: House, value: "At home", label: "Sample collection", mobileLabel: "Collection" },

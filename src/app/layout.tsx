@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 
 /* Plus Jakarta Sans for headings, Inter for everything else, both
@@ -85,10 +86,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${jakarta.variable} ${inter.variable} antialiased`}
-      >
+      <body className={`${jakarta.variable} ${inter.variable} antialiased`}>
         {children}
+        {/* ReplyBash chat widget. Loaded after the page is idle so it never
+            competes with the LCP element. */}
+        <Script
+          src="https://replybash.sitebackend.com/embed.js"
+          data-agent-id="diagnoslab_RQQVD"
+          // strategy="lazyOnload"
+        />
       </body>
     </html>
   );

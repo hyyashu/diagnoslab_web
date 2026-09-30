@@ -58,7 +58,7 @@ export default function TestBrowser({ tests }: { tests: BrowserTest[] }) {
             id="find-test-heading"
             eyebrow="ALL LAB TESTS"
             title="Find your test"
-            subtitle="Search by name or browse by health concern — book in under a minute."
+            subtitle="Search by name or browse by health concern and book in under a minute."
           />
           <CatalogSearch
             value={query}

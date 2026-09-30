@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Diagnos Lab | Radiology Services in Jamshedpur",
     description:
-      "Book radiology services at Diagnos Lab in Jamshedpur — Ultrasound, X-Ray, ECG, and PFT with fast reporting and experienced specialists.",
+      "Book radiology services at Diagnos Lab in Jamshedpur: Ultrasound, X-Ray, ECG, and PFT with fast reporting and experienced specialists.",
     url: "https://diagnoslab.in/radiology/",
     images: ["/images/diagnoslogo.avif"],
   },
@@ -38,8 +38,8 @@ export default function Page() {
       <ServicePageHero
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Radiology" }]}
         eyebrow="Radiology in Jamshedpur · Walk-ins welcome"
-        title="Ultrasound, X-Ray, ECG, ECHO & PFT — reports in 1–2 hours"
-        subtitle="Modern digital equipment, experienced radiologists and a dedicated female radiologist — all under one roof in Sakchi."
+        title="Ultrasound, X-Ray, ECG, ECHO & PFT, with reports in 1–2 hours"
+        subtitle="Modern digital equipment, experienced radiologists and a dedicated female radiologist, all under one roof in Sakchi."
         cta={{ label: "Book a scan", href: "#radiology-section" }}
         form={{ services: scanServices.map((s) => s.title) }}
       />
@@ -47,7 +47,7 @@ export default function Page() {
       <WhyPoints
         title="Why patients in Jamshedpur choose us for imaging"
         mobileTitle="Why patients choose us for imaging"
-        subtitle="Trusted by thousands of patients for accurate radiology services — with reports your doctor can act on the same day."
+        subtitle="Trusted by thousands of patients for accurate radiology services, with reports your doctor can act on the same day."
         mobileSubtitle="Trusted by thousands of patients across Jamshedpur."
         points={whyPoints}
       />

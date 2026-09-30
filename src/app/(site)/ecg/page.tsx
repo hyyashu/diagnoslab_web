@@ -69,7 +69,7 @@ export default function Page() {
         hero={{
           crumb: "ECG",
           eyebrow: "ECG in Jamshedpur · Walk-ins welcome",
-          title: "ECG Test in Jamshedpur — reports in 1–2 hours",
+          title: "ECG Test in Jamshedpur, reports in 1–2 hours",
           subtitle: "12-lead ECG (electrocardiogram) for heart rhythm and electrical activity analysis at our Sakchi centre.",
           chips: ["Chest pain", "Irregular heartbeat", "Pre-surgery", "Routine cardiac screening"],
           proofPoints: [

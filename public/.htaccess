@@ -1,4 +1,4 @@
-# Diagnos Lab — static export served by LiteSpeed (Apache-compatible).
+# Diagnos Lab: static export served by LiteSpeed (Apache-compatible).
 # `next build` copies this file from public/ into out/.
 #
 # The host already forces https, strips www and adds trailing slashes. The

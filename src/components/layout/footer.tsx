@@ -68,7 +68,7 @@ export default function Footer() {
                 Book, track and get reports on WhatsApp
               </span>
               <span className="hidden text-sm text-white/65 md:block">
-                Message us any time — our team replies from 7:30 AM to 7:30 PM, every day.
+                Message us any time. Our team replies from 7:30 AM to 7:30 PM, every day.
               </span>
             </span>
           </div>

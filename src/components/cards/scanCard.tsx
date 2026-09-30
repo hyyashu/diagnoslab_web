@@ -23,7 +23,7 @@ export type ScanService = {
   preparation?: string;
 };
 
-/* DL.pen radiology "Ultrasound — Featured" (featured) and "Service Cards"
+/* DL.pen radiology "Ultrasound / Featured" (featured) and "Service Cards"
    (card). A card is a compact row on phones. */
 export default function ScanCard({
   scan,

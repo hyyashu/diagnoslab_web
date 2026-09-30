@@ -16,7 +16,7 @@ export default function ScansOffered() {
           id="scans-heading"
           eyebrow="SCANS WE OFFER"
           title="Ultrasound scans we offer"
-          subtitle="From routine abdominal checks to pregnancy monitoring — comprehensive USG services under one roof."
+          subtitle="From routine abdominal checks to pregnancy monitoring, comprehensive USG services under one roof."
         />
         <ScanCard scan={featuredScan} variant="featured" />
         <ul className="grid gap-3 md:grid-cols-2 md:gap-5 lg:grid-cols-3">

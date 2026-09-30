@@ -80,7 +80,7 @@ export const ultrasoundFaq: FaqItem[] = [
   },
   {
     question: "Is ultrasound safe during pregnancy?",
-    answer: "Yes. Ultrasound is painless, non-invasive and uses no radiation — safe for all ages including pregnancy.",
+    answer: "Yes. Ultrasound is painless, non-invasive and uses no radiation. It is safe for all ages including pregnancy.",
   },
   {
     question: "How long does an ultrasound scan take?",

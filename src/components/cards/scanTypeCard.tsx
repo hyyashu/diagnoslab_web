@@ -32,7 +32,7 @@ export default function ScanTypeCard({ service, title, description, preparation,
         className={buttonClass("primary", "sm", "w-full md:w-fit md:self-end")}
         form={{
           title: "Book",
-          testName: `${service} — ${title}`,
+          testName: `${service}: ${title}`,
           testDescription: description,
           additionalSourceData: {
             radiology_name: title,

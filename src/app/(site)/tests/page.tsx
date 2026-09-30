@@ -55,8 +55,8 @@ export default function Page() {
       <ServicePageHero
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Lab Tests" }]}
         eyebrow="Blood tests in Jamshedpur · Home collection available"
-        title="Blood tests in Jamshedpur — reports in 6–12 hours"
-        subtitle="CBC, thyroid, diabetes, liver, kidney and hormone tests — with sample collection at home or at our Sakchi, Jugsalai and Adityapur centres."
+        title="Blood tests in Jamshedpur, reports in 6–12 hours"
+        subtitle="CBC, thyroid, diabetes, liver, kidney and hormone tests, with sample collection at home or at our Sakchi, Jugsalai and Adityapur centres."
         proofPoints={[
           { icon: Clock3, value: "6–12 hrs", label: "Report turnaround", mobileLabel: "Reports" },
           { icon: House, value: "At home", label: "Sample collection", mobileLabel: "Collection" },

@@ -1,7 +1,7 @@
 import JsonLd from "@/components/seo/jsonLd";
 import HomeCollectionJsonLd from "@/components/seo/homeCollectionJsonLd";
 import Navbar from "@/components/layout/navbar";
-import BottomNav from "@/components/layout/bottomNav";
+// import BottomNav from "@/components/layout/bottomNav";
 import FloatingCTA from "@/components/layout/floatingCTA";
 import Footer from "@/components/layout/footer";
 import FAQAccordion from "@/components/sections/faq";
@@ -109,7 +109,7 @@ export default function SiteLayout({
       <JsonLd data={localBusinessSchema} />
       <HomeCollectionJsonLd />
       <Navbar />
-      <main className="pb-20 md:pb-0">
+      <main>
         {children}
         <FloatingCTA
           phoneNumber="+918404802201"
@@ -128,7 +128,10 @@ export default function SiteLayout({
         </HideOn>
       </main>
       <Footer />
-      <BottomNav />
+      {/* Bottom nav switched off for now. To bring it back, uncomment this
+          and its import, restore pb-20 md:pb-0 on <main>, bottom-16 on the
+          detail page sticky bar and bottom-24 / bottom-40 on FloatingCTA. */}
+      {/* <BottomNav /> */}
     </>
   );
 }

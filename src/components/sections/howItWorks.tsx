@@ -14,7 +14,7 @@ const options = [
     key: "lab",
     icon: Building2,
     title: "Lab visit",
-    subtitle: "Visit any centre — Sakchi, Jugsalai or Adityapur",
+    subtitle: "Visit any centre: Sakchi, Jugsalai or Adityapur",
     steps: [
       { title: "Visit the lab", text: "Walk in or arrive at your appointment time." },
       { title: "Tested by experts", text: "Our trained technicians collect and process your sample." },
