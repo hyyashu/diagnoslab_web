@@ -109,31 +109,36 @@ export default function CheckupPackageCard({ pkg, highlight = false }: { pkg: Ch
         )}
       </div>
 
-      <div className="mt-auto flex items-end justify-between gap-3 border-t border-dl-line pt-5">
-        <div className="flex flex-col gap-0.5">
-          {originalPrice > price && (
-            <s className="text-[13px] font-medium text-dl-muted">
-              ₹{originalPrice.toLocaleString("en-IN")}
-            </s>
-          )}
+      <div className="mt-auto flex flex-col gap-4 border-t border-dl-line pt-5">
+        <div className="flex items-end gap-2">
           <span className="font-display text-2xl md:text-[26px] font-extrabold tracking-[-0.025em] text-dl-ink">
             ₹{price.toLocaleString("en-IN")}
           </span>
+          {originalPrice > price && (
+            <s className="pb-1 text-[13px] font-medium text-dl-muted">
+              ₹{originalPrice.toLocaleString("en-IN")}
+            </s>
+          )}
         </div>
-        <BookButton
-          className={buttonClass(pkg.mostBooked ? "primary" : "dark")}
-          form={{
-            title: "Book",
-            testName: title,
-            testDescription: description,
-            testPrice: price,
-            testOriginalPrice: originalPrice,
-            additionalSourceData: leadMeta,
-          }}
-        >
-          Book
-          <ArrowRight className="size-4" aria-hidden />
-        </BookButton>
+        <div className="flex gap-2">
+          <Link href={`/packages/${slug}`} className={buttonClass("neutral", "md", "flex-1")}>
+            Details
+          </Link>
+          <BookButton
+            className={buttonClass("primary", "md", "flex-1")}
+            form={{
+              title: "Book",
+              testName: title,
+              testDescription: description,
+              testPrice: price,
+              testOriginalPrice: originalPrice,
+              additionalSourceData: leadMeta,
+            }}
+          >
+            Book
+            <ArrowRight className="size-4" aria-hidden />
+          </BookButton>
+        </div>
       </div>
     </article>
   );

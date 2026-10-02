@@ -39,7 +39,7 @@ export default function MapEmbed({ src, title }: { src: string; title: string })
   }, []);
 
   return (
-    <div ref={ref} className="w-full h-full bg-gray-100">
+    <div ref={ref} className="w-full h-full bg-dl-bg">
       {show && (
         <iframe
           src={src}

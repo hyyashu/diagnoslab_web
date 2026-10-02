@@ -132,7 +132,7 @@ export default async function Page({
     provider: {
       "@type": "MedicalBusiness",
       name: "Diagnos Lab",
-      telephone: "+918404802201",
+      telephone: "+918404802214",
       url: "https://diagnoslab.in",
       address: {
         "@type": "PostalAddress",

@@ -1,16 +1,24 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, Lock } from "lucide-react";
+import { ArrowRight, ChevronDown, Lock } from "lucide-react";
 import { submitLeadForm } from "@/lib/api";
 import { useSource } from "@/lib/useSource";
 import { normalizePhone, sanitizeName, validateName, validatePhone } from "@/lib/leadValidation";
 import { buttonClass } from "@/components/ui/button";
 
 type CallbackFormProps = {
+  title?: string;
   subtitle?: string;
   /* Options for the "Service" select; leave out to hide the field. */
   services?: string[];
+  /* Wording of the Service select. */
+  serviceLabel?: string;
+  servicePlaceholder?: string;
+  /* Optional single-choice chips ("What do you need?") instead of the
+     Service select. */
+  needs?: string[];
+  note?: string;
   /* Sent with the lead when there is no Service select. */
   service?: string;
   formType?: "enquiry_form" | "home_collection";
@@ -19,8 +27,13 @@ type CallbackFormProps = {
 /* DL.pen "Call Back Card". Sends the same lead as the enquiry form, plus
    the chosen service under the key the radiology cards already use. */
 export default function CallbackForm({
+  title = "Request a call back",
   subtitle = "Share your details and our team will call you to book a slot.",
   services,
+  serviceLabel = "Service",
+  servicePlaceholder = "Select a scan",
+  needs,
+  note = "We never share your number.",
   service: fixedService,
   formType = "enquiry_form",
 }: CallbackFormProps) {
@@ -77,7 +90,7 @@ export default function CallbackForm({
     >
       <div className="flex flex-col gap-1.5">
         <h2 className="font-display text-lg font-extrabold tracking-[-0.02em] text-dl-ink md:text-[22px]">
-          Request a call back
+          {title}
         </h2>
         <p className="text-[13px] leading-normal text-dl-ink-2 md:text-sm">
           {subtitle}
@@ -127,14 +140,14 @@ export default function CallbackForm({
 
         {services && (
           <label className="flex flex-col gap-1.5">
-            <span className={label}>Service</span>
+            <span className={label}>{serviceLabel}</span>
             <span className="relative">
               <select
                 value={service}
                 onChange={(e) => setService(e.target.value)}
                 className={`${field} appearance-none pr-10 ${service ? "" : "text-dl-muted"}`}
               >
-                <option value="">Select a scan</option>
+                <option value="">{servicePlaceholder}</option>
                 {services.map((s) => (
                   <option key={s} value={s}>
                     {s}
@@ -146,8 +159,35 @@ export default function CallbackForm({
           </label>
         )}
 
+        {needs && (
+          <fieldset className="flex flex-col gap-2">
+            <legend className={`${label} pb-2`}>What do you need? (optional)</legend>
+            <div className="grid grid-cols-3 gap-2">
+              {needs.map((n) => {
+                const selected = service === n;
+                return (
+                  <button
+                    key={n}
+                    type="button"
+                    aria-pressed={selected}
+                    onClick={() => setService(selected ? "" : n)}
+                    className={`rounded-full border px-2 py-[9px] text-[12.5px] transition-colors md:text-[13px] ${
+                      selected
+                        ? "border-dl-red bg-dl-red-soft font-bold text-dl-red"
+                        : "border-dl-line bg-white font-medium text-dl-ink-2 hover:border-dl-ink/40"
+                    }`}
+                  >
+                    {n}
+                  </button>
+                );
+              })}
+            </div>
+          </fieldset>
+        )}
+
         <button type="submit" disabled={submitting} className={buttonClass("primary", "lg", "mt-1 w-full disabled:opacity-60")}>
           {submitting ? "Submitting…" : "Request call back"}
+          {!submitting && <ArrowRight className="size-4" aria-hidden />}
         </button>
 
         {submitted && (
@@ -163,7 +203,7 @@ export default function CallbackForm({
 
         <p className="flex items-center justify-center gap-1.5 text-[11.5px] text-dl-muted md:text-xs">
           <Lock className="size-3.5" aria-hidden />
-          We never share your number.
+          {note}
         </p>
       </form>
     </div>

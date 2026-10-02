@@ -40,8 +40,24 @@ const options = [
   },
 ];
 
-/* DL.pen "How It Works": lab visit and home collection side by side. */
-export default function HowItWorks() {
+type HowItWorksProps = {
+  title?: string;
+  subtitle?: string;
+  labSubtitle?: string;
+  homeSubtitle?: string;
+  /* A link (e.g. directions) in place of the lab card's appointment form. */
+  labCta?: { label: string; href: string };
+};
+
+/* DL.pen "How It Works": lab visit and home collection side by side. The
+   area pages word it for the area and point the lab card at directions. */
+export default function HowItWorks({
+  title = "Two easy ways to get tested",
+  subtitle = "Walk in to any of our centres, or book a home collection and we'll come to you.",
+  labSubtitle,
+  homeSubtitle,
+  labCta,
+}: HowItWorksProps = {}) {
   const [form, setForm] = useState<EnquiryFormType | null>(null);
 
   return (
@@ -58,60 +74,76 @@ export default function HowItWorks() {
                 id="how-heading"
                 className="font-display text-[22px] font-extrabold tracking-[-0.03em] text-dl-ink md:text-[38px] md:leading-[1.1]"
               >
-                Two easy ways to get tested
+                {title}
               </h2>
             </div>
             <p className="text-[13.5px] leading-normal text-dl-ink-2 md:max-w-[440px] md:text-[15px] md:leading-relaxed">
-              Walk in to any of our centres, or book a home collection and we&apos;ll come to you.
+              {subtitle}
             </p>
           </div>
 
           <div className="grid gap-4 md:grid-cols-2 md:gap-5">
-            {options.map(({ key, icon: Icon, title, subtitle, steps, cta, form: formType, dark }) => (
-              <div
-                key={key}
-                className={`flex flex-col gap-6 rounded-3xl p-6 md:gap-7 md:p-8 ${
-                  dark ? "bg-dl-ink text-white" : "border border-dl-line bg-white text-dl-ink"
-                }`}
-              >
-                <div className="flex items-center gap-4">
-                  <span
-                    className={`flex size-12 shrink-0 items-center justify-center rounded-2xl ${
-                      dark ? "bg-dl-red text-white" : "bg-dl-red-soft text-dl-red"
-                    }`}
-                  >
-                    <Icon className="size-[22px]" aria-hidden />
-                  </span>
-                  <span className="flex flex-col gap-0.5">
-                    <h3 className="font-display text-xl font-extrabold tracking-[-0.02em] md:text-2xl">{title}</h3>
-                    <span className={`text-[13.5px] ${dark ? "text-white/70" : "text-dl-ink-2"}`}>{subtitle}</span>
-                  </span>
-                </div>
-
-                <ol className="flex flex-col gap-5">
-                  {steps.map((s, i) => (
-                    <li key={s.title} className="flex gap-3.5">
-                      <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-dl-red text-[13px] font-bold text-white">
-                        {i + 1}
-                      </span>
-                      <span className="flex flex-col gap-1">
-                        <span className="font-display text-base font-bold">{s.title}</span>
-                        <span className={`text-sm leading-normal ${dark ? "text-white/70" : "text-dl-ink-2"}`}>{s.text}</span>
-                      </span>
-                    </li>
-                  ))}
-                </ol>
-
-                <button
-                  type="button"
-                  onClick={() => setForm(formType)}
-                  className={buttonClass("primary", "lg", "mt-auto w-full md:w-fit")}
+            {options.map(({ key, icon: Icon, title, subtitle: defaultSubtitle, steps, cta, form: formType, dark }) => {
+              const subtitle = (key === "lab" ? labSubtitle : homeSubtitle) ?? defaultSubtitle;
+              const link = key === "lab" ? labCta : undefined;
+              return (
+                <div
+                  key={key}
+                  className={`flex flex-col gap-6 rounded-3xl p-6 md:gap-7 md:p-8 ${
+                    dark ? "bg-dl-ink text-white" : "border border-dl-line bg-white text-dl-ink"
+                  }`}
                 >
-                  {cta}
-                  <ArrowRight className="size-4" aria-hidden />
-                </button>
-              </div>
-            ))}
+                  <div className="flex items-center gap-4">
+                    <span
+                      className={`flex size-12 shrink-0 items-center justify-center rounded-2xl ${
+                        dark ? "bg-dl-red text-white" : "bg-dl-red-soft text-dl-red"
+                      }`}
+                    >
+                      <Icon className="size-[22px]" aria-hidden />
+                    </span>
+                    <span className="flex flex-col gap-0.5">
+                      <h3 className="font-display text-xl font-extrabold tracking-[-0.02em] md:text-2xl">{title}</h3>
+                      <span className={`text-[13.5px] ${dark ? "text-white/70" : "text-dl-ink-2"}`}>{subtitle}</span>
+                    </span>
+                  </div>
+
+                  <ol className="flex flex-col gap-5">
+                    {steps.map((s, i) => (
+                      <li key={s.title} className="flex gap-3.5">
+                        <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-dl-red text-[13px] font-bold text-white">
+                          {i + 1}
+                        </span>
+                        <span className="flex flex-col gap-1">
+                          <span className="font-display text-base font-bold">{s.title}</span>
+                          <span className={`text-sm leading-normal ${dark ? "text-white/70" : "text-dl-ink-2"}`}>{s.text}</span>
+                        </span>
+                      </li>
+                    ))}
+                  </ol>
+
+                  {link ? (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={buttonClass("primary", "lg", "mt-auto w-full md:w-fit")}
+                    >
+                      {link.label}
+                      <ArrowRight className="size-4" aria-hidden />
+                    </a>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => setForm(formType)}
+                      className={buttonClass("primary", "lg", "mt-auto w-full md:w-fit")}
+                    >
+                      {cta}
+                      <ArrowRight className="size-4" aria-hidden />
+                    </button>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

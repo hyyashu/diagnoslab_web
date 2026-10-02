@@ -36,15 +36,15 @@ export const categoryLabel = (slug: string, categories: string) => {
 /* The design's order for the first page; the rest follow in catalogue order. */
 export const leadOrder = ["bio-t-plus", "bio-t-d-plus", "diabetes-monitoring-panel-1", "pcod-profile", "amh-plus", "ante-natal-panel"];
 
-/* Chip label -> the packages it shows. */
-export const packageChips: [string, string[] | null][] = [
-  ["All packages", null],
-  ["Full Body", ["nd-plus", "nd-max-plus", "bio-t-plus", "bio-t-d-plus"]],
-  ["Diabetes", ["bio-t-d-plus", "diabetes-monitoring-panel-1", "diabetes-monitoring-panel-2", "nd-plus", "nd-max-plus"]],
-  ["Women's Health", ["amh-plus", "pcod-profile"]],
-  ["Thyroid & Hormones", ["nd-plus", "nd-max-plus", "amh-plus", "pcod-profile"]],
-  ["Pregnancy", pregnancy],
-  ["Heart Health", ["nd-plus", "nd-max-plus"]],
-  ["Liver & Kidney", ["liver-function-test-lft", "kidney-function-tests-kft"]],
-  ["Vitamins", ["nd-plus", "nd-max-plus"]],
+/* Chip label -> the packages it shows, and the chip's icon. */
+export const packageChips: [string, string[] | null, string][] = [
+  ["All packages", null, "layout-grid"],
+  ["Full Body", ["nd-plus", "nd-max-plus", "bio-t-plus", "bio-t-d-plus"], "person-standing"],
+  ["Diabetes", ["bio-t-d-plus", "diabetes-monitoring-panel-1", "diabetes-monitoring-panel-2", "nd-plus", "nd-max-plus"], "droplet"],
+  ["Women's Health", ["amh-plus", "pcod-profile"], "venus"],
+  ["Thyroid & Hormones", ["nd-plus", "nd-max-plus", "amh-plus", "pcod-profile"], "activity"],
+  ["Pregnancy", pregnancy, "baby"],
+  ["Heart Health", ["nd-plus", "nd-max-plus"], "heart-pulse"],
+  ["Liver & Kidney", ["liver-function-test-lft", "kidney-function-tests-kft"], "flask-conical"],
+  ["Vitamins", ["nd-plus", "nd-max-plus"], "pill"],
 ];

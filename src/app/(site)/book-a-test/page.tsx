@@ -1,14 +1,20 @@
 import type { Metadata } from "next";
-import BookHero from "./components/bookHero";
-import WhyDiagnosLab from "@/components/sections/whyDiagnos";
-import PopularTests from "@/components/sections/popularTests";
-import PopularHealthPackages from "@/components/sections/packages";
+import FeaturedTests from "@/components/sections/featuredTests";
+import FeaturedPackages from "@/components/sections/featuredPackages";
+import PatientReviews from "@/components/sections/patientReviews";
+import FAQAccordion from "@/components/sections/faq";
+import FaqJsonLd from "@/components/seo/faqJsonLd";
 import JsonLd from "@/components/seo/jsonLd";
+import BookHero from "./components/bookHero";
+import BookingSteps from "./components/bookingSteps";
+import PrescriptionBand from "./components/prescriptionBand";
+import Coverage from "./components/coverage";
+import { bookingFaq } from "./content";
 
 export const metadata: Metadata = {
   title: { absolute: "Book Blood Test in Jamshedpur | Home Collection | Diagnos Lab" },
   description:
-    "Book blood tests, ultrasound, ECG, X-Ray & health packages in Jamshedpur with home sample collection. Same-day digital reports. Call +91 8404802201.",
+    "Book blood tests, ultrasound, ECG, X-Ray & health packages in Jamshedpur with home sample collection. Same-day digital reports. Call +91 8404802214.",
   keywords: [
     "book blood test jamshedpur",
     "blood test at home jamshedpur",
@@ -56,9 +62,23 @@ export default function BookATestPage() {
       <JsonLd data={bookingSchema} />
       <JsonLd data={bookingBreadcrumb} />
       <BookHero />
-      <WhyDiagnosLab />
-      <PopularTests />
-      <PopularHealthPackages />
+      <BookingSteps />
+      <FeaturedTests
+        eyebrow="TRANSPARENT PRICES"
+        title="Popular tests & prices"
+        subtitle="Tell us the test name on the call and we'll confirm the price and slot right away."
+      />
+      <PrescriptionBand />
+      <FeaturedPackages title="Full-body checkups, collected at your home" />
+      <Coverage />
+      <PatientReviews tone="white" subtitle="Real Google reviews from patients across Jamshedpur" />
+      <FaqJsonLd items={bookingFaq} />
+      <FAQAccordion
+        title="Questions before you book?"
+        items={bookingFaq}
+        intro="Not sure which test to book? Message us on WhatsApp, share your prescription and we'll help."
+        tone="muted"
+      />
     </>
   );
 }

@@ -1,9 +1,15 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { CalendarCheck, Check, ChevronRight, Phone, Sparkles } from "lucide-react";
+import { shell } from "@/components/ui/shell";
+import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
+import PolicyNav from "./components/policyNav";
+import { LAST_UPDATED, inShort, privacyIntro, privacySections } from "./content";
 
 export const metadata: Metadata = {
   title: { absolute: "Privacy Policy | Diagnos Lab Jamshedpur" },
   description:
-    "Read the privacy policy of Diagnos Lab, Jamshedpur. We are committed to protecting patient data and maintaining confidentiality.",
+    "How Diagnos Lab, Jamshedpur handles your samples, your data and your reports: what we collect, who we share it with, how long we keep it and your rights.",
   alternates: {
     canonical: "https://diagnoslab.in/policy/",
   },
@@ -16,115 +22,100 @@ export const metadata: Metadata = {
   },
 };
 
+/* DL.pen "Diagnos Lab — Policies": a title band, then the policy beside a
+   sticky "on this page" nav. */
 export default function PrivacyPolicyPage() {
   return (
-    <div className="bg-white ">
-      <div className="max-w-4xl mx-auto px-4 py-12">
-
-        {/* Heading */}
-        <h1 className="text-3xl font-heading md:text-4xl font-bold mb-6 text-black">
-          Privacy Policy
-        </h1>
-
-        {/* Content */}
-        <div className="space-y-8 text-black leading-relaxed">
-
-          {/* Section */}
-          <section>
-            <h2 className="text-xl font-heading font-semibold mb-2 text-black">
-              1. Introduction
-            </h2>
-            <p className="font-body">
-              We value your privacy and are committed to protecting your personal
-              information. This Privacy Policy explains how we collect, use, and
-              safeguard your data when you use our website and services.
+    <>
+      <section className="border-b border-dl-line bg-linear-to-b from-dl-red-soft to-dl-bg">
+        <div className={`${shell} flex flex-col gap-5 pt-5 pb-8 md:gap-[22px] md:pt-10 md:pb-14`}>
+          <nav aria-label="Breadcrumb">
+            <ol className="flex items-center gap-1.5 text-xs text-dl-muted md:text-[13px]">
+              <li className="flex items-center gap-1.5">
+                <Link href="/" className="hover:text-dl-ink">Home</Link>
+                <ChevronRight className="size-3.5" aria-hidden />
+              </li>
+              <li aria-current="page" className="font-semibold text-dl-ink">Policies</li>
+            </ol>
+          </nav>
+          <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between md:gap-10">
+            <div className="flex max-w-[620px] flex-col gap-2.5 md:gap-3">
+              <h1 className="font-display text-[30px] font-extrabold tracking-[-0.03em] text-dl-ink md:text-[46px]">
+                Policies &amp; terms
+              </h1>
+              <p className="text-sm leading-normal text-dl-ink-2 md:text-[17px] md:leading-[1.55]">
+                How we handle your samples, your data and your money, written to be read, not skimmed past.
+              </p>
+            </div>
+            <p className="inline-flex w-fit shrink-0 items-center gap-2 rounded-full border border-dl-line bg-white px-4 py-2.5 text-[13px] font-semibold text-dl-ink">
+              <CalendarCheck className="size-[15px] text-dl-green" aria-hidden />
+              Last updated {LAST_UPDATED}
             </p>
-          </section>
-
-          {/* Section */}
-          <section>
-            <h2 className="text-xl font-heading font-semibold mb-2 text-black">
-              2. Information We Collect
-            </h2>
-            <ul className="list-disc pl-5 space-y-2">
-              <li>Personal details (name, phone number, email)</li>
-              <li>Health-related information (for diagnostic services)</li>
-              <li>Payment and billing information</li>
-              <li>Usage data (browser type, pages visited)</li>
-            </ul>
-          </section>
-
-          {/* Section */}
-          <section>
-            <h2 className="text-xl font-heading font-semibold mb-2 text-black">
-              3. How We Use Your Information
-            </h2>
-            <ul className="list-disc pl-5 space-y-2">
-              <li>To provide and manage diagnostic services</li>
-              <li>To communicate reports and updates</li>
-              <li>To improve our services and user experience</li>
-              <li>To comply with legal obligations</li>
-            </ul>
-          </section>
-
-          {/* Section */}
-          <section>
-            <h2 className="text-xl font-heading font-semibold mb-2 text-black">
-              4. Data Sharing
-            </h2>
-            <p className="font-body">
-              We do not sell your personal data. We may share your information
-              with trusted partners such as laboratories, payment providers, and
-              legal authorities when required.
-            </p>
-          </section>
-
-          {/* Section */}
-          <section>
-            <h2 className="text-xl font-heading font-semibold mb-2 text-black">
-              5. Data Security
-            </h2>
-            <p className="font-body">
-              We implement appropriate security measures to protect your data
-              against unauthorized access, alteration, or disclosure.
-            </p>
-          </section>
-
-          {/* Section */}
-          <section>
-            <h2 className="text-xl font-heading font-semibold mb-2 text-black">
-              6. Cookies
-            </h2>
-            <p className="font-body">
-              Our website may use cookies to enhance user experience and analyze
-              traffic. You can disable cookies through your browser settings.
-            </p>
-          </section>
-
-          {/* Section */}
-          <section>
-            <h2 className="text-xl font-heading font-semibold mb-2 text-black">
-              7. Your Rights
-            </h2>
-            <ul className="list-disc pl-5 space-y-2">
-              <li>Access your personal data</li>
-              <li>Request correction or deletion</li>
-              <li>Withdraw consent at any time</li>
-            </ul>
-          </section>
-
-          {/* Section */}
-          <section>
-            <h2 className="text-xl font-heading font-semibold mb-2 text-black">
-              8. Changes to This Policy
-            </h2>
-            <p className="font-body">
-              We may update this Privacy Policy from time to time. Changes will
-              be posted on this page with an updated date.
-            </p>
-          </section>
+          </div>
         </div>
+      </section>
+
+      <div className={`${shell} grid grid-cols-[minmax(0,1fr)] gap-8 pt-8 pb-12 lg:grid-cols-[280px_minmax(0,1fr)] lg:gap-[72px] lg:pt-14 lg:pb-24`}>
+        <aside className="flex flex-col gap-7 lg:sticky lg:top-28 lg:self-start">
+          <PolicyNav />
+          <div className="hidden flex-col gap-2.5 rounded-2xl bg-dl-red-soft p-5 lg:flex">
+            <p className="font-display text-base font-bold text-dl-ink">Questions about a policy?</p>
+            <p className="text-[13.5px] leading-normal text-dl-ink-2">Our care team can explain anything here in plain words.</p>
+            <a href={PHONE_HREF} className="flex items-center gap-1.5 pt-1 text-sm font-bold text-dl-red hover:underline">
+              <Phone className="size-3.5" aria-hidden />
+              {PHONE_DISPLAY}
+            </a>
+          </div>
+        </aside>
+
+        <article className="flex min-w-0 max-w-[928px] flex-col gap-9 md:gap-11">
+          <header id="privacy" className="flex scroll-mt-32 flex-col gap-3">
+            <p className="text-xs font-bold tracking-[0.12em] text-dl-red">PRIVACY POLICY</p>
+            <h2 className="font-display text-[24px] font-extrabold tracking-[-0.03em] text-dl-ink md:text-[34px]">
+              Your health data stays yours.
+            </h2>
+            <p className="text-[15px] leading-relaxed text-dl-ink-2 md:text-base">{privacyIntro}</p>
+          </header>
+
+          <section aria-labelledby="in-short-heading" className="flex flex-col gap-4 rounded-[20px] border border-dl-line bg-white p-5 md:p-7">
+            <h3 id="in-short-heading" className="flex items-center gap-2.5 font-display text-lg font-bold text-dl-ink">
+              <Sparkles className="size-[18px] text-dl-red" aria-hidden />
+              The short version
+            </h3>
+            <ul className="grid gap-3.5 md:grid-cols-2 md:gap-x-6">
+              {inShort.map((point) => (
+                <li key={point} className="flex gap-2.5 text-sm leading-normal text-dl-ink-2 md:text-[14.5px]">
+                  <span className="flex size-[22px] shrink-0 items-center justify-center rounded-full bg-dl-green/10 text-dl-green">
+                    <Check className="size-[13px]" strokeWidth={3} aria-hidden />
+                  </span>
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          {privacySections.map(({ id, title, text, bullets }, i) => (
+            <section key={id} id={id} aria-labelledby={`${id}-heading`} className="flex scroll-mt-32 flex-col gap-3.5 border-t border-dl-line pt-8">
+              <h3 id={`${id}-heading`} className="flex items-baseline gap-3.5 font-display text-xl font-bold text-dl-ink md:text-2xl">
+                <span className="text-sm font-bold text-dl-red">{String(i + 1).padStart(2, "0")}</span>
+                {title}
+              </h3>
+              <p className="text-[15px] leading-relaxed text-dl-ink-2 md:text-base">{text}</p>
+              {bullets && (
+                <ul className="flex flex-col gap-2.5 pl-1 pt-0.5">
+                  {bullets.map((b) => (
+                    <li key={b} className="flex gap-3 text-[15px] leading-relaxed text-dl-ink-2 md:text-base">
+                      <span className="mt-[11px] size-1.5 shrink-0 rounded-full bg-dl-red" aria-hidden />
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </section>
+          ))}
+
+        </article>
       </div>
-    </div>
+    </>
   );
 }

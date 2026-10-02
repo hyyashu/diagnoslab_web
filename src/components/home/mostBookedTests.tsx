@@ -27,7 +27,7 @@ export default function MostBookedTests() {
           <SectionHead
             id="tests-heading"
             title="Most booked tests"
-            subtitle="Same-day reports on most tests · Prices include home collection"
+            subtitle="Same-day reports on most tests · Home collection available"
             mobileSubtitle="Same-day reports on most tests"
             link={{ href: "/tests/", label: "See all" }}
           />

@@ -9,11 +9,13 @@ import TrustBand from "@/components/home/trustBand";
 import FindUsAreas from "@/components/sections/findUsAreas";
 import PatientReviews from "@/components/sections/patientReviews";
 import JsonLd from "@/components/seo/jsonLd";
+import FaqJsonLd from "@/components/seo/faqJsonLd";
+import FAQAccordion from "@/components/sections/faq";
 
 export const metadata: Metadata = {
   title: { absolute: "Diagnos Lab Jamshedpur | Blood Test, Ultrasound & Home Collection" },
   description:
-    "Jamshedpur's top-rated diagnostic lab in Sakchi. Blood tests, ultrasound by female radiologist, ECG & X-Ray. Home sample collection across all areas. Same-day digital reports. Call 8404802201.",
+    "Jamshedpur's top-rated diagnostic lab in Sakchi. Blood tests, ultrasound by female radiologist, ECG & X-Ray. Home sample collection across all areas. Same-day digital reports. Call 8404802214.",
   keywords: [
     "Blood Test in Jamshedpur",
     "Diagnostic Center Jamshedpur",
@@ -65,6 +67,8 @@ export default function Home() {
       <TrustBand />
       <FindUsAreas bordered />
       <PatientReviews tone="white" />
+      <FaqJsonLd />
+      <FAQAccordion />
     </>
   );
 }

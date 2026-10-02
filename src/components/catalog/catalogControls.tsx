@@ -1,9 +1,12 @@
 "use client";
 
+import { useRef } from "react";
 import { ChevronLeft, ChevronRight, Search } from "lucide-react";
+import Icon from "@/components/ui/icon";
 
 /* DL.pen catalogue controls, shared by the Lab Tests and Health Packages
-   pages: the search field, the category chips and the pager. */
+   pages: the search field, the category chips and the pager. The chips are
+   also the home page's package filter. */
 
 export function CatalogSearch({
   value,
@@ -39,36 +42,74 @@ export function CatalogSearch({
   );
 }
 
+export type ChipOption = { label: string; icon: string };
+
+/* DL.pen "Category Chip": an icon in a tinted circle beside the label. */
+export function CategoryChip({
+  option,
+  selected,
+  onClick,
+}: {
+  option: ChipOption;
+  selected: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      role="tab"
+      aria-selected={selected}
+      onClick={onClick}
+      className={`flex shrink-0 items-center gap-2 rounded-full border py-[7px] pl-2 pr-[13px] text-[13px] font-semibold transition-colors md:py-[9px] md:pl-2.5 md:pr-4 md:text-sm ${
+        selected ? "border-dl-red bg-dl-red text-white" : "border-dl-line bg-white text-dl-ink hover:border-dl-ink/40"
+      }`}
+    >
+      <span
+        className={`flex size-[22px] items-center justify-center rounded-full md:size-[26px] ${
+          selected ? "bg-white/15 text-white" : "bg-dl-red-soft text-dl-red"
+        }`}
+      >
+        <Icon name={option.icon} className="size-3.5" />
+      </span>
+      {option.label}
+    </button>
+  );
+}
+
+/* One scrolling row of chips; on desktop a round button scrolls it on. */
 export function CategoryChips({
   options,
   active,
   onChange,
   label,
 }: {
-  options: string[];
+  options: ChipOption[];
   active: string;
   onChange: (value: string) => void;
   label: string;
 }) {
+  const rowRef = useRef<HTMLDivElement>(null);
+
   return (
-    <div role="tablist" aria-label={label} className="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 md:mx-0 md:flex-wrap md:px-0">
-      {options.map((o) => {
-        const selected = o === active;
-        return (
-          <button
-            key={o}
-            type="button"
-            role="tab"
-            aria-selected={selected}
-            onClick={() => onChange(o)}
-            className={`shrink-0 rounded-full border px-4 py-2 text-[13px] font-semibold transition-colors md:text-[13.5px] ${
-              selected ? "border-dl-ink bg-dl-ink text-white" : "border-dl-line bg-white text-dl-ink-2 hover:border-dl-ink/40"
-            }`}
-          >
-            {o}
-          </button>
-        );
-      })}
+    <div className="flex items-center gap-4">
+      <div
+        ref={rowRef}
+        role="tablist"
+        aria-label={label}
+        className="no-scrollbar -mx-4 flex flex-1 gap-2 overflow-x-auto px-4 md:mx-0 md:gap-2.5 md:px-0"
+      >
+        {options.map((o) => (
+          <CategoryChip key={o.label} option={o} selected={o.label === active} onClick={() => onChange(o.label)} />
+        ))}
+      </div>
+      <button
+        type="button"
+        aria-label="More categories"
+        onClick={() => rowRef.current?.scrollBy({ left: 240, behavior: "smooth" })}
+        className="hidden size-[42px] shrink-0 items-center justify-center rounded-full border border-dl-line text-dl-ink hover:border-dl-ink md:flex"
+      >
+        <ChevronRight className="size-[18px]" aria-hidden />
+      </button>
     </div>
   );
 }

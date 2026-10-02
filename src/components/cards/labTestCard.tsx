@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Plus, Utensils, Zap } from "lucide-react";
+import { ArrowRight, Utensils, Zap } from "lucide-react";
 import BookButton from "@/components/cards/bookButton";
 import { buttonClass } from "@/components/ui/button";
 import type { Test } from "@/lib/catalog";
@@ -21,21 +21,29 @@ const fastingLabel = (fasting: string) => {
   return fasting;
 };
 
-/* "home": the most-booked card (Book only). "catalog": the Lab Tests page
-   card, with a category pill and a Details link. */
+/* "home": the most-booked card (Details and Book under the price).
+   "catalog": the Lab Tests page card, with a category pill and a Details
+   link. */
 export default function LabTestCard({
   test,
   variant = "home",
   categoryLabel = test.category,
+  stacked: stackedProp = false,
 }: {
   test: LabTest;
   variant?: "home" | "catalog" | "related";
   categoryLabel?: string;
+  /* Buttons on their own full-width row under the price, for narrow
+     four-up grids (the area pages). The home card is always stacked. */
+  stacked?: boolean;
 }) {
   const catalog = variant === "catalog";
   /* "related": the detail pages' "Often booked with" card: grey category
-     pill, green discount pill and a dark "+ Book" button. */
+     pill, green discount pill and a "Book" button. */
   const related = variant === "related";
+  const home = variant === "home";
+  const stacked = stackedProp || home;
+  const withDetails = catalog || home;
   const { slug, title, description, price, originalPrice } = test;
   const discount =
     originalPrice > 0 && price > 0
@@ -106,7 +114,11 @@ export default function LabTestCard({
         </span>
       </div>
 
-      <div className="mt-auto flex items-center justify-between gap-3 border-t border-dl-line pt-[18px]">
+      <div
+        className={`mt-auto flex gap-3 border-t border-dl-line pt-[18px] ${
+          stacked ? "flex-col" : "items-center justify-between"
+        }`}
+      >
         <div className="flex items-end gap-2">
           <span className="font-display text-2xl font-extrabold tracking-[-0.02em] text-dl-ink">
             ₹{price.toLocaleString("en-IN")}
@@ -118,15 +130,13 @@ export default function LabTestCard({
           )}
         </div>
         <div className="flex shrink-0 items-center gap-2">
-          {catalog && (
-            <Link href={`/tests/${slug}`} className={buttonClass("neutral", "sm")}>
+          {withDetails && (
+            <Link href={`/tests/${slug}`} className={buttonClass("neutral", "sm", stacked ? "flex-1" : "")}>
               Details
             </Link>
           )}
           <BookButton
-            className={
-              catalog ? buttonClass("primary", "sm") : related ? buttonClass("dark", "sm") : buttonClass("outline", "sm")
-            }
+            className={buttonClass("primary", "sm", stacked ? "flex-1" : "")}
             form={{
               title: "Book",
               testName: title,
@@ -136,9 +146,8 @@ export default function LabTestCard({
               additionalSourceData: leadMeta,
             }}
           >
-            {related && <Plus className="size-4" aria-hidden />}
             {catalog ? "Book now" : "Book"}
-            {variant === "home" && <Plus className="size-4" aria-hidden />}
+            <ArrowRight className="size-4" aria-hidden />
           </BookButton>
         </div>
       </div>

@@ -4,13 +4,6 @@ import Navbar from "@/components/layout/navbar";
 // import BottomNav from "@/components/layout/bottomNav";
 import FloatingCTA from "@/components/layout/floatingCTA";
 import Footer from "@/components/layout/footer";
-import FAQAccordion from "@/components/sections/faq";
-import FaqJsonLd from "@/components/seo/faqJsonLd";
-import FindUs from "@/components/sections/findus";
-import AreasServed from "@/components/sections/areasServed";
-import ReviewCarousel from "@/components/sections/reviews";
-import ConditionalHowItWorks from "@/components/sections/conditionalHowItWorks";
-import HideOn from "@/components/layout/hideOn";
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
@@ -26,7 +19,7 @@ const localBusinessSchema = {
   image: "https://diagnoslab.in/images/diagnoslogo.avif",
   description:
     "Diagnos Lab is a top-rated diagnostic centre in Sakchi, Jamshedpur offering blood tests, ultrasound, ECG, X-Ray, PFT, and health packages with home sample collection.",
-  telephone: "+918404802201",
+  telephone: "+918404802214",
   email: "info@diagnoslab.in",
   address: {
     "@type": "PostalAddress",
@@ -112,20 +105,9 @@ export default function SiteLayout({
       <main>
         {children}
         <FloatingCTA
-          phoneNumber="+918404802201"
+          phoneNumber="+918404802214"
           whatsappNumber="+918404802214"
         />
-        <HideOn paths={["/", "/radiology", "/ultrasound-in-jamshedpur", "/ecg", "/xray", "/tests", "/packages", "/corporate", "/aboutUs"]} prefixes={["/packages/", "/tests/"]}>
-          <FindUs />
-          <AreasServed />
-          <ReviewCarousel />
-          <ConditionalHowItWorks />
-        </HideOn>
-        {/* These pages have their own FAQ (and schema). */}
-        <HideOn paths={["/radiology", "/ultrasound-in-jamshedpur", "/ecg", "/xray", "/tests", "/packages", "/corporate", "/aboutUs"]} prefixes={["/packages/", "/tests/"]}>
-          <FaqJsonLd />
-          <FAQAccordion />
-        </HideOn>
       </main>
       <Footer />
       {/* Bottom nav switched off for now. To bring it back, uncomment this

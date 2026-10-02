@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     template: "%s | Diagnos Lab",
   },
   description:
-    "Jamshedpur's top-rated diagnostic lab in Sakchi. Blood tests, ultrasound by female radiologist, ECG & X-Ray. Home sample collection across all areas. Same-day digital reports. Call 8404802201.",
+    "Jamshedpur's top-rated diagnostic lab in Sakchi. Blood tests, ultrasound by female radiologist, ECG & X-Ray. Home sample collection across all areas. Same-day digital reports. Call 8404802214.",
   keywords: [
     "Blood Test in Jamshedpur",
     "Best Lab in Jamshedpur",

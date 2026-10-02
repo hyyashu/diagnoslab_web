@@ -12,7 +12,7 @@ import { scanServices, whyPoints } from "./content";
 export const metadata: Metadata = {
   title: { absolute: "Radiology in Jamshedpur | Ultrasound, X-Ray, ECG, Echo | Diagnos Lab" },
   description:
-    "Ultrasound by female radiologist, digital X-Ray, ECG, Echocardiography & PFT at Diagnos Lab, Sakchi. Same-day reports. Open 7 days, 7:30 AM–8 PM. Book now: 8404802201.",
+    "Ultrasound by female radiologist, digital X-Ray, ECG, Echocardiography & PFT at Diagnos Lab, Sakchi. Same-day reports. Open 7 days, 7:30 AM–8 PM. Book now: 8404802214.",
   keywords: [
     "Radiology Services in Jamshedpur",
     "Ultrasound in Jamshedpur",

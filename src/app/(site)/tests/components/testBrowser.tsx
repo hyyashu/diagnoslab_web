@@ -8,17 +8,18 @@ import { shell } from "@/components/ui/shell";
 
 export type BrowserTest = LabTest & { categories: string[] };
 
-/* Chip label -> catalogue category. */
-const CHIPS: [string, string | null][] = [
-  ["All tests", null],
-  ["Blood Health", "Blood Health"],
-  ["Diabetes", "Diabetes"],
-  ["Thyroid & Hormones", "Hormonal Health"],
-  ["Liver", "Liver Health"],
-  ["Kidney", "Kidney Health"],
-  ["Heart Health", "Heart Health"],
-  ["Reproductive Health", "Reproductive Health"],
-  ["Vitamins", "Nutrition / Immunity"],
+/* Chip label -> catalogue category, and the chip's icon (the home page's
+   icon for the same concern). */
+const CHIPS: [string, string | null, string][] = [
+  ["All tests", null, "layout-grid"],
+  ["Blood Health", "Blood Health", "droplets"],
+  ["Diabetes", "Diabetes", "droplet"],
+  ["Thyroid & Hormones", "Hormonal Health", "activity"],
+  ["Liver", "Liver Health", "flask-conical"],
+  ["Kidney", "Kidney Health", "bean"],
+  ["Heart Health", "Heart Health", "heart-pulse"],
+  ["Reproductive Health", "Reproductive Health", "venus"],
+  ["Vitamins", "Nutrition / Immunity", "pill"],
 ];
 /* The design words one category differently on the cards. */
 const displayCategory = (category: string) => (category === "Hormonal Health" ? "Thyroid & Hormones" : category);
@@ -73,7 +74,7 @@ export default function TestBrowser({ tests }: { tests: BrowserTest[] }) {
 
         <CategoryChips
           label="Test categories"
-          options={CHIPS.map(([label]) => label)}
+          options={CHIPS.map(([label, , icon]) => ({ label, icon }))}
           active={query ? "All tests" : chip}
           onChange={(c) => {
             setChip(c);

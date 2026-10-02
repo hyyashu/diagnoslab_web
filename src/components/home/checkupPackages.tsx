@@ -37,10 +37,9 @@ export default function CheckupPackages() {
         <div className={shell}>
           <SectionHead
             id="packages-heading"
-            eyebrow="HEALTH CHECKUPS"
             title="Doctor-curated health checkup packages"
             mobileTitle="Health checkup packages"
-            subtitle="Designed by our pathologists for every age and concern, with free home collection."
+            subtitle="Designed by our pathologists for every age and concern, with home collection available."
             mobileSubtitle="Designed by our pathologists for every age"
             link={{ href: "/packages/", label: "See all packages", mobileLabel: "See all" }}
           />

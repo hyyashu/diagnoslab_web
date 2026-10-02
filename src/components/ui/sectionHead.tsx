@@ -60,7 +60,7 @@ export default function SectionHead({
         {subtitle && (
           <p
             className={`${mobileSubtitle === null ? "hidden md:block" : ""} text-[13.5px] md:text-base leading-normal md:max-w-[640px] ${
-              dark ? "text-white/65" : "text-dl-ink-2"
+              dark ? "text-white/[0.88]" : "text-dl-ink-2"
             }`}
           >
             <Responsive desktop={subtitle} mobile={mobileSubtitle ?? undefined} />

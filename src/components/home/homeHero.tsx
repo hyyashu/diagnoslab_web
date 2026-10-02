@@ -13,7 +13,7 @@ export default function HomeHero() {
   const offer = getPackageBySlug("nd-plus");
 
   return (
-    <section className="bg-dl-bg">
+    <section className="bg-linear-to-b from-dl-red-soft to-dl-bg">
       <div
         className={`${shell} grid gap-5 pt-6 pb-7 md:grid-cols-[minmax(0,1fr)_minmax(0,440px)] md:gap-x-10 md:gap-y-8 md:pt-14 md:pb-[72px] xl:grid-cols-[minmax(0,1fr)_500px] xl:gap-x-14`}
       >

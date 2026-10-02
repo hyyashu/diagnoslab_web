@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 type LogoProps = {
-  /* "dark" is for the ink footer: the logo's grey wordmark needs a white
+  /* "dark" is for the red footer: the logo's grey wordmark needs a white
      tile behind it there. */
   tone?: "light" | "dark";
   priority?: boolean;

@@ -6,7 +6,8 @@ import { buttonClass } from "@/components/ui/button";
 import { areas } from "@/lib/catalog";
 import { EMAIL, INSTAGRAM_HREF, WHATSAPP_DISPLAY, WHATSAPP_HREF } from "@/lib/contact";
 
-/* DL.pen "Site Footer" / "Mobile Footer". */
+/* DL.pen "Site Footer" / "Mobile Footer": brand red, with white text and
+   white-tinted panels at the design's opacities. */
 
 const linkGroups = [
   {
@@ -55,10 +56,10 @@ const areaSlug = new Map(areas.map((a) => [a.name, a.slug]));
 
 export default function Footer() {
   return (
-    <footer className="bg-dl-ink text-white">
+    <footer className="bg-dl-red text-white">
       <div className="mx-auto flex max-w-[1440px] flex-col gap-7 px-4 pt-8 pb-7 md:gap-12 md:px-10 md:pt-16 md:pb-8 xl:px-20">
         {/* WhatsApp strip */}
-        <div className="flex flex-col gap-4 rounded-[20px] border border-white/10 bg-white/[0.04] p-[18px] md:flex-row md:items-center md:justify-between md:rounded-3xl md:px-7 md:py-6">
+        <div className="flex flex-col gap-4 rounded-[18px] bg-white/[0.12] p-[18px] md:flex-row md:items-center md:justify-between md:rounded-3xl md:px-7 md:py-6">
           <div className="flex items-center gap-3 md:gap-[18px]">
             <span className="flex size-11 shrink-0 items-center justify-center rounded-[13px] bg-dl-whatsapp md:size-[52px] md:rounded-2xl">
               <MessageCircle className="size-5 md:size-6" aria-hidden />
@@ -67,7 +68,7 @@ export default function Footer() {
               <span className="font-display text-[15px] font-bold leading-snug md:text-xl md:tracking-[-0.015em]">
                 Book, track and get reports on WhatsApp
               </span>
-              <span className="hidden text-sm text-white/65 md:block">
+              <span className="hidden text-sm text-white/[0.88] md:block">
                 Message us any time. Our team replies from 7:30 AM to 7:30 PM, every day.
               </span>
             </span>
@@ -76,10 +77,10 @@ export default function Footer() {
             href={WHATSAPP_HREF}
             target="_blank"
             rel="noopener noreferrer"
-            className={buttonClass("whatsapp", "md", "w-full md:w-auto")}
+            className={buttonClass("whiteInk", "md", "w-full md:w-auto")}
           >
             Chat on {WHATSAPP_DISPLAY}
-            <MessageCircle className="size-4" aria-hidden />
+            <MessageCircle className="size-4 text-dl-whatsapp" aria-hidden />
           </a>
         </div>
 
@@ -87,7 +88,7 @@ export default function Footer() {
         <div className="flex flex-col gap-7 md:grid md:grid-cols-[minmax(0,360px)_repeat(4,minmax(0,1fr))] md:gap-12">
           <div className="flex flex-col gap-3.5 md:gap-[18px]">
             <Logo tone="dark" className="self-start" />
-            <p className="text-[13px] leading-relaxed text-white/65 md:text-sm">
+            <p className="text-[13px] leading-relaxed text-white/[0.88] md:text-sm">
               Accurate diagnostics since 2010. Pathology, ultrasound, X-ray, ECG, ECHO and PFT under one roof in Jamshedpur.
             </p>
             <ul className="hidden gap-2 md:flex">
@@ -97,7 +98,7 @@ export default function Footer() {
               ].map(({ icon: Icon, text }) => (
                 <li
                   key={text}
-                  className="flex items-center gap-1.5 rounded-full border border-white/20 px-3 py-1.5 text-[12.5px] text-white/85"
+                  className="flex items-center gap-1.5 rounded-full border border-white/35 px-3 py-1.5 text-[12.5px] text-white/[0.94]"
                 >
                   <Icon className="size-3.5 text-white" aria-hidden />
                   {text}
@@ -106,8 +107,8 @@ export default function Footer() {
             </ul>
             <ul className="flex flex-col gap-2 md:hidden">
               {visit.map(({ icon: Icon, text, href }) => (
-                <li key={text} className="flex items-center gap-2 text-[13px] text-white/90">
-                  <Icon className="size-3.5 text-white/50" aria-hidden />
+                <li key={text} className="flex items-center gap-2 text-[13px] text-white/[0.88]">
+                  <Icon className="size-3.5 text-white/[0.94]" aria-hidden />
                   {href ? <a href={href}>{text}</a> : text}
                 </li>
               ))}
@@ -121,9 +122,9 @@ export default function Footer() {
           </div>
 
           <div className="hidden flex-col gap-3 md:flex">
-            <p className="pb-0 text-[13px] font-bold tracking-[0.1em] text-white/50">Visit us</p>
+            <p className="pb-0 text-[13px] font-bold tracking-[0.1em] text-white">Visit us</p>
             {visit.map(({ text, href }) => (
-              <p key={text} className="text-[14.5px] text-white/90">
+              <p key={text} className="text-[14.5px] text-white/[0.88]">
                 {href ? <a href={href} className="hover:underline">{text}</a> : text}
               </p>
             ))}
@@ -131,17 +132,17 @@ export default function Footer() {
         </div>
 
         {/* Areas */}
-        <div className="flex flex-col gap-3 md:gap-3.5 md:border-t md:border-white/10 md:pt-8">
-          <p className="text-sm font-semibold text-white/70 md:text-[13px]">Home collection across Jamshedpur</p>
+        <div className="flex flex-col gap-3 md:gap-3.5 md:border-t md:border-white/25 md:pt-8">
+          <p className="text-sm font-semibold text-white/[0.94] md:text-[13px]">Home collection across Jamshedpur</p>
           <ul className="flex flex-wrap gap-2">
             {servedAreas.map((name, i) => {
               const slug = areaSlug.get(name);
               const chip =
-                "block rounded-full border border-white/20 px-3 py-1.5 text-xs text-white/85 md:px-3.5 md:py-[7px] md:text-[13px]";
+                "block rounded-full bg-white/15 px-3 py-1.5 text-xs text-white/[0.88] md:px-3.5 md:py-[7px] md:text-[13px]";
               return (
                 <li key={name} className={i >= 9 ? "hidden md:block" : ""}>
                   {slug ? (
-                    <Link href={`/area/${slug}/`} className={`${chip} hover:border-white/50 hover:text-white`}>
+                    <Link href={`/area/${slug}/`} className={`${chip} hover:bg-white/25 hover:text-white`}>
                       {name}
                     </Link>
                   ) : (
@@ -154,14 +155,14 @@ export default function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="flex flex-col-reverse gap-3.5 border-t border-white/10 pt-5 md:flex-row md:items-center md:justify-between md:pt-6">
-          <p className="text-xs text-white/50 md:text-[13px]">© 2026 Diagnos Labs. All rights reserved.</p>
+        <div className="flex flex-col-reverse gap-3.5 border-t border-white/25 pt-5 md:flex-row md:items-center md:justify-between md:pt-6">
+          <p className="text-xs text-white/[0.88] md:text-[13px]">© 2026 Diagnos Labs. All rights reserved.</p>
           <a
             href={INSTAGRAM_HREF}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Diagnos Lab on Instagram"
-            className="flex size-9 items-center justify-center rounded-full border border-white/20 hover:border-white/50"
+            className="flex size-9 items-center justify-center rounded-full border border-white/35 text-white/[0.94] hover:border-white"
           >
             <Instagram className="size-4" aria-hidden />
           </a>

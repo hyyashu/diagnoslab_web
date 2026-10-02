@@ -1,9 +1,8 @@
 /* Contact points shown across the header, hero and footer. */
-export const PHONE_DISPLAY = "+91 84048 02201";
-export const PHONE_HREF = "tel:+918404802201";
+export const PHONE_DISPLAY = "+91 84048 02214";
+export const PHONE_HREF = "tel:+918404802214";
 
-/* WhatsApp is a different line from the call number (see the FAQ and the
-   floating button). */
+/* Calls and WhatsApp share one line. */
 export const WHATSAPP_DISPLAY = "+91 84048 02214";
 export const WHATSAPP_HREF = "https://wa.me/918404802214";
 

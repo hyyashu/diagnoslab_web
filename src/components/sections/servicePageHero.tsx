@@ -14,7 +14,8 @@ const defaultProofPoints: ProofPoint[] = [
 ];
 
 type ServicePageHeroProps = {
-  /* The last crumb is the current page. */
+  /* The last crumb is the current page; earlier crumbs without an href
+     render as plain text. */
   breadcrumb: { label: string; href?: string }[];
   eyebrow: string;
   title: string;
@@ -22,6 +23,9 @@ type ServicePageHeroProps = {
   /* Scan types shown as chips under the subtitle. */
   chips?: string[];
   cta: { label: string; href: string };
+  /* Replaces the CTA buttons; shown above the proof points on every screen
+     size (the Book a Test page's call and WhatsApp buttons). */
+  actions?: React.ReactNode;
   form: React.ComponentProps<typeof CallbackForm>;
   proofPoints?: ProofPoint[];
 };
@@ -35,6 +39,7 @@ export default function ServicePageHero({
   subtitle,
   chips,
   cta,
+  actions,
   form,
   proofPoints = defaultProofPoints,
 }: ServicePageHeroProps) {
@@ -52,7 +57,11 @@ export default function ServicePageHero({
                       <span aria-current="page" className="font-semibold text-dl-ink">{crumb.label}</span>
                     ) : (
                       <>
-                        <Link href={crumb.href ?? "/"} className="hover:text-dl-ink">{crumb.label}</Link>
+                        {crumb.href ? (
+                          <Link href={crumb.href} className="hover:text-dl-ink">{crumb.label}</Link>
+                        ) : (
+                          <span>{crumb.label}</span>
+                        )}
                         <ChevronRight className="size-3.5" aria-hidden />
                       </>
                     )}
@@ -82,6 +91,8 @@ export default function ServicePageHero({
             )}
           </div>
 
+          {actions}
+
           <ul className="grid grid-cols-3 gap-2 md:flex md:flex-wrap md:gap-8">
             {proofPoints.map(({ icon: Icon, value, label, mobileLabel }) => (
               <li key={value} className="flex flex-col gap-2 rounded-2xl border border-dl-line bg-white p-3 md:flex-row md:items-center md:gap-3 md:border-0 md:bg-transparent md:p-0">
@@ -99,7 +110,7 @@ export default function ServicePageHero({
             ))}
           </ul>
 
-          <div className="hidden gap-3 md:flex">
+          <div className={actions ? "hidden" : "hidden gap-3 md:flex"}>
             <a href={cta.href} className={buttonClass("primary", "lg")}>
               {cta.label}
               <ArrowRight className="size-4" aria-hidden />

@@ -149,7 +149,7 @@ function PriceBlock({ item, discount }: { item: BookingItem; discount: number })
           <span className="self-center rounded-lg bg-dl-green/10 px-[9px] py-1 text-xs font-extrabold text-dl-green">{discount}% OFF</span>
         )}
       </p>
-      <p className="text-[13px] text-dl-ink-2">Price includes home sample collection</p>
+      <p className="text-[13px] text-dl-ink-2">Home collection charge applies</p>
     </div>
   );
 }

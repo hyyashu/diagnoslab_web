@@ -12,7 +12,7 @@ const howToSchema = {
       "@type": "HowToStep",
       position: 1,
       name: "Book Your Test",
-      text: "Call +91 8404802201 or WhatsApp +91 8404802214, or fill the online form on diagnoslab.in. Choose your tests or health package.",
+      text: "Call or WhatsApp +91 8404802214, or fill the online form on diagnoslab.in. Choose your tests or health package.",
     },
     {
       "@type": "HowToStep",

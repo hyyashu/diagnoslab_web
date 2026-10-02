@@ -32,6 +32,7 @@ const desktopLinks = [
   { name: "Lab Tests", href: "/tests/", icon: FlaskConical },
   { name: "Health Packages", href: "/packages/", icon: Package },
   { name: "Radiology", href: "/radiology/", icon: ScanLine },
+  { name: "Corporate Tie-ups", href: "/corporate/", icon: Handshake },
 ];
 
 const mobileTabs = [
@@ -39,6 +40,7 @@ const mobileTabs = [
   { name: "Lab Tests", href: "/tests/" },
   { name: "Packages", href: "/packages/" },
   { name: "Radiology", href: "/radiology/" },
+  { name: "Corporate", href: "/corporate/" },
 ];
 
 /* Everything, for the slide-out menu. */
@@ -166,7 +168,7 @@ export default function Navbar() {
 
         {/* Phones: tabs */}
         <nav aria-label="Sections" className="border-b border-dl-line md:hidden">
-          <ul className="no-scrollbar flex gap-[18px] overflow-x-auto px-4">
+          <ul className="no-scrollbar flex gap-3.5 overflow-x-auto px-4">
             {mobileTabs.map(({ name, href }) => {
               const active = isActive(href);
               return (
@@ -174,7 +176,7 @@ export default function Navbar() {
                   <Link
                     href={href}
                     aria-current={active ? "page" : undefined}
-                    className={`block border-b-2 py-[11px] text-sm ${
+                    className={`block border-b-2 py-[11px] text-[13px] ${
                       active
                         ? "border-dl-red font-bold text-dl-ink"
                         : "border-transparent font-medium text-dl-muted"

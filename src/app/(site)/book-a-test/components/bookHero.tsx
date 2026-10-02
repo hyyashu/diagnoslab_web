@@ -1,61 +1,58 @@
-import Image from "next/image";
-import CallbackForm from "@/components/forms/callbackForm";
+import { Clock3, FileCheck, MessageCircle, Phone, Star } from "lucide-react";
+import ServicePageHero from "@/components/sections/servicePageHero";
+import { PHONE_DISPLAY, PHONE_HREF, WHATSAPP_HREF } from "@/lib/contact";
 
+/* DL.pen "Book a Test" hero: the shared service hero with the design's two
+   large call and WhatsApp buttons in place of its CTAs. */
 export default function BookHero() {
   return (
-    <section className="relative w-full h-[600px] md:h-[700px] flex flex-col items-center justify-center overflow-visible mb-[230px] md:mb-[250px] z-10">
-
-      {/* Background image */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <Image
-          src="/images/hero/hero1.avif"
-          alt="Book blood test with home collection in Jamshedpur – Diagnos Lab"
-          fill
-          className="object-cover"
-          priority
-        />
-        <div className="absolute inset-0 bg-slate-900/60" />
-      </div>
-
-      {/* Text content */}
-      <div className="relative z-10 w-full flex flex-col items-start">
-        <div className="w-full max-w-7xl mx-auto px-4 mb-6 md:-mt-20">
-          <p className="font-heading text-sm md:text-base font-bold text-white/70 uppercase tracking-widest mb-2">
-            Home Collection Available
-          </p>
-          <h1 className="font-heading text-3xl md:text-4xl lg:text-6xl font-black text-white uppercase">
-            Book a Blood Test<br />
-            in Jamshedpur
-          </h1>
-          <p className="font-body text-sm md:text-base text-white/80 mt-3 max-w-lg">
-            Home collection across Sakchi, Bistupur, Mango &amp; all of Jamshedpur. Same-day digital reports.
-          </p>
+    <ServicePageHero
+      breadcrumb={[{ label: "Home", href: "/" }, { label: "Book a test" }]}
+      eyebrow="Taking bookings now · 6 AM – 9 PM, every day"
+      title="Book a blood test in Jamshedpur, collected at home from 6 AM"
+      subtitle="Call, WhatsApp or leave your number. Our team confirms your test, price and slot in one quick call. Same-day digital reports."
+      proofPoints={[
+        { icon: Clock3, value: "6 AM", label: "Home collection starts", mobileLabel: "Collection" },
+        { icon: FileCheck, value: "Same day", label: "Most blood reports", mobileLabel: "Reports" },
+        { icon: Star, value: "4.9", label: "3,000+ Google reviews", mobileLabel: "Google rating" },
+      ]}
+      cta={{ label: "Request a call back", href: "#enquiry-form" }}
+      actions={
+        <div className="flex flex-col gap-2.5 sm:flex-row sm:gap-3">
+          <a
+            href={PHONE_HREF}
+            className="flex items-center gap-3 rounded-full bg-dl-red py-3 pl-3.5 pr-6 text-white transition-colors hover:bg-dl-red-dark"
+          >
+            <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white/20">
+              <Phone className="size-[17px]" aria-hidden />
+            </span>
+            <span className="flex flex-col">
+              <span className="text-xs font-semibold text-white/80">Call to book</span>
+              <span className="font-display text-[17px] font-extrabold">{PHONE_DISPLAY}</span>
+            </span>
+          </a>
+          <a
+            href={WHATSAPP_HREF}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 rounded-full border border-dl-line bg-white py-3 pl-3.5 pr-6 transition-colors hover:border-dl-ink"
+          >
+            <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-dl-whatsapp text-white">
+              <MessageCircle className="size-[17px]" aria-hidden />
+            </span>
+            <span className="flex flex-col">
+              <span className="text-xs font-semibold text-dl-muted">Send prescription</span>
+              <span className="font-display text-[17px] font-extrabold text-dl-ink">WhatsApp us</span>
+            </span>
+          </a>
         </div>
-
-        {/* Services bar */}
-        <div
-          className="relative w-full overflow-x-hidden"
-          style={{
-            WebkitMaskImage:
-              "linear-gradient(to right, black 0%, black 40%, transparent 95%)",
-            maskImage:
-              "linear-gradient(to right, black 0%, black 40%, transparent 95%)",
-          }}
-        >
-          <div className="bg-white/70 backdrop-blur-md py-3 md:py-4">
-            <div className="w-full max-w-7xl mx-auto px-4">
-              <p className="font-body text-sm md:text-xl font-bold text-slate-900 whitespace-nowrap">
-                Blood Tests | Ultrasound | ECG | X-Ray | Full Body Checkup | Home Collection
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Floating enquiry form */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-20 w-full max-w-[90%] md:max-w-md">
-        <CallbackForm formType="home_collection" />
-      </div>
-    </section>
+      }
+      form={{
+        title: "Get a call back",
+        subtitle: "Leave your number and we'll call to confirm your test, price and a convenient slot.",
+        needs: ["Blood test", "Health package", "Ultrasound", "X-Ray", "ECG / ECHO", "Not sure"],
+        note: "We never share your number. No spam.",
+      }}
+    />
   );
 }

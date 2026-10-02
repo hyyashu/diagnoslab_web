@@ -7,7 +7,13 @@ import { GOOGLE_REVIEWS_HREF } from "@/lib/contact";
 import { shell } from "@/components/ui/shell";
 
 /* DL.pen "Reviews". Four on desktop; a sideways scroller on phones. */
-export default function PatientReviews({ tone = "muted" }: { tone?: "white" | "muted" }) {
+export default function PatientReviews({
+  tone = "muted",
+  subtitle = "Real reviews from Google",
+}: {
+  tone?: "white" | "muted";
+  subtitle?: string;
+}) {
   const featured = featuredReviewers
     .map((name) => reviews.find((r) => r.authorName === name))
     .filter((r) => r !== undefined);
@@ -42,7 +48,7 @@ export default function PatientReviews({ tone = "muted" }: { tone?: "white" | "m
     <section aria-labelledby="reviews-heading" className={`${tone === "muted" ? "bg-dl-bg" : "bg-white"} py-10 md:py-24`}>
       <div className="flex flex-col gap-5 md:gap-10">
         <div className={shell}>
-          <SectionHead id="reviews-heading" title="What our patients say" subtitle="Real reviews from Google" aside={badge} />
+          <SectionHead id="reviews-heading" title="What our patients say" subtitle={subtitle} aside={badge} />
         </div>
         <div className={`${shell} max-md:px-0`}>
           <ul className="no-scrollbar flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:px-0 lg:grid-cols-4">

@@ -2,7 +2,7 @@
    A helper rather than a component because the same pill is rendered as a
    <button>, a <Link> or an <a> depending on what it does. */
 
-type Variant = "primary" | "dark" | "outline" | "neutral" | "neutralDark" | "white" | "whatsapp";
+type Variant = "primary" | "dark" | "outline" | "neutral" | "neutralDark" | "white" | "whiteInk" | "whatsapp";
 type Size = "md" | "sm" | "lg";
 
 const base =
@@ -16,6 +16,8 @@ const variants: Record<Variant, string> = {
   neutral: "border border-dl-line bg-white text-dl-ink hover:border-dl-ink",
   neutralDark: "border border-white/25 text-white hover:border-white",
   white: "bg-white text-dl-red font-bold hover:bg-dl-red-soft",
+  /* On the red footer. */
+  whiteInk: "bg-white text-dl-ink hover:bg-white/90",
   whatsapp: "bg-dl-whatsapp text-white hover:brightness-95",
 };
 

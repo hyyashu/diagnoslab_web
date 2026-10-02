@@ -74,7 +74,7 @@ export default function PackageBrowser({
 
         <CategoryChips
           label="Package categories"
-          options={packageChips.map(([label]) => label)}
+          options={packageChips.map(([label, , icon]) => ({ label, icon }))}
           active={q ? "All packages" : chip}
           onChange={(c) => {
             setChip(c);
@@ -86,7 +86,7 @@ export default function PackageBrowser({
         {showFeatured && page === 1 && (
           <div className="grid gap-4 md:gap-5 lg:grid-cols-2">
             {/* The first featured package (ND Plus) is the one we promote. */}
-            <FeaturedPackageCard pkg={featured[0]} tone="dark" bestValue />
+            <FeaturedPackageCard pkg={featured[0]} tone="red" bestValue />
             <FeaturedPackageCard pkg={featured[1]} />
           </div>
         )}

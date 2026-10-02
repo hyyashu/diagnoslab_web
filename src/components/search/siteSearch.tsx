@@ -2,10 +2,9 @@
 
 import { useId, useState, useSyncExternalStore } from "react";
 import { useRouter } from "next/navigation";
-import { FileUp, Mic, Search } from "lucide-react";
+import { Mic, Search } from "lucide-react";
 import type { SearchEntry } from "@/app/search-index.json/route";
 import { buttonClass } from "@/components/ui/button";
-import { WHATSAPP_HREF } from "@/lib/contact";
 
 /* One fetch per page view, shared by every search box on the page. */
 let indexPromise: Promise<SearchEntry[]> | null = null;
@@ -173,31 +172,11 @@ export default function SiteSearch({ variant }: SiteSearchProps) {
                 <Mic className="size-[18px]" aria-hidden />
               </button>
             )}
-            <a
-              href={WHATSAPP_HREF}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Send your prescription on WhatsApp"
-              className="flex size-[42px] shrink-0 items-center justify-center rounded-full bg-dl-bg text-dl-ink-2 transition-colors hover:bg-dl-red-soft"
-            >
-              <FileUp className="size-[18px]" aria-hidden />
-            </a>
             <button type="submit" className={buttonClass("primary", "lg")}>
               Search
             </button>
           </>
-        ) : (
-          <a
-            href={WHATSAPP_HREF}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Send your prescription on WhatsApp"
-            className="flex shrink-0 items-center gap-[5px] rounded-full bg-white px-3 py-2 text-[13px] font-bold text-dl-red"
-          >
-            <FileUp className="size-3.5" aria-hidden />
-            Rx
-          </a>
-        )}
+        ) : null}
       </div>
 
       {showList && (

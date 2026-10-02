@@ -41,7 +41,7 @@ const ecgSchema = {
   performer: {
     "@type": "MedicalBusiness",
     name: "Diagnos Lab",
-    telephone: "+918404802201",
+    telephone: "+918404802214",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Sakchi, Jamshedpur",

@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
-import ContactSection from "./components/contactSection";
+import ContactHero from "./components/contactHero";
+import VisitCentre from "./components/visitCentre";
+import OneInbox from "./components/oneInbox";
 
 export const metadata: Metadata = {
   title: { absolute: "Contact Diagnos Lab in Jamshedpur | Book a Test" },
   description:
-    "Contact Diagnos Lab in Sakchi, Jamshedpur for test bookings, home sample collection, corporate wellness, or report queries. Call +91 8404802201.",
+    "Contact Diagnos Lab in Sakchi, Jamshedpur for test bookings, home sample collection, corporate wellness, or report queries. Call +91 84048 02214.",
   keywords: [
     "Contact Diagnos Lab",
     "Book Blood Test Jamshedpur",
@@ -24,5 +26,11 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <ContactSection />;
+  return (
+    <>
+      <ContactHero />
+      <VisitCentre />
+      <OneInbox />
+    </>
+  );
 }
