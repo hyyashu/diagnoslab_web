@@ -90,3 +90,50 @@ Pages: `/`, `/tests/`, `/tests/complete-blood-count/`, `/packages/`, `/packages/
 Not assessed: live local-pack / geo-grid positions, GBP Insights and categories, review velocity and response rate,
 backlinks and domain authority, citation listings on third-party sites. These need GBP access or a paid tool
 (BrightLocal, Local Falcon, Whitespark, DataForSEO).
+
+---
+
+# Ultrasound deep dive (3 Oct 2026)
+
+Search Console (last 3 months, `gsc data/gsc/Queries.csv`): 108 ultrasound/USG queries, **3,743 impressions,
+20 clicks (0.5% CTR)**, mostly ranking in positions 1–5. People find you, but few click.
+
+| Intent | Queries | Impressions | Clicks | Example (position) |
+|---|---|---|---|---|
+| Any ultrasound / USG | 108 | 3,743 | 20 | "ultrasound in jamshedpur" 737 impr (3.3) |
+| Near me | 56 | 752 | 3 | "ultrasound near me" 426 impr (4.8) |
+| Area (mostly Sakchi) | 8 | 531 | 4 | "best ultrasound in sakchi" 176 impr (1.0) |
+| Price / cost | 16 | 501 | 2 | "ultrasound price in jamshedpur" 370 impr (2.2) |
+| Pregnancy scans (NT, anomaly) | 35 | 389 | 1 | "anomaly scan in jamshedpur" 56 impr (3.4) |
+| Doppler | 8 | 99 | 0 | "doppler test" 68 impr (6.6) |
+| Sunday / open now | 11 | 33 | 1 | "sunday ultrasound near me" |
+| CT / MRI / DEXA / Fibroscan | 33 | 790 | 4 | "fibroscan in jamshedpur" 104 impr (1.9) |
+
+**`/ultrasound-in-jamshedpur/` is not live yet.** It was added on this branch (8 Sept) and the live site only has
+`/radiology/`, so today these searches land on the home page. Deploying it is the single biggest ultrasound win.
+
+## What the new page does well
+City in title, H1 and URL; female radiologist in title, H1 and 7 times in the copy; scan list, preparation,
+FAQ + FAQPage schema, breadcrumbs, call-back form, map and reviews; ~1,000 words; in the radiology sitemap.
+
+## Gaps, mapped to the searches above
+
+| # | Gap | Fix | Needs from you |
+|---|---|---|---|
+| 1 | No prices (501 impr, pos 2–5, 0.4% CTR) | Ultrasound price list ("from ₹…") + `Offer` schema | Prices per scan |
+| 2 | "Sakchi" not in title or H1 (531 impr) | "Ultrasound (USG) in Sakchi, Jamshedpur" in title/H1 | – |
+| 3 | No named radiologist (YMYL / E-E-A-T) | Radiologist card: name, MD Radiology, experience + `Physician` schema | Names, qualifications |
+| 4 | Pregnancy scans only listed as chips (389 impr) | Short sections for NT, anomaly (TIFFA), growth and Doppler scans with timing (weeks) and prep | Which of these you do |
+| 5 | No PC-PNDT notice | "Sex determination of the foetus is not done here; it is punishable under the PC-PNDT Act, 1994." Legally required at the centre; a trust signal online | – |
+| 6 | Sunday / open-now not stated (33 impr) | "Open all 7 days, including Sundays, 7:30 AM – 7:30 PM" in hero + FAQ | – |
+| 7 | Generic schema (`MedicalProcedure`) | `MedicalWebPage` + `ImagingTest` (imagingTechnique: Ultrasound) per scan, provider referencing `#organization` | – |
+| 8 | Share image is the logo | Ultrasound-specific Open Graph image | – |
+| 9 | "Near me" (752 impr) | Landmark line ("near Union Bank of India, Ambagan") on the page; mostly a GBP proximity/reviews game | Confirm landmark |
+| 10 | CT / MRI / DEXA / Fibroscan (790 impr) | Pages only if you offer them; otherwise ignore | Which you offer |
+
+## Off-site (Google Business Profile)
+- Add secondary category **"Ultrasound imaging center"** (plus "Radiologist").
+- Add each ultrasound scan as a GBP **Service** with price and a one-line description.
+- Upload real photos of the USG room and machine; post a GBP update about the female radiologist.
+- Ask ultrasound patients for a review describing their visit (don't script keywords or gate reviews).
+- Practo / Justdial listings for radiology with the same name, address and phone.
