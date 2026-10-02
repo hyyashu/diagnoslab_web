@@ -10,6 +10,7 @@ import { getTestBySlug } from "@/lib/catalog";
 import JsonLd from "@/components/seo/jsonLd";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { BUSINESS_TYPE, POSTAL_ADDRESS } from "@/lib/contact";
 
 function toTitleCase(str: string) {
   return str.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
@@ -93,16 +94,11 @@ export default async function Page({
     description: `${toTitleCase(test.TestName)} test available at Diagnos Lab, Sakchi Jamshedpur. Home sample collection and same-day digital reports.`,
     usedToDiagnose: test.Categories?.join(", ") ?? "",
     provider: {
-      "@type": "MedicalBusiness",
+      "@type": BUSINESS_TYPE,
       name: "Diagnos Lab",
       telephone: "+918404802214",
       url: "https://diagnoslab.in",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Jamshedpur",
-        addressRegion: "Jharkhand",
-        addressCountry: "IN",
-      },
+      address: POSTAL_ADDRESS,
     },
   };
 

@@ -3,6 +3,7 @@ import { Clock3, HeartPulse, Star } from "lucide-react";
 import JsonLd from "@/components/seo/jsonLd";
 import ScanServicePage from "@/components/sections/scanServicePage";
 import { ecgFaq } from "@/lib/faq";
+import { BUSINESS_TYPE, POSTAL_ADDRESS } from "@/lib/contact";
 
 export const metadata: Metadata = {
   title: { absolute: "Diagnos Lab | Book ECG in Jamshedpur" },
@@ -39,14 +40,10 @@ const ecgSchema = {
   followup: "Reports available within 1–2 hours",
   howPerformed: "Non-invasive recording of the heart's electrical activity using electrodes placed on skin",
   performer: {
-    "@type": "MedicalBusiness",
+    "@type": BUSINESS_TYPE,
     name: "Diagnos Lab",
     telephone: "+918404802214",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Sakchi, Jamshedpur",
-      addressRegion: "Jharkhand",
-    },
+    address: POSTAL_ADDRESS,
   },
 };
 

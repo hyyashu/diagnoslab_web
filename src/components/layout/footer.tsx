@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { Award, Clock3, Instagram, Mail, MapPin, MessageCircle, ShieldCheck } from "lucide-react";
+import { Award, Building2, Clock3, Instagram, Mail, MapPin, MessageCircle, ShieldCheck } from "lucide-react";
 import Logo from "@/components/ui/logo";
 import FooterLinkGroup from "@/components/layout/footerLinkGroup";
 import { buttonClass } from "@/components/ui/button";
 import { areas } from "@/lib/catalog";
-import { EMAIL, INSTAGRAM_HREF, WHATSAPP_DISPLAY, WHATSAPP_HREF } from "@/lib/contact";
+import { ADDRESS_DISPLAY, EMAIL, HOURS_DISPLAY, INSTAGRAM_HREF, WHATSAPP_DISPLAY, WHATSAPP_HREF } from "@/lib/contact";
 
 /* DL.pen "Site Footer" / "Mobile Footer": brand red, with white text and
    white-tinted panels at the design's opacities. */
@@ -42,8 +42,9 @@ const linkGroups = [
 ];
 
 const visit = [
-  { icon: MapPin, text: "Sakchi · Jugsalai · Adityapur" },
-  { icon: Clock3, text: "Mon–Sun, 7:30 AM – 7:30 PM" },
+  { icon: MapPin, text: ADDRESS_DISPLAY },
+  { icon: Building2, text: "Also in Jugsalai · Adityapur" },
+  { icon: Clock3, text: HOURS_DISPLAY },
   { icon: Mail, text: EMAIL, href: `mailto:${EMAIL}` },
 ];
 
@@ -107,8 +108,8 @@ export default function Footer() {
             </ul>
             <ul className="flex flex-col gap-2 md:hidden">
               {visit.map(({ icon: Icon, text, href }) => (
-                <li key={text} className="flex items-center gap-2 text-[13px] text-white/[0.88]">
-                  <Icon className="size-3.5 text-white/[0.94]" aria-hidden />
+                <li key={text} className="flex items-start gap-2 text-[13px] leading-snug text-white/[0.88]">
+                  <Icon className="mt-0.5 size-3.5 shrink-0 text-white/[0.94]" aria-hidden />
                   {href ? <a href={href}>{text}</a> : text}
                 </li>
               ))}
@@ -156,7 +157,7 @@ export default function Footer() {
 
         {/* Bottom */}
         <div className="flex flex-col-reverse gap-3.5 border-t border-white/25 pt-5 md:flex-row md:items-center md:justify-between md:pt-6">
-          <p className="text-xs text-white/[0.88] md:text-[13px]">© 2026 Diagnos Labs. All rights reserved.</p>
+          <p className="text-xs text-white/[0.88] md:text-[13px]">© 2026 Diagnos Lab. All rights reserved.</p>
           <a
             href={INSTAGRAM_HREF}
             target="_blank"

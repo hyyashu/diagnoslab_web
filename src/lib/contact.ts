@@ -8,6 +8,26 @@ export const WHATSAPP_HREF = "https://wa.me/918404802214";
 
 export const EMAIL = "info@diagnoslab.in";
 
+/* The Sakchi lab's address, as on the Google Business Profile. Use these
+   everywhere so the site, schema and listing never disagree. */
+export const STREET_ADDRESS = "1st Floor, Building No. 142, Rishab Shanti Apartment, Dhalbhum Road, Ambagan, Sakchi";
+export const ADDRESS_DISPLAY = `${STREET_ADDRESS}, Jamshedpur, Jharkhand 831001`;
+export const POSTAL_ADDRESS = {
+  "@type": "PostalAddress",
+  streetAddress: STREET_ADDRESS,
+  addressLocality: "Jamshedpur",
+  addressRegion: "Jharkhand",
+  postalCode: "831001",
+  addressCountry: "IN",
+};
+
+/* Walk-in and phone hours, every day. */
+export const HOURS_DISPLAY = "Mon–Sun, 7:30 AM – 7:30 PM";
+
+/* MedicalBusiness keeps the lab a LocalBusiness for Google; DiagnosticLab
+   says what kind. */
+export const BUSINESS_TYPE = ["MedicalBusiness", "DiagnosticLab"];
+
 export const GOOGLE_REVIEWS_HREF =
   "https://www.google.com/maps/place/Diagnos+Lab/@22.8088744,86.2029601,17z/data=!4m8!3m7!1s0x39f5e3088f40bb2b:0x46180907852da273!8m2!3d22.8088744!4d86.2029601!9m1!1b1!16s%2Fg%2F1260h0qk1";
 

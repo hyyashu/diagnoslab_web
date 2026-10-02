@@ -159,7 +159,7 @@ export default function Navbar() {
                 <Phone className="size-[15px] text-dl-red" aria-hidden />
               </span>
               <span className="flex flex-col">
-                <span className="text-[11px] font-medium text-dl-muted">Call to book · 6 AM – 9 PM</span>
+                <span className="text-[11px] font-medium text-dl-muted">Call to book · 7:30 AM – 7:30 PM</span>
                 <span className="text-[15px] font-bold text-dl-ink">{PHONE_DISPLAY}</span>
               </span>
             </a>

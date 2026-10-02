@@ -4,11 +4,11 @@ import { Building2, Clock3, ExternalLink, Mail, MapPin, Navigation } from "lucid
 import MapEmbed from "@/components/sections/mapEmbed";
 import { shell } from "@/components/ui/shell";
 import { areas } from "@/lib/catalog";
-import { DIRECTIONS_HREF, EMAIL, MAP_EMBED_SRC } from "@/lib/contact";
+import { ADDRESS_DISPLAY, DIRECTIONS_HREF, EMAIL, HOURS_DISPLAY, MAP_EMBED_SRC } from "@/lib/contact";
 
 const facts = [
   { icon: Building2, label: "Walk-in centres", value: "Sakchi · Jugsalai · Adityapur" },
-  { icon: Clock3, label: "Open every day", value: "Mon–Sun, 7:30 AM – 7:30 PM" },
+  { icon: Clock3, label: "Open every day", value: HOURS_DISPLAY },
   { icon: Mail, label: "Corporate desk", value: EMAIL, href: `mailto:${EMAIL}` },
 ];
 
@@ -79,7 +79,7 @@ export default function FindUsAreas({
                 </span>
                 <div className="flex min-w-0 flex-1 flex-col">
                   <span className="font-display text-lg font-extrabold text-dl-ink md:text-[22px]">Diagnos Lab</span>
-                  <span className="text-[13px] text-dl-muted md:text-sm">Jamshedpur, Jharkhand</span>
+                  <span className="text-[13px] text-dl-muted md:text-sm">{ADDRESS_DISPLAY}</span>
                 </div>
                 <a
                   href={DIRECTIONS_HREF}

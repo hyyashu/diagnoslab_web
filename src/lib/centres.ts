@@ -1,4 +1,4 @@
-import { DIRECTIONS_HREF, MAP_EMBED_SRC } from "@/lib/contact";
+import { ADDRESS_DISPLAY, DIRECTIONS_HREF, HOURS_DISPLAY, MAP_EMBED_SRC } from "@/lib/contact";
 
 /* The walk-in centres. Only Sakchi has an exact address and map pin in the
    repo; Jugsalai and Adityapur fall back to a Google Maps search until their
@@ -17,7 +17,7 @@ export type Centre = {
   mapSrc: string;
 };
 
-const WALK_IN_HOURS = "Mon–Sun · 7:30 AM – 7:30 PM";
+const WALK_IN_HOURS = HOURS_DISPLAY;
 
 const search = (q: string) => ({
   directionsHref: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`,
@@ -26,8 +26,8 @@ const search = (q: string) => ({
 
 export const sakchi: Centre = {
   name: "Diagnos Lab, Sakchi",
-  address: "Ambagan, Sakchi, Jamshedpur, Jharkhand 831001",
-  shortAddress: "Dhalbhum Road, near Union Bank, Ambagan",
+  address: ADDRESS_DISPLAY,
+  shortAddress: "Dhalbhum Road, Ambagan, Sakchi",
   tag: "Main lab & radiology",
   hours: WALK_IN_HOURS,
   directionsHref: DIRECTIONS_HREF,

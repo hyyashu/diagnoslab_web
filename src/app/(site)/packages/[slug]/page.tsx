@@ -12,6 +12,7 @@ import { getPackageBySlug } from "@/lib/catalog";
 import JsonLd from "@/components/seo/jsonLd";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { BUSINESS_TYPE, POSTAL_ADDRESS } from "@/lib/contact";
 
 export function generateStaticParams() {
   return data.packages.map((pkg) => ({
@@ -130,16 +131,11 @@ export default async function Page({
       url: `https://diagnoslab.in/packages/${pkg.Slug}/`,
     },
     provider: {
-      "@type": "MedicalBusiness",
+      "@type": BUSINESS_TYPE,
       name: "Diagnos Lab",
       telephone: "+918404802214",
       url: "https://diagnoslab.in",
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Jamshedpur",
-        addressRegion: "Jharkhand",
-        addressCountry: "IN",
-      },
+      address: POSTAL_ADDRESS,
     },
   };
 

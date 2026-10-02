@@ -3,6 +3,7 @@ import { Clock3, ShieldCheck, Star } from "lucide-react";
 import JsonLd from "@/components/seo/jsonLd";
 import ScanServicePage from "@/components/sections/scanServicePage";
 import { xrayFaq } from "@/lib/faq";
+import { BUSINESS_TYPE, POSTAL_ADDRESS } from "@/lib/contact";
 
 export const metadata: Metadata = {
   title: { absolute: "Diagnos Lab | Book X-Ray in Jamshedpur" },
@@ -39,14 +40,10 @@ const xraySchema = {
   followup: "Reports available within 1–2 hours",
   howPerformed: "Digital radiography using low-dose X-ray radiation to produce high-resolution images",
   performer: {
-    "@type": "MedicalBusiness",
+    "@type": BUSINESS_TYPE,
     name: "Diagnos Lab",
     telephone: "+918404802214",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Sakchi, Jamshedpur",
-      addressRegion: "Jharkhand",
-    },
+    address: POSTAL_ADDRESS,
   },
 };
 

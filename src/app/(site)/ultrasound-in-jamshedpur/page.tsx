@@ -10,6 +10,7 @@ import ScansOffered from "./components/scansOffered";
 import PrepareSection from "./components/prepareSection";
 import { relatedServices, whyPoints } from "./content";
 import { ultrasoundFaq } from "@/lib/faq";
+import { BUSINESS_TYPE, POSTAL_ADDRESS } from "@/lib/contact";
 
 export const metadata: Metadata = {
   title: {
@@ -52,14 +53,10 @@ const ultrasoundSchema = {
   howPerformed:
     "Non-invasive, radiation-free imaging using high-frequency sound waves",
   performer: {
-    "@type": "MedicalBusiness",
+    "@type": BUSINESS_TYPE,
     name: "Diagnos Lab",
     telephone: "+918404802214",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Sakchi, Jamshedpur",
-      addressRegion: "Jharkhand",
-    },
+    address: POSTAL_ADDRESS,
   },
 };
 

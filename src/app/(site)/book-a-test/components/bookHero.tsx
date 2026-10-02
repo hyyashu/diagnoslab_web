@@ -8,7 +8,7 @@ export default function BookHero() {
   return (
     <ServicePageHero
       breadcrumb={[{ label: "Home", href: "/" }, { label: "Book a test" }]}
-      eyebrow="Taking bookings now · 6 AM – 9 PM, every day"
+      eyebrow="Taking bookings now · 7:30 AM – 7:30 PM, every day"
       title="Book a blood test in Jamshedpur, collected at home from 6 AM"
       subtitle="Call, WhatsApp or leave your number. Our team confirms your test, price and slot in one quick call. Same-day digital reports."
       proofPoints={[

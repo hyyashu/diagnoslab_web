@@ -1,12 +1,12 @@
 import type { Area } from "@/lib/catalog";
 import type { FaqItem } from "@/lib/faq";
-import { jugsalai, sakchi, type Centre } from "@/lib/centres";
+import { adityapur, jugsalai, sakchi, type Centre } from "@/lib/centres";
 
 /* Area page copy from DL.pen ("Area: Jugsalai"). */
 
 /* Walk-in centres that are also area pages. Every other area is served
    from the main lab in Sakchi. */
-const centres: Record<string, Centre> = { sakchi, jugsalai };
+const centres: Record<string, Centre> = { sakchi, jugsalai, adityapur };
 
 /* `hasCentre`: the area has its own walk-in centre; otherwise `centre` is
    the nearest one (Sakchi). */
@@ -50,7 +50,7 @@ export function areaFaq(area: Area): FaqItem[] {
     {
       question: "Can I get my reports on WhatsApp?",
       answer:
-        "Yes. All digital reports are delivered on WhatsApp and email as soon as they're ready. You can also access them through our patient portal.",
+        "Yes. All digital reports are delivered on WhatsApp and email as soon as they're ready.",
     },
   ];
 }

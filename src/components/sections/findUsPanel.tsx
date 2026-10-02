@@ -4,7 +4,7 @@ import MapEmbed from "@/components/sections/mapEmbed";
 import { buttonClass } from "@/components/ui/button";
 import { shell } from "@/components/ui/shell";
 import { areas } from "@/lib/catalog";
-import { DIRECTIONS_HREF, MAP_EMBED_SRC, PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
+import { ADDRESS_DISPLAY, DIRECTIONS_HREF, HOURS_DISPLAY, MAP_EMBED_SRC, PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
 
 type FindUsPanelProps = {
   tone?: "white" | "muted";
@@ -18,7 +18,7 @@ type FindUsPanelProps = {
   currentArea?: string;
 };
 
-const sakchi = { title: "Diagnos Lab", text: "Sakchi, Jamshedpur, Jharkhand", directionsHref: DIRECTIONS_HREF, mapSrc: MAP_EMBED_SRC };
+const sakchi = { title: "Diagnos Lab", text: ADDRESS_DISPLAY, directionsHref: DIRECTIONS_HREF, mapSrc: MAP_EMBED_SRC };
 
 /* DL.pen "Find Us": address, directions and the areas we collect from,
    beside the live map (which loads only when scrolled near). */
@@ -33,7 +33,7 @@ export default function FindUsPanel({
 }: FindUsPanelProps) {
   const details = [
     { icon: MapPin, title: centre.title, text: centre.text },
-    { icon: Clock3, title: "Open every day", text: "Mon–Sun, 7:30 AM – 7:30 PM" },
+    { icon: Clock3, title: "Open every day", text: HOURS_DISPLAY },
     { icon: Phone, title: "Call or WhatsApp", text: PHONE_DISPLAY, href: PHONE_HREF },
   ];
 

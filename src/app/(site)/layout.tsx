@@ -1,4 +1,5 @@
 import JsonLd from "@/components/seo/jsonLd";
+import { BUSINESS_TYPE, POSTAL_ADDRESS } from "@/lib/contact";
 import HomeCollectionJsonLd from "@/components/seo/homeCollectionJsonLd";
 import Navbar from "@/components/layout/navbar";
 // import BottomNav from "@/components/layout/bottomNav";
@@ -7,7 +8,7 @@ import Footer from "@/components/layout/footer";
 
 const localBusinessSchema = {
   "@context": "https://schema.org",
-  "@type": "MedicalBusiness",
+  "@type": BUSINESS_TYPE,
   /* Canonical identifier for the business. Every other block that talks about
      Diagnos Lab references this @id instead of describing it again, so search
      engines resolve one entity rather than one per page. */
@@ -21,14 +22,7 @@ const localBusinessSchema = {
     "Diagnos Lab is a top-rated diagnostic centre in Sakchi, Jamshedpur offering blood tests, ultrasound, ECG, X-Ray, PFT, and health packages with home sample collection.",
   telephone: "+918404802214",
   email: "info@diagnoslab.in",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: "Sakchi",
-    addressLocality: "Jamshedpur",
-    addressRegion: "Jharkhand",
-    postalCode: "831001",
-    addressCountry: "IN",
-  },
+  address: POSTAL_ADDRESS,
   geo: {
     "@type": "GeoCoordinates",
     latitude: 22.8088744,
@@ -47,7 +41,7 @@ const localBusinessSchema = {
         "Sunday",
       ],
       opens: "07:30",
-      closes: "20:00",
+      closes: "19:30",
     },
   ],
   priceRange: "₹₹",

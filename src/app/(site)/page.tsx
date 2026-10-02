@@ -9,6 +9,7 @@ import TrustBand from "@/components/home/trustBand";
 import FindUsAreas from "@/components/sections/findUsAreas";
 import PatientReviews from "@/components/sections/patientReviews";
 import JsonLd from "@/components/seo/jsonLd";
+import { BUSINESS_TYPE } from "@/lib/contact";
 import FaqJsonLd from "@/components/seo/faqJsonLd";
 import FAQAccordion from "@/components/sections/faq";
 
@@ -47,7 +48,8 @@ const webPageSchema = {
     cssSelector: ["h1", ".speakable-description"],
   },
   about: {
-    "@type": "MedicalBusiness",
+    "@id": "https://diagnoslab.in/#organization",
+    "@type": BUSINESS_TYPE,
     name: "Diagnos Lab",
     description:
       "Diagnos Lab is Jamshedpur's top-rated diagnostic centre in Sakchi offering blood tests, ultrasound by female radiologist, ECG, X-Ray, and health packages with home sample collection and same-day digital reports.",

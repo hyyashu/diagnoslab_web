@@ -3,10 +3,11 @@ import { ArrowUpRight, MapPin } from "lucide-react";
 import { shell } from "@/components/ui/shell";
 import { areas } from "@/lib/catalog";
 import { allCentres } from "@/lib/centres";
+import { HOURS_DISPLAY } from "@/lib/contact";
 
 /* DL.pen "Coverage": the home collection areas beside the three walk-in
-   centres. Adityapur is served but has no area page yet. */
-const servedAreas = [...areas.map((a) => ({ name: a.name, slug: a.slug as string | null })), { name: "Adityapur", slug: null }];
+   centres. */
+const servedAreas = areas.map((a) => ({ name: a.name, slug: a.slug as string | null }));
 
 export default function Coverage() {
   const chip = "inline-flex items-center gap-1.5 rounded-full border border-dl-line bg-dl-bg px-3.5 py-2 text-[13.5px] font-medium text-dl-ink";
@@ -45,7 +46,7 @@ export default function Coverage() {
 
         <div className="flex flex-col gap-3 rounded-3xl border border-dl-line bg-dl-bg p-5 md:p-6">
           <h3 className="font-display text-lg font-extrabold text-dl-ink">Prefer to walk in?</h3>
-          <p className="text-[13.5px] text-dl-ink-2">Visit any of our 3 centres · Mon–Sun, 7:30 AM – 7:30 PM</p>
+          <p className="text-[13.5px] text-dl-ink-2">Visit any of our 3 centres · {HOURS_DISPLAY}</p>
           <ul className="flex flex-col gap-3 pt-1">
             {allCentres.map((c) => (
               <li key={c.name} className="flex items-center gap-3.5 rounded-2xl border border-dl-line bg-white p-4">

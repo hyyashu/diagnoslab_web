@@ -4,7 +4,7 @@ import { shell } from "@/components/ui/shell";
 import { EMAIL, PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
 
 const contacts = [
-  { icon: Phone, value: PHONE_DISPLAY, text: "Call or WhatsApp · 6 AM – 9 PM, every day", href: PHONE_HREF },
+  { icon: Phone, value: PHONE_DISPLAY, text: "Call or WhatsApp · 7:30 AM – 7:30 PM, every day", href: PHONE_HREF },
   { icon: Mail, value: EMAIL, text: "Write any time · we reply within 24 hours", href: `mailto:${EMAIL}` },
 ];
 

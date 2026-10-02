@@ -24,7 +24,7 @@ export default function HomeHero() {
             <span className="hidden md:inline">Home collection in Jamshedpur from 6 AM</span>
           </p>
           <h1 className="font-display text-[36px] font-extrabold leading-[1.05] tracking-[-0.04em] text-dl-ink md:text-[56px] xl:text-[68px] xl:leading-[1.02]">
-            Looking for a test?
+            Looking for a test in Jamshedpur?
           </h1>
           <p className="speakable-description max-w-[540px] text-[14.5px] leading-normal text-dl-ink-2 md:text-lg md:leading-[1.55]">
             <span className="md:hidden">1,000+ tests, packages &amp; scans. Reports on WhatsApp.</span>
