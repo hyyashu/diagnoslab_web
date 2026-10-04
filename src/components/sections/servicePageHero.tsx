@@ -1,6 +1,6 @@
-import Link from "next/link";
-import { ArrowRight, ChevronRight, Clock3, Phone, Star, UserRoundCheck, type LucideIcon } from "lucide-react";
+import { ArrowRight, Clock3, Phone, Star, UserRoundCheck, type LucideIcon } from "lucide-react";
 import CallbackForm from "@/components/forms/callbackForm";
+import Breadcrumbs, { type Crumb } from "@/components/ui/breadcrumbs";
 import { buttonClass } from "@/components/ui/button";
 import { shell } from "@/components/ui/shell";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
@@ -14,9 +14,7 @@ const defaultProofPoints: ProofPoint[] = [
 ];
 
 type ServicePageHeroProps = {
-  /* The last crumb is the current page; earlier crumbs without an href
-     render as plain text. */
-  breadcrumb: { label: string; href?: string }[];
+  breadcrumb: Crumb[];
   eyebrow: string;
   title: string;
   subtitle: string;
@@ -47,29 +45,7 @@ export default function ServicePageHero({
     <section className="bg-linear-to-b from-dl-red-soft to-dl-bg">
       <div className={`${shell} grid gap-6 pt-5 pb-9 md:grid-cols-[minmax(0,1fr)_minmax(0,400px)] md:items-center md:gap-10 md:py-16 xl:grid-cols-[minmax(0,1fr)_440px] xl:gap-16`}>
         <div className="flex flex-col gap-5 md:gap-7">
-          <nav aria-label="Breadcrumb">
-            <ol className="flex flex-wrap items-center gap-1.5 text-xs text-dl-muted md:text-[13px]">
-              {breadcrumb.map((crumb, i) => {
-                const last = i === breadcrumb.length - 1;
-                return (
-                  <li key={crumb.label} className="flex items-center gap-1.5">
-                    {last ? (
-                      <span aria-current="page" className="font-semibold text-dl-ink">{crumb.label}</span>
-                    ) : (
-                      <>
-                        {crumb.href ? (
-                          <Link href={crumb.href} className="hover:text-dl-ink">{crumb.label}</Link>
-                        ) : (
-                          <span>{crumb.label}</span>
-                        )}
-                        <ChevronRight className="size-3.5" aria-hidden />
-                      </>
-                    )}
-                  </li>
-                );
-              })}
-            </ol>
-          </nav>
+          <Breadcrumbs items={breadcrumb} />
 
           <div className="flex flex-col gap-3 md:gap-5">
             <p className="inline-flex w-fit items-center gap-2 rounded-full border border-dl-line bg-white py-1.5 pl-2.5 pr-3 text-xs font-semibold text-dl-ink-2 md:py-[7px] md:pr-3.5 md:text-[13px]">

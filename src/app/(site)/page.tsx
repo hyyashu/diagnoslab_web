@@ -12,6 +12,7 @@ import JsonLd from "@/components/seo/jsonLd";
 import { BUSINESS_TYPE } from "@/lib/contact";
 import FaqJsonLd from "@/components/seo/faqJsonLd";
 import FAQAccordion from "@/components/sections/faq";
+import { ORG_ID, SITE_URL } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: { absolute: "Diagnos Lab Jamshedpur | Blood Test, Ultrasound & Home Collection" },
@@ -28,13 +29,13 @@ export const metadata: Metadata = {
     "Lab near me Jamshedpur",
   ],
   alternates: {
-    canonical: "https://diagnoslab.in",
+    canonical: SITE_URL,
   },
   openGraph: {
     title: "Diagnos Lab | Blood Test, Ultrasound & Radiology in Jamshedpur",
     description:
       "Top-rated diagnostic centre in Sakchi, Jamshedpur. Blood tests, USG, ECG, X-Ray, and health packages with home collection.",
-    url: "https://diagnoslab.in",
+    url: SITE_URL,
   },
 };
 
@@ -42,13 +43,13 @@ const webPageSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
   name: "Diagnos Lab – Blood Test, Ultrasound & Diagnostic Centre Jamshedpur",
-  url: "https://diagnoslab.in",
+  url: SITE_URL,
   speakable: {
     "@type": "SpeakableSpecification",
     cssSelector: ["h1", ".speakable-description"],
   },
   about: {
-    "@id": "https://diagnoslab.in/#organization",
+    "@id": ORG_ID,
     "@type": BUSINESS_TYPE,
     name: "Diagnos Lab",
     description:

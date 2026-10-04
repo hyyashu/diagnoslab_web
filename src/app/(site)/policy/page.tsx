@@ -1,20 +1,21 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { CalendarCheck, Check, ChevronRight, Phone, Sparkles } from "lucide-react";
+import { CalendarCheck, Check, Phone, Sparkles } from "lucide-react";
+import Breadcrumbs from "@/components/ui/breadcrumbs";
 import { shell } from "@/components/ui/shell";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
 import PolicyNav from "./components/policyNav";
 import { LAST_UPDATED, inShort, privacyIntro, privacySections } from "./content";
+import { pageUrl } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: { absolute: "Privacy Policy | Diagnos Lab Jamshedpur" },
   description:
     "How Diagnos Lab, Jamshedpur handles your samples, your data and your reports: what we collect, who we share it with, how long we keep it and your rights.",
   alternates: {
-    canonical: "https://diagnoslab.in/policy/",
+    canonical: pageUrl("/policy/"),
   },
   openGraph: {
-    url: "https://diagnoslab.in/policy/",
+    url: pageUrl("/policy/"),
   },
   robots: {
     index: true,
@@ -22,22 +23,14 @@ export const metadata: Metadata = {
   },
 };
 
-/* DL.pen "Diagnos Lab — Policies": a title band, then the policy beside a
+/* DL.pen "Diagnos Lab - Policies": a title band, then the policy beside a
    sticky "on this page" nav. */
 export default function PrivacyPolicyPage() {
   return (
     <>
       <section className="border-b border-dl-line bg-linear-to-b from-dl-red-soft to-dl-bg">
         <div className={`${shell} flex flex-col gap-5 pt-5 pb-8 md:gap-[22px] md:pt-10 md:pb-14`}>
-          <nav aria-label="Breadcrumb">
-            <ol className="flex items-center gap-1.5 text-xs text-dl-muted md:text-[13px]">
-              <li className="flex items-center gap-1.5">
-                <Link href="/" className="hover:text-dl-ink">Home</Link>
-                <ChevronRight className="size-3.5" aria-hidden />
-              </li>
-              <li aria-current="page" className="font-semibold text-dl-ink">Policies</li>
-            </ol>
-          </nav>
+          <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Policies" }]} />
           <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between md:gap-10">
             <div className="flex max-w-[620px] flex-col gap-2.5 md:gap-3">
               <h1 className="font-display text-[30px] font-extrabold tracking-[-0.03em] text-dl-ink md:text-[46px]">

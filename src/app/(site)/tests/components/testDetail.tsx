@@ -1,32 +1,29 @@
 import { Droplet, FileClock, FlaskConical, TestTubes, UtensilsCrossed } from "lucide-react";
 import {
   BookingAside,
+  bookingItem,
   DetailLayout,
   FaqCard,
   MobilePriceCard,
   Preparation,
-  Responsive,
   TitleCard,
   detailCard,
   detailCardTitle,
-  discountPct,
   type DetailFact,
   type PrepStep,
 } from "@/components/detail/detailParts";
-import { DetailStickyBar, EnquiryCard, type BookingItem } from "@/components/detail/detailClient";
+import Responsive from "@/components/ui/responsive";
+import { DetailStickyBar, EnquiryCard } from "@/components/detail/detailClient";
 import { labTestsFaq } from "@/lib/faq";
 import type { Test } from "@/lib/catalog";
+import { discountPct, isNoFasting, isOvernightFast, isSameDay } from "@/lib/format";
 import type { TestDetails } from "../details";
 
 /* DL.pen "Test Details". Tests the design doesn't write up get catalogue
    facts, generic preparation and the general lab test FAQ. */
 
-const overnight = (f: string) => /over[\s-]*night/i.test(f);
-const noFasting = (f: string) => /not\s*required/i.test(f);
-const sameDay = (r: string) => /same\s*day/i.test(r);
-
 function genericPrep(fasting: string): { intro: string; steps: PrepStep[] } {
-  if (overnight(fasting))
+  if (isOvernightFast(fasting))
     return {
       intro: "This test needs overnight fasting.",
       steps: [
@@ -36,32 +33,14 @@ function genericPrep(fasting: string): { intro: string; steps: PrepStep[] } {
       ],
     };
   return {
-    intro: noFasting(fasting) ? "No special preparation needed." : `Fasting: ${fasting}.`,
+    intro: isNoFasting(fasting) ? "No special preparation needed." : `Fasting: ${fasting}.`,
     steps: [
-      noFasting(fasting)
+      isNoFasting(fasting)
         ? { title: "No fasting needed", text: "Eat and drink normally before your sample." }
         : { title: `Fasting: ${fasting}`, text: "Our team will confirm the timing when you book." },
       { title: "Stay hydrated", text: "A glass of water makes the draw quicker." },
       { title: "Share your medicines", text: "Tell the phlebotomist about any medicines you take." },
     ],
-  };
-}
-
-export function testBookingItem(test: Test): BookingItem {
-  /* Same lead payload as LabTestCard. */
-  return {
-    name: test.title,
-    price: test.price,
-    originalPrice: test.originalPrice,
-    sourceData: {
-      test_name: test.title,
-      test_slug: test.slug,
-      test_price: test.price,
-      test_original_price: test.originalPrice,
-      test_category: test.category,
-      test_fasting: test.fasting,
-      test_reporting: test.reporting,
-    },
   };
 }
 
@@ -127,9 +106,9 @@ function WhenToTake({ d }: { d: TestDetails }) {
 }
 
 export function TestMain({ test, d }: { test: Test; d?: TestDetails }) {
-  const item = testBookingItem(test);
+  const item = bookingItem({ kind: "test", ...test });
   const discount = discountPct(test.price, test.originalPrice);
-  const reportLine = sameDay(test.reporting) ? "Report on WhatsApp, same day" : "Report on WhatsApp";
+  const reportLine = isSameDay(test.reporting) ? "Report on WhatsApp, same day" : "Report on WhatsApp";
   const parameterCount = d?.groups?.reduce((n, g) => n + g.parameters.length, 0) ?? 0;
   const sample = d?.sample ?? test.sampleType;
 
@@ -139,9 +118,9 @@ export function TestMain({ test, d }: { test: Test; d?: TestDetails }) {
     {
       icon: UtensilsCrossed,
       label: "Fasting",
-      value: noFasting(test.fasting) ? "Not required" : overnight(test.fasting) ? "10–12 hours" : test.fasting,
+      value: isNoFasting(test.fasting) ? "Not required" : isOvernightFast(test.fasting) ? "10–12 hours" : test.fasting,
     },
-    { icon: FileClock, label: "Report", value: sameDay(test.reporting) ? "Same day" : test.reporting },
+    { icon: FileClock, label: "Report", value: isSameDay(test.reporting) ? "Same day" : test.reporting },
   ];
   const prep = d?.prep ? { intro: d.prepIntro ?? "", steps: d.prep } : genericPrep(test.fasting);
   const shortName = d?.shortName ?? test.title;

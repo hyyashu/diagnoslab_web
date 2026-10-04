@@ -3,7 +3,7 @@ import { Clock3, ShieldCheck, Star } from "lucide-react";
 import JsonLd from "@/components/seo/jsonLd";
 import ScanServicePage from "@/components/sections/scanServicePage";
 import { xrayFaq } from "@/lib/faq";
-import { BUSINESS_TYPE, POSTAL_ADDRESS } from "@/lib/contact";
+import { ORG_REF, breadcrumbSchema, pageUrl } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: { absolute: "Diagnos Lab | Book X-Ray in Jamshedpur" },
@@ -18,13 +18,13 @@ export const metadata: Metadata = {
     "Diagnos Lab in Jamshedpur",
   ],
   alternates: {
-    canonical: "https://diagnoslab.in/xray/",
+    canonical: pageUrl("/xray/"),
   },
   openGraph: {
     title: "Diagnos Lab | Book X-Ray in Jamshedpur",
     description:
       "Book digital X-Ray at Diagnos Lab in Jamshedpur. Fast, low-radiation imaging for bones, chest, spine, and joints with reports in 1–2 hours.",
-    url: "https://diagnoslab.in/xray/",
+    url: pageUrl("/xray/"),
     images: ["/images/diagnoslogo.avif"],
   },
 };
@@ -33,29 +33,20 @@ const xraySchema = {
   "@context": "https://schema.org",
   "@type": "MedicalProcedure",
   name: "X-Ray in Jamshedpur",
-  url: "https://diagnoslab.in/xray/",
+  url: pageUrl("/xray/"),
   description:
     "Digital X-Ray for bones, chest, spine, and joints at Diagnos Lab, Sakchi Jamshedpur. Low-radiation imaging with same-day reports.",
   procedureType: "Diagnostic",
   followup: "Reports available within 1–2 hours",
   howPerformed: "Digital radiography using low-dose X-ray radiation to produce high-resolution images",
-  performer: {
-    "@type": BUSINESS_TYPE,
-    name: "Diagnos Lab",
-    telephone: "+918404802214",
-    address: POSTAL_ADDRESS,
-  },
+  performer: ORG_REF,
 };
 
-const xrayBreadcrumb = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://diagnoslab.in" },
-    { "@type": "ListItem", position: 2, name: "Radiology", item: "https://diagnoslab.in/radiology/" },
-    { "@type": "ListItem", position: 3, name: "X-Ray in Jamshedpur", item: "https://diagnoslab.in/xray/" },
-  ],
-};
+const xrayBreadcrumb = breadcrumbSchema([
+  ["Home", ""],
+  ["Radiology", "/radiology/"],
+  ["X-Ray in Jamshedpur", "/xray/"],
+]);
 
 export default function Page() {
   return (

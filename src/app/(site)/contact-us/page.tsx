@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import ContactHero from "./components/contactHero";
 import VisitCentre from "./components/visitCentre";
 import OneInbox from "./components/oneInbox";
+import { pageUrl } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: { absolute: "Contact Diagnos Lab in Jamshedpur | Book a Test" },
@@ -15,13 +16,13 @@ export const metadata: Metadata = {
     "Lab Phone Number Jamshedpur",
   ],
   alternates: {
-    canonical: "https://diagnoslab.in/contact-us/",
+    canonical: pageUrl("/contact-us/"),
   },
   openGraph: {
     title: "Contact Diagnos Lab | Book Tests in Jamshedpur",
     description:
       "Reach Diagnos Lab in Sakchi, Jamshedpur for bookings and queries.",
-    url: "https://diagnoslab.in/contact-us/",
+    url: pageUrl("/contact-us/"),
   },
 };
 

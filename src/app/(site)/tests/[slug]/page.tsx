@@ -10,7 +10,7 @@ import { getTestBySlug } from "@/lib/catalog";
 import JsonLd from "@/components/seo/jsonLd";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { BUSINESS_TYPE, POSTAL_ADDRESS } from "@/lib/contact";
+import { ORG_REF, breadcrumbSchema, detailMeta, pageUrl } from "@/lib/schema";
 
 function toTitleCase(str: string) {
   return str.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
@@ -48,8 +48,9 @@ export async function generateMetadata({
 
   const description = `Book ${name} test in Jamshedpur${pricePart} at Diagnos Lab, Sakchi.${fastingPart}${reportingPart} Home sample collection available across all Jamshedpur areas.`;
 
-  return {
-    title: { absolute: title },
+  return detailMeta({
+    path: `/tests/${test.Slug}/`,
+    title,
     description,
     keywords: [
       `${name} test in Jamshedpur`,
@@ -59,17 +60,7 @@ export async function generateMetadata({
       `${name} price Jamshedpur`,
       ...(test.Categories ?? []),
     ],
-    alternates: {
-      canonical: `https://diagnoslab.in/tests/${test.Slug}/`,
-    },
-    openGraph: {
-      title,
-      description,
-      url: `https://diagnoslab.in/tests/${test.Slug}/`,
-      type: "website",
-    },
-    robots: { index: true, follow: true },
-  };
+  });
 }
 
 export default async function Page({
@@ -90,47 +81,22 @@ export default async function Page({
     "@context": "https://schema.org",
     "@type": "MedicalTest",
     name: toTitleCase(test.TestName),
-    url: `https://diagnoslab.in/tests/${test.Slug}/`,
+    url: pageUrl(`/tests/${test.Slug}/`),
     description: `${toTitleCase(test.TestName)} test available at Diagnos Lab, Sakchi Jamshedpur. Home sample collection and same-day digital reports.`,
     usedToDiagnose: test.Categories?.join(", ") ?? "",
-    provider: {
-      "@type": BUSINESS_TYPE,
-      name: "Diagnos Lab",
-      telephone: "+918404802214",
-      url: "https://diagnoslab.in",
-      address: POSTAL_ADDRESS,
-    },
+    provider: ORG_REF,
   };
 
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: "https://diagnoslab.in",
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Tests",
-        item: "https://diagnoslab.in/tests/",
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: `${toTitleCase(test.TestName)} Test`,
-        item: `https://diagnoslab.in/tests/${test.Slug}/`,
-      },
-    ],
-  };
+  const breadcrumb = breadcrumbSchema([
+    ["Home", ""],
+    ["Tests", "/tests/"],
+    [`${toTitleCase(test.TestName)} Test`, `/tests/${test.Slug}/`],
+  ]);
 
   return (
     <div className="pb-24 md:pb-0">
       <JsonLd data={testSchema} />
-      <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={breadcrumb} />
       <FaqJsonLd items={content?.faq ?? labTestsFaq.filter((f) => !f.desktopOnly)} />
       <DetailBreadcrumb parent={{ label: "Lab tests", href: "/tests/" }} title={t.title} />
       <TestMain test={t} d={content} />

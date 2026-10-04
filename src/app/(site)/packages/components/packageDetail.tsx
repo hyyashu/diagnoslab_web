@@ -1,5 +1,5 @@
 import { Check, Droplet, FileClock, TestTubes, UtensilsCrossed } from "lucide-react";
-import { discountOf, type ListingPackage } from "@/components/cards/packageListingCards";
+import type { ListingPackage } from "@/components/cards/packageListingCards";
 import {
   BookingAside,
   DetailLayout,
@@ -14,26 +14,25 @@ import {
 } from "@/components/detail/detailParts";
 import { DetailStickyBar, EnquiryCard, ProfileList, type BookingItem } from "@/components/detail/detailClient";
 import { packagesFaq, type FaqItem } from "@/lib/faq";
+import { discountPct, isOvernightFast, isSameDay } from "@/lib/format";
 import type { PackageDetails } from "../details";
 
 /* DL.pen "Package Details". Packages the design doesn't write up get
    catalogue facts, generic preparation and the general package FAQ. */
 
-const overnight = (f: string) => /over[\s-]*night/i.test(f);
-
 function genericPrep(fasting: string): PrepStep[] {
   return [
-    overnight(fasting)
+    isOvernightFast(fasting)
       ? { title: "Fast for 10–12 hours", text: "Only water is allowed. Skip tea, coffee and snacks." }
       : { title: "No fasting needed", text: "You can eat and drink as usual before your sample." },
     { title: "Pick a slot", text: "Home collection runs daily from 6 AM, or walk in at any centre." },
-    { title: "Get your report", text: "Digital reports are sent straight to your WhatsApp." },
+    { title: "Get your report", text: "Your report is sent to your WhatsApp automatically." },
   ];
 }
 
 export function resolveDetails(pkg: ListingPackage, d?: PackageDetails) {
-  const fasting = d?.fasting ?? (overnight(pkg.fasting) ? "10–12 hours" : "Not required");
-  const report = d?.report ?? (/same\s*day/i.test(pkg.reporting) ? "Same day" : pkg.reporting);
+  const fasting = d?.fasting ?? (isOvernightFast(pkg.fasting) ? "10–12 hours" : "Not required");
+  const report = d?.report ?? (isSameDay(pkg.reporting) ? "Same day" : pkg.reporting);
   const faq: FaqItem[] = d?.faq ?? packagesFaq.filter((f) => !f.desktopOnly);
   const facts: DetailFact[] = [
     ...(pkg.parameters > 0 ? [{ icon: TestTubes, label: "Parameters", value: `${pkg.parameters} tests` }] : []),
@@ -52,7 +51,7 @@ export function resolveDetails(pkg: ListingPackage, d?: PackageDetails) {
     facts,
     profiles: d?.profiles,
     whoShouldBook: d?.whoShouldBook,
-    prepIntro: d?.prepIntro ?? (overnight(pkg.fasting) ? "This package needs overnight fasting." : "No special preparation is needed."),
+    prepIntro: d?.prepIntro ?? (isOvernightFast(pkg.fasting) ? "This package needs overnight fasting." : "No special preparation is needed."),
     prepIntroMobile: d?.prepIntroMobile ?? d?.prepIntro,
     prep: d?.prep ?? genericPrep(pkg.fasting),
     faq,
@@ -113,7 +112,7 @@ function WhoShouldBook({ items }: { items?: string[] }) {
 }
 
 export function PackageMain({ pkg, d, item }: { pkg: ListingPackage; d: ResolvedDetails; item: BookingItem }) {
-  const discount = discountOf(pkg);
+  const discount = discountPct(pkg.price, pkg.originalPrice);
   const reportLine = "Reports on WhatsApp within 24 hrs";
   return (
     <>

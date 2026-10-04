@@ -1,62 +1,230 @@
 {
-  "scanTypes": [
+ "scanTypes": [
+  {
+   "id": "abdomen",
+   "title": "Abdominal Ultrasound",
+   "description": "Evaluates liver, gallbladder, pancreas, spleen and abdominal organs for stones, swelling or abnormalities.",
+   "preparation": "6–8 hours fasting recommended"
+  },
+  {
+   "id": "pelvic",
+   "title": "Pelvic Ultrasound",
+   "description": "Assesses uterus, ovaries and bladder. Commonly used for gynaecological complaints and fertility evaluation.",
+   "preparation": "Drink water and hold bladder before scan"
+  },
+  {
+   "id": "pregnancy",
+   "title": "Pregnancy (Obstetric) USG",
+   "description": "Monitors fetal growth, placenta and amniotic fluid. Includes dating, NT, anomaly and growth scans as advised by your doctor, performed by a female radiologist.",
+   "preparation": "Follow your doctor's scan schedule"
+  },
+  {
+   "id": "kub",
+   "title": "KUB / Renal Ultrasound",
+   "description": "Examines kidneys, ureters and bladder for stones, infections or structural issues.",
+   "preparation": "Full bladder may be required"
+  },
+  {
+   "id": "thyroid",
+   "title": "Thyroid & Neck Ultrasound",
+   "description": "Checks thyroid gland size, nodules and neck lymph nodes for swelling or abnormalities.",
+   "preparation": "No special preparation needed"
+  },
+  {
+   "id": "breast",
+   "title": "Breast Ultrasound",
+   "description": "Used to evaluate breast lumps, pain, or as a follow-up to mammography findings.",
+   "preparation": "No special preparation needed"
+  }
+ ],
+ "preparationSteps": [
+  {
+   "id": 1,
+   "title": "Follow fasting instructions",
+   "description": "For abdomen scans, avoid food for 6–8 hours. Clear fluids are usually allowed unless advised otherwise."
+  },
+  {
+   "id": 2,
+   "title": "Bladder preparation",
+   "description": "Pelvic and some KUB scans need a full bladder. Drink 4–5 glasses of water 1 hour before your appointment."
+  },
+  {
+   "id": 3,
+   "title": "Bring prior reports",
+   "description": "Carry previous ultrasound or related reports so our radiologist can compare findings accurately."
+  },
+  {
+   "id": 4,
+   "title": "Wear comfortable clothing",
+   "description": "Loose, easy-to-remove clothing helps the scan go quickly. You may be asked to change into a gown."
+  }
+ ],
+ "pregnancyScans": [
+  {
+   "id": "nt-scan",
+   "slug": "nt-scan",
+   "title": "NT Scan",
+   "icon": "baby",
+   "when": "11–14 weeks",
+   "description": "Measures the fluid at the back of the baby's neck (nuchal translucency) and checks early development. Done between 11 and 14 weeks, often with the dual marker blood test.",
+   "preparation": "No fasting. We'll tell you if a full bladder is needed",
+   "metaTitle": "NT Scan in Sakchi, Jamshedpur | 11–14 Weeks | Diagnos Lab",
+   "metaDescription": "NT scan (nuchal translucency) at 11–14 weeks by a female MD Radiology radiologist at Diagnos Lab, Sakchi, Jamshedpur. Report on WhatsApp in 1–2 hrs.",
+   "h1": "NT Scan in Sakchi, Jamshedpur",
+   "subtitle": "The 11–14 week pregnancy scan that measures nuchal translucency and checks your baby's early development, done by a female radiologist with an MD in Radiology.",
+   "about": "The NT (nuchal translucency) scan is an ultrasound done between 11 and 14 weeks of pregnancy. It measures the small pocket of fluid at the back of the baby's neck. Together with your age and the dual marker blood test, this measurement helps your doctor estimate the chance of chromosomal conditions such as Down syndrome. It is a screening test: it does not diagnose a condition, and your doctor will explain the result and any next steps.",
+   "checks": [
+    "Nuchal translucency (the fluid at the back of the neck)",
+    "Baby's heartbeat and the number of babies",
+    "Crown–rump length, to confirm your due date",
+    "Nasal bone and early anatomy, where visible"
+   ],
+   "timing": "Between 11 weeks and 13 weeks 6 days of pregnancy. The measurement is only reliable in this window, so book as soon as your doctor advises.",
+   "duration": "20–30 min",
+   "prepSteps": [
+    "No fasting needed.",
+    "Drink some water beforehand; we'll tell you when you book if a fuller bladder will help.",
+    "Bring your doctor's prescription, a photo ID and any earlier scan reports.",
+    "Wear loose, two-piece clothing."
+   ],
+   "relatedTest": {
+    "label": "Dual marker blood test",
+    "href": "/tests/dual-marker/"
+   },
+   "faq": [
     {
-      "id": "abdomen",
-      "title": "Abdominal Ultrasound",
-      "description": "Evaluates liver, gallbladder, pancreas, spleen and abdominal organs for stones, swelling or abnormalities.",
-      "preparation": "6–8 hours fasting recommended"
+     "question": "When should I get the NT scan?",
+     "answer": "Between 11 weeks and 13 weeks 6 days of pregnancy. After 14 weeks the fluid at the back of the neck can no longer be measured reliably, so don't leave it late."
     },
     {
-      "id": "pelvic",
-      "title": "Pelvic Ultrasound",
-      "description": "Assesses uterus, ovaries and bladder. Commonly used for gynaecological complaints and fertility evaluation.",
-      "preparation": "Drink water and hold bladder before scan"
+     "question": "Is the NT scan the same as the dual marker test?",
+     "answer": "No. The NT scan is an ultrasound and the dual marker is a blood test. They are usually done in the same week and read together, which gives your doctor a more accurate screening result. You can do both at Diagnos Lab."
     },
     {
-      "id": "pregnancy",
-      "title": "Pregnancy (Obstetric) USG",
-      "description": "Monitors fetal growth, placenta and amniotic fluid. Includes dating, NT, anomaly and growth scans as advised by your doctor, performed by a female radiologist.",
-      "preparation": "Follow your doctor's scan schedule"
+     "question": "Is the NT scan safe for my baby?",
+     "answer": "Yes. Ultrasound uses sound waves, not radiation, and is safe for you and your baby at every stage of pregnancy."
     },
     {
-      "id": "kub",
-      "title": "KUB / Renal Ultrasound",
-      "description": "Examines kidneys, ureters and bladder for stones, infections or structural issues.",
-      "preparation": "Full bladder may be required"
+     "question": "Do I need a doctor's prescription for a pregnancy scan?",
+     "answer": "Yes. Under the PC-PNDT Act every pregnancy ultrasound needs a doctor's referral, and you fill in a short Form F at the centre. Please bring your prescription and a photo ID."
     },
     {
-      "id": "thyroid",
-      "title": "Thyroid & Neck Ultrasound",
-      "description": "Checks thyroid gland size, nodules and neck lymph nodes for swelling or abnormalities.",
-      "preparation": "No special preparation needed"
+     "question": "Do you tell the baby's sex?",
+     "answer": "No. Sex determination of the foetus is not done at Diagnos Lab; it is illegal and punishable under the PC-PNDT Act, 1994."
     },
     {
-      "id": "breast",
-      "title": "Breast Ultrasound",
-      "description": "Used to evaluate breast lumps, pain, or as a follow-up to mammography findings.",
-      "preparation": "No special preparation needed"
+     "question": "When will I get my NT scan report?",
+     "answer": "Usually within 1–2 hours. The report is sent to your WhatsApp automatically as soon as it's ready."
     }
-  ],
-  "preparationSteps": [
+   ]
+  },
+  {
+   "id": "growth-scan",
+   "slug": "growth-scan",
+   "title": "Growth Scan",
+   "icon": "ruler",
+   "when": "Third trimester",
+   "description": "Checks the baby's size and estimated weight, the amniotic fluid and the position of the placenta, usually from 28 weeks or as your doctor advises.",
+   "preparation": "No special preparation needed",
+   "metaTitle": "Growth Scan in Sakchi, Jamshedpur | Pregnancy | Diagnos Lab",
+   "metaDescription": "Pregnancy growth scan at Diagnos Lab, Sakchi, Jamshedpur: baby's size, weight, fluid and placenta, by a female MD Radiology radiologist. Report on WhatsApp.",
+   "h1": "Growth Scan in Sakchi, Jamshedpur",
+   "subtitle": "A third-trimester ultrasound that checks how your baby is growing: estimated weight, amniotic fluid, placenta and position, by a female radiologist with an MD in Radiology.",
+   "about": "A growth scan is an ultrasound later in pregnancy, usually from 28 weeks, that checks how your baby is growing. The radiologist measures the baby's head, abdomen and thigh bone to estimate weight, and checks the amniotic fluid, the placenta and the baby's position. Doctors often advise it when the bump is smaller or larger than expected, in twin pregnancies, or when the mother has diabetes or high blood pressure.",
+   "checks": [
+    "Estimated fetal weight and growth",
+    "Head, abdomen and thigh bone measurements",
+    "Amniotic fluid level",
+    "Placenta and the baby's position (head-down or breech)"
+   ],
+   "timing": "Usually between 28 and 40 weeks, as often as your doctor advises.",
+   "duration": "20–30 min",
+   "prepSteps": [
+    "No fasting and no full bladder needed.",
+    "Bring all earlier pregnancy scan reports so growth can be compared.",
+    "Bring your doctor's prescription and a photo ID.",
+    "Wear loose, two-piece clothing."
+   ],
+   "faq": [
     {
-      "id": 1,
-      "title": "Follow fasting instructions",
-      "description": "For abdomen scans, avoid food for 6–8 hours. Clear fluids are usually allowed unless advised otherwise."
+     "question": "When is a growth scan done?",
+     "answer": "Usually from 28 weeks onwards, once or more depending on what your doctor wants to monitor."
     },
     {
-      "id": 2,
-      "title": "Bladder preparation",
-      "description": "Pelvic and some KUB scans need a full bladder. Drink 4–5 glasses of water 1 hour before your appointment."
+     "question": "How accurate is the baby's estimated weight?",
+     "answer": "It's an estimate from the baby's measurements and can differ from the actual birth weight by around 10–15%. Your doctor looks at the trend across scans rather than a single number."
     },
     {
-      "id": 3,
-      "title": "Bring prior reports",
-      "description": "Carry previous ultrasound or related reports so our radiologist can compare findings accurately."
+     "question": "Is a growth scan done with a Doppler?",
+     "answer": "Often, yes. If your doctor asks for a growth scan with Doppler, both are done in the same visit."
     },
     {
-      "id": 4,
-      "title": "Wear comfortable clothing",
-      "description": "Loose, easy-to-remove clothing helps the scan go quickly. You may be asked to change into a gown."
+     "question": "Do I need a doctor's prescription for a pregnancy scan?",
+     "answer": "Yes. Under the PC-PNDT Act every pregnancy ultrasound needs a doctor's referral, and you fill in a short Form F at the centre. Please bring your prescription and a photo ID."
+    },
+    {
+     "question": "Do you tell the baby's sex?",
+     "answer": "No. Sex determination of the foetus is not done at Diagnos Lab; it is illegal and punishable under the PC-PNDT Act, 1994."
+    },
+    {
+     "question": "When will I get my growth scan report?",
+     "answer": "Usually within 1–2 hours. The report is sent to your WhatsApp automatically as soon as it's ready."
     }
-  ]
+   ]
+  },
+  {
+   "id": "doppler-scan",
+   "slug": "doppler-scan",
+   "title": "Doppler Scan",
+   "icon": "activity",
+   "when": "As advised by your doctor",
+   "description": "Colour Doppler measures blood flow in the umbilical cord and the baby's and mother's blood vessels, to make sure the baby is getting enough oxygen and nutrients. Often done with a growth scan.",
+   "preparation": "No special preparation needed",
+   "metaTitle": "Doppler Scan in Sakchi, Jamshedpur | Pregnancy | Diagnos Lab",
+   "metaDescription": "Pregnancy colour Doppler scan at Diagnos Lab, Sakchi, Jamshedpur: blood flow to your baby and placenta, by a female MD Radiology radiologist. Mon–Sat.",
+   "h1": "Doppler Scan in Sakchi, Jamshedpur",
+   "subtitle": "A colour Doppler pregnancy scan that checks blood flow through the umbilical cord and placenta to your baby, by a female radiologist with an MD in Radiology.",
+   "about": "An obstetric Doppler scan uses colour Doppler ultrasound to measure blood flow in the umbilical cord, in the baby's brain (middle cerebral artery) and in the mother's uterine arteries. It shows whether the placenta is supplying enough oxygen and nutrients. Doctors usually advise it together with a growth scan when the baby is smaller than expected, or when the mother has high blood pressure, diabetes or a twin pregnancy.",
+   "checks": [
+    "Umbilical artery blood flow",
+    "Middle cerebral artery flow in the baby's brain",
+    "Uterine artery flow to the placenta",
+    "Baby's growth, when done with a growth scan"
+   ],
+   "timing": "Usually in the second half of pregnancy, as advised by your doctor.",
+   "duration": "20–30 min",
+   "prepSteps": [
+    "No fasting and no full bladder needed.",
+    "Bring earlier scan reports, especially your last growth scan.",
+    "Bring your doctor's prescription and a photo ID.",
+    "Wear loose, two-piece clothing."
+   ],
+   "faq": [
+    {
+     "question": "Why has my doctor asked for a Doppler scan?",
+     "answer": "Usually to check that the placenta is giving your baby enough blood flow, for example if the baby is measuring small, or if you have high blood pressure, diabetes or a twin pregnancy."
+    },
+    {
+     "question": "Is a Doppler scan safe in pregnancy?",
+     "answer": "Yes. It uses the same sound waves as a routine ultrasound, at settings designed for pregnancy, and no radiation."
+    },
+    {
+     "question": "What is the difference between a Doppler and a growth scan?",
+     "answer": "A growth scan measures the baby's size and fluid; a Doppler measures blood flow. They answer different questions, so doctors often ask for both in one visit."
+    },
+    {
+     "question": "Do I need a doctor's prescription for a pregnancy scan?",
+     "answer": "Yes. Under the PC-PNDT Act every pregnancy ultrasound needs a doctor's referral, and you fill in a short Form F at the centre. Please bring your prescription and a photo ID."
+    },
+    {
+     "question": "Do you tell the baby's sex?",
+     "answer": "No. Sex determination of the foetus is not done at Diagnos Lab; it is illegal and punishable under the PC-PNDT Act, 1994."
+    },
+    {
+     "question": "When will I get my Doppler report?",
+     "answer": "Usually within 1–2 hours. The report is sent to your WhatsApp automatically as soon as it's ready."
+    }
+   ]
+  }
+ ]
 }

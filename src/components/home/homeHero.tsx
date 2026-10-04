@@ -1,10 +1,12 @@
 import { ArrowRight, Zap } from "lucide-react";
 import BookButton from "@/components/cards/bookButton";
 import SiteSearch from "@/components/search/siteSearch";
+import HeroImage from "@/components/home/heroImage";
 import QuickActions from "@/components/home/quickActions";
 import { buttonClass } from "@/components/ui/button";
 import { shell } from "@/components/ui/shell";
 import { getPackageBySlug } from "@/lib/catalog";
+import { leadMeta } from "@/lib/leadMeta";
 
 /* DL.pen "Hero". Phones: heading, offer, quick actions (search lives in
    the header). Desktop: heading, search and quick actions on the left, the
@@ -29,7 +31,7 @@ export default function HomeHero() {
           <p className="speakable-description max-w-[540px] text-[14.5px] leading-normal text-dl-ink-2 md:text-lg md:leading-[1.55]">
             <span className="md:hidden">1,000+ tests, packages &amp; scans. Reports on WhatsApp.</span>
             <span className="hidden md:inline">
-              Search 1,000+ blood tests, packages and scans, with reports straight to your WhatsApp.
+              Search 1,000+ blood tests, packages and scans, with reports sent to your WhatsApp automatically.
             </span>
           </p>
         </div>
@@ -40,15 +42,7 @@ export default function HomeHero() {
 
         {offer && (
           <div className="relative isolate flex h-[300px] flex-col justify-end gap-2 overflow-hidden rounded-[22px] p-5 text-white md:col-start-2 md:row-span-3 md:row-start-1 md:h-[560px] md:gap-4 md:self-center md:rounded-[28px] md:p-8">
-            <img
-              src="/images/hero/hero1-mobile.avif"
-              alt="Pathologist examining a sample at Diagnos Lab, Jamshedpur"
-              width={720}
-              height={1028}
-              fetchPriority="high"
-              decoding="async"
-              className="absolute inset-0 -z-10 size-full object-cover object-[center_25%]"
-            />
+            <HeroImage />
             <div
               className="absolute inset-0 -z-10 bg-linear-to-b from-dl-red-dark/0 from-10% via-dl-red-dark/90 via-55% to-dl-red-dark"
               aria-hidden
@@ -86,21 +80,10 @@ export default function HomeHero() {
               <BookButton
                 className={buttonClass("white", "md", "w-full md:w-auto")}
                 form={{
-                  title: "Book",
                   testName: offer.title,
-                  testDescription: offer.description,
                   testPrice: offer.price,
                   testOriginalPrice: offer.originalPrice,
-                  additionalSourceData: {
-                    package_name: offer.title,
-                    package_description: offer.description,
-                    package_price: offer.price,
-                    package_original_price: offer.originalPrice,
-                    package_parameters: offer.parameters,
-                    package_categories: offer.categories.split(","),
-                    package_fasting: offer.fasting,
-                    package_reporting: offer.reporting,
-                  },
+                  additionalSourceData: leadMeta({ kind: "package", ...offer }),
                 }}
               >
                 Book now

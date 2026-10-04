@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Mic, Search } from "lucide-react";
 import type { SearchEntry } from "@/app/search-index.json/route";
 import { buttonClass } from "@/components/ui/button";
+import { rupees } from "@/lib/format";
 
 /* One fetch per page view, shared by every search box on the page. */
 let indexPromise: Promise<SearchEntry[]> | null = null;
@@ -208,7 +209,7 @@ export default function SiteSearch({ variant }: SiteSearchProps) {
               >
                 <span className="min-w-0 truncate text-sm font-medium text-dl-ink">{entry.t}</span>
                 <span className="flex shrink-0 items-center gap-2 text-xs text-dl-muted">
-                  {entry.p > 0 && <span className="font-semibold text-dl-ink-2">₹{entry.p.toLocaleString("en-IN")}</span>}
+                  {entry.p > 0 && <span className="font-semibold text-dl-ink-2">{rupees(entry.p)}</span>}
                   <span className="rounded-md bg-dl-red-soft px-1.5 py-0.5 font-semibold text-dl-red">{entry.k}</span>
                 </span>
               </li>

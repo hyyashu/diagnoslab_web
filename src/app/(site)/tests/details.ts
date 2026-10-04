@@ -105,7 +105,7 @@ export const testDetails: Record<string, TestDetails> = {
     faq: [
       {
         question: "How long does it take to get my CBC report?",
-        answer: "Most CBC reports are ready the same day and sent straight to your WhatsApp.",
+        answer: "Most CBC reports are ready the same day and sent to your WhatsApp automatically.",
       },
       {
         question: "Is the sample collected at home?",

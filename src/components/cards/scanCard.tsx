@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Check, CircleCheck, ClipboardList, Clock3, UserRoundCheck } from "lucide-react";
+import { ArrowRight, Check, CircleCheck, ClipboardList, Clock3, UserRoundCheck } from "lucide-react";
 import BookButton from "@/components/cards/bookButton";
 import Icon from "@/components/ui/icon";
 import { buttonClass } from "@/components/ui/button";
+import { leadMeta } from "@/lib/leadMeta";
 
 export type ScanService = {
   id: string;
@@ -32,23 +33,16 @@ export default function ScanCard({
   scan: ScanService;
   variant?: "featured" | "card";
 }) {
-  /* Same lead payload as the classic RadiologyCard. */
   const book = (className: string, label = "Book now") => (
     <BookButton
       className={className}
       form={{
-        title: "Book",
         testName: scan.title,
-        testDescription: scan.description,
-        additionalSourceData: {
-          radiology_name: scan.title,
-          radiology_description: scan.description,
-          radiology_facilities: scan.usedFor,
-          radiology_reporting_time: scan.reportingTime,
-        },
+        additionalSourceData: leadMeta({ kind: "scan", ...scan }),
       }}
     >
       {label}
+      <ArrowRight className="size-4" aria-hidden />
     </BookButton>
   );
 

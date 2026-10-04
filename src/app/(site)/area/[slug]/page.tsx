@@ -13,6 +13,7 @@ import ServicesStrip from "../components/servicesStrip";
 import FeaturedTests from "@/components/sections/featuredTests";
 import FeaturedPackages from "@/components/sections/featuredPackages";
 import { areaFaq, centreFor } from "../content";
+import { ORG_REF, breadcrumbSchema, pageUrl } from "@/lib/schema";
 
 
 export function generateStaticParams() {
@@ -46,12 +47,12 @@ export async function generateMetadata({
       `blood test ${area.name} Jamshedpur`,
     ],
     alternates: {
-      canonical: `https://diagnoslab.in/area/${area.slug}/`,
+      canonical: pageUrl(`/area/${area.slug}/`),
     },
     openGraph: {
       title,
       description,
-      url: `https://diagnoslab.in/area/${area.slug}/`,
+      url: pageUrl(`/area/${area.slug}/`),
     },
   };
 }
@@ -74,24 +75,20 @@ export default async function AreaPage({
     "@type": "Service",
     name: `Blood Tests & Diagnostics in ${area.name}`,
     serviceType: "Diagnostic laboratory services",
-    url: `https://diagnoslab.in/area/${area.slug}/`,
+    url: pageUrl(`/area/${area.slug}/`),
     areaServed: {
       "@type": "Place",
       name: `${area.name}, Jamshedpur`,
     },
-    provider: { "@id": "https://diagnoslab.in/#organization" },
+    provider: ORG_REF,
     description: `Diagnos Lab provides blood tests, ultrasound, ECG, X-Ray, and home sample collection services in ${area.name}, Jamshedpur.`,
   };
 
-  const url = `https://diagnoslab.in/area/${area.slug}/`;
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://diagnoslab.in" },
-      { "@type": "ListItem", position: 2, name: area.name, item: url },
-    ],
-  };
+  const url = pageUrl(`/area/${area.slug}/`);
+  const breadcrumb = breadcrumbSchema([
+    ["Home", ""],
+    [area.name, url],
+  ]);
 
   const { centre, hasCentre } = centreFor(area);
   const faq = areaFaq(area);
@@ -100,7 +97,7 @@ export default async function AreaPage({
   return (
     <>
       <JsonLd data={areaSchema} />
-      <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={breadcrumb} />
       <ServicePageHero
         breadcrumb={[{ label: "Home", href: "/" }, { label: "Jamshedpur" }, { label: area.name }]}
         eyebrow={

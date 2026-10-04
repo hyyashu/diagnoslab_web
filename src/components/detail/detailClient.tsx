@@ -3,11 +3,10 @@
 import { useId, useState, type ReactNode } from "react";
 import { ArrowRight, ChevronDown, ListChecks, MessageCircle, MessageSquareText, Minus, PhoneCall, Plus, UserRound } from "lucide-react";
 import ContactSheet from "@/components/forms/contactSheet";
-import { submitLeadForm } from "@/lib/api";
-import { useSource } from "@/lib/useSource";
-import { normalizePhone, sanitizeName, validateName, validatePhone } from "@/lib/leadValidation";
+import { FieldError, leadIntent, topicValue, useLeadForm } from "@/components/forms/useLeadForm";
 import { WHATSAPP_HREF } from "@/lib/contact";
 import type { FaqItem } from "@/lib/faq";
+import { rupees } from "@/lib/format";
 
 /* The interactive parts of the test and package detail pages. Everything
    here gets plain data from the server page; icons are rendered there. */
@@ -19,8 +18,6 @@ export type BookingItem = {
   /* The lead metadata the package cards send. */
   sourceData: Record<string, unknown>;
 };
-
-const rupees = (n: number) => `₹${n.toLocaleString("en-IN")}`;
 
 /* Phones show the first few profiles and a "Show all" toggle; desktop
    always shows every profile in two columns. */
@@ -73,7 +70,9 @@ export function DetailFaq({ items }: { items: FaqItem[] }) {
                 {on ? <Minus className="size-4" aria-hidden /> : <Plus className="size-4" aria-hidden />}
               </span>
             </button>
-            {on && <p className="pt-2 pr-11 text-[13.5px] leading-[1.55] text-dl-ink-2 md:text-sm">{item.answer}</p>}
+            {/* Closed answers stay in the HTML, just hidden, so search
+                engines read every answer the FAQ schema lists. */}
+            <p className={`pt-2 pr-11 text-[13.5px] leading-[1.55] text-dl-ink-2 md:text-sm ${on ? "" : "hidden"}`}>{item.answer}</p>
           </li>
         );
       })}
@@ -142,49 +141,20 @@ export function EnquiryCard({
   className?: string;
 }) {
   const topics = [`Book this ${kind}`, "Home collection", "Reports", "Something else"];
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
   const [topic, setTopic] = useState(topics[0]);
   const [message, setMessage] = useState("");
-  const [nameError, setNameError] = useState<string | null>(null);
-  const [phoneError, setPhoneError] = useState<string | null>(null);
-  const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const { nameInput, phoneInput, nameError, phoneError, submitting, submitted, error, handleSubmit } = useLeadForm();
 
   const headingId = useId();
-  const home = topic === "Home collection";
-  const source = useSource({
-    ...item.sourceData,
-    clicked_at: item.name,
-    form_type: home ? "home_collection" : "enquiry_form",
-    contact_topic: topic,
-    ...(message.trim() && { message: message.trim() }),
-  });
-
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setError(null);
-    const nErr = validateName(name);
-    const pErr = validatePhone(phone);
-    setNameError(nErr);
-    setPhoneError(pErr);
-    if (nErr || pErr) return;
-    setSubmitting(true);
-    try {
-      await submitLeadForm({
-        name: name.trim(),
-        phone: normalizePhone(phone),
-        source,
-        ...(home && { lead_intent: "book_home_collection" as const }),
-      });
-      setSubmitted(true);
-    } catch {
-      setError("Something went wrong. Please try again.");
-    } finally {
-      setSubmitting(false);
-    }
-  };
+  const homeCollection = topic === "Home collection";
+  const onSubmit = handleSubmit(() => ({
+    source: {
+      ...item.sourceData,
+      contact_topic: topicValue(topic),
+      ...(message.trim() && { message: message.trim() }),
+    },
+    intent: leadIntent({ homeCollection, booking: true }),
+  }));
 
   const box = "flex h-12 items-center gap-2.5 rounded-xl border border-dl-line bg-white px-3.5 focus-within:border-dl-red";
   const label = "text-[13px] font-semibold text-dl-ink";
@@ -216,20 +186,9 @@ export function EnquiryCard({
             </span>
             <span className={box}>
               <UserRound className="size-[18px] shrink-0 text-dl-muted" aria-hidden />
-              <input
-                type="text"
-                autoComplete="name"
-                value={name}
-                onChange={(e) => {
-                  const v = sanitizeName(e.target.value);
-                  setName(v);
-                  if (nameError) setNameError(validateName(v));
-                }}
-                placeholder="Your name"
-                className={input}
-              />
+              <input {...nameInput} placeholder="Your name" className={input} />
             </span>
-            {nameError && <span className="text-xs text-dl-red">{nameError}</span>}
+            <FieldError message={nameError} />
           </label>
 
           <label className="flex flex-col gap-1.5">
@@ -239,21 +198,9 @@ export function EnquiryCard({
             <span className={box}>
               <span className="text-[15px] font-semibold text-dl-ink">+91</span>
               <span className="h-[22px] w-px bg-dl-line" aria-hidden />
-              <input
-                type="tel"
-                autoComplete="tel-national"
-                inputMode="numeric"
-                value={phone}
-                onChange={(e) => {
-                  const digits = normalizePhone(e.target.value).slice(0, 10);
-                  setPhone(digits);
-                  if (phoneError) setPhoneError(validatePhone(digits));
-                }}
-                placeholder="98765 43210"
-                className={input}
-              />
+              <input {...phoneInput} placeholder="98765 43210" className={input} />
             </span>
-            {phoneError && <span className="text-xs text-dl-red">{phoneError}</span>}
+            <FieldError message={phoneError} />
           </label>
 
           <label className="flex flex-col gap-1.5">

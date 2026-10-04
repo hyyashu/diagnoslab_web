@@ -2,8 +2,8 @@
 
 @theme {
   --color-background-primary: #E73834;
-  --font-sans: var(--font-inter), sans-serif;
-  --font-display: var(--font-jakarta), var(--font-inter), sans-serif;
+  --font-sans: "DL Rupee", var(--font-inter), sans-serif;
+  --font-display: "DL Rupee", var(--font-jakarta), var(--font-inter), sans-serif;
 
   /* Diagnos Lab design tokens (DL.pen, "dl-*" variables). */
   --color-dl-red: #D92D27;
@@ -26,18 +26,31 @@
   }
 }
 
+/* The rupee sign is in Inter's latin-ext file (about 85 KB), which every
+   page with a price would download for that one glyph. This is that glyph
+   alone, cut from the same variable Inter (all weights, 1.2 KB). It comes
+   first in each font stack and its unicode-range covers only U+20B9, so it
+   draws the ₹ and nothing else. */
+@font-face {
+  font-family: "DL Rupee";
+  src: url("/fonts/inter-rupee-v1.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+  unicode-range: U+20B9;
+}
+
 /* Inter is the body face; headings opt into Plus Jakarta Sans with
    font-display (or the older font-heading class). */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-inter), sans-serif;
+  font-family: "DL Rupee", var(--font-inter), sans-serif;
 }
 .font-heading {
-  font-family: var(--font-jakarta), var(--font-inter), sans-serif;
+  font-family: "DL Rupee", var(--font-jakarta), var(--font-inter), sans-serif;
 }
 .font-body {
-  font-family: var(--font-inter), sans-serif;
+  font-family: "DL Rupee", var(--font-inter), sans-serif;
 }
 @theme {
   /* Define the keyframes first */

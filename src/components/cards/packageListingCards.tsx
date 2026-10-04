@@ -3,6 +3,8 @@ import { Activity, ArrowRight, Clock3, FlaskConical, House, Sparkles, Utensils }
 import BookButton from "@/components/cards/bookButton";
 import { buttonClass } from "@/components/ui/button";
 import type { Package } from "@/lib/catalog";
+import { discountPct, fastingLabel, reportLabel, rupees } from "@/lib/format";
+import { leadMeta } from "@/lib/leadMeta";
 
 /* DL.pen Health Packages cards: the grid card and the large featured card. */
 
@@ -16,36 +18,15 @@ export type ListingPackage = Pick<
   includes?: string[];
 };
 
-export const discountOf = (p: ListingPackage) =>
-  p.originalPrice > 0 && p.price > 0 ? Math.round(((p.originalPrice - p.price) / p.originalPrice) * 100) : 0;
-
-export const reportLabel = (r: string) => (/same\s*day/i.test(r) ? "Same-day report" : `Report in ${r.toLowerCase()}`);
-export const fastingLabel = (f: string) =>
-  /over[\s-]*night/i.test(f) ? "Overnight fasting" : /not\s*required/i.test(f) ? "No fasting" : f;
-
-export const rupees = (n: number) => `₹${n.toLocaleString("en-IN")}`;
-
-/* Same lead payload as the classic PackageCard. */
 export function PackageBookButton({ pkg, className }: { pkg: ListingPackage; className: string }) {
   return (
     <BookButton
       className={className}
       form={{
-        title: "Book",
         testName: pkg.title,
-        testDescription: pkg.description,
         testPrice: pkg.price,
         testOriginalPrice: pkg.originalPrice,
-        additionalSourceData: {
-          package_name: pkg.title,
-          package_description: pkg.description,
-          package_price: pkg.price,
-          package_original_price: pkg.originalPrice,
-          package_parameters: pkg.parameters,
-          package_categories: pkg.categories.split(","),
-          package_fasting: pkg.fasting,
-          package_reporting: pkg.reporting,
-        },
+        additionalSourceData: leadMeta({ kind: "package", ...pkg }),
       }}
     >
       Book now
@@ -55,7 +36,7 @@ export function PackageBookButton({ pkg, className }: { pkg: ListingPackage; cla
 }
 
 export function PackageGridCard({ pkg }: { pkg: ListingPackage }) {
-  const discount = discountOf(pkg);
+  const discount = discountPct(pkg.price, pkg.originalPrice);
   const summary = pkg.summary ?? pkg.description;
 
   return (
@@ -108,7 +89,7 @@ export function FeaturedPackageCard({
   bestValue?: boolean;
 }) {
   const red = tone === "red";
-  const discount = discountOf(pkg);
+  const discount = discountPct(pkg.price, pkg.originalPrice);
   const muted = red ? "text-white/[0.88]" : "text-dl-ink-2";
 
   return (

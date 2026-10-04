@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { pageUrl } from "@/lib/schema";
 
 /* Required for output: "export", written to out/robots.txt at build time. */
 export const dynamic = "force-static";
@@ -14,6 +15,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/lp/"],
       },
     ],
-    sitemap: "https://diagnoslab.in/sitemap.xml",
+    sitemap: pageUrl("/sitemap.xml"),
   };
 }

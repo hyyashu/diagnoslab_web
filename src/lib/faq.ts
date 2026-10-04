@@ -14,7 +14,7 @@ export const generalFaq: FaqItem[] = [
   { question: "How fast will I get my reports?", answer: "Most reports are delivered within 6 to 12 hours depending on the test type." },
   { question: "Do you provide home sample collection?", answer: "Yes, we offer professional home collection services across Jamshedpur including Sakchi, Bistupur, Mango, Kadma, Jugsalai, and surrounding areas." },
   { question: "Do I need an appointment?", answer: "No, walk-ins are welcome at our Sakchi centre, but booking ahead saves you time." },
-  { question: "Are reports digital?", answer: "Yes, all reports are available digitally via our portal and delivered on WhatsApp and email." },
+  { question: "Are reports digital?", answer: "Yes. Every report is sent to your WhatsApp automatically as soon as it's ready. No app, login or follow-up call needed." },
   { question: "What services do you provide in Jamshedpur?", answer: "Diagnos Lab in Jamshedpur offers blood tests, ultrasound (USG), ECG, digital X-Ray, PFT, and affordable health packages with home sample collection." },
   { question: "Where is Diagnos Lab located in Jamshedpur?", answer: "Diagnos Lab is located in Sakchi, Jamshedpur, Jharkhand. We also serve Bistupur, Mango, Kadma, Jugsalai, Adityapur, Golmuri, Telco, and Baridih." },
   { question: "How much does a blood test cost at Diagnos Lab?", answer: "Blood tests at Diagnos Lab start from ₹99. Most common tests like CBC, thyroid, and blood sugar fall between ₹150–₹500. Full body health packages are available from ₹999. Call +91 8404802214 for specific test pricing." },
@@ -22,10 +22,10 @@ export const generalFaq: FaqItem[] = [
   { question: "How do I book a home sample collection in Jamshedpur?", answer: "You can book home collection by calling or messaging on WhatsApp at +91 8404802214, or filling the enquiry form on our website. A trained phlebotomist will visit your home at the scheduled time." },
   { question: "What areas in Jamshedpur does Diagnos Lab cover for home collection?", answer: "We cover Sakchi, Bistupur, Mango, Kadma, Jugsalai, Agrico, Golmuri, Telco, Baridih, Sonari, Adityapur, Baradwari, Ambagan, Dimna, Birsanagar, Namda Basti, and Parsudih." },
   { question: "What is the turnaround time for ultrasound reports at Diagnos Lab?", answer: "Ultrasound reports at Diagnos Lab are available within 1–2 hours of the scan." },
-  { question: "Is Diagnos Lab open on Sundays?", answer: "Yes, Diagnos Lab is open 7 days a week including Sundays and public holidays, from 7:30 AM to 7:30 PM." },
+  { question: "Is Diagnos Lab open on Sundays?", answer: "Yes, Diagnos Lab is open 7 days a week including Sundays and public holidays, from 7:30 AM to 7:30 PM. Ultrasound scans are done Monday to Saturday." },
   { question: "Does Diagnos Lab provide ECG services?", answer: "Yes, Diagnos Lab provides 12-lead ECG (electrocardiogram) tests for heart rhythm and electrical activity analysis. Reports are available within 1–2 hours." },
   { question: "What health packages does Diagnos Lab offer?", answer: "Diagnos Lab offers several health packages including ND Plus (comprehensive full body checkup), Bio-T Plus (thyroid and metabolic panel), and disease-specific panels for diabetes, anaemia, arthritis, and antenatal care." },
-  { question: "Can I get my reports on WhatsApp?", answer: "Yes, all digital reports are delivered on WhatsApp and email within the committed turnaround time." },
+  { question: "Can I get my reports on WhatsApp?", answer: "Yes. All reports are sent to your WhatsApp automatically as soon as they're ready, within the committed turnaround time." },
 ];
 
 const byQuestion = (q: string) => generalFaq.find((f) => f.question === q)!.answer;
@@ -35,7 +35,7 @@ export const radiologyFaq: FaqItem[] = [
     question: "Is there a female radiologist for ultrasound at Diagnos Lab?",
     mobileQuestion: "Is there a female radiologist for ultrasound?",
     answer:
-      "Yes. A dedicated female radiologist is available for female patients. Mention it when you book and we'll schedule your slot accordingly.",
+      "Yes. A dedicated female radiologist (MD Radiology) is available for female patients. Mention it when you book and we'll schedule your slot accordingly.",
   },
   {
     question: "What is the turnaround time for ultrasound reports?",
@@ -67,7 +67,7 @@ export const ultrasoundFaq: FaqItem[] = [
     question: "Is there a female radiologist for ultrasound at Diagnos Lab?",
     mobileQuestion: "Is there a female radiologist for ultrasound?",
     answer:
-      "Yes. A dedicated female radiologist is available for female patients. Mention it when you book and we'll schedule your slot accordingly.",
+      "Yes. A dedicated female radiologist (MD Radiology) is available for female patients. Mention it when you book and we'll schedule your slot accordingly.",
   },
   {
     question: "What is the turnaround time for ultrasound reports?",
@@ -77,6 +77,16 @@ export const ultrasoundFaq: FaqItem[] = [
     question: "Do I need to fast before an ultrasound?",
     answer:
       "For abdomen scans, avoid food for 6–8 hours. Clear fluids are usually allowed unless advised otherwise. Pelvic and some KUB scans need a full bladder instead; most other scans need no special preparation.",
+  },
+  {
+    question: "Is ultrasound available on Sundays?",
+    answer:
+      "No. Ultrasound scans are done Monday to Saturday, 7:30 AM to 7:30 PM. Blood tests and home sample collection run every day, including Sundays.",
+  },
+  {
+    question: "Do you tell the baby's sex during a pregnancy scan?",
+    answer:
+      "No. Sex determination of the foetus is not done at Diagnos Lab; it is illegal and punishable under the PC-PNDT Act, 1994. Our pregnancy scans check your baby's development and health only.",
   },
   {
     question: "Is ultrasound safe during pregnancy?",
@@ -119,7 +129,7 @@ export const xrayFaq: FaqItem[] = [
 export const labTestsFaq: FaqItem[] = [
   {
     question: "How fast will I get my reports?",
-    answer: "Most reports are delivered within 6 to 12 hours depending on the test type, and shared on WhatsApp.",
+    answer: "Most reports are delivered within 6 to 12 hours depending on the test type, and sent to your WhatsApp automatically.",
   },
   reuse("Do you provide home sample collection?"),
   {

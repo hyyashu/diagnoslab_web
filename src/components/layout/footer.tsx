@@ -28,6 +28,7 @@ const linkGroups = [
       { name: "Digital X-Ray", href: "/xray/" },
       { name: "ECG & 2D ECHO", href: "/ecg/" },
       { name: "Home collection", href: "/book-a-test/" },
+      { name: "All services", href: "/services/" },
     ],
   },
   {

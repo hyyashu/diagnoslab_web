@@ -3,6 +3,7 @@ import SectionHead from "@/components/ui/sectionHead";
 import LabTestCard from "@/components/cards/labTestCard";
 import { shell } from "@/components/ui/shell";
 import { getTestBySlug } from "@/lib/catalog";
+import { rupees } from "@/lib/format";
 
 const featuredTests: { slug: string; category: string }[] = [
   { slug: "complete-blood-count", category: "Blood Health" },
@@ -76,7 +77,7 @@ export default function FeaturedTests({
                     className="inline-flex items-center gap-1.5 rounded-full border border-dl-line bg-white px-3 py-[7px] text-[13px] hover:border-dl-ink"
                   >
                     <span className="font-medium text-dl-ink-2">{label}</span>
-                    <span className="font-bold text-dl-ink">₹{price.toLocaleString("en-IN")}</span>
+                    <span className="font-bold text-dl-ink">{rupees(price)}</span>
                   </Link>
                 </li>
               ))}

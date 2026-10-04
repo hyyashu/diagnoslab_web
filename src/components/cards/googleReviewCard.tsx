@@ -19,7 +19,7 @@ const initials = (name: string) =>
 export default function GoogleReviewCard({ author, rating, time, text }: GoogleReviewCardProps) {
   return (
     <figure className="flex h-full flex-col gap-4 md:gap-5 rounded-[20px] border border-dl-line bg-white p-[22px] md:p-[26px]">
-      <div className="flex gap-[3px] text-dl-star" aria-label={`${rating} out of 5 stars`}>
+      <div className="flex gap-[3px] text-dl-star" role="img" aria-label={`${rating} out of 5 stars`}>
         {Array.from({ length: rating }, (_, i) => (
           <Star key={i} className="size-[15px]" fill="currentColor" aria-hidden />
         ))}

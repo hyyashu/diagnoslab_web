@@ -8,6 +8,7 @@ import PatientReviews from "@/components/sections/patientReviews";
 import FaqCards from "@/components/sections/faqCards";
 import FaqJsonLd from "@/components/seo/faqJsonLd";
 import { generalFaq } from "@/lib/faq";
+import { pageUrl } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: {
@@ -23,13 +24,13 @@ export const metadata: Metadata = {
     "Diagnos Lab History",
   ],
   alternates: {
-    canonical: "https://diagnoslab.in/aboutUs/",
+    canonical: pageUrl("/aboutUs/"),
   },
   openGraph: {
     title: "About Diagnos Lab | Trusted Diagnostic Centre in Jamshedpur",
     description:
       "15+ years of diagnostic excellence in Jamshedpur. 4.9-star rating, in-house pathologist, same-day reports.",
-    url: "https://diagnoslab.in/aboutUs/",
+    url: pageUrl("/aboutUs/"),
   },
 };
 

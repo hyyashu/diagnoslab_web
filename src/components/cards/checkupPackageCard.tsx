@@ -3,6 +3,8 @@ import { ArrowRight, Clock3, Flame, TestTubes } from "lucide-react";
 import BookButton from "@/components/cards/bookButton";
 import { buttonClass } from "@/components/ui/button";
 import type { Package } from "@/lib/catalog";
+import { discountPct, rupees } from "@/lib/format";
+import { leadMeta } from "@/lib/leadMeta";
 
 /* DL.pen "Package Card". The audience line and the "includes" chips are
    editorial and only exist for the featured packages; any other package
@@ -20,23 +22,7 @@ export type CheckupPackage = Pick<
    comparison). */
 export default function CheckupPackageCard({ pkg, highlight = false }: { pkg: CheckupPackage; highlight?: boolean }) {
   const { title, description, price, originalPrice, parameters, slug } = pkg;
-  const discount =
-    originalPrice > 0 && price > 0
-      ? Math.round(((originalPrice - price) / originalPrice) * 100)
-      : 0;
-
-  /* Same lead payload as the classic PackageCard, so the CRM sees no
-     difference between the two. */
-  const leadMeta = {
-    package_name: title,
-    package_description: description,
-    package_price: price,
-    package_original_price: originalPrice,
-    package_parameters: parameters,
-    package_categories: pkg.categories.split(","),
-    package_fasting: pkg.fasting,
-    package_reporting: pkg.reporting,
-  };
+  const discount = discountPct(price, originalPrice);
 
   return (
     <article
@@ -112,11 +98,11 @@ export default function CheckupPackageCard({ pkg, highlight = false }: { pkg: Ch
       <div className="mt-auto flex flex-col gap-4 border-t border-dl-line pt-5">
         <div className="flex items-end gap-2">
           <span className="font-display text-2xl md:text-[26px] font-extrabold tracking-[-0.025em] text-dl-ink">
-            ₹{price.toLocaleString("en-IN")}
+            {rupees(price)}
           </span>
           {originalPrice > price && (
             <s className="pb-1 text-[13px] font-medium text-dl-muted">
-              ₹{originalPrice.toLocaleString("en-IN")}
+              {rupees(originalPrice)}
             </s>
           )}
         </div>
@@ -127,12 +113,10 @@ export default function CheckupPackageCard({ pkg, highlight = false }: { pkg: Ch
           <BookButton
             className={buttonClass("primary", "md", "flex-1")}
             form={{
-              title: "Book",
               testName: title,
-              testDescription: description,
               testPrice: price,
               testOriginalPrice: originalPrice,
-              additionalSourceData: leadMeta,
+              additionalSourceData: leadMeta({ kind: "package", ...pkg }),
             }}
           >
             Book

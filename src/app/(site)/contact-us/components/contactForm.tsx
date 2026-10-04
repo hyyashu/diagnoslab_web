@@ -2,10 +2,8 @@
 
 import { useState } from "react";
 import { Lock, Send } from "lucide-react";
-import { submitLeadForm } from "@/lib/api";
-import { useSource } from "@/lib/useSource";
-import { normalizePhone, sanitizeName, validateName, validatePhone } from "@/lib/leadValidation";
 import { buttonClass } from "@/components/ui/button";
+import { FieldError, leadIntent, useLeadForm } from "@/components/forms/useLeadForm";
 
 const topics = ["Booking", "Reports", "Billing & refund", "Home collection", "Feedback", "Doctor / corporate"];
 
@@ -13,50 +11,23 @@ const topics = ["Booking", "Reports", "Billing & refund", "Home collection", "Fe
    the same lead as every other site form, with the topic and message in
    its source. */
 export default function ContactForm() {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
   const [topic, setTopic] = useState("");
   const [message, setMessage] = useState("");
-  const [nameError, setNameError] = useState<string | null>(null);
-  const [phoneError, setPhoneError] = useState<string | null>(null);
-  const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const { nameInput, phoneInput, nameError, phoneError, submitting, submitted, error, handleSubmit } = useLeadForm();
 
-  const source = useSource({ form_type: "contact_form" });
-
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setError(null);
-    const nErr = validateName(name);
-    const pErr = validatePhone(phone);
-    setNameError(nErr);
-    setPhoneError(pErr);
-    if (nErr || pErr) return;
-
-    setSubmitting(true);
-    try {
-      await submitLeadForm({
-        name: name.trim(),
-        phone: normalizePhone(phone),
-        source: {
-          ...source,
-          ...(topic && { topic }),
-          ...(message.trim() && { message: message.trim() }),
-        },
-        lead_intent: "general_enquiry",
-      });
-      setName("");
-      setPhone("");
+  const onSubmit = handleSubmit(
+    () => ({
+      source: {
+        contact_topic: topic || "Something else",
+        ...(message.trim() && { message: message.trim() }),
+      },
+      intent: leadIntent({ homeCollection: topic === "Home collection" }),
+    }),
+    () => {
       setTopic("");
       setMessage("");
-      setSubmitted(true);
-    } catch {
-      setError("Something went wrong. Please try again.");
-    } finally {
-      setSubmitting(false);
-    }
-  };
+    },
+  );
 
   const field =
     "w-full rounded-xl border border-dl-line bg-dl-bg px-3.5 py-3 text-sm text-dl-ink outline-none placeholder:text-dl-muted focus:border-dl-red";
@@ -78,20 +49,8 @@ export default function ContactForm() {
         <div className="grid gap-[18px] sm:grid-cols-2 sm:gap-3">
           <label className="flex flex-col gap-2">
             <span className={label}>Name</span>
-            <input
-              type="text"
-              autoComplete="name"
-              value={name}
-              onChange={(e) => {
-                const v = sanitizeName(e.target.value);
-                setName(v);
-                if (nameError) setNameError(validateName(v));
-              }}
-              onBlur={() => setNameError(validateName(name))}
-              placeholder="Your full name"
-              className={field}
-            />
-            {nameError && <span className="text-xs text-dl-red">{nameError}</span>}
+            <input {...nameInput} placeholder="Your full name" className={field} />
+            <FieldError message={nameError} />
           </label>
 
           <label className="flex flex-col gap-2">
@@ -100,21 +59,12 @@ export default function ContactForm() {
               <span className="font-semibold">+91</span>
               <span className="h-5 w-px bg-dl-line" aria-hidden />
               <input
-                type="tel"
-                autoComplete="tel-national"
-                inputMode="numeric"
-                value={phone}
-                onChange={(e) => {
-                  const digits = normalizePhone(e.target.value).slice(0, 10);
-                  setPhone(digits);
-                  if (phoneError) setPhoneError(validatePhone(digits));
-                }}
-                onBlur={() => setPhoneError(validatePhone(phone))}
+                {...phoneInput}
                 placeholder="10-digit mobile"
                 className="min-w-0 flex-1 bg-transparent outline-none placeholder:text-dl-muted"
               />
             </span>
-            {phoneError && <span className="text-xs text-dl-red">{phoneError}</span>}
+            <FieldError message={phoneError} />
           </label>
         </div>
 

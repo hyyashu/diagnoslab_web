@@ -1,34 +1,16 @@
 import SectionHead from "@/components/ui/sectionHead";
 import PackageShelf, { type ShelfCategory } from "@/components/home/packageShelf";
-import type { CheckupPackage } from "@/components/cards/checkupPackageCard";
-import { featuredPackages, packageCategories } from "@/components/home/content";
+import { packageCategories, toCheckupCard } from "@/components/home/content";
 import { getPackageBySlug } from "@/lib/catalog";
 import { shell } from "@/components/ui/shell";
 
 /* DL.pen "Checkup Packages". Resolves every chip's packages here so the
    browser gets only the handful it can show. */
 export default function CheckupPackages() {
-  const toCard = (slug: string): CheckupPackage | null => {
-    const p = getPackageBySlug(slug);
-    if (!p) return null;
-    return {
-      slug: p.slug,
-      title: p.title,
-      description: p.description,
-      price: p.price,
-      originalPrice: p.originalPrice,
-      parameters: p.parameters,
-      categories: p.categories,
-      fasting: p.fasting,
-      reporting: p.reporting,
-      ...featuredPackages[p.slug],
-    };
-  };
-
   const categories: ShelfCategory[] = packageCategories.map((c) => ({
     label: c.label,
     icon: c.icon,
-    packages: c.slugs.map(toCard).filter((p): p is CheckupPackage => p !== null),
+    packages: c.slugs.map(getPackageBySlug).filter((p) => p !== undefined).map(toCheckupCard),
   }));
 
   return (

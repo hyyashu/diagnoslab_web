@@ -1,10 +1,11 @@
 /* Contact points shown across the header, hero and footer. */
+export const PHONE_E164 = "+918404802214";
 export const PHONE_DISPLAY = "+91 84048 02214";
-export const PHONE_HREF = "tel:+918404802214";
+export const PHONE_HREF = `tel:${PHONE_E164}`;
 
 /* Calls and WhatsApp share one line. */
 export const WHATSAPP_DISPLAY = "+91 84048 02214";
-export const WHATSAPP_HREF = "https://wa.me/918404802214";
+export const WHATSAPP_HREF = `https://wa.me/${PHONE_E164.slice(1)}`;
 
 export const EMAIL = "info@diagnoslab.in";
 
@@ -23,6 +24,16 @@ export const POSTAL_ADDRESS = {
 
 /* Walk-in and phone hours, every day. */
 export const HOURS_DISPLAY = "Mon–Sun, 7:30 AM – 7:30 PM";
+/* Ultrasound needs the radiologist, who is not in on Sundays. */
+export const ULTRASOUND_HOURS_DISPLAY = "Mon–Sat, 7:30 AM – 7:30 PM";
+
+/* Localities right around the Sakchi lab, shown as "Near …". Add more as
+   needed. */
+export const NEARBY_AREAS = ["Sakchi", "Ambagan"];
+
+/* Required by the PC-PNDT Act wherever pregnancy ultrasound is done. */
+export const PCPNDT_NOTICE =
+  "Sex determination of the foetus is not done here; it is punishable under the PC-PNDT Act, 1994.";
 
 /* MedicalBusiness keeps the lab a LocalBusiness for Google; DiagnosticLab
    says what kind. */

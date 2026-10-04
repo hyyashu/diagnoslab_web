@@ -1,4 +1,4 @@
-import { getPackages, getTestIndex, radiologyServices } from "@/lib/catalog";
+import { getPackages, getTestIndex, pregnancyScans, radiologyServices } from "@/lib/catalog";
 
 export const dynamic = "force-static";
 
@@ -26,6 +26,12 @@ export function GET() {
     ...radiologyServices.map((s) => ({
       t: titleCase(s.title),
       h: scanHref[s.id] ?? "/radiology/",
+      k: "Scan" as const,
+      p: 0,
+    })),
+    ...pregnancyScans.map((s) => ({
+      t: s.title,
+      h: `/ultrasound-in-jamshedpur/${s.slug}/`,
       k: "Scan" as const,
       p: 0,
     })),

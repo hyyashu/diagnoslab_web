@@ -68,10 +68,11 @@ export const radiologyServices: RadiologyService[] =
   rawRadiology.radiologyServices as RadiologyService[];
 
 export const areas: Area[] = rawAreas.areas as Area[];
-export const areaCity: string = rawAreas.city;
-export const areaIntro: string = rawAreas.intro;
 
 export const reviews: Review[] = rawReviews.reviews as Review[];
 
 export const ultrasoundScans = rawScans.scanTypes;
 export const ultrasoundPreparationSteps = rawScans.preparationSteps;
+/* NT, growth and Doppler: each has its own page under /ultrasound-in-jamshedpur/. */
+export const pregnancyScans = rawScans.pregnancyScans;
+export type PregnancyScan = (typeof pregnancyScans)[number];

@@ -36,7 +36,7 @@ export function areaFaq(area: Area): FaqItem[] {
     {
       question: "How fast will I get my reports?",
       answer:
-        "Most blood test reports are ready the same day, within 6 to 12 hours depending on the test, and shared on WhatsApp. Ultrasound and ECG reports usually take 1–2 hours.",
+        "Most blood test reports are ready the same day, within 6 to 12 hours depending on the test, and sent to your WhatsApp automatically. Ultrasound and ECG reports usually take 1–2 hours.",
     },
     {
       question: `Is there a home collection charge in ${area.name}?`,
@@ -50,7 +50,7 @@ export function areaFaq(area: Area): FaqItem[] {
     {
       question: "Can I get my reports on WhatsApp?",
       answer:
-        "Yes. All digital reports are delivered on WhatsApp and email as soon as they're ready.",
+        "Yes. All reports are sent to your WhatsApp automatically as soon as they're ready.",
     },
   ];
 }

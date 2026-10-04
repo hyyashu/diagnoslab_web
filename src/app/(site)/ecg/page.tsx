@@ -3,7 +3,7 @@ import { Clock3, HeartPulse, Star } from "lucide-react";
 import JsonLd from "@/components/seo/jsonLd";
 import ScanServicePage from "@/components/sections/scanServicePage";
 import { ecgFaq } from "@/lib/faq";
-import { BUSINESS_TYPE, POSTAL_ADDRESS } from "@/lib/contact";
+import { ORG_REF, breadcrumbSchema, pageUrl } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: { absolute: "Diagnos Lab | Book ECG in Jamshedpur" },
@@ -18,13 +18,13 @@ export const metadata: Metadata = {
     "Diagnos Lab in Jamshedpur",
   ],
   alternates: {
-    canonical: "https://diagnoslab.in/ecg/",
+    canonical: pageUrl("/ecg/"),
   },
   openGraph: {
     title: "Diagnos Lab | Book ECG in Jamshedpur",
     description:
       "Book ECG at Diagnos Lab in Jamshedpur. Quick heart rhythm and electrical activity testing with reports in 1–2 hours.",
-    url: "https://diagnoslab.in/ecg/",
+    url: pageUrl("/ecg/"),
     images: ["/images/diagnoslogo.avif"],
   },
 };
@@ -33,29 +33,20 @@ const ecgSchema = {
   "@context": "https://schema.org",
   "@type": "MedicalProcedure",
   name: "ECG Test in Jamshedpur",
-  url: "https://diagnoslab.in/ecg/",
+  url: pageUrl("/ecg/"),
   description:
     "12-lead ECG (electrocardiogram) for heart rhythm and electrical activity analysis at Diagnos Lab, Sakchi Jamshedpur. Reports available within 1–2 hours.",
   procedureType: "Diagnostic",
   followup: "Reports available within 1–2 hours",
   howPerformed: "Non-invasive recording of the heart's electrical activity using electrodes placed on skin",
-  performer: {
-    "@type": BUSINESS_TYPE,
-    name: "Diagnos Lab",
-    telephone: "+918404802214",
-    address: POSTAL_ADDRESS,
-  },
+  performer: ORG_REF,
 };
 
-const ecgBreadcrumb = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://diagnoslab.in" },
-    { "@type": "ListItem", position: 2, name: "Radiology", item: "https://diagnoslab.in/radiology/" },
-    { "@type": "ListItem", position: 3, name: "ECG Test in Jamshedpur", item: "https://diagnoslab.in/ecg/" },
-  ],
-};
+const ecgBreadcrumb = breadcrumbSchema([
+  ["Home", ""],
+  ["Radiology", "/radiology/"],
+  ["ECG Test in Jamshedpur", "/ecg/"],
+]);
 
 export default function Page() {
   return (

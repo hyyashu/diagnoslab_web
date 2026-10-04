@@ -17,7 +17,7 @@ const options = [
     steps: [
       { title: "Visit the lab", text: "Walk in or arrive at your appointment time." },
       { title: "Tested by experts", text: "Our trained technicians collect and process your sample." },
-      { title: "Reports on WhatsApp", text: "Digital reports are shared directly on your phone." },
+      { title: "Reports on WhatsApp", text: "Reports are sent to your WhatsApp automatically." },
     ],
     cta: "Get an appointment",
     form: "enquiry_form" as EnquiryFormType,
@@ -32,7 +32,7 @@ const options = [
       { title: "Book home collection", text: "Submit the form or call us with your address." },
       { title: "Sample collected at home", text: "Our phlebotomist visits you at your chosen slot." },
       { title: "Tested at our lab", text: "Samples processed using modern equipment." },
-      { title: "Reports on WhatsApp", text: "Reports shared digitally once ready." },
+      { title: "Reports on WhatsApp", text: "Sent to your WhatsApp automatically once ready." },
     ],
     cta: "Book home collection",
     form: "home_collection" as EnquiryFormType,

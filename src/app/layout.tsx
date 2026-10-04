@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import Script from "next/script";
+import AdsTracking from "@/components/layout/adsTracking";
+import Tracking from "@/components/layout/tracking";
+import { SITE_URL, pageUrl } from "@/lib/schema";
 import "./globals.css";
 
 /* Plus Jakarta Sans for headings, Inter for everything else, both
@@ -26,7 +29,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://diagnoslab.in"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Diagnos Lab | Blood Test, Ultrasound & Radiology in Jamshedpur",
     template: "%s | Diagnos Lab",
@@ -51,7 +54,7 @@ export const metadata: Metadata = {
     title: "Diagnos Lab | Blood Test, Ultrasound & Radiology in Jamshedpur",
     description:
       "Top-rated diagnostic centre in Sakchi, Jamshedpur. Blood tests, USG, ECG, X-Ray, and health packages with home collection.",
-    url: "https://diagnoslab.in",
+    url: SITE_URL,
     siteName: "Diagnos Lab",
     images: [
       {
@@ -72,9 +75,9 @@ export const metadata: Metadata = {
     images: ["/images/diagnoslogo.avif"],
   },
   alternates: {
-    canonical: "https://diagnoslab.in",
+    canonical: SITE_URL,
     types: {
-      "text/plain": "https://diagnoslab.in/llms.txt",
+      "text/plain": pageUrl("/llms.txt"),
     },
   },
 };
@@ -88,6 +91,8 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${jakarta.variable} ${inter.variable} antialiased`}>
         {children}
+        <Tracking />
+        <AdsTracking />
         {/* ReplyBash chat widget. Loaded after the page is idle so it never
             competes with the LCP element. */}
         <Script

@@ -1,8 +1,9 @@
 import Script from "next/script";
 import { GADS_ID } from "@/lib/gtag";
 
-/* Renders nothing until NEXT_PUBLIC_GADS_ID is set, so no empty gtag
-   request goes out while the account is still being set up. */
+/* The Google Ads tag, on every page so form and call conversions are
+   counted site-wide. Renders nothing until NEXT_PUBLIC_GADS_ID is set, so
+   no gtag script loads while the account is still being set up. */
 export default function AdsTracking() {
   if (!GADS_ID) return null;
 

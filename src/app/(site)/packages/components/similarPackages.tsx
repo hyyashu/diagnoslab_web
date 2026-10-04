@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import CheckupPackageCard, { type CheckupPackage } from "@/components/cards/checkupPackageCard";
-import { featuredPackages } from "@/components/home/content";
+import { toCheckupCard } from "@/components/home/content";
 import { shell } from "@/components/ui/shell";
 import { getPackages, type Package } from "@/lib/catalog";
 
@@ -39,19 +39,7 @@ export default function SimilarPackages({
   const current = all.find((p) => p.slug === currentSlug);
   if (!current) return null;
 
-  const cards: CheckupPackage[] = pick(all, current, compare).map((p) => ({
-    slug: p.slug,
-    title: p.title,
-    description: p.description,
-    price: p.price,
-    originalPrice: p.originalPrice,
-    parameters: p.parameters,
-    categories: p.categories,
-    fasting: p.fasting,
-    reporting: p.reporting,
-    ...featuredPackages[p.slug],
-    mostBooked: false,
-  }));
+  const cards: CheckupPackage[] = pick(all, current, compare).map((p) => ({ ...toCheckupCard(p), mostBooked: false }));
   if (cards.length === 0) return null;
 
   return (

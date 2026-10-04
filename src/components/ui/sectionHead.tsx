@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import Responsive from "@/components/ui/responsive";
 
 /* DL.pen "Section Head": optional eyebrow, title, subtitle and a
    "see all" link with a ringed arrow. The design words some headings
@@ -16,16 +17,6 @@ type SectionHeadProps = {
   tone?: "light" | "dark";
   aside?: React.ReactNode;
 };
-
-function Responsive({ desktop, mobile }: { desktop: string; mobile?: string }) {
-  if (!mobile || mobile === desktop) return <>{desktop}</>;
-  return (
-    <>
-      <span className="md:hidden">{mobile}</span>
-      <span className="hidden md:inline">{desktop}</span>
-    </>
-  );
-}
 
 export default function SectionHead({
   id,

@@ -2,10 +2,9 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { ArrowRight, Check, MessageCircle, Phone, UserRound, X } from "lucide-react";
-import { submitLeadForm } from "@/lib/api";
-import { useSource } from "@/lib/useSource";
-import { normalizePhone, sanitizeName, validateName, validatePhone } from "@/lib/leadValidation";
+import { FieldError, leadIntent, topicValue, useLeadForm } from "@/components/forms/useLeadForm";
 import { PHONE_HREF, WHATSAPP_HREF } from "@/lib/contact";
+import { rupees } from "@/lib/format";
 
 export const contactTopics = ["Book a test", "Home collection", "Reports", "Radiology", "Something else"] as const;
 export type ContactTopic = (typeof contactTopics)[number];
@@ -26,8 +25,6 @@ type SheetProps = Required<Pick<ContactSheetProps, "onClose">> & {
   item?: ContactSheetProps["item"];
   sourceData?: ContactSheetProps["sourceData"];
 };
-
-const rupees = (n: number) => `₹${n.toLocaleString("en-IN")}`;
 
 /* DL.pen "Contact Pop-up (Mobile)": a bottom sheet with call / WhatsApp
    shortcuts and a callback form. On desktop the same content sits in a
@@ -64,59 +61,18 @@ export default function ContactSheet({ isOpen, onClose, topic: initialTopic = "B
 function Sheet({ onClose, initialTopic, item, sourceData }: SheetProps) {
   const titleId = useId();
   const nameRef = useRef<HTMLInputElement>(null);
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
   const [topic, setTopic] = useState<ContactTopic>(initialTopic);
-  /* Consent tick box parked for now; see the commented block below. */
-  // const [consent, setConsent] = useState(false);
-  const [nameError, setNameError] = useState<string | null>(null);
-  const [phoneError, setPhoneError] = useState<string | null>(null);
-  const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const source = useSource({
-    ...sourceData,
-    ...(item && { clicked_at: item.name }),
-    form_type: topic === "Home collection" ? "home_collection" : "enquiry_form",
-    contact_topic: topic,
-  });
+  const { nameInput, phoneInput, nameError, phoneError, submitting, submitted, error, handleSubmit } = useLeadForm();
 
   useEffect(() => {
     nameRef.current?.focus({ preventScroll: true });
   }, []);
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setError(null);
-    const nErr = validateName(name);
-    const pErr = validatePhone(phone);
-    setNameError(nErr);
-    setPhoneError(pErr);
-    if (nErr || pErr) return;
-    // if (!consent) {
-    //   setError("Please agree to be contacted so we can call you back.");
-    //   return;
-    // }
-
-    setSubmitting(true);
-    try {
-      await submitLeadForm({
-        name: name.trim(),
-        phone: normalizePhone(phone),
-        source,
-        /* Book buttons never sent an intent; keep their leads unchanged
-           unless the visitor asks for home collection. */
-        lead_intent:
-          topic === "Home collection" ? "book_home_collection" : item ? undefined : "general_enquiry",
-      });
-      setSubmitted(true);
-    } catch {
-      setError("Something went wrong. Please try again.");
-    } finally {
-      setSubmitting(false);
-    }
-  };
+  const homeCollection = topic === "Home collection";
+  const onSubmit = handleSubmit(() => ({
+    source: { ...sourceData, contact_topic: topicValue(topic) },
+    intent: leadIntent({ homeCollection, booking: !!item }),
+  }));
 
   const input =
     "flex h-11 items-center gap-2.5 rounded-xl border border-dl-line bg-white px-3.5 transition focus-within:border-[1.5px] focus-within:border-dl-red focus-within:shadow-[0_4px_14px_rgba(217,45,39,0.2)]";
@@ -206,21 +162,13 @@ function Sheet({ onClose, initialTopic, item, sourceData }: SheetProps) {
                 <UserRound className="size-[18px] shrink-0 text-dl-red" aria-hidden />
                 <input
                   ref={nameRef}
-                  type="text"
-                  autoComplete="name"
+                  {...nameInput}
                   required
-                  value={name}
-                  onChange={(e) => {
-                    const v = sanitizeName(e.target.value);
-                    setName(v);
-                    if (nameError) setNameError(validateName(v));
-                  }}
-                  onBlur={() => name && setNameError(validateName(name))}
                   placeholder="Your full name"
                   className="min-w-0 flex-1 bg-transparent text-[15px] font-medium text-dl-ink outline-none placeholder:font-normal placeholder:text-dl-muted"
                 />
               </span>
-              {nameError && <span className="text-xs text-dl-red">{nameError}</span>}
+              <FieldError message={nameError} />
             </label>
 
             <label className="flex flex-col gap-1.5">
@@ -231,22 +179,13 @@ function Sheet({ onClose, initialTopic, item, sourceData }: SheetProps) {
                 <span className="text-[15px] font-semibold text-dl-ink">+91</span>
                 <span className="h-[22px] w-px bg-dl-line" aria-hidden />
                 <input
-                  type="tel"
-                  autoComplete="tel-national"
-                  inputMode="numeric"
+                  {...phoneInput}
                   required
-                  value={phone}
-                  onChange={(e) => {
-                    const digits = normalizePhone(e.target.value).slice(0, 10);
-                    setPhone(digits);
-                    if (phoneError) setPhoneError(validatePhone(digits));
-                  }}
-                  onBlur={() => phone && setPhoneError(validatePhone(phone))}
                   placeholder="98765 43210"
                   className="min-w-0 flex-1 bg-transparent text-[15px] font-medium text-dl-ink outline-none placeholder:font-normal placeholder:text-dl-muted"
                 />
               </span>
-              {phoneError && <span className="text-xs text-dl-red">{phoneError}</span>}
+              <FieldError message={phoneError} />
             </label>
 
             {!item && (
@@ -276,29 +215,6 @@ function Sheet({ onClose, initialTopic, item, sourceData }: SheetProps) {
               </fieldset>
             )}
           </div>
-
-          {/* Consent tick box, off for now. Restore with the consent state above.
-          <label className="flex cursor-pointer items-start gap-2.5">
-            <input
-              type="checkbox"
-              checked={consent}
-              onChange={(e) => {
-                setConsent(e.target.checked);
-                if (e.target.checked) setError(null);
-              }}
-              className="peer sr-only"
-            />
-            <span
-              className="flex size-[18px] shrink-0 items-center justify-center rounded-[5px] border border-dl-line bg-white text-white peer-checked:border-dl-red peer-checked:bg-dl-red peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-dl-red"
-              aria-hidden
-            >
-              {consent && <Check className="size-3" strokeWidth={3} />}
-            </span>
-            <span className="text-[12.5px] leading-[1.45] text-dl-ink-2">
-              I agree to be contacted on call, SMS or WhatsApp.
-            </span>
-          </label>
-          */}
 
           {error && (
             <p className="-mt-2 text-sm font-semibold text-dl-red" role="alert">

@@ -20,7 +20,7 @@ export const bookingFaq: FaqItem[] = [
   {
     question: "How fast will I get my reports?",
     answer:
-      "Most blood test reports are ready the same day, within 6 to 12 hours depending on the test, and shared on WhatsApp. Ultrasound and ECG reports usually take 1–2 hours.",
+      "Most blood test reports are ready the same day, within 6 to 12 hours depending on the test, and sent to your WhatsApp automatically. Ultrasound and ECG reports usually take 1–2 hours.",
   },
   {
     question: "Can I send my prescription on WhatsApp?",

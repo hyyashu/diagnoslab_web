@@ -12,7 +12,8 @@ import { labWhyPoints, labWhySubtitle } from "@/components/sections/labWhyPoints
 import { getPackages } from "@/lib/catalog";
 import { packagesFaq } from "@/lib/faq";
 import PackageBrowser from "./components/packageBrowser";
-import { categoryLabel, featured, leadOrder, summaries } from "./content";
+import { featured, leadOrder, toListing } from "./content";
+import { pageUrl } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: { absolute: "Health Packages in Jamshedpur | Full Body Checkup | Diagnos Lab" },
@@ -28,30 +29,18 @@ export const metadata: Metadata = {
     "Affordable Health Test Jamshedpur",
   ],
   alternates: {
-    canonical: "https://diagnoslab.in/packages/",
+    canonical: pageUrl("/packages/"),
   },
   openGraph: {
     title: "Health Packages in Jamshedpur | Diagnos Lab",
     description:
       "Affordable full body checkup and health packages with home collection at Diagnos Lab, Jamshedpur.",
-    url: "https://diagnoslab.in/packages/",
+    url: pageUrl("/packages/"),
   },
 };
 
 export default function Page() {
-  const all: ListingPackage[] = getPackages().map((p) => ({
-    slug: p.slug,
-    title: p.title,
-    description: p.description,
-    price: p.price,
-    originalPrice: p.originalPrice,
-    parameters: p.parameters,
-    categories: p.categories,
-    fasting: p.fasting,
-    reporting: p.reporting,
-    categoryLabel: categoryLabel(p.slug, p.categories),
-    summary: summaries[p.slug],
-  }));
+  const all = getPackages().map(toListing);
   const rank = (slug: string) => {
     const i = leadOrder.indexOf(slug);
     return i === -1 ? leadOrder.length : i;
@@ -77,7 +66,7 @@ export default function Page() {
           { icon: Star, value: "4.9", label: "3,000+ Google reviews", mobileLabel: "Google rating" },
         ]}
         cta={{ label: "Book a package", href: "#packages-section" }}
-        form={{}}
+        form={{ service: "Health package" }}
       />
       <PackageBrowser packages={packages} featured={[feature("nd-plus"), feature("nd-max-plus")]} />
       <WhyPoints

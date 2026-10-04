@@ -46,7 +46,6 @@ const mobileTabs = [
 /* Everything, for the slide-out menu. */
 const menuLinks = [
   ...desktopLinks,
-  { name: "Corporate tie-ups", href: "/corporate/", icon: Handshake },
   { name: "About us", href: "/aboutUs/", icon: Users },
   { name: "Contact us", href: "/contact-us/", icon: Mail },
   { name: "Privacy policy", href: "/policy/", icon: FileText },

@@ -1,25 +1,40 @@
-import Link from "next/link";
 import type { ReactNode } from "react";
 import {
   Activity,
   ArrowRight,
   BadgeCheck,
   CalendarClock,
-  ChevronRight,
   Flame,
   MessageCircle,
   MessageSquareText,
   Phone,
   type LucideIcon,
 } from "lucide-react";
+import Breadcrumbs from "@/components/ui/breadcrumbs";
 import { shell } from "@/components/ui/shell";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
 import type { FaqItem } from "@/lib/faq";
+import type { Package, Test } from "@/lib/catalog";
+import { rupees } from "@/lib/format";
+import { leadMeta } from "@/lib/leadMeta";
 import { DetailFaq, SheetButton, type BookingItem } from "./detailClient";
+import Responsive from "@/components/ui/responsive";
 
 /* DL.pen "Test Details" / "Package Details": the pieces both pages share.
    Desktop is a content column beside a sticky booking card; phones stack
    the same cards with a price card up top and a sticky booking bar. */
+
+/* What the Book and Enquire forms on a detail page get about the item. */
+export function bookingItem(
+  item: ({ kind: "test" } & Test) | ({ kind: "package" } & Package),
+): BookingItem {
+  return {
+    name: item.title,
+    price: item.price,
+    originalPrice: item.originalPrice,
+    sourceData: leadMeta(item),
+  };
+}
 
 export type DetailFact = { icon: LucideIcon; label: string; value: string };
 export type PrepStep = { title: string; text: string };
@@ -29,36 +44,13 @@ export const detailCard =
 export const detailCardTitle =
   "font-display text-lg font-extrabold tracking-[-0.02em] text-dl-ink md:text-[22px] md:tracking-[-0.025em]";
 
-const rupees = (n: number) => `₹${n.toLocaleString("en-IN")}`;
-
-export const discountPct = (price: number, originalPrice: number) =>
-  originalPrice > price && price > 0 ? Math.round(((originalPrice - price) / originalPrice) * 100) : 0;
-
-export function Responsive({ desktop, mobile }: { desktop: string; mobile?: string }) {
-  if (!mobile || mobile === desktop) return <>{desktop}</>;
-  return (
-    <>
-      <span className="md:hidden">{mobile}</span>
-      <span className="hidden md:inline">{desktop}</span>
-    </>
-  );
-}
-
 export function DetailBreadcrumb({ parent, title }: { parent: { label: string; href: string }; title: string }) {
   return (
-    <nav aria-label="Breadcrumb" className={`${shell} hidden py-4 md:block`}>
-      <ol className="flex items-center gap-2.5 text-[13px] text-dl-muted">
-        <li className="flex items-center gap-2.5">
-          <Link href="/" className="hover:text-dl-ink">Home</Link>
-          <ChevronRight className="size-3.5" aria-hidden />
-        </li>
-        <li className="flex items-center gap-2.5">
-          <Link href={parent.href} className="hover:text-dl-ink">{parent.label}</Link>
-          <ChevronRight className="size-3.5" aria-hidden />
-        </li>
-        <li aria-current="page" className="font-semibold text-dl-ink">{title}</li>
-      </ol>
-    </nav>
+    <Breadcrumbs
+      size="detail"
+      items={[{ label: "Home", href: "/" }, parent, { label: title }]}
+      className={`${shell} hidden py-4 md:block`}
+    />
   );
 }
 

@@ -1,8 +1,8 @@
 import JsonLd from "@/components/seo/jsonLd";
-import { BUSINESS_TYPE, POSTAL_ADDRESS } from "@/lib/contact";
+import { BUSINESS_TYPE, PHONE_E164, POSTAL_ADDRESS } from "@/lib/contact";
+import { ORG_ID, SITE_URL, pageUrl } from "@/lib/schema";
 import HomeCollectionJsonLd from "@/components/seo/homeCollectionJsonLd";
 import Navbar from "@/components/layout/navbar";
-// import BottomNav from "@/components/layout/bottomNav";
 import FloatingCTA from "@/components/layout/floatingCTA";
 import Footer from "@/components/layout/footer";
 
@@ -12,15 +12,15 @@ const localBusinessSchema = {
   /* Canonical identifier for the business. Every other block that talks about
      Diagnos Lab references this @id instead of describing it again, so search
      engines resolve one entity rather than one per page. */
-  "@id": "https://diagnoslab.in/#organization",
+  "@id": ORG_ID,
   name: "Diagnos Lab",
   alternateName: "Diagno Labs Jamshedpur",
-  url: "https://diagnoslab.in",
-  logo: "https://diagnoslab.in/images/diagnoslogo.avif",
-  image: "https://diagnoslab.in/images/diagnoslogo.avif",
+  url: SITE_URL,
+  logo: pageUrl("/images/diagnoslogo.avif"),
+  image: pageUrl("/images/diagnoslogo.avif"),
   description:
     "Diagnos Lab is a top-rated diagnostic centre in Sakchi, Jamshedpur offering blood tests, ultrasound, ECG, X-Ray, PFT, and health packages with home sample collection.",
-  telephone: "+918404802214",
+  telephone: PHONE_E164,
   email: "info@diagnoslab.in",
   address: POSTAL_ADDRESS,
   geo: {
@@ -99,15 +99,11 @@ export default function SiteLayout({
       <main>
         {children}
         <FloatingCTA
-          phoneNumber="+918404802214"
-          whatsappNumber="+918404802214"
+          phoneNumber={PHONE_E164}
+          whatsappNumber={PHONE_E164}
         />
       </main>
       <Footer />
-      {/* Bottom nav switched off for now. To bring it back, uncomment this
-          and its import, restore pb-20 md:pb-0 on <main>, bottom-16 on the
-          detail page sticky bar and bottom-24 / bottom-40 on FloatingCTA. */}
-      {/* <BottomNav /> */}
     </>
   );
 }

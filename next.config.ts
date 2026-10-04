@@ -14,6 +14,8 @@ const nextConfig: NextConfig = {
   /* The image optimiser needs a server. Source images are already small
      .avif files, so they are served as they are. */
   images: { unoptimized: true },
+  /* Dev only: lets phones on the LAN load the dev server (HMR, chunks). */
+  allowedDevOrigins: ["192.168.1.7"],
 };
 
 export default nextConfig;

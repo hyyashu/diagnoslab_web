@@ -2,9 +2,7 @@
 
 import { useState } from "react";
 import { ArrowRight, Building2, Mail, Phone, UserRound, Users } from "lucide-react";
-import { submitLeadForm } from "@/lib/api";
-import { useSource } from "@/lib/useSource";
-import { normalizePhone, sanitizeName, validateName, validatePhone } from "@/lib/leadValidation";
+import { FieldError, useLeadForm } from "@/components/forms/useLeadForm";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
 
 const COMPANY_MIN_LENGTH = 2;
@@ -42,10 +40,6 @@ function validateEmployees(raw: string): string | null {
   return null;
 }
 
-function Err({ message }: { message?: string | null }) {
-  return message ? <span className="text-xs text-dl-red">{message}</span> : null;
-}
-
 function Req() {
   return (
     <span className="text-dl-red" aria-hidden>
@@ -54,62 +48,37 @@ function Req() {
   );
 }
 
-/* DL.pen corporate "Get In Touch Card". Sends the same corporate lead as
-   before: form_type corporate_hero_form, lead_type corporate, and the
-   company details in `source`. */
+/* DL.pen corporate "Get In Touch Card". The topic is "Corporate", with the
+   company details beside it in `source`. */
 export default function CorporateForm() {
   const [companyName, setCompanyName] = useState("");
-  const [contactPerson, setContactPerson] = useState("");
-  const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [employees, setEmployees] = useState("");
   const [errors, setErrors] = useState<Record<string, string | null>>({});
-  const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const { nameInput, phoneInput, nameError, phoneError, submitting, submitted, error, handleSubmit } = useLeadForm();
 
-  const source = useSource({ form_type: "corporate_hero_form" });
-
-  /* Only the contact person and phone are required; the rest are checked
-     when filled in. */
+  /* Only the contact person and phone are required (checked by
+     useLeadForm); the rest are checked when filled in. */
   const check = {
     company: () => (companyName.trim() ? validateCompanyName(companyName) : null),
-    contact: () => validateName(contactPerson),
-    phone: () => validatePhone(phone),
     email: () => (email.trim() ? validateEmail(email) : null),
     employees: () => (employees.trim() ? validateEmployees(employees) : null),
   };
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setError(null);
+  /* No lead_intent: corporate leads are told apart by their topic. */
+  const onSubmit = handleSubmit(() => {
     const next = Object.fromEntries(Object.entries(check).map(([k, fn]) => [k, fn()]));
     setErrors(next);
-    if (Object.values(next).some(Boolean)) return;
-
-    const companyTrimmed = companyName.trim();
-    const contactTrimmed = contactPerson.trim();
-    setSubmitting(true);
-    try {
-      await submitLeadForm({
-        name: contactTrimmed || companyTrimmed,
-        phone: normalizePhone(phone),
-        source: {
-          ...source,
-          company_name: companyTrimmed,
-          contact_person: contactTrimmed,
-          email: email.trim(),
-          employees,
-          lead_type: "corporate",
-        },
-      });
-      setSubmitted(true);
-    } catch {
-      setError("Something went wrong. Please try again.");
-    } finally {
-      setSubmitting(false);
-    }
-  };
+    if (Object.values(next).some(Boolean)) return null;
+    return {
+      source: {
+        contact_topic: "Corporate",
+        company_name: companyName.trim(),
+        email: email.trim(),
+        employees,
+      },
+    };
+  });
 
   const box =
     "flex h-12 items-center gap-2.5 rounded-xl border border-dl-line bg-white px-3.5 focus-within:border-dl-red md:h-[46px]";
@@ -152,7 +121,7 @@ export default function CorporateForm() {
                 className={input}
               />
             </span>
-            <Err message={errors.company} />
+            <FieldError message={errors.company} />
           </label>
 
           <label className="flex flex-col gap-1.5">
@@ -161,17 +130,9 @@ export default function CorporateForm() {
             </span>
             <span className={box}>
               <UserRound className={icon} aria-hidden />
-              <input
-                type="text"
-                autoComplete="name"
-                value={contactPerson}
-                onChange={(e) => setContactPerson(sanitizeName(e.target.value))}
-                onBlur={() => contactPerson && setErrors((s) => ({ ...s, contact: check.contact() }))}
-                placeholder="Full name"
-                className={input}
-              />
+              <input {...nameInput} placeholder="Full name" className={input} />
             </span>
-            <Err message={errors.contact} />
+            <FieldError message={nameError} />
           </label>
 
           {/* Phone gets its own row; email and employees share one. */}
@@ -183,18 +144,9 @@ export default function CorporateForm() {
               <span className={box}>
                 <span className="text-[15px] font-semibold text-dl-ink md:text-sm">+91</span>
                 <span className="h-5 w-px bg-dl-line" aria-hidden />
-                <input
-                  type="tel"
-                  inputMode="numeric"
-                  autoComplete="tel-national"
-                  value={phone}
-                  onChange={(e) => setPhone(normalizePhone(e.target.value).slice(0, 10))}
-                  onBlur={() => phone && setErrors((s) => ({ ...s, phone: check.phone() }))}
-                  placeholder="10-digit mobile"
-                  className={input}
-                />
+                <input {...phoneInput} placeholder="10-digit mobile" className={input} />
               </span>
-              <Err message={errors.phone} />
+              <FieldError message={phoneError} />
             </label>
 
             <div className="grid grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] gap-3">
@@ -214,7 +166,7 @@ export default function CorporateForm() {
                     className={input}
                   />
                 </span>
-                <Err message={errors.email} />
+                <FieldError message={errors.email} />
               </label>
 
               <label className="flex flex-col gap-1.5">
@@ -234,7 +186,7 @@ export default function CorporateForm() {
                     className={input}
                   />
                 </span>
-                <Err message={errors.employees} />
+                <FieldError message={errors.employees} />
               </label>
             </div>
           </div>

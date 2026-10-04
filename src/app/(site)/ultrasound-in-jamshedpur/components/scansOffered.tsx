@@ -19,7 +19,7 @@ export default function ScansOffered() {
           subtitle="From routine abdominal checks to pregnancy monitoring, comprehensive USG services under one roof."
         />
         <ScanCard scan={featuredScan} variant="featured" />
-        <ul className="grid gap-3 md:grid-cols-2 md:gap-5 lg:grid-cols-3">
+        <ul className="grid grid-cols-[minmax(0,1fr)] gap-3 md:grid-cols-2 md:gap-5 lg:grid-cols-3">
           {scanTypes.map((s) => (
             <li key={s.id}>
               <ScanTypeCard service="Ultrasound" title={s.title} description={s.description} preparation={s.preparation} icon={s.icon} />

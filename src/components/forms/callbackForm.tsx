@@ -2,10 +2,8 @@
 
 import { useState } from "react";
 import { ArrowRight, ChevronDown, Lock } from "lucide-react";
-import { submitLeadForm } from "@/lib/api";
-import { useSource } from "@/lib/useSource";
-import { normalizePhone, sanitizeName, validateName, validatePhone } from "@/lib/leadValidation";
 import { buttonClass } from "@/components/ui/button";
+import { FieldError, leadIntent, useLeadForm } from "@/components/forms/useLeadForm";
 
 type CallbackFormProps = {
   title?: string;
@@ -21,11 +19,10 @@ type CallbackFormProps = {
   note?: string;
   /* Sent with the lead when there is no Service select. */
   service?: string;
-  formType?: "enquiry_form" | "home_collection";
 };
 
-/* DL.pen "Call Back Card". Sends the same lead as the enquiry form, plus
-   the chosen service under the key the radiology cards already use. */
+/* DL.pen "Call Back Card". The chosen service, else the page's own, is
+   the lead's contact topic. */
 export default function CallbackForm({
   title = "Request a call back",
   subtitle = "Share your details and our team will call you to book a slot.",
@@ -35,49 +32,20 @@ export default function CallbackForm({
   needs,
   note = "We never share your number.",
   service: fixedService,
-  formType = "enquiry_form",
 }: CallbackFormProps) {
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
   const [service, setService] = useState("");
-  const [nameError, setNameError] = useState<string | null>(null);
-  const [phoneError, setPhoneError] = useState<string | null>(null);
-  const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const { nameInput, phoneInput, nameError, phoneError, submitting, submitted, error, handleSubmit } = useLeadForm();
 
-  const source = useSource({
-    form_type: formType,
-    ...((service || fixedService) && { radiology_name: service || fixedService }),
-  });
-
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setError(null);
-    const nErr = validateName(name);
-    const pErr = validatePhone(phone);
-    setNameError(nErr);
-    setPhoneError(pErr);
-    if (nErr || pErr) return;
-
-    setSubmitting(true);
-    try {
-      await submitLeadForm({
-        name: name.trim(),
-        phone: normalizePhone(phone),
-        source,
-        lead_intent: formType === "home_collection" ? "book_home_collection" : "general_enquiry",
-      });
-      setName("");
-      setPhone("");
-      setService("");
-      setSubmitted(true);
-    } catch {
-      setError("Something went wrong. Please try again.");
-    } finally {
-      setSubmitting(false);
-    }
-  };
+  const onSubmit = handleSubmit(
+    () => {
+      const topic = service || fixedService || "Something else";
+      return {
+        source: { contact_topic: topic },
+        intent: leadIntent({ homeCollection: topic === "Home collection" }),
+      };
+    },
+    () => setService(""),
+  );
 
   const field =
     "w-full rounded-xl border border-transparent bg-dl-bg px-4 py-3 text-sm text-dl-ink outline-none placeholder:text-dl-muted focus:border-dl-red";
@@ -100,20 +68,8 @@ export default function CallbackForm({
       <form onSubmit={onSubmit} className="flex flex-col gap-4" noValidate>
         <label className="flex flex-col gap-1.5">
           <span className={label}>Name</span>
-          <input
-            type="text"
-            autoComplete="name"
-            value={name}
-            onChange={(e) => {
-              const v = sanitizeName(e.target.value);
-              setName(v);
-              if (nameError) setNameError(validateName(v));
-            }}
-            onBlur={() => setNameError(validateName(name))}
-            placeholder="Your full name"
-            className={field}
-          />
-          {nameError && <span className="text-xs text-dl-red">{nameError}</span>}
+          <input {...nameInput} placeholder="Your full name" className={field} />
+          <FieldError message={nameError} />
         </label>
 
         <label className="flex flex-col gap-1.5">
@@ -121,21 +77,12 @@ export default function CallbackForm({
           <span className={`${field} flex items-center gap-2 focus-within:border-dl-red`}>
             <span className="text-dl-ink-2">+91</span>
             <input
-              type="tel"
-              autoComplete="tel-national"
-              inputMode="numeric"
-              value={phone}
-              onChange={(e) => {
-                const digits = normalizePhone(e.target.value).slice(0, 10);
-                setPhone(digits);
-                if (phoneError) setPhoneError(validatePhone(digits));
-              }}
-              onBlur={() => setPhoneError(validatePhone(phone))}
+              {...phoneInput}
               placeholder="Your 10-digit number"
               className="min-w-0 flex-1 bg-transparent outline-none placeholder:text-dl-muted"
             />
           </span>
-          {phoneError && <span className="text-xs text-dl-red">{phoneError}</span>}
+          <FieldError message={phoneError} />
         </label>
 
         {services && (

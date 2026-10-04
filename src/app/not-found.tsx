@@ -30,11 +30,11 @@ const destinations: { title: string; text: string; href: string; icon: LucideIco
   { title: "Book a blood test", text: "Home collection from 6 AM", href: "/book-a-test/", icon: Droplet, tone: "bg-dl-red-soft text-dl-red" },
   { title: "Health packages", text: "Full body, diabetes, heart & more", href: "/packages/", icon: PackageCheck, tone: "bg-dl-green/10 text-dl-green" },
   { title: "Radiology & scans", text: "Ultrasound, X-Ray, ECG, ECHO", href: "/radiology/", icon: ScanLine, tone: "bg-dl-red-soft text-dl-red" },
-  { title: "Get your reports", text: "On WhatsApp with your booking ID", href: WHATSAPP_HREF, icon: FileDown, tone: "bg-dl-ink/5 text-dl-ink", external: true },
+  { title: "Get your reports", text: "Sent to your WhatsApp automatically", href: WHATSAPP_HREF, icon: FileDown, tone: "bg-dl-ink/5 text-dl-ink", external: true },
   { title: "Contact & centres", text: "Sakchi, Jugsalai, Adityapur", href: "/contact-us/", icon: MapPin, tone: "bg-dl-ink/5 text-dl-ink" },
 ];
 
-/* DL.pen "Diagnos Lab — 404 Not Found". It sits at the app root so it
+/* DL.pen "Diagnos Lab - 404 Not Found". It sits at the app root so it
    catches every unmatched URL, which is outside the (site) layout, so it
    brings its own header and footer. */
 export default function NotFound() {

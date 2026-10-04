@@ -19,9 +19,8 @@ export default function PackageShelf({ categories }: { categories: ShelfCategory
         <CategoryChips label="Package categories" options={categories} active={active} onChange={setActive} />
       </div>
 
-      <div className={`${shell} max-md:px-0`}>
+      <div role="tabpanel" aria-label={active} className={`${shell} max-md:px-0`}>
         <ul
-          role="tabpanel"
           className="no-scrollbar flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:px-0 lg:grid-cols-4"
         >
           {packages.map((pkg) => (

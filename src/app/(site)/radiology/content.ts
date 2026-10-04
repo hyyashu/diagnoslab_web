@@ -94,7 +94,7 @@ export const whyPoints = [
   {
     icon: "file-check",
     title: "Clear, accurate reports",
-    text: "Detailed digital reports on WhatsApp and email.",
-    mobileText: "Digital reports on WhatsApp and email.",
+    text: "Detailed reports sent to your WhatsApp automatically.",
+    mobileText: "Reports sent to your WhatsApp automatically.",
   },
 ];

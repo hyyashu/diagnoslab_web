@@ -35,16 +35,20 @@ export const scanTypes = ["abdomen", "pelvic", "kub", "thyroid", "breast"].map((
   icon: icons[id],
 }));
 
+/* NT, growth and Doppler scans, from data/ultrasoundScans.json. Each has
+   its own page at /ultrasound-in-jamshedpur/<slug>/. */
+export { pregnancyScans } from "@/lib/catalog";
+
 export const whyPoints: WhyPoint[] = [
   { icon: "monitor", title: "Advanced USG equipment", text: "High-resolution colour Doppler machines for clear, detailed images." },
-  { icon: "users", title: "Experienced radiology team", text: "Qualified radiologists with years of ultrasound expertise." },
+  { icon: "users", title: "MD Radiology radiologists", text: "Every scan is done and reported by a radiologist with an MD in Radiology." },
   {
     icon: "user-round-check",
     title: "Female radiologist",
     text: "Pelvic, obstetric and breast scans by a female radiologist on request.",
     highlight: true,
   },
-  { icon: "clock-3", title: "Same-day reports", text: "Reports in 1–2 hours, shared digitally on WhatsApp." },
+  { icon: "clock-3", title: "Same-day reports", text: "Reports in 1–2 hours, sent to your WhatsApp automatically." },
   { icon: "shield-check", title: "Painless & radiation-free", text: "Non-invasive and safe for all ages, including during pregnancy." },
 ];
 
@@ -65,7 +69,7 @@ export const expectPoints = [
   "Painless, non-invasive and uses no radiation. Safe for all ages including pregnancy.",
   "A gel is applied to the skin and a probe is moved over the area being examined.",
   "Female patients can request a female radiologist for pelvic, obstetric and breast scans.",
-  "Digital reports are shared on WhatsApp and available through our portal.",
+  "Your report is sent to your WhatsApp automatically, usually within 1–2 hours.",
 ];
 
 export const relatedServices = [

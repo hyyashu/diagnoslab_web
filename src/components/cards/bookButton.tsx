@@ -12,9 +12,7 @@ const ContactSheet = dynamic(loadSheet, { ssr: false });
 
 /* What the card is booking; shown in the sheet and sent with the lead. */
 type BookForm = {
-  title?: string;
   testName?: string;
-  testDescription?: string;
   testPrice?: number;
   testOriginalPrice?: number;
   additionalSourceData?: Record<string, unknown>;

@@ -3,23 +3,14 @@ import { ArrowRight, Utensils, Zap } from "lucide-react";
 import BookButton from "@/components/cards/bookButton";
 import { buttonClass } from "@/components/ui/button";
 import type { Test } from "@/lib/catalog";
+import { discountPct, fastingLabel, reportLabel, rupees } from "@/lib/format";
+import { leadMeta } from "@/lib/leadMeta";
 
 /* DL.pen "Test Card". */
 export type LabTest = Pick<
   Test,
   "slug" | "title" | "description" | "price" | "originalPrice" | "category" | "fasting" | "reporting"
 >;
-
-/* The catalogue stores "Same Day" / "Not Required" / "Over-Night"; the
-   design phrases them as patients would. */
-const reportLabel = (reporting: string) =>
-  /same\s*day/i.test(reporting) ? "Same-day report" : `${reporting} report`;
-
-const fastingLabel = (fasting: string) => {
-  if (/not\s*required/i.test(fasting)) return "No fasting";
-  if (/over[\s-]*night/i.test(fasting)) return "Overnight fasting";
-  return fasting;
-};
 
 /* "home": the most-booked card (Details and Book under the price).
    "catalog": the Lab Tests page card, with a category pill and a Details
@@ -45,21 +36,7 @@ export default function LabTestCard({
   const stacked = stackedProp || home;
   const withDetails = catalog || home;
   const { slug, title, description, price, originalPrice } = test;
-  const discount =
-    originalPrice > 0 && price > 0
-      ? Math.round(((originalPrice - price) / originalPrice) * 100)
-      : 0;
-
-  /* Same lead payload as the classic TestCard. */
-  const leadMeta = {
-    test_name: title,
-    test_slug: slug,
-    test_price: price,
-    test_original_price: originalPrice,
-    test_category: test.category,
-    test_fasting: test.fasting,
-    test_reporting: test.reporting,
-  };
+  const discount = discountPct(price, originalPrice);
 
   return (
     <article className="flex h-full flex-col gap-[18px] rounded-[20px] border border-dl-line bg-white p-5 md:p-6">
@@ -116,20 +93,20 @@ export default function LabTestCard({
 
       <div
         className={`mt-auto flex gap-3 border-t border-dl-line pt-[18px] ${
-          stacked ? "flex-col" : "items-center justify-between"
+          stacked ? "flex-col" : "flex-wrap items-center justify-between"
         }`}
       >
         <div className="flex items-end gap-2">
           <span className="font-display text-2xl font-extrabold tracking-[-0.02em] text-dl-ink">
-            ₹{price.toLocaleString("en-IN")}
+            {rupees(price)}
           </span>
           {originalPrice > price && (
             <s className="pb-0.5 text-sm text-dl-muted">
-              ₹{originalPrice.toLocaleString("en-IN")}
+              {rupees(originalPrice)}
             </s>
           )}
         </div>
-        <div className="flex shrink-0 items-center gap-2">
+        <div className={`flex shrink-0 items-center gap-2 ${stacked ? "" : "ml-auto"}`}>
           {withDetails && (
             <Link href={`/tests/${slug}`} className={buttonClass("neutral", "sm", stacked ? "flex-1" : "")}>
               Details
@@ -138,15 +115,15 @@ export default function LabTestCard({
           <BookButton
             className={buttonClass("primary", "sm", stacked ? "flex-1" : "")}
             form={{
-              title: "Book",
               testName: title,
-              testDescription: description,
               testPrice: price,
               testOriginalPrice: originalPrice,
-              additionalSourceData: leadMeta,
+              additionalSourceData: leadMeta({ kind: "test", ...test }),
             }}
           >
-            {catalog ? "Book now" : "Book"}
+            {/* "now" drops on narrow phones so price, Details and Book
+                still share one row. */}
+            {catalog ? <span>Book<span className="max-sm:hidden"> now</span></span> : "Book"}
             <ArrowRight className="size-4" aria-hidden />
           </BookButton>
         </div>

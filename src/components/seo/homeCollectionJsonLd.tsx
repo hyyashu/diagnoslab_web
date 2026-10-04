@@ -24,7 +24,7 @@ const howToSchema = {
       "@type": "HowToStep",
       position: 3,
       name: "Receive Digital Reports",
-      text: "Reports are processed at our NABL-grade lab and delivered digitally on WhatsApp and email within 6–12 hours.",
+      text: "Reports are processed at our NABL-grade lab and sent to your WhatsApp automatically within 6–12 hours.",
     },
   ],
 };

@@ -10,6 +10,7 @@ import BookingSteps from "./components/bookingSteps";
 import PrescriptionBand from "./components/prescriptionBand";
 import Coverage from "./components/coverage";
 import { bookingFaq } from "./content";
+import { ORG_REF, breadcrumbSchema, pageUrl } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: { absolute: "Book Blood Test in Jamshedpur | Home Collection | Diagnos Lab" },
@@ -25,13 +26,13 @@ export const metadata: Metadata = {
     "full body checkup booking jamshedpur",
   ],
   alternates: {
-    canonical: "https://diagnoslab.in/book-a-test/",
+    canonical: pageUrl("/book-a-test/"),
   },
   openGraph: {
     title: "Book Blood Test in Jamshedpur | Home Collection | Diagnos Lab",
     description:
       "Home sample collection across all Jamshedpur areas. Same-day reports.",
-    url: "https://diagnoslab.in/book-a-test/",
+    url: pageUrl("/book-a-test/"),
   },
 };
 
@@ -39,22 +40,18 @@ const bookingSchema = {
   "@context": "https://schema.org",
   /* Attaches the booking action to the existing business node rather than
      declaring a second Diagnos Lab. */
-  "@id": "https://diagnoslab.in/#organization",
+  ...ORG_REF,
   potentialAction: {
     "@type": "ReserveAction",
-    target: "https://diagnoslab.in/book-a-test/",
+    target: pageUrl("/book-a-test/"),
     name: "Book a Blood Test",
   },
 };
 
-const bookingBreadcrumb = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  itemListElement: [
-    { "@type": "ListItem", position: 1, name: "Home", item: "https://diagnoslab.in" },
-    { "@type": "ListItem", position: 2, name: "Book a Blood Test in Jamshedpur", item: "https://diagnoslab.in/book-a-test/" },
-  ],
-};
+const bookingBreadcrumb = breadcrumbSchema([
+  ["Home", ""],
+  ["Book a Blood Test in Jamshedpur", "/book-a-test/"],
+]);
 
 export default function BookATestPage() {
   return (

@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { Clock3, ExternalLink, MapPin, Phone } from "lucide-react";
+import { Clock3, ExternalLink, Landmark, MapPin, Phone } from "lucide-react";
 import MapEmbed from "@/components/sections/mapEmbed";
 import { buttonClass } from "@/components/ui/button";
 import { shell } from "@/components/ui/shell";
 import { areas } from "@/lib/catalog";
-import { ADDRESS_DISPLAY, DIRECTIONS_HREF, HOURS_DISPLAY, MAP_EMBED_SRC, PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
+import { ADDRESS_DISPLAY, DIRECTIONS_HREF, HOURS_DISPLAY, MAP_EMBED_SRC, NEARBY_AREAS, PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
 
 type FindUsPanelProps = {
   tone?: "white" | "muted";
@@ -16,6 +16,8 @@ type FindUsPanelProps = {
   areasHeading?: string;
   /* Highlights this area's chip (the area pages). */
   currentArea?: string;
+  /* Replaces "Open every day" (ultrasound runs Mon–Sat). */
+  hours?: { title: string; text: string };
 };
 
 const sakchi = { title: "Diagnos Lab", text: ADDRESS_DISPLAY, directionsHref: DIRECTIONS_HREF, mapSrc: MAP_EMBED_SRC };
@@ -30,10 +32,13 @@ export default function FindUsPanel({
   centre = sakchi,
   areasHeading = "HOME COLLECTION ACROSS JAMSHEDPUR",
   currentArea,
+  hours = { title: "Open every day", text: HOURS_DISPLAY },
 }: FindUsPanelProps) {
   const details = [
     { icon: MapPin, title: centre.title, text: centre.text },
-    { icon: Clock3, title: "Open every day", text: HOURS_DISPLAY },
+    /* The nearby localities only describe the Sakchi lab. */
+    ...(centre.mapSrc === MAP_EMBED_SRC ? [{ icon: Landmark, title: "Nearby", text: `Near ${NEARBY_AREAS.join(", ")}` }] : []),
+    { icon: Clock3, title: hours.title, text: hours.text },
     { icon: Phone, title: "Call or WhatsApp", text: PHONE_DISPLAY, href: PHONE_HREF },
   ];
 

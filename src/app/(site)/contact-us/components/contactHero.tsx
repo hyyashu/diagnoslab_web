@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { ArrowUpRight, ChevronRight, Mail, MessageCircle, Phone } from "lucide-react";
+import { ArrowUpRight, Mail, MessageCircle, Phone } from "lucide-react";
+import Breadcrumbs from "@/components/ui/breadcrumbs";
 import { shell } from "@/components/ui/shell";
 import { EMAIL, PHONE_DISPLAY, PHONE_HREF, WHATSAPP_HREF } from "@/lib/contact";
 import ContactForm from "./contactForm";
@@ -14,15 +14,7 @@ export default function ContactHero() {
     <section className="bg-linear-to-b from-dl-red-soft to-dl-bg">
       <div className={`${shell} grid gap-8 pt-5 pb-10 md:grid-cols-[minmax(0,1fr)_minmax(0,420px)] md:items-center md:gap-10 md:pt-10 md:pb-[72px] xl:grid-cols-[minmax(0,1fr)_460px] xl:gap-16`}>
         <div className="flex flex-col gap-6 md:gap-7">
-          <nav aria-label="Breadcrumb">
-            <ol className="flex items-center gap-1.5 text-xs text-dl-muted md:text-[13px]">
-              <li className="flex items-center gap-1.5">
-                <Link href="/" className="hover:text-dl-ink">Home</Link>
-                <ChevronRight className="size-3.5" aria-hidden />
-              </li>
-              <li aria-current="page" className="font-semibold text-dl-ink">Contact us</li>
-            </ol>
-          </nav>
+          <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "Contact us" }]} />
 
           <div className="flex flex-col gap-3 md:gap-3.5">
             <h1 className="font-display text-[30px] font-extrabold leading-[1.1] tracking-[-0.03em] text-dl-ink md:text-[40px] xl:text-[46px] xl:leading-[1.08]">

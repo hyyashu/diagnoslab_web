@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Check, FlaskConical } from "lucide-react";
-import { PackageBookButton, discountOf, rupees, type ListingPackage } from "@/components/cards/packageListingCards";
+import { PackageBookButton, type ListingPackage } from "@/components/cards/packageListingCards";
+import { discountPct, rupees } from "@/lib/format";
 import { buttonClass } from "@/components/ui/button";
 import { shell } from "@/components/ui/shell";
 import { getPackageBySlug } from "@/lib/catalog";
@@ -94,7 +95,7 @@ export default function FeaturedPackages({ title }: { title: string }) {
 }
 
 function PackageCard({ pkg }: { pkg: FeaturedPackage }) {
-  const discount = discountOf(pkg);
+  const discount = discountPct(pkg.price, pkg.originalPrice);
 
   return (
     <article className="flex h-full flex-col gap-4 rounded-[20px] bg-white p-5 md:p-6">

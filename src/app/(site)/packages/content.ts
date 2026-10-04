@@ -1,3 +1,5 @@
+import type { ListingPackage } from "@/components/cards/packageListingCards";
+import type { Package } from "@/lib/catalog";
 /* Health Packages page copy from DL.pen. Prices, parameters, fasting and
    reporting still come from the catalogue. */
 
@@ -14,7 +16,7 @@ export const featured = {
 
 /* Short card summaries; packages without one fall back to their catalogue
    description (or none). */
-export const summaries: Record<string, string> = {
+const summaries: Record<string, string> = {
   "bio-t-plus": "Blood health, glucose, cholesterol, kidney function, uric acid, calcium and liver function.",
   "bio-t-d-plus": "Everything in BIO T Plus, with HbA1c for long-term glucose monitoring.",
   "diabetes-monitoring-panel-1": "Key tests to track blood sugar control and related health markers.",
@@ -27,13 +29,28 @@ const womens = ["amh-plus", "pcod-profile"];
 const pregnancy = ["ante-natal-panel", "antenatal-panel-1sl", "antenatal-panel-pg"];
 
 /* The category pill on each card. */
-export const categoryLabel = (slug: string, categories: string) => {
+const categoryLabel = (slug: string, categories: string) => {
   if (womens.includes(slug)) return "Women's Health";
   if (pregnancy.includes(slug)) return "Pregnancy";
   return categories.split(",")[0]?.trim() || "General Health";
 };
 
 /* The design's order for the first page; the rest follow in catalogue order. */
+/* A catalogue package as the listing cards and the detail page show it. */
+export const toListing = (p: Package): ListingPackage => ({
+  slug: p.slug,
+  title: p.title,
+  description: p.description,
+  price: p.price,
+  originalPrice: p.originalPrice,
+  parameters: p.parameters,
+  categories: p.categories,
+  fasting: p.fasting,
+  reporting: p.reporting,
+  categoryLabel: categoryLabel(p.slug, p.categories),
+  summary: summaries[p.slug],
+});
+
 export const leadOrder = ["bio-t-plus", "bio-t-d-plus", "diabetes-monitoring-panel-1", "pcod-profile", "amh-plus", "ante-natal-panel"];
 
 /* Chip label -> the packages it shows, and the chip's icon. */

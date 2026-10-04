@@ -11,6 +11,7 @@ import { labWhyPoints, labWhySubtitle } from "@/components/sections/labWhyPoints
 import { getTests } from "@/lib/catalog";
 import { labTestsFaq } from "@/lib/faq";
 import TestBrowser, { type BrowserTest } from "./components/testBrowser";
+import { pageUrl } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: { absolute: "Book Blood Tests in Jamshedpur | All Lab Tests | Diagnos Lab" },
@@ -27,13 +28,13 @@ export const metadata: Metadata = {
     "Home Sample Collection Jamshedpur",
   ],
   alternates: {
-    canonical: "https://diagnoslab.in/tests/",
+    canonical: pageUrl("/tests/"),
   },
   openGraph: {
     title: "Book Blood Tests in Jamshedpur | Diagnos Lab",
     description:
       "Browse 500+ lab tests. Book with home sample collection at Diagnos Lab, Sakchi, Jamshedpur.",
-    url: "https://diagnoslab.in/tests/",
+    url: pageUrl("/tests/"),
   },
 };
 
@@ -63,7 +64,7 @@ export default function Page() {
           { icon: Star, value: "4.9", label: "3,000+ Google reviews", mobileLabel: "Google rating" },
         ]}
         cta={{ label: "Book a test", href: "#tests-section" }}
-        form={{}}
+        form={{ service: "Blood test" }}
       />
       <TestBrowser tests={tests} />
       <WhyPoints

@@ -4,9 +4,9 @@ export * from "./packages";
 export {
   radiologyServices,
   areas,
-  areaCity,
-  areaIntro,
   reviews,
   ultrasoundScans,
   ultrasoundPreparationSteps,
+  pregnancyScans,
+  type PregnancyScan,
 } from "./source";

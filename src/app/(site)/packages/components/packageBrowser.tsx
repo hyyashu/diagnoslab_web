@@ -94,7 +94,7 @@ export default function PackageBrowser({
         {filtered.length === 0 ? (
           <p className="py-16 text-center text-dl-muted">No packages found.</p>
         ) : (
-          <ul className="grid gap-3 md:grid-cols-2 md:gap-5 lg:grid-cols-3">
+          <ul className="grid grid-cols-[minmax(0,1fr)] gap-3 md:grid-cols-2 md:gap-5 lg:grid-cols-3">
             {gridItems.map((p) => (
               <li key={p.slug} className={visible.has(p.slug) ? "" : "hidden"}>
                 <PackageGridCard pkg={p} />

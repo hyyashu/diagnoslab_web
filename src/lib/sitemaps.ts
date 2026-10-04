@@ -1,10 +1,9 @@
-import { getTestSlugs, getPackageSlugs, areas } from "@/lib/catalog";
+import { getTestSlugs, getPackageSlugs, areas, pregnancyScans } from "@/lib/catalog";
+import { SITE_URL } from "@/lib/schema";
 
 /* The site's sitemaps, split by section so Search Console reports indexing
    for each one separately. /sitemap.xml is an index pointing at these; each
    is served by a static route handler under src/app/sitemap-<name>.xml/. */
-
-const BASE = "https://diagnoslab.in";
 
 type ChangeFrequency = "daily" | "weekly" | "monthly" | "yearly";
 
@@ -16,7 +15,7 @@ type Entry = {
 
 /* trailingSlash is on, so every page lives at /path/; listing /path would
    send crawlers through a 301 for each URL. */
-const absolute = (path: string) => `${BASE}${path.replace(/\/?$/, "/")}`;
+const absolute = (path: string) => `${SITE_URL}${path.replace(/\/?$/, "/")}`;
 
 const page = (
   path: string,
@@ -28,6 +27,7 @@ export const sitemaps = {
   main: (): Entry[] => [
     page("/", "weekly", 1),
     page("/book-a-test", "monthly", 0.9),
+    page("/services", "monthly", 0.8),
     page("/contact-us", "yearly", 0.7),
     page("/aboutUs", "yearly", 0.6),
     page("/corporate", "monthly", 0.6),
@@ -40,6 +40,7 @@ export const sitemaps = {
   ],
   radiology: (): Entry[] => [
     page("/ultrasound-in-jamshedpur", "monthly", 0.9),
+    ...pregnancyScans.map((s) => page(`/ultrasound-in-jamshedpur/${s.slug}`, "monthly", 0.8)),
     page("/radiology", "monthly", 0.8),
     page("/xray", "monthly", 0.8),
     page("/ecg", "monthly", 0.8),
@@ -52,7 +53,7 @@ export const sitemaps = {
 
 export type SitemapName = keyof typeof sitemaps;
 
-export const sitemapUrl = (name: SitemapName) => `${BASE}/sitemap-${name}.xml`;
+export const sitemapUrl = (name: SitemapName) => `${SITE_URL}/sitemap-${name}.xml`;
 
 const escapeXml = (value: string) =>
   value

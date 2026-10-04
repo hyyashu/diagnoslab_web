@@ -23,12 +23,12 @@ export default function PatientReviews({
       href={GOOGLE_REVIEWS_HREF}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="4.9 out of 5 from 3,000+ Google reviews"
       className="flex shrink-0 flex-col items-end gap-0.5 md:flex-row md:items-center md:gap-3.5 md:rounded-[20px] md:border md:border-dl-line md:bg-white md:px-[22px] md:py-4"
     >
       <span className="flex items-center gap-[5px]">
         <Star className="size-4 text-dl-star md:hidden" fill="currentColor" aria-hidden />
         <span className="font-display text-[22px] font-extrabold text-dl-ink md:text-[40px] md:tracking-[-0.04em]">4.9</span>
+        <span className="sr-only"> out of 5 from</span>
       </span>
       <span className="flex flex-col gap-1">
         <span className="hidden gap-[3px] text-dl-star md:flex" aria-hidden>
@@ -38,6 +38,7 @@ export default function PatientReviews({
         </span>
         <span className="text-[11.5px] text-dl-muted md:text-[13px] md:text-dl-ink-2">
           <span className="md:hidden">3,000+ reviews</span>
+          <span className="sr-only md:hidden"> on Google</span>
           <span className="hidden md:inline">3,000+ Google reviews</span>
         </span>
       </span>

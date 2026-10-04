@@ -86,7 +86,7 @@ export default function TestBrowser({ tests }: { tests: BrowserTest[] }) {
         {filtered.length === 0 ? (
           <p className="py-16 text-center text-dl-muted">No tests found matching your search.</p>
         ) : (
-          <ul className="grid gap-3 md:grid-cols-2 md:gap-5 lg:grid-cols-3">
+          <ul className="grid grid-cols-[minmax(0,1fr)] gap-3 md:grid-cols-2 md:gap-5 lg:grid-cols-3">
             {tests.map((t) => (
               <li key={t.slug} className={visible.has(t.slug) ? "" : "hidden"}>
                 <LabTestCard test={t} variant="catalog" categoryLabel={displayCategory(t.category)} />
