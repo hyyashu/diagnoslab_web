@@ -29,7 +29,7 @@ export function PackageBookButton({ pkg, className }: { pkg: ListingPackage; cla
         additionalSourceData: leadMeta({ kind: "package", ...pkg }),
       }}
     >
-      Book now
+      Book
       <ArrowRight className="size-4" aria-hidden />
     </BookButton>
   );

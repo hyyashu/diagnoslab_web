@@ -35,18 +35,26 @@ export default function ContactSheet({ isOpen, onClose, topic: initialTopic = "B
     if (!isOpen) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    // Hides the chat and call/WhatsApp buttons (see globals.css).
+    document.body.dataset.sheetOpen = "";
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = prev;
+      delete document.body.dataset.sheetOpen;
       window.removeEventListener("keydown", onKey);
     };
   }, [isOpen, onClose]);
 
+  const viewport = useKeyboardViewport(isOpen);
+
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-end justify-center md:items-center md:p-6">
+    <div
+      className="fixed inset-x-0 top-0 z-[100] flex h-dvh items-end justify-center md:items-center md:p-6"
+      style={viewport}
+    >
       <div
         className="animate-fade-in absolute inset-0 bg-dl-ink/55 backdrop-blur-[4px]"
         onClick={onClose}
@@ -64,8 +72,10 @@ function Sheet({ onClose, initialTopic, item, sourceData }: SheetProps) {
   const [topic, setTopic] = useState<ContactTopic>(initialTopic);
   const { nameInput, phoneInput, nameError, phoneError, submitting, submitted, error, handleSubmit } = useLeadForm();
 
+  // Desktop only: on phones the keyboard would cover the sheet before
+  // anyone has seen it.
   useEffect(() => {
-    nameRef.current?.focus({ preventScroll: true });
+    if (window.matchMedia("(min-width: 48rem)").matches) nameRef.current?.focus({ preventScroll: true });
   }, []);
 
   const homeCollection = topic === "Home collection";
@@ -83,7 +93,13 @@ function Sheet({ onClose, initialTopic, item, sourceData }: SheetProps) {
       role="dialog"
       aria-modal="true"
       aria-labelledby={titleId}
-      className="animate-sheet-up md:animate-fade-in relative flex w-full flex-col gap-3.5 rounded-t-[26px] bg-white px-5 pt-2.5 shadow-[0_-10px_40px_rgba(22,24,29,0.2)] md:max-w-[440px] md:rounded-[26px] md:p-7 md:shadow-[0_20px_60px_rgba(22,24,29,0.25)]"
+      onFocus={(e) => {
+        // Once the keyboard has opened and the sheet has shrunk, bring the
+        // field being typed in back into view.
+        const field = e.target;
+        if (field.matches("input, select, textarea")) setTimeout(() => field.scrollIntoView({ block: "center" }), 300);
+      }}
+      className="animate-sheet-up md:animate-fade-in relative flex max-h-full w-full flex-col gap-3.5 overflow-y-auto overscroll-contain rounded-t-[26px] bg-white px-5 pt-2.5 shadow-[0_-10px_40px_rgba(22,24,29,0.2)] md:max-w-[440px] md:rounded-[26px] md:p-7 md:shadow-[0_20px_60px_rgba(22,24,29,0.25)]"
       style={{ paddingBottom: "calc(1.5rem + env(safe-area-inset-bottom, 0px))" }}
     >
       <div className="flex justify-center md:hidden" aria-hidden>
@@ -234,4 +250,28 @@ function Sheet({ onClose, initialTopic, item, sourceData }: SheetProps) {
       )}
     </div>
   );
+}
+
+/* iOS opens the keyboard over the page without resizing it, so a sheet
+   pinned to the bottom of the screen ends up behind the keyboard. While the
+   sheet is open this pins its overlay to the visible part of the screen
+   (the visual viewport) instead. */
+function useKeyboardViewport(active: boolean) {
+  const [style, setStyle] = useState<{ top: number; height: number }>();
+
+  useEffect(() => {
+    const vv = window.visualViewport;
+    if (!active || !vv) return;
+    const update = () => setStyle({ top: vv.offsetTop, height: vv.height });
+    update();
+    vv.addEventListener("resize", update);
+    vv.addEventListener("scroll", update);
+    return () => {
+      vv.removeEventListener("resize", update);
+      vv.removeEventListener("scroll", update);
+      setStyle(undefined);
+    };
+  }, [active]);
+
+  return style;
 }

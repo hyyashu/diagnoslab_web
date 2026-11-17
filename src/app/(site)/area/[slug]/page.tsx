@@ -13,7 +13,8 @@ import ServicesStrip from "../components/servicesStrip";
 import FeaturedTests from "@/components/sections/featuredTests";
 import FeaturedPackages from "@/components/sections/featuredPackages";
 import { areaFaq, centreFor } from "../content";
-import { ORG_REF, breadcrumbSchema, pageUrl } from "@/lib/schema";
+import { areaDescription } from "@/lib/metaDescription";
+import { ORG_REF, breadcrumbSchema, pageUrl, ogDefaults } from "@/lib/schema";
 
 
 export function generateStaticParams() {
@@ -29,14 +30,14 @@ export async function generateMetadata({
   const area = areas.find((a) => a.slug === slug);
 
   if (!area) {
-    return { title: { absolute: "Area Not Found | Diagnos Lab" } };
+    return { title: "Area Not Found" };
   }
 
-  const title = `Blood Test in ${area.name}, Jamshedpur | Diagnos Lab`;
-  const description = `Book blood tests, ultrasound, ECG, X-Ray, and health packages in ${area.name}, Jamshedpur at Diagnos Lab. Home sample collection available in ${area.name} with same-day digital reports from our Sakchi lab.`;
+  const title = `Blood Test in ${area.name}, Jamshedpur`;
+  const description = areaDescription({ name: area.name, hasCentre: centreFor(area).hasCentre });
 
   return {
-    title: { absolute: title },
+    title,
     description,
     keywords: [
       `blood test in ${area.name}`,
@@ -50,6 +51,7 @@ export async function generateMetadata({
       canonical: pageUrl(`/area/${area.slug}/`),
     },
     openGraph: {
+      ...ogDefaults,
       title,
       description,
       url: pageUrl(`/area/${area.slug}/`),

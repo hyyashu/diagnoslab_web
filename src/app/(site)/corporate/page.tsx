@@ -7,12 +7,12 @@ import FaqCards from "@/components/sections/faqCards";
 import PatientReviews from "@/components/sections/patientReviews";
 import FaqJsonLd from "@/components/seo/faqJsonLd";
 import { generalFaq } from "@/lib/faq";
-import { pageUrl } from "@/lib/schema";
+import { pageUrl, ogDefaults } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: { absolute: "Corporate Health Testing in Jamshedpur | Diagnos Lab" },
+  title: "Corporate Health Testing in Jamshedpur",
   description:
-    "Partner with Diagnos Lab for corporate wellness and employee health check programmes in Jamshedpur. Flexible on-site and in-lab testing for companies in Jharkhand.",
+    "Corporate wellness and employee health checks from Diagnos Lab, Jamshedpur. On-site camps or in-lab testing for companies across Jharkhand.",
   keywords: [
     "Corporate Health Checkup Jamshedpur",
     "Employee Health Testing Jamshedpur",
@@ -24,7 +24,8 @@ export const metadata: Metadata = {
     canonical: pageUrl("/corporate/"),
   },
   openGraph: {
-    title: "Corporate Health Testing in Jamshedpur | Diagnos Lab",
+    ...ogDefaults,
+    title: "Corporate Health Testing in Jamshedpur",
     description:
       "Employee health check and corporate wellness programmes at Diagnos Lab, Jamshedpur.",
     url: pageUrl("/corporate/"),

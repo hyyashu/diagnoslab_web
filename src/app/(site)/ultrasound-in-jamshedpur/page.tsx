@@ -12,14 +12,12 @@ import PregnancyScans from "./components/pregnancyScans";
 import { featuredScan, pregnancyScans, relatedServices, scanTypes, whyPoints } from "./content";
 import { ultrasoundFaq } from "@/lib/faq";
 import { ULTRASOUND_HOURS_DISPLAY } from "@/lib/contact";
-import { ORG_REF, breadcrumbSchema, pageUrl } from "@/lib/schema";
+import { ORG_REF, breadcrumbSchema, pageUrl, ogDefaults } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: {
-    absolute: "Ultrasound (USG) in Sakchi, Jamshedpur | Diagnos Lab",
-  },
+  title: "Ultrasound (USG) in Sakchi, Jamshedpur",
   description:
-    "Ultrasound by MD Radiology radiologists, incl. a female radiologist, at Diagnos Lab, Sakchi, Jamshedpur. NT, growth, Doppler, abdomen & pelvis scans. Mon–Sat.",
+    "Ultrasound by MD radiologists, including a female radiologist, at Diagnos Lab, Sakchi, Jamshedpur. NT, growth, Doppler, abdomen and pelvis scans, Mon–Sat.",
   keywords: [
     "Ultrasound in Jamshedpur",
     "USG in Jamshedpur",
@@ -37,11 +35,11 @@ export const metadata: Metadata = {
     canonical: pageUrl("/ultrasound-in-jamshedpur/"),
   },
   openGraph: {
-    title: "Diagnos Lab | Book Ultrasound (USG) in Jamshedpur",
+    ...ogDefaults,
+    title: "Book Ultrasound (USG) in Jamshedpur",
     description:
       "Book ultrasound (USG) at Diagnos Lab in Jamshedpur. Safe, radiation-free imaging for abdomen, pelvis, pregnancy, thyroid, and more. Reports in 1–2 hours.",
     url: pageUrl("/ultrasound-in-jamshedpur/"),
-    images: ["/images/diagnoslogo.avif"],
   },
 };
 

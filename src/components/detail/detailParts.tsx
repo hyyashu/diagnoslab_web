@@ -149,7 +149,7 @@ function PriceBlock({ item, discount }: { item: BookingItem; discount: number })
 function BookingInfo({ reportLine }: { reportLine: string }) {
   const benefits: { icon: LucideIcon; text: string }[] = [
     { icon: MessageCircle, text: reportLine },
-    { icon: BadgeCheck, text: "Accurate diagnostics since 2010" },
+    { icon: BadgeCheck, text: "Accurate diagnostics since 2009" },
   ];
   return (
     <>
@@ -157,7 +157,7 @@ function BookingInfo({ reportLine }: { reportLine: string }) {
         <CalendarClock className="size-5 shrink-0 text-dl-red" aria-hidden />
         <span className="flex flex-col gap-0.5">
           <span className="text-xs font-medium text-dl-muted">Home collection</span>
-          <span className="text-[14.5px] font-bold text-dl-ink">Every day, from 6:00 AM</span>
+          <span className="text-[14.5px] font-bold text-dl-ink">Every day, from 6 AM</span>
         </span>
       </div>
       <ul className="flex flex-col gap-3">
@@ -201,7 +201,7 @@ export function BookingAside({ item, discount, reportLine, kind, children }: Boo
             item={item}
             className="flex h-[52px] items-center justify-center gap-2 rounded-[14px] bg-dl-red text-base font-semibold text-white shadow-[0_8px_20px_rgba(217,45,39,0.25)] transition-colors hover:bg-dl-red-dark"
           >
-            Book now
+            Book
             <ArrowRight className="size-[18px]" aria-hidden />
           </SheetButton>
           <SheetButton

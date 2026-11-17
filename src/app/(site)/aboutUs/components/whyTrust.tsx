@@ -11,9 +11,9 @@ const reasons: { icon: LucideIcon; title: string; mobileTitle: string; text: str
   },
   {
     icon: Star,
-    title: "4.9-star Google rating",
-    mobileTitle: "4.9-star Google rating, 3,000+ reviews",
-    text: "Rated by 3,000+ patients for care, accuracy and speed.",
+    title: "4.9 Google rating",
+    mobileTitle: "4.9 Google rating, 3,000+ Google reviews",
+    text: "From 3,000+ Google reviews, for care, accuracy and speed.",
   },
   {
     icon: Microscope,

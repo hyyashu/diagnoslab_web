@@ -9,15 +9,15 @@ import TrustBand from "@/components/home/trustBand";
 import FindUsAreas from "@/components/sections/findUsAreas";
 import PatientReviews from "@/components/sections/patientReviews";
 import JsonLd from "@/components/seo/jsonLd";
-import { BUSINESS_TYPE } from "@/lib/contact";
+import { BUSINESS_TYPE, PHONE_DISPLAY } from "@/lib/contact";
 import FaqJsonLd from "@/components/seo/faqJsonLd";
 import FAQAccordion from "@/components/sections/faq";
-import { ORG_ID, SITE_URL } from "@/lib/schema";
+import { ORG_ID, SITE_URL, ogDefaults } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: { absolute: "Diagnos Lab Jamshedpur | Blood Test, Ultrasound & Home Collection" },
+  title: "Blood Test, Ultrasound & Home Collection in Jamshedpur",
   description:
-    "Jamshedpur's top-rated diagnostic lab in Sakchi. Blood tests, ultrasound by female radiologist, ECG & X-Ray. Home sample collection across all areas. Same-day digital reports. Call 8404802214.",
+    `Jamshedpur's top-rated diagnostic lab in Sakchi: blood tests, ultrasound by a female radiologist, ECG, X-ray. Home collection from 6 AM. Call ${PHONE_DISPLAY}.`,
   keywords: [
     "Blood Test in Jamshedpur",
     "Diagnostic Center Jamshedpur",
@@ -32,7 +32,8 @@ export const metadata: Metadata = {
     canonical: SITE_URL,
   },
   openGraph: {
-    title: "Diagnos Lab | Blood Test, Ultrasound & Radiology in Jamshedpur",
+    ...ogDefaults,
+    title: "Blood Test, Ultrasound & Radiology in Jamshedpur",
     description:
       "Top-rated diagnostic centre in Sakchi, Jamshedpur. Blood tests, USG, ECG, X-Ray, and health packages with home collection.",
     url: SITE_URL,

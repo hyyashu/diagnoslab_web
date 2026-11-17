@@ -5,16 +5,17 @@ import { shell } from "@/components/ui/shell";
 import { PHONE_DISPLAY, PHONE_HREF } from "@/lib/contact";
 import PolicyNav from "./components/policyNav";
 import { LAST_UPDATED, inShort, privacyIntro, privacySections } from "./content";
-import { pageUrl } from "@/lib/schema";
+import { pageUrl, ogDefaults } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: { absolute: "Privacy Policy | Diagnos Lab Jamshedpur" },
+  title: "Privacy Policy",
   description:
     "How Diagnos Lab, Jamshedpur handles your samples, your data and your reports: what we collect, who we share it with, how long we keep it and your rights.",
   alternates: {
     canonical: pageUrl("/policy/"),
   },
   openGraph: {
+    ...ogDefaults,
     url: pageUrl("/policy/"),
   },
   robots: {

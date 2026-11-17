@@ -1,6 +1,7 @@
 import JsonLd from "@/components/seo/jsonLd";
 import { BUSINESS_TYPE, PHONE_E164, POSTAL_ADDRESS } from "@/lib/contact";
-import { ORG_ID, SITE_URL, pageUrl } from "@/lib/schema";
+import { OG_IMAGE, ORG_ID, SITE_URL, pageUrl } from "@/lib/schema";
+import { areas } from "@/lib/catalog";
 import HomeCollectionJsonLd from "@/components/seo/homeCollectionJsonLd";
 import Navbar from "@/components/layout/navbar";
 import FloatingCTA from "@/components/layout/floatingCTA";
@@ -16,8 +17,8 @@ const localBusinessSchema = {
   name: "Diagnos Lab",
   alternateName: "Diagno Labs Jamshedpur",
   url: SITE_URL,
-  logo: pageUrl("/images/diagnoslogo.avif"),
-  image: pageUrl("/images/diagnoslogo.avif"),
+  logo: pageUrl("/images/diagnoslogo.png"),
+  image: pageUrl(OG_IMAGE.url),
   description:
     "Diagnos Lab is a top-rated diagnostic centre in Sakchi, Jamshedpur offering blood tests, ultrasound, ECG, X-Ray, PFT, and health packages with home sample collection.",
   telephone: PHONE_E164,
@@ -57,20 +58,8 @@ const localBusinessSchema = {
     "https://maps.google.com/?cid=5050796909999792755",
     "https://www.instagram.com/diagnoslab.in/",
   ],
-  areaServed: [
-    "Jamshedpur",
-    "Sakchi",
-    "Bistupur",
-    "Jugsalai",
-    "Adityapur",
-    "Mango",
-    "Kadma",
-    "Agrico",
-    "Golmuri",
-    "Telco",
-    "Baridih",
-    "Sonari",
-  ],
+  /* Every area in areasServed.json, so the schema matches the area pages. */
+  areaServed: ["Jamshedpur", ...areas.map((area) => area.name)],
   medicalSpecialty: ["Pathology", "Radiology", "Cardiology"],
   availableService: [
     { "@type": "MedicalTest", name: "Blood Test" },

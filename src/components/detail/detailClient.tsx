@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useState, type ReactNode } from "react";
+import { useEffect, useId, useState, type ReactNode } from "react";
 import { ArrowRight, ChevronDown, ListChecks, MessageCircle, MessageSquareText, Minus, PhoneCall, Plus, UserRound } from "lucide-react";
 import ContactSheet from "@/components/forms/contactSheet";
 import { FieldError, leadIntent, topicValue, useLeadForm } from "@/components/forms/useLeadForm";
@@ -80,7 +80,7 @@ export function DetailFaq({ items }: { items: FaqItem[] }) {
   );
 }
 
-/* Opens the contact sheet for this package; Book now and Enquire both use it. */
+/* Opens the contact sheet for this package; Book and Enquire both use it. */
 export function SheetButton({ item, className, children, label }: { item: BookingItem; className: string; children: ReactNode; label?: string }) {
   const [open, setOpen] = useState(false);
   return (
@@ -100,6 +100,14 @@ export function SheetButton({ item, className, children, label }: { item: Bookin
 
 /* DL.pen "Sticky Booking Bar" (phones). */
 export function DetailStickyBar({ item, discount }: { item: BookingItem; discount: number }) {
+  // Lifts the chat button above the bar (see globals.css).
+  useEffect(() => {
+    document.body.dataset.stickyBar = "";
+    return () => {
+      delete document.body.dataset.stickyBar;
+    };
+  }, []);
+
   return (
     <div
       className="fixed inset-x-0 bottom-0 z-40 flex items-center gap-2.5 border-t border-dl-line bg-white px-4 pt-3 shadow-[0_-8px_24px_rgba(22,24,29,0.06)] md:hidden"
@@ -118,7 +126,7 @@ export function DetailStickyBar({ item, discount }: { item: BookingItem; discoun
         item={item}
         className="flex h-12 shrink-0 items-center justify-center gap-2 rounded-[14px] bg-dl-red px-5 text-[15px] font-semibold text-white shadow-[0_8px_20px_rgba(217,45,39,0.25)]"
       >
-        Book now
+        Book
         <ArrowRight className="size-[18px]" aria-hidden />
       </SheetButton>
     </div>

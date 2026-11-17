@@ -4,7 +4,7 @@ import { shell } from "@/components/ui/shell";
 
 const stats = [
   { value: "15+", label: "Years of diagnostic excellence", mobileLabel: "Years of excellence", red: true },
-  { value: "4.9★", label: "Google rating, 3,000+ reviews", mobileLabel: "Google rating", red: false },
+  { value: "4.9", label: "3,000+ Google reviews", mobileLabel: "Google rating", red: false },
   { value: "3", label: "Centres: Sakchi, Jugsalai, Adityapur", mobileLabel: "Walk-in centres", red: true },
   { value: "Same day", label: "Digital reports on most tests", mobileLabel: "Digital reports", red: false },
 ];
@@ -59,7 +59,7 @@ export default function AboutHero() {
                 <span className="font-display text-base font-extrabold text-dl-ink md:text-lg">
                   4.9<span className="hidden md:inline"> on Google</span>
                 </span>
-                <span className="text-xs text-dl-muted md:text-[13px]">3,000+ <span className="md:hidden">Google</span><span className="hidden md:inline">patient</span> reviews</span>
+                <span className="text-xs text-dl-muted md:text-[13px]">3,000+ Google reviews</span>
               </span>
             </div>
           </div>

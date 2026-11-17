@@ -1,4 +1,5 @@
 import JsonLd from "@/components/seo/jsonLd";
+import { PHONE_DISPLAY } from "@/lib/contact";
 
 const howToSchema = {
   "@context": "https://schema.org",
@@ -12,7 +13,7 @@ const howToSchema = {
       "@type": "HowToStep",
       position: 1,
       name: "Book Your Test",
-      text: "Call or WhatsApp +91 8404802214, or fill the online form on diagnoslab.in. Choose your tests or health package.",
+      text: `Call or WhatsApp ${PHONE_DISPLAY}, or fill the online form on diagnoslab.in. Choose your tests or health package.`,
     },
     {
       "@type": "HowToStep",

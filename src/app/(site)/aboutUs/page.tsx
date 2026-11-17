@@ -8,14 +8,12 @@ import PatientReviews from "@/components/sections/patientReviews";
 import FaqCards from "@/components/sections/faqCards";
 import FaqJsonLd from "@/components/seo/faqJsonLd";
 import { generalFaq } from "@/lib/faq";
-import { pageUrl } from "@/lib/schema";
+import { pageUrl, ogDefaults } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: {
-    absolute: "About Diagnos Lab | Diagnostic Centre in Jamshedpur Since 2009",
-  },
+  title: "About Us | Diagnostic Centre in Jamshedpur Since 2009",
   description:
-    "Learn about Diagnos Lab, Jamshedpur's trusted diagnostic centre for 15+ years. NABL-quality testing, 4.9-star Google rating, and a patient-first team in Sakchi.",
+    "Diagnos Lab, Sakchi: Jamshedpur's trusted diagnostic centre since 2009. NABL and ISO certified, rated 4.9 from 3,000+ Google reviews.",
   keywords: [
     "About Diagnos Lab",
     "Best Diagnostic Center Jamshedpur",
@@ -27,9 +25,10 @@ export const metadata: Metadata = {
     canonical: pageUrl("/aboutUs/"),
   },
   openGraph: {
-    title: "About Diagnos Lab | Trusted Diagnostic Centre in Jamshedpur",
+    ...ogDefaults,
+    title: "About Us | Trusted Diagnostic Centre in Jamshedpur",
     description:
-      "15+ years of diagnostic excellence in Jamshedpur. 4.9-star rating, in-house pathologist, same-day reports.",
+      "15+ years of diagnostic excellence in Jamshedpur. A 4.9 rating from 3,000+ Google reviews, in-house pathologist, same-day reports.",
     url: pageUrl("/aboutUs/"),
   },
 };

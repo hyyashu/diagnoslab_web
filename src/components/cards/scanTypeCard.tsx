@@ -72,7 +72,7 @@ export default function ScanTypeCard({
             additionalSourceData: leadMeta({ kind: "scan", title }),
           }}
         >
-          Book now
+          Book
           <ArrowRight className="size-4" aria-hidden />
         </BookButton>
       </div>

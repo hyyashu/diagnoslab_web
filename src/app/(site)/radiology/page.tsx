@@ -8,12 +8,13 @@ import FAQAccordion from "@/components/sections/faq";
 import FaqJsonLd from "@/components/seo/faqJsonLd";
 import { radiologyFaq } from "@/lib/faq";
 import { scanServices, whyPoints } from "./content";
-import { pageUrl } from "@/lib/schema";
+import { pageUrl, ogDefaults } from "@/lib/schema";
+import { PHONE_DISPLAY } from "@/lib/contact";
 
 export const metadata: Metadata = {
-  title: { absolute: "Radiology in Jamshedpur | Ultrasound, X-Ray, ECG, Echo | Diagnos Lab" },
+  title: "Radiology in Jamshedpur | Ultrasound, X-Ray, ECG, Echo",
   description:
-    "Ultrasound by female radiologist, digital X-Ray, ECG, Echocardiography & PFT at Diagnos Lab, Sakchi. Same-day reports. Open 7:30 AM–7:30 PM (ultrasound Mon–Sat). Call 8404802214.",
+    `Ultrasound by a female radiologist, digital X-ray, ECG, 2D ECHO and PFT at Diagnos Lab, Sakchi. Reports in 1–2 hours. Ultrasound Mon–Sat.`,
   keywords: [
     "Radiology Services in Jamshedpur",
     "Ultrasound in Jamshedpur",
@@ -25,11 +26,11 @@ export const metadata: Metadata = {
     canonical: pageUrl("/radiology/"),
   },
   openGraph: {
-    title: "Diagnos Lab | Radiology Services in Jamshedpur",
+    ...ogDefaults,
+    title: "Radiology Services in Jamshedpur",
     description:
       "Book radiology services at Diagnos Lab in Jamshedpur: Ultrasound, X-Ray, ECG, and PFT with fast reporting and experienced specialists.",
     url: pageUrl("/radiology/"),
-    images: ["/images/diagnoslogo.avif"],
   },
 };
 

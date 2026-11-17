@@ -3,10 +3,10 @@ import { Clock3, ShieldCheck, Star } from "lucide-react";
 import JsonLd from "@/components/seo/jsonLd";
 import ScanServicePage from "@/components/sections/scanServicePage";
 import { xrayFaq } from "@/lib/faq";
-import { ORG_REF, breadcrumbSchema, pageUrl } from "@/lib/schema";
+import { ORG_REF, breadcrumbSchema, pageUrl, ogDefaults } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: { absolute: "Diagnos Lab | Book X-Ray in Jamshedpur" },
+  title: "Book X-Ray in Jamshedpur",
   description:
     "Book digital X-Ray at Diagnos Lab in Jamshedpur. Fast, low-radiation imaging for bones, chest, spine, and joints with reports in 1–2 hours.",
   keywords: [
@@ -21,11 +21,11 @@ export const metadata: Metadata = {
     canonical: pageUrl("/xray/"),
   },
   openGraph: {
-    title: "Diagnos Lab | Book X-Ray in Jamshedpur",
+    ...ogDefaults,
+    title: "Book X-Ray in Jamshedpur",
     description:
       "Book digital X-Ray at Diagnos Lab in Jamshedpur. Fast, low-radiation imaging for bones, chest, spine, and joints with reports in 1–2 hours.",
     url: pageUrl("/xray/"),
-    images: ["/images/diagnoslogo.avif"],
   },
 };
 

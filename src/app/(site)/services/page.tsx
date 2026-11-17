@@ -9,13 +9,14 @@ import FAQAccordion from "@/components/sections/faq";
 import FaqJsonLd from "@/components/seo/faqJsonLd";
 import JsonLd from "@/components/seo/jsonLd";
 import { serviceGroups, serviceOptions, servicesFaq, servicesWhyPoints } from "./content";
-import { breadcrumbSchema, pageUrl } from "@/lib/schema";
+import { breadcrumbSchema, pageUrl, ogDefaults } from "@/lib/schema";
+import { PHONE_DISPLAY } from "@/lib/contact";
 
 const description =
-  "All services at Diagnos Lab, Sakchi: blood tests, health packages, home sample collection, ultrasound, pregnancy scans, digital X-Ray, ECG, 2D ECHO and PFT. Same-day reports. Call 8404802214.";
+  `All services at Diagnos Lab, Sakchi: blood tests, health packages, home collection, ultrasound, pregnancy scans, X-ray, ECG, 2D ECHO and PFT.`;
 
 export const metadata: Metadata = {
-  title: { absolute: "Our Services | Lab Tests, Ultrasound, X-Ray, ECG in Jamshedpur | Diagnos Lab" },
+  title: "Our Services | Lab Tests, Ultrasound, X-Ray, ECG in Jamshedpur",
   description,
   keywords: [
     "Diagnostic Services in Jamshedpur",
@@ -29,10 +30,10 @@ export const metadata: Metadata = {
     canonical: pageUrl("/services/"),
   },
   openGraph: {
-    title: "Diagnos Lab | Our Services in Jamshedpur",
+    ...ogDefaults,
+    title: "Our Services in Jamshedpur",
     description,
     url: pageUrl("/services/"),
-    images: ["/images/diagnoslogo.avif"],
   },
 };
 

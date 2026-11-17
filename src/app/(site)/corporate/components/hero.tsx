@@ -5,7 +5,7 @@ import CorporateForm from "./corporateForm";
 
 const stats = [
   { value: "15+", label: "Years in Jamshedpur", mobileLabel: "Years" },
-  { value: "4.9★", label: "Google rating", mobileLabel: "Google rating" },
+  { value: "4.9", label: "3,000+ Google reviews", mobileLabel: "Google rating" },
   { value: "On-site", label: "Camps at your premises", mobileLabel: null },
   { value: "Same day", label: "Digital reports", mobileLabel: "Reports" },
 ];

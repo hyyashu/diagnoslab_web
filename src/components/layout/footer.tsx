@@ -49,10 +49,16 @@ const visit = [
   { icon: Mail, text: EMAIL, href: `mailto:${EMAIL}` },
 ];
 
-/* The design's list, in its order. The last five only fit on desktop. */
-const servedAreas = [
+/* Every area in areasServed.json: the design's order first (the first nine
+   fit on phones, the rest show on desktop), then any area added to the data
+   later, so the footer never drops one. */
+const featuredAreas = [
   "Sakchi", "Bistupur", "Sonari", "Kadma", "Mango", "Telco", "Golmuri", "Jugsalai", "Adityapur",
   "Dimna", "Baridih", "Birsanagar", "Agrico", "Parsudih",
+];
+const servedAreas = [
+  ...featuredAreas,
+  ...areas.map((a) => a.name).filter((name) => !featuredAreas.includes(name)),
 ];
 const areaSlug = new Map(areas.map((a) => [a.name, a.slug]));
 
@@ -91,7 +97,7 @@ export default function Footer() {
           <div className="flex flex-col gap-3.5 md:gap-[18px]">
             <Logo tone="dark" className="self-start" />
             <p className="text-[13px] leading-relaxed text-white/[0.88] md:text-sm">
-              Accurate diagnostics since 2010. Pathology, ultrasound, X-ray, ECG, ECHO and PFT under one roof in Jamshedpur.
+              Accurate diagnostics since 2009. Pathology, ultrasound, X-ray, ECG, ECHO and PFT under one roof in Jamshedpur.
             </p>
             <ul className="hidden gap-2 md:flex">
               {[

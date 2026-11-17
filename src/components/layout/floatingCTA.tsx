@@ -34,7 +34,7 @@ export default function FloatingCTA({
         {/* Call Button (Mobile Only) */}
         <button
           onClick={handleCall}
-          className="md:hidden flex items-center justify-center w-14 h-14 rounded-full bg-blue-600 text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300"
+          className="md:hidden flex items-center justify-center w-14 h-14 rounded-full bg-dl-red text-white hover:bg-dl-red-dark shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300"
           aria-label="Call"
         >
           <Phone className="w-6 h-6" fill="currentColor" />
@@ -43,7 +43,7 @@ export default function FloatingCTA({
         {/* WhatsApp Button */}
         <button
           onClick={handleWhatsApp}
-          className="flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300"
+          className="flex items-center justify-center w-14 h-14 rounded-full bg-dl-whatsapp text-white shadow-lg hover:shadow-xl hover:scale-105 active:scale-95 transition-all duration-300"
           aria-label="WhatsApp"
         >
           <svg

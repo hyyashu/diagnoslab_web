@@ -1,4 +1,4 @@
-import { ArrowRight, Zap } from "lucide-react";
+import { ArrowRight, Flame } from "lucide-react";
 import BookButton from "@/components/cards/bookButton";
 import SiteSearch from "@/components/search/siteSearch";
 import HeroImage from "@/components/home/heroImage";
@@ -49,8 +49,8 @@ export default function HomeHero() {
             />
 
             <p className="inline-flex w-fit items-center gap-1.5 rounded-full bg-white px-2.5 py-[5px] text-[10px] font-extrabold tracking-[0.11em] text-dl-red md:px-3 md:py-1.5 md:text-[11px]">
-              <Zap className="size-3 md:size-[13px]" aria-hidden />
-              LIMITED OFFER
+              <Flame className="size-3 md:size-[13px]" aria-hidden />
+              MOST BOOKED
             </p>
             <h2 className="font-display text-[19px] font-extrabold tracking-[-0.02em] md:text-[28px]">
               Full Body Checkup
@@ -86,7 +86,7 @@ export default function HomeHero() {
                   additionalSourceData: leadMeta({ kind: "package", ...offer }),
                 }}
               >
-                Book now
+                Book
                 <ArrowRight className="size-4" aria-hidden />
               </BookButton>
             </div>

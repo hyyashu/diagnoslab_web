@@ -13,12 +13,12 @@ import { getPackages } from "@/lib/catalog";
 import { packagesFaq } from "@/lib/faq";
 import PackageBrowser from "./components/packageBrowser";
 import { featured, leadOrder, toListing } from "./content";
-import { pageUrl } from "@/lib/schema";
+import { pageUrl, ogDefaults } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: { absolute: "Health Packages in Jamshedpur | Full Body Checkup | Diagnos Lab" },
+  title: "Health Packages in Jamshedpur | Full Body Checkup",
   description:
-    "Book affordable health checkup packages at Diagnos Lab in Jamshedpur. Full body checkup, thyroid profile, diabetes panel, cardiac profile, and more with home collection.",
+    "Health checkup packages at Diagnos Lab, Jamshedpur: full body, thyroid, diabetes, cardiac and more, with home sample collection.",
   keywords: [
     "Health Packages Jamshedpur",
     "Full Body Checkup Jamshedpur",
@@ -32,7 +32,8 @@ export const metadata: Metadata = {
     canonical: pageUrl("/packages/"),
   },
   openGraph: {
-    title: "Health Packages in Jamshedpur | Diagnos Lab",
+    ...ogDefaults,
+    title: "Health Packages in Jamshedpur",
     description:
       "Affordable full body checkup and health packages with home collection at Diagnos Lab, Jamshedpur.",
     url: pageUrl("/packages/"),

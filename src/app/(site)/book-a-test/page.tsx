@@ -10,12 +10,13 @@ import BookingSteps from "./components/bookingSteps";
 import PrescriptionBand from "./components/prescriptionBand";
 import Coverage from "./components/coverage";
 import { bookingFaq } from "./content";
-import { ORG_REF, breadcrumbSchema, pageUrl } from "@/lib/schema";
+import { ORG_REF, breadcrumbSchema, pageUrl, ogDefaults } from "@/lib/schema";
+import { PHONE_DISPLAY } from "@/lib/contact";
 
 export const metadata: Metadata = {
-  title: { absolute: "Book Blood Test in Jamshedpur | Home Collection | Diagnos Lab" },
+  title: "Book Blood Test in Jamshedpur | Home Collection",
   description:
-    "Book blood tests, ultrasound, ECG, X-Ray & health packages in Jamshedpur with home sample collection. Same-day digital reports. Call +91 8404802214.",
+    `Book blood tests, ultrasound, ECG, X-Ray & health packages in Jamshedpur with home sample collection. Same-day digital reports. Call ${PHONE_DISPLAY}.`,
   keywords: [
     "book blood test jamshedpur",
     "blood test at home jamshedpur",
@@ -29,7 +30,8 @@ export const metadata: Metadata = {
     canonical: pageUrl("/book-a-test/"),
   },
   openGraph: {
-    title: "Book Blood Test in Jamshedpur | Home Collection | Diagnos Lab",
+    ...ogDefaults,
+    title: "Book Blood Test in Jamshedpur | Home Collection",
     description:
       "Home sample collection across all Jamshedpur areas. Same-day reports.",
     url: pageUrl("/book-a-test/"),

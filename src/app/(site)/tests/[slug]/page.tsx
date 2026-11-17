@@ -11,6 +11,7 @@ import JsonLd from "@/components/seo/jsonLd";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ORG_REF, breadcrumbSchema, detailMeta, pageUrl } from "@/lib/schema";
+import { testDescription } from "@/lib/metaDescription";
 
 function toTitleCase(str: string) {
   return str.toLowerCase().replace(/\b\w/g, (c) => c.toUpperCase());
@@ -31,22 +32,18 @@ export async function generateMetadata({
   const test = data.tests.find((t) => t.Slug === slug);
 
   if (!test) {
-    return { title: { absolute: "Test Not Found | Diagnos Lab" } };
+    return { title: "Test Not Found" };
   }
 
   const name = toTitleCase(test.TestName);
-  const title = `${name} Test in Jamshedpur | Home Collection | Diagnos Lab`;
+  const title = `${name} Test in Jamshedpur | Home Collection`;
 
-  const pricePart =
-    test.DiscountedPrice > 0 ? ` at ₹${test.DiscountedPrice}` : "";
-  const fastingPart =
-    test.Fasting && test.Fasting.trim() ? ` Fasting: ${test.Fasting}.` : "";
-  const reportingPart =
-    test.Reporting && test.Reporting.trim()
-      ? ` Reports in ${test.Reporting}.`
-      : " Same-day digital reports.";
-
-  const description = `Book ${name} test in Jamshedpur${pricePart} at Diagnos Lab, Sakchi.${fastingPart}${reportingPart} Home sample collection available across all Jamshedpur areas.`;
+  const description = testDescription({
+    name: getTestBySlug(test.Slug)?.title ?? name,
+    price: test.DiscountedPrice,
+    fasting: test.Fasting,
+    reporting: test.Reporting,
+  });
 
   return detailMeta({
     path: `/tests/${test.Slug}/`,

@@ -3,10 +3,10 @@ import { Clock3, HeartPulse, Star } from "lucide-react";
 import JsonLd from "@/components/seo/jsonLd";
 import ScanServicePage from "@/components/sections/scanServicePage";
 import { ecgFaq } from "@/lib/faq";
-import { ORG_REF, breadcrumbSchema, pageUrl } from "@/lib/schema";
+import { ORG_REF, breadcrumbSchema, pageUrl, ogDefaults } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: { absolute: "Diagnos Lab | Book ECG in Jamshedpur" },
+  title: "Book ECG in Jamshedpur",
   description:
     "Book ECG at Diagnos Lab in Jamshedpur. Quick heart rhythm and electrical activity testing with reports in 1–2 hours.",
   keywords: [
@@ -21,11 +21,11 @@ export const metadata: Metadata = {
     canonical: pageUrl("/ecg/"),
   },
   openGraph: {
-    title: "Diagnos Lab | Book ECG in Jamshedpur",
+    ...ogDefaults,
+    title: "Book ECG in Jamshedpur",
     description:
       "Book ECG at Diagnos Lab in Jamshedpur. Quick heart rhythm and electrical activity testing with reports in 1–2 hours.",
     url: pageUrl("/ecg/"),
-    images: ["/images/diagnoslogo.avif"],
   },
 };
 

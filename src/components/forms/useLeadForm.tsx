@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { submitLeadForm, type LeadIntent } from "@/lib/api";
 import { attribution } from "@/lib/attribution";
-import { trackLead } from "@/lib/gtag";
+import { THANK_YOU_PATH, markLeadSubmitted } from "@/lib/leadConversion";
 import { normalizePhone, sanitizeName, validateName, validatePhone } from "@/lib/leadValidation";
 
 /* The one intent rule for every form: home collection asks for a visit;
@@ -83,8 +83,12 @@ export function useLeadForm() {
         setName("");
         setPhone("");
         setSubmitted(true);
-        trackLead();
         onSuccess?.();
+        /* The conversion is counted on the thank-you page (see
+           lib/leadConversion). The form's own "Thank you" shows while it
+           loads. */
+        markLeadSubmitted();
+        window.location.assign(THANK_YOU_PATH);
       } catch {
         setError("Something went wrong. Please try again.");
       } finally {

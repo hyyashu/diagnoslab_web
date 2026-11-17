@@ -10,6 +10,23 @@ export const pageUrl = (path: string) => `${SITE_URL}${path}`;
 export const ORG_ID = `${SITE_URL}/#organization`;
 export const ORG_REF = { "@id": ORG_ID };
 
+/* The share image (Open Graph and Twitter). A JPG because WhatsApp,
+   Facebook and X don't render AVIF previews. Next replaces a parent's whole
+   openGraph object when a page sets its own, so every page spreads
+   ogDefaults into its openGraph to keep the image, site name and locale. */
+export const OG_IMAGE = {
+  url: "/images/og-image.jpg",
+  width: 1200,
+  height: 630,
+  alt: "Diagnos Lab, diagnostic centre in Jamshedpur",
+};
+export const ogDefaults = {
+  siteName: "Diagnos Lab",
+  locale: "en_IN",
+  type: "website" as const,
+  images: [OG_IMAGE],
+};
+
 /* The ListItems of a breadcrumb trail. `path` is site-relative; "" is the
    home page. For a BreadcrumbList inside an @graph. */
 export const breadcrumbNode = (trail: [name: string, path: string][]) => ({
@@ -42,11 +59,11 @@ export function detailMeta({
 }): Metadata {
   const url = pageUrl(path);
   return {
-    title: { absolute: title },
+    title,
     description,
     keywords,
     alternates: { canonical: url },
-    openGraph: { title, description, url, type: "website" },
+    openGraph: { ...ogDefaults, title, description, url, type: "website" },
     robots: { index: true, follow: true },
   };
 }

@@ -52,8 +52,8 @@ const speechCtor = () =>
 const noopSubscribe = () => () => {};
 
 type SiteSearchProps = {
-  /* "hero": the large desktop bar with mic, Rx and Search buttons.
-     "header": the compact mobile field with an Rx pill. */
+  /* "hero": the large desktop bar with mic and Search buttons.
+     "header": the compact mobile field. */
   variant: "hero" | "header";
 };
 

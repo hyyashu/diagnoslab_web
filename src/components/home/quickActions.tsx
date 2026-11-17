@@ -35,6 +35,7 @@ export default function QuickActions() {
               <span className="hidden md:inline">Book home collection</span>
             </span>
             <span className={sub}>
+              <span className="md:hidden">From 6 AM daily</span>
               <span className="hidden md:inline">Slots from 6 AM, 7 days</span>
             </span>
           </span>

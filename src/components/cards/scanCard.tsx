@@ -33,7 +33,7 @@ export default function ScanCard({
   scan: ScanService;
   variant?: "featured" | "card";
 }) {
-  const book = (className: string, label = "Book now") => (
+  const book = (className: string, label = "Book") => (
     <BookButton
       className={className}
       form={{

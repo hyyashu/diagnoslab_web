@@ -13,7 +13,7 @@ import { shell } from "@/components/ui/shell";
 import { pregnancyScans } from "@/lib/catalog";
 import { ULTRASOUND_HOURS_DISPLAY } from "@/lib/contact";
 import ScanDetail from "../components/scanDetail";
-import { ORG_REF, breadcrumbNode, pageUrl } from "@/lib/schema";
+import { ORG_REF, breadcrumbNode, pageUrl, ogDefaults } from "@/lib/schema";
 
 const BASE = pageUrl("/ultrasound-in-jamshedpur/");
 
@@ -29,10 +29,10 @@ export async function generateMetadata({ params }: { params: Promise<{ scan: str
   if (!scan) return {};
   const url = `${BASE}${scan.slug}/`;
   return {
-    title: { absolute: scan.metaTitle },
+    title: scan.metaTitle,
     description: scan.metaDescription,
     alternates: { canonical: url },
-    openGraph: { title: scan.metaTitle, description: scan.metaDescription, url, images: ["/images/radiology/USG.avif"] },
+    openGraph: { ...ogDefaults, title: scan.metaTitle, description: scan.metaDescription, url },
   };
 }
 

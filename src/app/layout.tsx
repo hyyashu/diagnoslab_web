@@ -3,8 +3,9 @@ import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import Script from "next/script";
 import AdsTracking from "@/components/layout/adsTracking";
 import Tracking from "@/components/layout/tracking";
-import { SITE_URL, pageUrl } from "@/lib/schema";
+import { OG_IMAGE, SITE_URL, ogDefaults, pageUrl } from "@/lib/schema";
 import "./globals.css";
+import { PHONE_DISPLAY } from "@/lib/contact";
 
 /* Plus Jakarta Sans for headings, Inter for everything else, both
    self-hosted by next/font. The rupee sign lives in latin-ext, which loads
@@ -28,14 +29,22 @@ const inter = Inter({
   preload: false,
 });
 
+/* Titles: pages give only their own words ("Book ECG in Jamshedpur") and
+   these templates add " | Diagnos Lab", to the page title and the share
+   (Open Graph) title alike. Twitter sets no title or description, so Next
+   fills both from each page's Open Graph tags. Use `title: { absolute }`
+   only for a title that must not carry the brand. */
+const BRAND_TEMPLATE = "%s | Diagnos Lab";
+const DEFAULT_TITLE = "Blood Test, Ultrasound & Radiology in Jamshedpur | Diagnos Lab";
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Diagnos Lab | Blood Test, Ultrasound & Radiology in Jamshedpur",
-    template: "%s | Diagnos Lab",
+    default: DEFAULT_TITLE,
+    template: BRAND_TEMPLATE,
   },
   description:
-    "Jamshedpur's top-rated diagnostic lab in Sakchi. Blood tests, ultrasound by female radiologist, ECG & X-Ray. Home sample collection across all areas. Same-day digital reports. Call 8404802214.",
+    `Jamshedpur's top-rated diagnostic lab in Sakchi: blood tests, ultrasound by a female radiologist, ECG, X-ray. Home collection from 6 AM. Call ${PHONE_DISPLAY}.`,
   keywords: [
     "Blood Test in Jamshedpur",
     "Best Lab in Jamshedpur",
@@ -51,28 +60,15 @@ export const metadata: Metadata = {
     "Health Packages Jamshedpur",
   ],
   openGraph: {
-    title: "Diagnos Lab | Blood Test, Ultrasound & Radiology in Jamshedpur",
+    ...ogDefaults,
+    title: { default: DEFAULT_TITLE, template: BRAND_TEMPLATE },
     description:
       "Top-rated diagnostic centre in Sakchi, Jamshedpur. Blood tests, USG, ECG, X-Ray, and health packages with home collection.",
     url: SITE_URL,
-    siteName: "Diagnos Lab",
-    images: [
-      {
-        url: "/images/diagnoslogo.avif",
-        width: 1200,
-        height: 630,
-        alt: "Diagnos Lab – Diagnostic Centre in Jamshedpur",
-      },
-    ],
-    locale: "en_IN",
-    type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Diagnos Lab | Diagnostic Centre in Jamshedpur",
-    description:
-      "Book blood tests, ultrasound, ECG, and X-Ray at Diagnos Lab in Sakchi, Jamshedpur.",
-    images: ["/images/diagnoslogo.avif"],
+    images: [OG_IMAGE.url],
   },
   alternates: {
     canonical: SITE_URL,
@@ -96,7 +92,7 @@ export default function RootLayout({
         {/* ReplyBash chat widget. Loaded after the page is idle so it never
             competes with the LCP element. */}
         <Script
-          src="https://replybash.sitebackend.com/embed.js"
+          src="https://replybash.com/embed.js"
           data-agent-id="diagnoslab_RQQVD"
           // strategy="lazyOnload"
         />

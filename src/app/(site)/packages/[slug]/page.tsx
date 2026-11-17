@@ -12,6 +12,7 @@ import JsonLd from "@/components/seo/jsonLd";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ORG_REF, breadcrumbSchema, detailMeta, pageUrl } from "@/lib/schema";
+import { packageDescription } from "@/lib/metaDescription";
 
 export function generateStaticParams() {
   return data.packages.map((pkg) => ({
@@ -28,20 +29,18 @@ export async function generateMetadata({
   const pkg = data.packages.find((p) => p.Slug === slug);
 
   if (!pkg) {
-    return { title: { absolute: "Package Not Found | Diagnos Lab" } };
+    return { title: "Package Not Found" };
   }
 
-  const title = `${pkg.PackageName} Health Package in Jamshedpur | Diagnos Lab`;
+  const title = `${pkg.PackageName} Health Package in Jamshedpur`;
 
-  const pricePart =
-    pkg.DiscountedPrice > 0 ? ` at ₹${pkg.DiscountedPrice}` : "";
-  const parametersPart = pkg.ParametersCovered
-    ? ` Covers ${pkg.ParametersCovered}+ health parameters.`
-    : "";
-  const fastingPart =
-    pkg.Fasting && pkg.Fasting.trim() ? ` Fasting: ${pkg.Fasting}.` : "";
-
-  const description = `Book the ${pkg.PackageName} health checkup package in Jamshedpur${pricePart} at Diagnos Lab, Sakchi.${parametersPart}${fastingPart} Home sample collection available across all Jamshedpur areas.`;
+  const description = packageDescription({
+    name: pkg.PackageName,
+    price: pkg.DiscountedPrice,
+    parameters: pkg.ParametersCovered,
+    fasting: pkg.Fasting,
+    reporting: pkg.Reporting,
+  });
 
   return detailMeta({
     path: `/packages/${pkg.Slug}/`,
