@@ -58,7 +58,6 @@ export const packageDetails: Record<string, PackageDetails> = {
     introMobile: "A complete yearly screen covering 75 parameters across 12 health profiles, with one home sample collection.",
     sample: "Blood & urine",
     fasting: "10–12 hours",
-    report: "Within 24 hrs",
     profiles: [
       { name: "Complete blood count", examples: "Hemoglobin, RBC, WBC, platelets", count: 20, icon: Droplet },
       { name: "Liver function", examples: "SGOT, SGPT, bilirubin, ALP…", count: 11, icon: FlaskConical },
@@ -93,7 +92,7 @@ export const packageDetails: Record<string, PackageDetails> = {
       },
       {
         question: "Will I get all 75 reports together?",
-        answer: "Yes. All results come in one report on WhatsApp, usually within 24 hours of sample collection.",
+        answer: "Yes. All results come in one report on WhatsApp, usually the same day as sample collection.",
       },
       {
         question: "Can I add more tests to this package?",

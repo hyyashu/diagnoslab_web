@@ -3,7 +3,7 @@ import { ArrowRight, Clock3, Flame, TestTubes } from "lucide-react";
 import BookButton from "@/components/cards/bookButton";
 import { buttonClass } from "@/components/ui/button";
 import type { Package } from "@/lib/catalog";
-import { discountPct, rupees } from "@/lib/format";
+import { discountPct, reportLabel, rupees } from "@/lib/format";
 import { leadMeta } from "@/lib/leadMeta";
 
 /* DL.pen "Package Card". The audience line and the "includes" chips are
@@ -85,7 +85,7 @@ export default function CheckupPackageCard({ pkg, highlight = false }: { pkg: Ch
       <div className="flex items-center gap-4 text-[12.5px] font-medium text-dl-ink-2">
         <span className="inline-flex items-center gap-1.5">
           <Clock3 className="size-3.5 text-dl-muted" aria-hidden />
-          Reports in 24 hrs
+          {reportLabel(pkg.reporting)}
         </span>
         {parameters > 0 && (
           <span className="inline-flex items-center gap-1.5">

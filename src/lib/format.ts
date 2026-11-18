@@ -16,7 +16,7 @@ export const fastingLabel = (fasting: string) =>
   isNoFasting(fasting) ? "No fasting" : isOvernightFast(fasting) ? "Overnight fasting" : fasting;
 
 export const reportLabel = (reporting: string) => {
-  if (isSameDay(reporting)) return "Same-day report";
-  if (/next\s*day/i.test(reporting)) return "Next-day report";
-  return `Report in ${reporting.toLowerCase()}`;
+  if (isSameDay(reporting)) return "Same-day reports";
+  if (/next\s*day/i.test(reporting)) return "Next-day reports";
+  return `Reports in ${reporting.toLowerCase()}`;
 };

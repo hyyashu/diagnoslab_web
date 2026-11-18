@@ -14,7 +14,7 @@ import {
 } from "@/components/detail/detailParts";
 import { DetailStickyBar, EnquiryCard, ProfileList, type BookingItem } from "@/components/detail/detailClient";
 import { packagesFaq, type FaqItem } from "@/lib/faq";
-import { discountPct, isOvernightFast, isSameDay } from "@/lib/format";
+import { discountPct, isOvernightFast, isSameDay, reportLabel } from "@/lib/format";
 import type { PackageDetails } from "../details";
 
 /* DL.pen "Package Details". Packages the design doesn't write up get
@@ -113,7 +113,7 @@ function WhoShouldBook({ items }: { items?: string[] }) {
 
 export function PackageMain({ pkg, d, item }: { pkg: ListingPackage; d: ResolvedDetails; item: BookingItem }) {
   const discount = discountPct(pkg.price, pkg.originalPrice);
-  const reportLine = "Reports on WhatsApp within 24 hrs";
+  const reportLine = `${reportLabel(pkg.reporting)} on WhatsApp`;
   return (
     <>
       <DetailLayout aside={<BookingAside item={item} discount={discount} reportLine={reportLine} kind="package" />}>
