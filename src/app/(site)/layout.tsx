@@ -87,10 +87,7 @@ export default function SiteLayout({
       <Navbar />
       <main>
         {children}
-        <FloatingCTA
-          phoneNumber={PHONE_E164}
-          whatsappNumber={PHONE_E164}
-        />
+        <FloatingCTA />
       </main>
       <Footer />
     </>
