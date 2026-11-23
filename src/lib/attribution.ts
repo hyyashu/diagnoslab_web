@@ -10,11 +10,56 @@ const PARAMS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_con
 
 type Attribution = Record<string, string>;
 
-function read(): (Attribution & { captured_at?: string }) | null {
+/* Stored timestamps: India time in ISO form, e.g. "2026-11-23T14:43:05+05:30",
+   so Date.parse still reads them back for the 30-day expiry. */
+function istTimestamp(ms: number = Date.now()): string {
+  return new Date(ms + 5.5 * 60 * 60 * 1000).toISOString().replace(/\.\d+Z$/, "+05:30");
+}
+
+/* Timestamps as the lead message shows them: "23 Nov 2026, 3:03 PM". */
+export function istLabel(ms: number = Date.now()): string {
+  return new Intl.DateTimeFormat("en-IN", {
+    timeZone: "Asia/Kolkata",
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  })
+    .format(ms)
+    .replace(/\b(am|pm)\b/, (m) => m.toUpperCase());
+}
+
+/* The landing page as a path ("/", "/lp/blood-test-at-home/?utm_source=google"),
+   without the domain. Keeps the query string, which carries the campaign. */
+function currentPath(): string {
+  return window.location.pathname + window.location.search;
+}
+
+function toPath(url: string): string {
+  try {
+    const u = new URL(url, window.location.origin);
+    return u.origin === window.location.origin ? u.pathname + u.search : url;
+  } catch {
+    return url;
+  }
+}
+
+function read(): Attribution | null {
   try {
     const saved = JSON.parse(localStorage.getItem(KEY) ?? "null");
-    if (!saved || Date.now() - Date.parse(saved.captured_at) > MAX_AGE_MS) return null;
-    return saved;
+    if (!saved) return null;
+    /* Records saved before the rename call the first visit `captured_at`. */
+    const { captured_at, ...rest } = saved;
+    const firstVisit = rest.first_visit_at ?? captured_at;
+    if (!firstVisit || Date.now() - Date.parse(firstVisit) > MAX_AGE_MS) return null;
+    return {
+      ...rest,
+      /* Records saved before these changes hold the full URL. */
+      ...(rest.landing_page && { landing_page: toPath(rest.landing_page) }),
+      first_visit_at: rest.first_visit_at ?? istTimestamp(Date.parse(captured_at)),
+    };
   } catch {
     return null;
   }
@@ -37,8 +82,8 @@ export function captureAttribution() {
   const record = {
     ...campaign,
     ...(external && { referrer: document.referrer }),
-    landing_page: window.location.href,
-    captured_at: new Date().toISOString(),
+    landing_page: currentPath(),
+    first_visit_at: istTimestamp(),
   };
   try {
     localStorage.setItem(KEY, JSON.stringify(record));
@@ -49,5 +94,7 @@ export function captureAttribution() {
 
 /* The attribution part of a lead's `source`: the saved landing visit. */
 export function attribution(): Attribution {
-  return read() ?? { landing_page: window.location.href };
+  const saved = read();
+  if (!saved) return { landing_page: currentPath() };
+  return { ...saved, first_visit_at: istLabel(Date.parse(saved.first_visit_at)) };
 }

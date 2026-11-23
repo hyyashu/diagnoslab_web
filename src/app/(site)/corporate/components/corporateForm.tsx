@@ -74,9 +74,9 @@ export default function CorporateForm() {
       source: {
         contact_topic: "Corporate",
         company_name: companyName.trim(),
-        email: email.trim(),
         employees,
       },
+      email: email.trim() || undefined,
     };
   });
 

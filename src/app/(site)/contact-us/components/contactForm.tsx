@@ -17,10 +17,8 @@ export default function ContactForm() {
 
   const onSubmit = handleSubmit(
     () => ({
-      source: {
-        contact_topic: topic || "Something else",
-        ...(message.trim() && { message: message.trim() }),
-      },
+      source: { contact_topic: topic || "Something else" },
+      message: message.trim() || undefined,
       intent: leadIntent({ homeCollection: topic === "Home collection" }),
     }),
     () => {

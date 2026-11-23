@@ -159,8 +159,8 @@ export function EnquiryCard({
     source: {
       ...item.sourceData,
       contact_topic: topicValue(topic),
-      ...(message.trim() && { message: message.trim() }),
     },
+    message: message.trim() || undefined,
     intent: leadIntent({ homeCollection, booking: true }),
   }));
 

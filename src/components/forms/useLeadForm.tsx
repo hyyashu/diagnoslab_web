@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { submitLeadForm, type LeadIntent } from "@/lib/api";
-import { attribution } from "@/lib/attribution";
+import { attribution, istLabel } from "@/lib/attribution";
 import { THANK_YOU_PATH, markLeadSubmitted } from "@/lib/leadConversion";
 import { normalizePhone, sanitizeName, validateName, validatePhone } from "@/lib/leadValidation";
 
@@ -20,6 +20,10 @@ type Lead = {
   /* The form's own details, added to the attribution in `source`. */
   source: Record<string, unknown>;
   intent?: LeadIntent;
+  /* Sent as the lead's own fields, not in `source`, so the lead message
+     shows them on their own lines. */
+  message?: string;
+  email?: string;
 };
 
 /* State, validation and submission shared by every lead form. Each form
@@ -77,7 +81,9 @@ export function useLeadForm() {
         await submitLeadForm({
           name: name.trim(),
           phone: normalizePhone(phone),
-          source: { ...attribution(), ...lead.source },
+          ...(lead.email && { email: lead.email }),
+          ...(lead.message && { message: lead.message }),
+          source: { ...attribution(), ...lead.source, submitted_at: istLabel() },
           ...(lead.intent && { lead_intent: lead.intent }),
         });
         setName("");

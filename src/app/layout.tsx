@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import Script from "next/script";
 import AdsTracking from "@/components/layout/adsTracking";
+import GtmTracking from "@/components/layout/gtmTracking";
 import Tracking from "@/components/layout/tracking";
 import { OG_IMAGE, SITE_URL, ogDefaults, pageUrl } from "@/lib/schema";
 import "./globals.css";
@@ -88,6 +89,7 @@ export default function RootLayout({
       <body className={`${jakarta.variable} ${inter.variable} antialiased`}>
         {children}
         <Tracking />
+        <GtmTracking />
         <AdsTracking />
         {/* ReplyBash chat widget. Loaded after the page is idle so it never
             competes with the LCP element. */}

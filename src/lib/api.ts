@@ -85,6 +85,8 @@ export type LeadIntent = "book_home_collection" | "general_enquiry";
 export type LeadFormSubmitData = {
   name: string;
   phone: string;
+  email?: string;
+  message?: string;
   source: Record<string, unknown>;
   lead_intent?: LeadIntent;
 };
