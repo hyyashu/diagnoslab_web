@@ -85,10 +85,12 @@ export default function LabTestCard({
           <Zap className="size-[13px] text-dl-muted" aria-hidden />
           {reportLabel(test.reporting)}
         </span>
-        <span className="inline-flex items-center gap-[5px]">
-          <Utensils className="size-[13px] text-dl-muted" aria-hidden />
-          {fastingLabel(test.fasting)}
-        </span>
+        {test.fasting && (
+          <span className="inline-flex items-center gap-[5px]">
+            <Utensils className="size-[13px] text-dl-muted" aria-hidden />
+            {fastingLabel(test.fasting)}
+          </span>
+        )}
       </div>
 
       <div

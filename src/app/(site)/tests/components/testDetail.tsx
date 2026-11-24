@@ -32,6 +32,24 @@ function genericPrep(fasting: string): { intro: string; steps: PrepStep[] } {
         { title: "Share your medicines", text: "Tell the phlebotomist about any medicines you take." },
       ],
     };
+  if (/after a meal/i.test(fasting))
+    return {
+      intro: "This sample is taken 2 hours after a meal.",
+      steps: [
+        { title: "Eat a normal meal", text: "Note the time you start eating." },
+        { title: "Wait 2 hours", text: "Give your sample 2 hours later. Avoid snacks in between." },
+        { title: "Share your medicines", text: "Tell the phlebotomist about any medicines you take." },
+      ],
+    };
+  if (!fasting)
+    return {
+      intro: "Our team will tell you how to prepare when you book.",
+      steps: [
+        { title: "Ask when you book", text: "Some tests need fasting or a special sample; we'll confirm." },
+        { title: "Stay hydrated", text: "A glass of water makes the draw quicker." },
+        { title: "Share your medicines", text: "Tell the phlebotomist about any medicines you take." },
+      ],
+    };
   return {
     intro: isNoFasting(fasting) ? "No special preparation needed." : `Fasting: ${fasting}.`,
     steps: [
@@ -115,11 +133,15 @@ export function TestMain({ test, d }: { test: Test; d?: TestDetails }) {
   const facts: DetailFact[] = [
     ...(parameterCount > 0 ? [{ icon: TestTubes, label: "Parameters", value: `${parameterCount} tests` }] : []),
     ...(sample ? [{ icon: d?.sample ? Droplet : FlaskConical, label: "Sample", value: sample }] : []),
-    {
-      icon: UtensilsCrossed,
-      label: "Fasting",
-      value: isNoFasting(test.fasting) ? "Not required" : isOvernightFast(test.fasting) ? "10–12 hours" : test.fasting,
-    },
+    ...(test.fasting
+      ? [
+          {
+            icon: UtensilsCrossed,
+            label: "Fasting",
+            value: isNoFasting(test.fasting) ? "Not required" : isOvernightFast(test.fasting) ? "10–12 hours" : test.fasting,
+          },
+        ]
+      : []),
     { icon: FileClock, label: "Report", value: isSameDay(test.reporting) ? "Same day" : test.reporting },
   ];
   const prep = d?.prep ? { intro: d.prepIntro ?? "", steps: d.prep } : genericPrep(test.fasting);

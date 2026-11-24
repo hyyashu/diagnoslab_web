@@ -10,7 +10,7 @@ export default function AdsLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <header className="border-b border-dl-line bg-white">
-        <div className={`${shell} flex items-center gap-4 py-3 md:py-4`}>
+        <div className={`${shell} flex items-center gap-4 py-2.5 md:py-4`}>
           <Logo priority />
           <span className="hidden items-center gap-1.5 text-sm sm:flex">
             <Star className="size-[15px] text-dl-star" fill="currentColor" aria-hidden />
@@ -30,7 +30,7 @@ export default function AdsLayout({ children }: { children: React.ReactNode }) {
         </div>
       </header>
 
-      <main className="pb-20 md:pb-0">{children}</main>
+      <main>{children}</main>
 
       <footer className="bg-dl-ink pb-24 pt-8 text-white/70 md:pb-8">
         <div className={`${shell} flex flex-col gap-2 text-[13px] md:flex-row md:items-center md:justify-between`}>

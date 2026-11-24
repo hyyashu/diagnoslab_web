@@ -62,11 +62,13 @@ function Hero({ offer }: { offer: LpOffer }) {
   return (
     <section className="bg-linear-to-b from-dl-red-soft to-dl-bg">
       <div
-        className={`${shell} grid gap-6 pt-6 pb-10 md:grid-cols-[minmax(0,1fr)_minmax(0,400px)] md:items-center md:gap-10 md:py-16 xl:grid-cols-[minmax(0,1fr)_440px] xl:gap-16`}
+        className={`${shell} grid gap-4 pt-4 pb-10 md:grid-cols-[minmax(0,1fr)_minmax(0,400px)] md:grid-rows-[auto_auto] md:gap-x-10 md:gap-y-7 md:py-16 xl:grid-cols-[minmax(0,1fr)_440px] xl:gap-x-16`}
       >
-        <div className="flex flex-col gap-5 md:gap-7">
-          <div className="flex flex-col gap-3 md:gap-5">
-            <p className="inline-flex w-fit items-center gap-2 rounded-full border border-dl-line bg-white py-1.5 pl-2.5 pr-3 text-xs font-semibold text-dl-ink-2 md:text-[13px]">
+        {/* Phones read: intro, form, then facts. Desktop keeps intro and
+            facts on the left with the form beside them. */}
+        <div className="flex flex-col gap-5 md:col-start-1 md:row-start-1 md:gap-7 md:self-end">
+          <div className="flex flex-col gap-2.5 md:gap-5">
+            <p className="inline-flex w-fit items-center gap-2 rounded-full border border-dl-line bg-white py-1 pl-2.5 md:py-1.5 pr-3 text-xs font-semibold text-dl-ink-2 md:text-[13px]">
               <span className="size-[7px] rounded-full bg-dl-green md:size-2" aria-hidden />
               {offer.eyebrow}
             </p>
@@ -91,8 +93,10 @@ function Hero({ offer }: { offer: LpOffer }) {
               )}
             </p>
           )}
+        </div>
 
-          <dl className="grid grid-cols-2 gap-2 md:grid-cols-4 md:gap-3">
+        <div className="order-last flex flex-col gap-5 md:order-none md:col-start-1 md:row-start-2 md:gap-7 md:self-start">
+          <dl className={`grid gap-2 md:grid-cols-4 md:gap-3 ${offer.facts.length === 3 ? "grid-cols-3" : "grid-cols-2"}`}>
             {offer.facts.map((f) => (
               <div key={f.label} className="flex flex-col gap-0.5 rounded-2xl border border-dl-line bg-white px-3.5 py-3">
                 <dt className="text-[11.5px] text-dl-muted md:text-xs">{f.label}</dt>
@@ -129,19 +133,19 @@ function Hero({ offer }: { offer: LpOffer }) {
               </span>
             </a>
           </div>
-
-          {offer.notice && <p className="text-xs leading-normal text-dl-muted">{offer.notice}</p>}
         </div>
 
-        <CallbackForm
-          title="Book with a quick call"
-          subtitle=""
-          service={offer.topic}
-          services={offer.services}
-          serviceLabel="Which scan?"
-          servicePlaceholder="Not sure / other"
-          note="We never share your number. No spam."
-        />
+        <div className="md:col-start-2 md:row-span-2 md:row-start-1 md:self-center">
+          <CallbackForm
+            title="Book with a quick call"
+            subtitle=""
+            service={offer.topic}
+            services={offer.services}
+            serviceLabel="Which scan?"
+            servicePlaceholder="Not sure / other"
+            note="We never share your number. No spam."
+          />
+        </div>
       </div>
     </section>
   );
@@ -165,6 +169,7 @@ function Scans({ offer }: { offer: LpOffer }) {
             </li>
           ))}
         </ul>
+        {offer.notice && <p className="text-xs leading-normal text-dl-muted">{offer.notice}</p>}
       </div>
     </section>
   );
@@ -228,7 +233,9 @@ function PriceList({ offer }: { offer: LpOffer }) {
               <span className="text-[15px] font-bold text-dl-ink">{t.title}</span>
               <span className="flex items-baseline gap-2">
                 <span className="font-display text-xl font-extrabold text-dl-ink">{rupees(t.price)}</span>
-                {t.originalPrice > t.price && <span className="text-sm text-dl-muted line-through">{rupees(t.originalPrice)}</span>}
+                {t.originalPrice > t.price && (
+                  <span className="text-sm text-dl-muted line-through">{rupees(t.originalPrice)}</span>
+                )}
               </span>
             </li>
           ))}
@@ -242,10 +249,15 @@ function ClosingCta() {
   return (
     <section className="bg-dl-red py-12 text-white md:py-16">
       <div className={`${shell} flex flex-col items-center gap-5 text-center`}>
-        <h2 className="font-display text-2xl font-extrabold tracking-[-0.03em] md:text-[34px]">Book today, get your report on WhatsApp</h2>
+        <h2 className="font-display text-2xl font-extrabold tracking-[-0.03em] md:text-[34px]">
+          Book today, get your report on WhatsApp
+        </h2>
         <p className="text-white/80">Lines are open 7:30 AM – 7:30 PM, every day.</p>
         <div className="flex flex-col gap-3 sm:flex-row">
-          <a href={PHONE_HREF} className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 font-bold text-dl-red">
+          <a
+            href={PHONE_HREF}
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 font-bold text-dl-red"
+          >
             <Phone className="size-4" aria-hidden />
             Call {PHONE_DISPLAY}
           </a>

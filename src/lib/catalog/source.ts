@@ -36,7 +36,8 @@ export const tests: Test[] = rawTests.tests.map((t) => ({
   originalPrice: num(t.Price),
   categories: t.Categories ?? [],
   category: t.Categories?.[0]?.trim() || "General Health",
-  fasting: text(t.Fasting) || "Not Required",
+  /* Blank means unknown: pages then say "we will confirm", never "no fasting". */
+  fasting: text(t.Fasting),
   reporting: text(t.Reporting) || "Same Day",
   tat: text(t.Tat),
   sampleType: text(t.SampleType),

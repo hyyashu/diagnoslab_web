@@ -55,7 +55,7 @@ export default function CallbackForm({
   return (
     <div
       id="enquiry-form"
-      className="flex flex-col gap-5 rounded-3xl border border-dl-line bg-white p-5 shadow-[0_20px_50px_rgba(22,24,29,0.08)] md:p-7"
+      className="flex flex-col gap-4 rounded-3xl border border-dl-line bg-white p-4 shadow-[0_20px_50px_rgba(22,24,29,0.08)] md:gap-5 md:p-7"
     >
       <div className="flex flex-col gap-1.5">
         <h2 className="font-display text-lg font-extrabold tracking-[-0.02em] text-dl-ink md:text-[22px]">
@@ -68,7 +68,7 @@ export default function CallbackForm({
         )}
       </div>
 
-      <form onSubmit={onSubmit} className="flex flex-col gap-4" noValidate>
+      <form onSubmit={onSubmit} className="flex flex-col gap-3 md:gap-4" noValidate>
         <label className="flex flex-col gap-1.5">
           <span className={label}>Name</span>
           <input {...nameInput} placeholder="Your full name" className={field} />

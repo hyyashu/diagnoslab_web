@@ -1,5 +1,5 @@
 import { getPackageBySlug, getPackages, getTestBySlug, getTests, pregnancyScans, ultrasoundScans } from "@/lib/catalog";
-import { PCPNDT_NOTICE, ULTRASOUND_HOURS_DISPLAY } from "@/lib/contact";
+import { PCPNDT_NOTICE } from "@/lib/contact";
 import { labTestsFaq, packagesFaq, ultrasoundFaq, type FaqItem } from "@/lib/faq";
 import { discountPct, isNoFasting, isOvernightFast, reportLabel, rupees } from "@/lib/format";
 import { packageDetails, type TestProfile } from "../../(site)/packages/details";
@@ -50,28 +50,49 @@ export type LpOffer = {
   faq: FaqItem[];
 };
 
-const homeCollectionFact: LpFact = { label: "Home collection", value: "From 6 AM" };
+const homeCollectionFact: LpFact = { label: "Home visit", value: "From 6 AM" };
 
 const fastingValue = (fasting: string) =>
   isNoFasting(fasting) ? "Not needed" : isOvernightFast(fasting) ? "10–12 hours" : fasting;
 
-const reportValue = (reporting: string) => reportLabel(reporting).replace(/ reports$/, "").replace(/^Reports in /, "");
+const reportValue = (reporting: string) =>
+  reportLabel(reporting)
+    .replace(/ reports$/, "")
+    .replace(/^Reports in /, "");
 
 const priceLine = (price: number, originalPrice: number) => {
   const off = discountPct(price, originalPrice);
   return off ? `${rupees(price)} (${off}% off)` : rupees(price);
 };
 
+/* Catalogue names that read badly in a headline. */
+const packageNames: Record<string, string> = {
+  "diabetes-monitoring-panel-1": "Diabetes Monitoring Panel 1",
+  "diabetes-monitoring-panel-2": "Diabetes Monitoring Panel 2",
+  "arthriti-panel-1": "Arthritis Panel 1",
+  "arthriti-panel-2": "Arthritis Panel 2",
+  "liver-function-test-lft": "Liver Function Test (LFT)",
+  "kidney-function-tests-kft": "Kidney Function Test (KFT)",
+  "antenatal-panel-1sl": "Antenatal Panel (1SL)",
+  "antenatal-panel-pg": "Antenatal Panel (PG)",
+};
+
+function packageName(slug: string, title: string) {
+  const name = packageNames[slug] ?? title;
+  /* "Fever Panel" is already a name; "BIO T Plus" needs the noun. */
+  return /\b(panel|profile|tests?)\b/i.test(name) ? name : `${name} Health Package`;
+}
+
 function packageOffer(slug: string, over: Partial<LpOffer> = {}): LpOffer | undefined {
   const p = getPackageBySlug(slug);
   if (!p) return undefined;
   const d = packageDetails[p.slug];
-  const name = d?.headline ?? `${p.title} Health Package`;
+  const name = d?.headline ?? packageName(p.slug, p.title);
   return {
     slug: p.slug,
     eyebrow: "NABL & ISO accredited lab · Since 2009",
     title: `${name} in Jamshedpur`,
-    subtitle: `${p.description || "Several tests from one sample."} Your report reaches your WhatsApp.`,
+    subtitle: `${p.description || "One blood sample, collected at home or at our Sakchi lab."} Your report reaches your WhatsApp.`,
     metaTitle: `${name} in Jamshedpur at ${rupees(p.price)}`,
     metaDescription: `${name} at Diagnos Lab, Jamshedpur: ${p.parameters} tests for ${priceLine(p.price, p.originalPrice)}. Home sample collection from 6 AM, reports on WhatsApp.`,
     price: p.price,
@@ -83,7 +104,12 @@ function packageOffer(slug: string, over: Partial<LpOffer> = {}): LpOffer | unde
       homeCollectionFact,
     ],
     profiles: d?.profiles,
-    includes: d?.profiles ? undefined : p.categories.split(",").map((c) => c.trim()).filter(Boolean),
+    includes: d?.profiles
+      ? undefined
+      : p.categories
+          .split(",")
+          .map((c) => c.trim())
+          .filter(Boolean),
     topic: p.title,
     homeCollection: false,
     faq: d?.faq ?? packagesFaq.filter((f) => !f.desktopOnly),
@@ -105,7 +131,7 @@ function testOffer(slug: string, over: Partial<LpOffer> = {}): LpOffer | undefin
     originalPrice: t.originalPrice,
     facts: [
       ...(t.sampleType ? [{ label: "Sample", value: t.sampleType }] : []),
-      { label: "Fasting", value: fastingValue(t.fasting) },
+      ...(t.fasting ? [{ label: "Fasting", value: fastingValue(t.fasting) }] : []),
       { label: "Report", value: reportValue(t.reporting) },
       homeCollectionFact,
     ],
@@ -175,7 +201,11 @@ const campaigns: LpOffer[] = [
     ],
     priceList: POPULAR_TESTS.map((s) => getTestBySlug(s))
       .filter((t) => t !== undefined)
-      .map((t) => ({ title: t.title, price: t.price, originalPrice: t.originalPrice })),
+      .map((t) => ({
+        title: t.title,
+        price: t.price,
+        originalPrice: t.originalPrice,
+      })),
     topic: "Home collection",
     homeCollection: true,
     faq: labTestsFaq.filter((f) => !f.desktopOnly),
@@ -183,10 +213,9 @@ const campaigns: LpOffer[] = [
   {
     ...usgBase,
     slug: "ultrasound",
-    eyebrow: `Ultrasound in Jamshedpur · ${ULTRASOUND_HOURS_DISPLAY}`,
+    eyebrow: "Trusted in Jamshedpur since 2009",
     title: "Ultrasound (USG) in Sakchi, Jamshedpur",
-    subtitle:
-      "Abdomen, pelvis, pregnancy, KUB, thyroid and breast scans on modern digital machines, with a female MD radiologist for female patients.",
+    subtitle: "Abdomen, pelvis, pregnancy, KUB, thyroid and breast scans, with a female MD radiologist for women.",
     metaTitle: "Ultrasound (USG) in Jamshedpur",
     metaDescription:
       "Book an ultrasound at Diagnos Lab, Sakchi, Jamshedpur. Female MD radiologist, report on WhatsApp in 1–2 hours. Monday to Saturday.",
