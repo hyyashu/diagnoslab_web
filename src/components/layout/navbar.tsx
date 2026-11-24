@@ -10,7 +10,6 @@ import {
   Handshake,
   House,
   Mail,
-  MapPin,
   Menu,
   Package,
   Phone,
@@ -70,16 +69,6 @@ export default function Navbar() {
         <div className="mx-auto flex max-w-[1440px] items-center gap-7 px-4 pt-3.5 pb-3 md:px-10 md:py-[18px] xl:px-20">
           <Logo priority />
 
-          <div className="hidden items-center gap-2.5 rounded-full bg-dl-bg py-2 pl-3 pr-4 md:flex">
-            <span className="flex size-[30px] items-center justify-center rounded-full bg-white">
-              <MapPin className="size-[15px] text-dl-red" aria-hidden />
-            </span>
-            <span className="flex flex-col">
-              <span className="text-[11px] font-medium text-dl-muted">Collecting samples in</span>
-              <span className="text-sm font-bold text-dl-ink">Jamshedpur, 831001</span>
-            </span>
-          </div>
-
           <div className="flex-1" />
 
           <a
@@ -104,13 +93,8 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Phones: location + search */}
+        {/* Phones: search */}
         <div className="flex flex-col gap-3 px-4 pb-3 md:hidden">
-          <p className="flex items-center gap-1.5 text-[13px]">
-            <MapPin className="size-3.5 text-dl-red" aria-hidden />
-            <span className="text-dl-muted">Collecting in</span>
-            <span className="font-bold text-dl-ink">Jamshedpur, 831001</span>
-          </p>
           <SiteSearch variant="header" />
         </div>
 

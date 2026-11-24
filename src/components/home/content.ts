@@ -64,5 +64,3 @@ export const radiologyItems: { title: string; subtitle: string; icon: string; hr
   { title: "PFT", subtitle: "Lung capacity & airflow", icon: "wind", href: "/radiology/" },
 ];
 
-/* Reviews the design features, by author name in the catalogue. */
-export const featuredReviewers = ["Chiranjeev Singh", "manisha choudhary", "Dharmendra Prasad", "v niharika"];

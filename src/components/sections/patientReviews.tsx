@@ -1,12 +1,11 @@
 import { Star } from "lucide-react";
 import SectionHead from "@/components/ui/sectionHead";
-import GoogleReviewCard from "@/components/cards/googleReviewCard";
-import { featuredReviewers } from "@/components/home/content";
-import { reviews } from "@/lib/catalog";
+import GoogleReviewsWidget from "@/components/sections/googleReviewsWidget";
 import { GOOGLE_REVIEWS_HREF } from "@/lib/contact";
 import { shell } from "@/components/ui/shell";
 
-/* DL.pen "Reviews". Four on desktop; a sideways scroller on phones. */
+/* DL.pen "Reviews": the heading and rating badge, with live Google
+   reviews from the SociableKit widget. */
 export default function PatientReviews({
   tone = "muted",
   subtitle = "Real reviews from Google",
@@ -14,10 +13,6 @@ export default function PatientReviews({
   tone?: "white" | "muted";
   subtitle?: string;
 }) {
-  const featured = featuredReviewers
-    .map((name) => reviews.find((r) => r.authorName === name))
-    .filter((r) => r !== undefined);
-
   const badge = (
     <a
       href={GOOGLE_REVIEWS_HREF}
@@ -51,14 +46,8 @@ export default function PatientReviews({
         <div className={shell}>
           <SectionHead id="reviews-heading" title="What our patients say" subtitle={subtitle} aside={badge} />
         </div>
-        <div className={`${shell} max-md:px-0`}>
-          <ul className="no-scrollbar flex snap-x snap-mandatory scroll-px-4 gap-3 overflow-x-auto px-4 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:px-0 lg:grid-cols-4">
-            {featured.map((r, i) => (
-              <li key={r.authorName} className={`w-[290px] shrink-0 snap-start md:w-auto ${i === 3 ? "max-md:hidden" : ""}`}>
-                <GoogleReviewCard author={r.authorName} rating={r.rating} time={r.date} text={r.text} />
-              </li>
-            ))}
-          </ul>
+        <div className={shell}>
+          <GoogleReviewsWidget />
         </div>
       </div>
     </section>

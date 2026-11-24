@@ -7,6 +7,7 @@ import { FieldError, leadIntent, useLeadForm } from "@/components/forms/useLeadF
 
 type CallbackFormProps = {
   title?: string;
+  /* Pass "" to hide the line. */
   subtitle?: string;
   /* Options for the "Service" select; leave out to hide the field. */
   services?: string[];
@@ -60,9 +61,11 @@ export default function CallbackForm({
         <h2 className="font-display text-lg font-extrabold tracking-[-0.02em] text-dl-ink md:text-[22px]">
           {title}
         </h2>
-        <p className="text-[13px] leading-normal text-dl-ink-2 md:text-sm">
-          {subtitle}
-        </p>
+        {subtitle && (
+          <p className="text-[13px] leading-normal text-dl-ink-2 md:text-sm">
+            {subtitle}
+          </p>
+        )}
       </div>
 
       <form onSubmit={onSubmit} className="flex flex-col gap-4" noValidate>
