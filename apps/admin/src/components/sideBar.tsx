@@ -11,10 +11,15 @@ import {
   Users,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useAuthStore } from "../store/authStore";
+import type { Permission } from "@diagno/schemas";
+import { PAGE_ACCESS } from "@/lib/access";
+import { useAuthStore, useCan } from "../store/authStore";
 import NotificationToggle from "./NotificationToggle";
 
-const groups = [
+type Item = { label: string; path: string; icon: typeof Target; needs?: Permission[] };
+
+
+const groups: { title?: string; items: Item[] }[] = [
   {
     items: [
       { label: "Dashboard", path: "/", icon: LayoutDashboard },
@@ -28,7 +33,7 @@ const groups = [
       { label: "Meetings", path: "/meetings", icon: UserRound },
       { label: "Attendance", path: "/attendance", icon: CalendarCheck },
       { label: "Doctors", path: "/doctors", icon: Stethoscope },
-      { label: "Users", path: "/users", icon: Users },
+      { label: "Staff & access", path: "/users", icon: Users },
     ],
   },
 ];
@@ -55,6 +60,10 @@ const itemClass = (active: boolean) =>
 
 export default function SideBar({ onMobileClose }: { onMobileClose?: () => void }) {
   const user = useAuthStore((s) => s.user);
+  const can = useCan();
+  const visible = groups
+    .map((g) => ({ ...g, items: g.items.filter((i) => !PAGE_ACCESS[i.path] || can(...PAGE_ACCESS[i.path]!)) }))
+    .filter((g) => g.items.length);
   const logout = useAuthStore((s) => s.logout);
 
   return (
@@ -64,7 +73,7 @@ export default function SideBar({ onMobileClose }: { onMobileClose?: () => void 
       </div>
 
       <nav className="flex flex-1 flex-col gap-4 overflow-y-auto px-2">
-        {groups.map((g, i) => (
+        {visible.map((g, i) => (
           <div key={i} className="flex flex-col gap-0.5">
             {g.title && (
               <div className="px-2.5 pb-1 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground/70">
@@ -89,17 +98,19 @@ export default function SideBar({ onMobileClose }: { onMobileClose?: () => void 
 
       <div className="flex flex-col gap-0.5 border-t px-2 py-3">
         <NotificationToggle />
-        <NavLink to="/settings" onClick={onMobileClose} className={({ isActive }) => itemClass(isActive)}>
-          <Settings className="size-[18px] shrink-0" strokeWidth={1.75} />
-          Settings
-        </NavLink>
+        {can("settings:manage") && (
+          <NavLink to="/settings" onClick={onMobileClose} className={({ isActive }) => itemClass(isActive)}>
+            <Settings className="size-[18px] shrink-0" strokeWidth={1.75} />
+            Settings
+          </NavLink>
+        )}
         <div className="flex items-center gap-2.5 px-2.5 py-2">
           <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-semibold">
             {(user?.name ?? "?").trim().charAt(0).toUpperCase()}
           </span>
           <div className="min-w-0 flex-1">
             <div className="truncate text-sm font-medium">{user?.name ?? "Signed in"}</div>
-            <div className="truncate text-[11px] text-muted-foreground">{user?.email}</div>
+            <div className="truncate text-[11px] text-muted-foreground">{user?.roleLabel ?? user?.email}</div>
           </div>
           <button
             onClick={logout}

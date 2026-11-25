@@ -23,6 +23,7 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { leadStatusValues } from "@diagno/schemas";
+import { useCan } from "@/store/authStore";
 import { ChannelTag, StatusPill } from "./LeadBits";
 import {
   channelLabel,
@@ -84,6 +85,8 @@ export default function LeadDetailsSheet({ id, onClose, onOpenLead }: Props) {
 }
 
 function LeadBody({ lead, onOpenLead }: { lead: LeadDetail; onOpenLead: (id: number) => void }) {
+  const can = useCan();
+  const canWork = can("leads:work");
   const digits = phoneDigits(lead);
   const first = lead.name?.trim().split(/\s+/)[0];
   const waText = `Hi${first ? ` ${first}` : ""}, this is Diagnos Lab, Jamshedpur. Thank you for your enquiry${
@@ -118,26 +121,32 @@ function LeadBody({ lead, onOpenLead }: { lead: LeadDetail; onOpenLead: (id: num
                 <MessageCircle /> WhatsApp
               </a>
             </Button>
-            <Button size="sm" variant="outline" onClick={() => setBooking((b) => !b)}>
-              <CalendarCheck /> Book
-            </Button>
+            {canWork && (
+              <Button size="sm" variant="outline" onClick={() => setBooking((b) => !b)}>
+                <CalendarCheck /> Book
+              </Button>
+            )}
           </div>
         )}
       </div>
 
       {booking && <BookForm lead={lead} onDone={() => setBooking(false)} />}
 
-      <Section title="Status and owner">
-        <PipelineControls lead={lead} />
-      </Section>
+      {canWork && (
+        <>
+          <Section title="Status and owner">
+            <PipelineControls lead={lead} />
+          </Section>
 
-      <Section title="Log contact">
-        <LogContact leadId={lead.id} />
-      </Section>
+          <Section title="Log contact">
+            <LogContact leadId={lead.id} />
+          </Section>
 
-      <Section title="Follow-ups">
-        <FollowUps lead={lead} />
-      </Section>
+          <Section title="Follow-ups">
+            <FollowUps lead={lead} />
+          </Section>
+        </>
+      )}
 
       <Section title="Enquiry">
         <EnquiryFacts lead={lead} />
@@ -183,6 +192,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 /* ---------- Status, lost reason, owner ---------- */
 
 function PipelineControls({ lead }: { lead: LeadDetail }) {
+  const canAssign = useCan()("leads:assign");
   const update = useUpdateLead(lead.id);
   const { data: owners = [] } = useOwners();
   const [pendingLost, setPendingLost] = useState(false);
@@ -213,6 +223,7 @@ function PipelineControls({ lead }: { lead: LeadDetail }) {
         <Select
           value={lead.assignedTo ? String(lead.assignedTo) : "none"}
           onValueChange={(v) => update.mutate({ assignedTo: v === "none" ? null : Number(v) })}
+          disabled={!canAssign}
         >
           <SelectTrigger>
             <SelectValue />

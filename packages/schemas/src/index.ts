@@ -7,3 +7,4 @@ export * from './attendance';
 export * from './products';
 export * from './booking';
 export * from './auditlogs';
+export * from './access';

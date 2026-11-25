@@ -1,9 +1,10 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
-import { eq, sql } from 'drizzle-orm';
+import { and, eq, inArray, sql } from 'drizzle-orm';
 import webpush from 'web-push';
 import { webPushSubscriptions } from '@diagno/db';
 import { DrizzleService } from '../db/drizzle.service';
+import { AccessService } from '../auth/access.service';
 import { LEAD_CREATED, type LeadCreatedPayload } from '../email/events/email.events';
 
 export type PushMessage = { title: string; body: string; url: string; tag?: string };
@@ -16,7 +17,10 @@ export class PushService implements OnModuleInit {
   private readonly logger = new Logger(PushService.name);
   private enabled = false;
 
-  constructor(private readonly drizzle: DrizzleService) {}
+  constructor(
+    private readonly drizzle: DrizzleService,
+    private readonly access: AccessService,
+  ) {}
 
   onModuleInit() {
     const { VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY, VAPID_SUBJECT } = process.env;
@@ -32,14 +36,14 @@ export class PushService implements OnModuleInit {
     return { publicKey: this.enabled ? process.env.VAPID_PUBLIC_KEY! : null };
   }
 
-  async subscribe(endpoint: string, keys: { p256dh: string; auth: string }, userAgent?: string) {
+  async subscribe(endpoint: string, keys: { p256dh: string; auth: string }, userId: number, userAgent?: string) {
     const now = new Date();
     await this.drizzle.db
       .insert(webPushSubscriptions)
-      .values({ endpoint, p256dh: keys.p256dh, auth: keys.auth, userAgent, isActive: true, lastSeenAt: now })
+      .values({ endpoint, p256dh: keys.p256dh, auth: keys.auth, userId, userAgent, isActive: true, lastSeenAt: now })
       .onConflictDoUpdate({
         target: webPushSubscriptions.endpoint,
-        set: { p256dh: keys.p256dh, auth: keys.auth, userAgent, isActive: true, lastSeenAt: now, updatedAt: now },
+        set: { p256dh: keys.p256dh, auth: keys.auth, userId, userAgent, isActive: true, lastSeenAt: now, updatedAt: now },
       });
     return { subscribed: true };
   }
@@ -52,14 +56,14 @@ export class PushService implements OnModuleInit {
     return { subscribed: false };
   }
 
-  /* Sends to every active device. Subscriptions the push service rejects
-     as gone or not ours are switched off so they aren't retried. */
-  async sendToAll(message: PushMessage) {
-    if (!this.enabled) return { sent: 0 };
+  /* Sends to every active device of these staff. Subscriptions the push
+     service rejects as gone or not ours are switched off. */
+  async sendTo(userIds: number[], message: PushMessage) {
+    if (!this.enabled || !userIds.length) return { sent: 0 };
     const subs = await this.drizzle.db
       .select()
       .from(webPushSubscriptions)
-      .where(eq(webPushSubscriptions.isActive, true));
+      .where(and(eq(webPushSubscriptions.isActive, true), inArray(webPushSubscriptions.userId, userIds)));
     const body = JSON.stringify(message);
     const dead: number[] = [];
     let sent = 0;
@@ -91,7 +95,8 @@ export class PushService implements OnModuleInit {
   async onLead(p: LeadCreatedPayload) {
     try {
       const what = [p.interestName, p.phone].filter(Boolean).join(' · ');
-      await this.sendToAll({
+      const staff = await this.access.usersWith(['leads:read:all']);
+      await this.sendTo(staff.map((u) => u.id), {
         title: `New lead: ${p.name?.trim() || 'No name'}`,
         body: what || 'Website enquiry',
         url: p.id ? `/leads?lead=${p.id}` : '/leads',

@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-import { useAuthStore } from "@/store/authStore";
+import { useAuthStore, useCan } from "@/store/authStore";
 import PageHeader from "@/components/PageHeader";
 import AddLeadSheet from "./AddLeadSheet";
 import FollowUpList from "./FollowUpList";
@@ -35,6 +35,7 @@ const since = (p: Period) =>
 
 export default function LeadManagementScreen() {
   const me = useAuthStore((s) => s.user);
+  const can = useCan();
   const [params, setParams] = useSearchParams();
   const openId = params.get("lead") ? Number(params.get("lead")) : null;
   const open = (id: number | null) =>
@@ -118,11 +119,13 @@ export default function LeadManagementScreen() {
             <Button variant="outline" size="icon" onClick={() => refetch()} aria-label="Refresh">
               <RefreshCw className={cn(isFetching && "animate-spin")} />
             </Button>
-            <AddLeadSheet onCreated={open}>
-              <Button>
-                <Plus /> Add lead
-              </Button>
-            </AddLeadSheet>
+            {can("leads:create") && (
+              <AddLeadSheet onCreated={open}>
+                <Button>
+                  <Plus /> Add lead
+                </Button>
+              </AddLeadSheet>
+            )}
           </>
         }
       />
@@ -137,7 +140,11 @@ export default function LeadManagementScreen() {
           onClick={() => setShowTasks(!tasksOpen)}
         />
         <Stat label="Leads, last 7 days" value={stats.week} hint={`${stats.weekAds} from ads`} />
-        <Stat label="Booked, last 30 days" value={stats.booked} hint={stats.revenue ? inr(stats.revenue) : "No bookings yet"} />
+        <Stat
+          label="Booked, last 30 days"
+          value={stats.booked}
+          hint={!can("leads:revenue") ? "Bookings" : stats.revenue ? inr(stats.revenue) : "No bookings yet"}
+        />
       </div>
 
       {tasksOpen && (

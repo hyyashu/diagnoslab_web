@@ -1,4 +1,5 @@
 import { boolean, integer, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
+import { users } from './users';
 
 /* One row per browser or installed app that turned on notifications in the
    staff dashboard. The table predates Drizzle here, hence the camelCase
@@ -7,6 +8,8 @@ import { boolean, integer, pgTable, text, timestamp } from 'drizzle-orm/pg-core'
 export const webPushSubscriptions = pgTable('web_push_subscriptions', {
   id: integer('id').primaryKey().generatedAlwaysAsIdentity(),
   endpoint: text('endpoint').notNull().unique(),
+  /* Who turned it on, so alerts only go to people allowed to see them. */
+  userId: integer('user_id').references(() => users.id, { onDelete: 'cascade' }),
   p256dh: text('p256dh').notNull(),
   auth: text('auth').notNull(),
   userAgent: text('userAgent'),

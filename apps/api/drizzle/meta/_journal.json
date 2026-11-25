@@ -22,6 +22,13 @@
       "when": 1795615579051,
       "tag": "0002_leads_pipeline",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1795637516361,
+      "tag": "0003_access_control",
+      "breakpoints": true
     }
   ]
 }

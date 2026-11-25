@@ -1,12 +1,8 @@
 import { SetMetadata } from '@nestjs/common';
+import type { Permission as PermissionName } from '@diagno/schemas';
 
-// Key used to store and retrieve the required permission from route metadata
 export const PERMISSION_KEY = 'permission';
 
-// Marks a route as requiring a specific permission string.
-// Permissions follow the 'resource:action' convention (e.g. 'leads:create', 'users:delete').
-// The PermissionsGuard reads this metadata and checks it against request.user.permissions.
-//
-// Usage: @Permission('leads:create')
-export const Permission = (permission: string) =>
-  SetMetadata(PERMISSION_KEY, permission);
+/* The route needs at least one of these permissions (see @diagno/schemas
+   access.ts). The owner always passes. Example: @Permission('leads:read:all', 'leads:read:own') */
+export const Permission = (...anyOf: PermissionName[]) => SetMetadata(PERMISSION_KEY, anyOf);

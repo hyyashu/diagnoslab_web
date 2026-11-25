@@ -1,4 +1,5 @@
 import {
+  Logger,
   Injectable,
   NestInterceptor,
   ExecutionContext,
@@ -19,6 +20,8 @@ export class AuditInterceptor implements NestInterceptor {
     private readonly auditService: AuditService,
     private readonly reflector: Reflector,
   ) {}
+
+  private readonly logger = new Logger('Audit');
 
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const entityType = this.reflector.get<string>(
@@ -43,18 +46,20 @@ export class AuditInterceptor implements NestInterceptor {
       }[method] ?? 'accessed';
 
     return next.handle().pipe(
-      tap(async (responseData) => {
-        const entityId = responseData?.id ?? req.params?.id ?? 'unknown';
-
-        await this.auditService.log({
-          userId,
-          action,
-          entityType,
-          entityId,
-          newValue: method !== 'DELETE' ? responseData : undefined,
-          ipAddress,
-          userAgent,
-        });
+      tap((responseData) => {
+        const entityId = responseData?.id ?? req.params?.id;
+        // Never let a failed audit write break the request or crash the API.
+        this.auditService
+          .log({
+            userId,
+            action,
+            entityType,
+            entityId: entityId != null && !Number.isNaN(Number(entityId)) ? String(entityId) : '0',
+            newValue: method !== 'DELETE' ? responseData : undefined,
+            ipAddress,
+            userAgent,
+          })
+          .catch((e: unknown) => this.logger.error(`Audit log failed: ${e instanceof Error ? e.message : e}`));
       }),
     );
   }

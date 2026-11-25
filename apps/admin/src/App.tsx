@@ -7,7 +7,7 @@ import Settings from "./pages/settings";
 import AdminAttendance from "./pages/attendance/AdminAttendance";
 import LeadManagementScreen from "./pages/leads/LeadManagementScreen";
 import Doctors from "./pages/doctor/Doctors";
-import AddingUser from "./pages/user/AddingUser";
+import StaffScreen from "./pages/user/StaffScreen";
 
 
 const router = createBrowserRouter([
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
       },
       {
         path: "users",
-        element: <AddingUser />,
+        element: <StaffScreen />,
       },
       {
         path: "bookings",

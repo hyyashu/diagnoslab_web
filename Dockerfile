@@ -47,6 +47,13 @@ COPY --from=deps /app/packages/schemas/node_modules  ./packages/schemas/node_mod
 # Compiled API output (TypeScript emits to apps/api/dist/ with monorepo-relative paths inside)
 COPY --from=build /app/apps/api/dist ./apps/api/dist
 
+# SQL migrations and the runner. The database has no public port, so pending
+# migrations are applied here, on start, before the API listens. A failed
+# migration stops the start (nothing half-applied: each runs in a transaction).
+COPY --from=build /app/apps/api/drizzle ./apps/api/drizzle
+COPY --from=build /app/apps/api/scripts/migrate.mjs ./apps/api/scripts/migrate.mjs
+COPY --from=build /app/apps/api/package.json ./apps/api/package.json
+
 EXPOSE 3000
 
-CMD ["node", "apps/api/dist/src/main.js"]
+CMD ["sh", "-c", "cd apps/api && node scripts/migrate.mjs && cd /app && exec node apps/api/dist/src/main.js"]

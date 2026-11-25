@@ -5,13 +5,31 @@ import { Phone } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { useAuthStore } from "@/store/authStore";
+import { useAuthStore, useCan } from "@/store/authStore";
 import FollowUpList from "./leads/FollowUpList";
 import { ChannelTag } from "./leads/LeadBits";
 import { inr } from "./leads/leadTypes";
 import { useLeadList, useOpenTasks } from "./leads/useLeadsApi";
 
 export const Dashboard = () => {
+  const can = useCan();
+  if (!can("leads:read:all", "leads:read:own")) return <Welcome />;
+  return <LeadsDashboard />;
+};
+
+/* For staff without lead access (lab staff): a simple home page. */
+function Welcome() {
+  const user = useAuthStore((s) => s.user);
+  return (
+    <div className="space-y-5">
+      <PageHeader title={`Hello${user?.name ? `, ${user.name.split(" ")[0]}` : ""}`} description={`Signed in as ${user?.roleLabel ?? "staff"}.`} />
+      <p className="text-sm text-muted-foreground">Use the menu for the pages you have access to.</p>
+    </div>
+  );
+}
+
+function LeadsDashboard() {
+  const can = useCan();
   const navigate = useNavigate();
   const name = useAuthStore((s) => s.user?.name);
   const { data: leads = [] } = useLeadList();
@@ -41,7 +59,7 @@ export const Dashboard = () => {
         <Stat label="Follow-ups overdue" value={s.overdue} alert={s.overdue > 0} onClick={() => navigate("/leads")} />
         <Stat label="Waiting for first call" value={s.neverCalled.length} onClick={() => navigate("/leads")} />
         <Stat label="New leads today" value={s.today} />
-        <Stat label="Booked this month" value={s.booked} hint={s.revenue ? inr(s.revenue) : undefined} />
+        <Stat label="Booked this month" value={s.booked} hint={can("leads:revenue") && s.revenue ? inr(s.revenue) : undefined} />
       </div>
 
       <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
@@ -98,7 +116,7 @@ export const Dashboard = () => {
       </div>
     </div>
   );
-};
+}
 
 function Stat({ label, value, hint, alert, onClick }: { label: string; value: number; hint?: string; alert?: boolean; onClick?: () => void }) {
   const Tag = onClick ? "button" : "div";

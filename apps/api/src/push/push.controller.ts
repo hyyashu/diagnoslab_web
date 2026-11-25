@@ -3,6 +3,7 @@ import { createZodDto } from 'nestjs-zod';
 import { PushSubscribeSchema, PushUnsubscribeSchema } from '@diagno/schemas';
 import { Message } from '../common/decorators/message.decorator';
 import { PushService } from './push.service';
+import { User } from '../auth/user.decorator';
 
 class SubscribeDto extends createZodDto(PushSubscribeSchema) {}
 class UnsubscribeDto extends createZodDto(PushUnsubscribeSchema) {}
@@ -20,8 +21,8 @@ export class PushController {
 
   @Post('subscribe')
   @Message('Notifications on')
-  subscribe(@Body() dto: SubscribeDto, @Headers('user-agent') ua?: string) {
-    return this.push.subscribe(dto.endpoint, dto.keys, ua?.slice(0, 300));
+  subscribe(@Body() dto: SubscribeDto, @User('id') userId: number, @Headers('user-agent') ua?: string) {
+    return this.push.subscribe(dto.endpoint, dto.keys, userId, ua?.slice(0, 300));
   }
 
   @Post('unsubscribe')
@@ -32,7 +33,7 @@ export class PushController {
 
   @Post('test')
   @Message('Test sent')
-  test() {
-    return this.push.sendToAll({ title: 'Diagnos Lab', body: 'Notifications are working.', url: '/leads', tag: 'test' });
+  test(@User('id') userId: number) {
+    return this.push.sendTo([userId], { title: 'Diagnos Lab', body: 'Notifications are working.', url: '/leads', tag: 'test' });
   }
 }

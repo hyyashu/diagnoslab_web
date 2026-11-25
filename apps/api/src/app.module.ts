@@ -12,6 +12,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { LeadsModule } from './routes/leads/leads.module';
 import { AuthModule } from './auth/auth.module';
+import { AccessModule } from './auth/access.module';
 import { UsersModule } from './routes/users/users.module';
 import { AuditInterceptor } from './common/interceptors/audit.interceptor';
 import { AuditService } from './common/interceptors/audit.service';
@@ -30,6 +31,7 @@ import { PushModule } from './push/push.module';
     EventEmitterModule.forRoot(),
     LoggerModule.forRoot(pinoConfig),
 
+    AccessModule,
     EmailModule,
     PushModule,
     AuthModule,

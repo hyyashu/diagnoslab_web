@@ -2,7 +2,7 @@ import axios from "axios";
 import { api } from "./api";
 
 /* The logged-in person, as returned by POST /auth/login. `role` is the
-   API's role: "superadmin" or "user". */
+   API's role: superadmin (owner), manager, front_desk, field or lab. */
 export type AuthUser = { id: number; name: string; email: string; role: string };
 
 type LoginResponse = { data: { access_token: string; user: AuthUser }; message?: string };

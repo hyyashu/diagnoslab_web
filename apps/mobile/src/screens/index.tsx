@@ -34,8 +34,10 @@ const Drawer = createDrawerNavigator();
 
 /* ---------------- ROUTES ---------------- */
 /* Roles as the API names them. */
-const EVERYONE = ["superadmin", "user"];
-const ADMINS = ["superadmin"];
+/* Role names from @diagno/schemas (access.ts). The API checks permissions
+   on every request; these lists only decide which screens appear. */
+const EVERYONE = ["superadmin", "manager", "front_desk", "field", "lab", "user"];
+const ADMINS = ["superadmin", "manager"];
 
 /* Attendance and Admin Attendance are hidden for now; their screens are
    still in ./attendance and can be added back here. */
@@ -100,7 +102,7 @@ function CustomDrawerContent(props: any) {
 /* ---------------- MAIN DRAWER ---------------- */
 
 function MainDrawer() {
-  const userRole = useAuthStore((s) => s.user?.role ?? "user");
+  const userRole = useAuthStore((s) => s.user?.role ?? "front_desk");
   const theme = usePaperTheme();
   const allowed = drawerRoutes.filter((r) => r.roles.includes(userRole));
 
