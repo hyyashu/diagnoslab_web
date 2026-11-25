@@ -22,6 +22,7 @@ import { BookingsModule } from './routes/bookings/bookings.module';
 import { AttendanceModule } from './routes/attendance/attendance.module';
 import { MeetingsModule } from './routes/meetings/meetings.module';
 import { EmailModule } from './email/email.module';
+import { PushModule } from './push/push.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { EmailModule } from './email/email.module';
     LoggerModule.forRoot(pinoConfig),
 
     EmailModule,
+    PushModule,
     AuthModule,
     UsersModule,
     LeadsModule,

@@ -165,6 +165,8 @@ export class LeadsService {
     });
 
     this.eventEmitter.emit('lead.created', {
+      id: lead.id,
+      interestName: lead.interestName,
       name: lead.name,
       email: lead.email,
       phone: lead.phone,

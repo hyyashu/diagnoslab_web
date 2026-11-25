@@ -1,0 +1,31 @@
+# Staff dashboard at app.diagnoslab.in (Hostinger, public_html/app).
+# A single-page app: any path that isn't a real file loads index.html, so
+# refreshing /leads or /login works. These rules replace the main site's
+# rewrite rules for this folder.
+
+ErrorDocument 404 /index.html
+
+# The host has no type for the app manifest.
+<IfModule mod_mime.c>
+  AddType application/manifest+json .webmanifest
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Hashed build files never change; HTML and the service worker must.
+  <FilesMatch "\.(js|css|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "(\.html|sw\.js|manifest\.webmanifest)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  # Staff-only: keep it out of search results.
+  Header set X-Robots-Tag "noindex, nofollow"
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+  RewriteRule ^ /index.html [L]
+</IfModule>

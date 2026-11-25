@@ -12,6 +12,7 @@
     "build:api": "pnpm build:packages && pnpm --filter @diagno/api build",
     "dev:admin": "pnpm --filter diagnosadmin dev",
     "build:admin": "pnpm --filter diagnosadmin build",
-    "dev:mobile": "pnpm --filter @diagno/mobile start"
+    "dev:mobile": "pnpm --filter @diagno/mobile start",
+    "deploy:admin": "pnpm build:admin && bash apps/admin/deploy.sh"
   }
 }

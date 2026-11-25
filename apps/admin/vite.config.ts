@@ -5,6 +5,19 @@ import path from "path";
 import { VitePWA } from "vite-plugin-pwa";
 
 export default defineConfig({
+  /* Local dev against the live API: run with VITE_API_URL=/live-api and the
+     dev server forwards those calls to api.diagnoslab.in, so the browser
+     never makes a cross-site request (the live API only allows the
+     diagnoslab.in sites). */
+  server: {
+    proxy: {
+      "/live-api": {
+        target: "https://api.diagnoslab.in",
+        changeOrigin: true,
+        rewrite: (p) => p.replace(/^\/live-api/, ""),
+      },
+    },
+  },
   plugins: [
     react(),
     tailwindcss(),
@@ -16,24 +29,19 @@ export default defineConfig({
       /* sw.ts only handles push notifications; it does not precache files. */
       injectManifest: { injectionPoint: undefined },
       manifest: {
-        name: "Diagnos Lab App",
-        short_name: "Diagnos Lab",
+        name: "Diagnos Lab Admin",
+        short_name: "Diagnos Admin",
+        description: "Leads, follow-ups and bookings for the Diagnos Lab team.",
+        id: "/",
         start_url: "/",
+        scope: "/",
         display: "standalone",
         background_color: "#ffffff",
-        theme_color: "#000000",
-
+        theme_color: "#ffffff",
         icons: [
-          {
-            src: "/favicon.ico",
-            sizes: "192x192",
-            type: "image/png",
-          },
-          {
-            src: "/favicon.ico",
-            sizes: "512x512",
-            type: "image/png",
-          },
+          { src: "/pwa-192.png", sizes: "192x192", type: "image/png" },
+          { src: "/pwa-512.png", sizes: "512x512", type: "image/png" },
+          { src: "/pwa-maskable-512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
         ],
       },
     }),

@@ -97,3 +97,11 @@ export const AdminUpdateLeadSchema = AdminCreateLeadSchema.partial();
 
 export type AdminCreateLeadInput = z.infer<typeof AdminCreateLeadSchema>;
 export type AdminUpdateLeadInput = z.infer<typeof AdminUpdateLeadSchema>;
+
+/* A browser's push subscription, as PushSubscription.toJSON() gives it. */
+export const PushSubscribeSchema = z.object({
+  endpoint: z.url(),
+  keys: z.object({ p256dh: z.string().min(1), auth: z.string().min(1) }),
+});
+export type PushSubscribeInput = z.infer<typeof PushSubscribeSchema>;
+export const PushUnsubscribeSchema = z.object({ endpoint: z.url() });

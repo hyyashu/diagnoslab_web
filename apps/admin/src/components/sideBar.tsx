@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useAuthStore } from "../store/authStore";
+import NotificationToggle from "./NotificationToggle";
 
 const groups = [
   {
@@ -87,6 +88,7 @@ export default function SideBar({ onMobileClose }: { onMobileClose?: () => void 
       </nav>
 
       <div className="flex flex-col gap-0.5 border-t px-2 py-3">
+        <NotificationToggle />
         <NavLink to="/settings" onClick={onMobileClose} className={({ isActive }) => itemClass(isActive)}>
           <Settings className="size-[18px] shrink-0" strokeWidth={1.75} />
           Settings

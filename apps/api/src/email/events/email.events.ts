@@ -12,6 +12,8 @@ export interface UserCreatedPayload {
   name?: string;
 }
 export interface LeadCreatedPayload {
+  id?: number;
+  interestName?: string | null;
   name: string;
   email: string;
   phone?: string;
