@@ -1,0 +1,55 @@
+{
+  "expo": {
+    "name": "Diagnos Lab Internal App",
+    "slug": "diagnos-lab-internal-app",
+    "version": "1.0.0",
+    "orientation": "default",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "scheme": "app",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.android.diagnosinternalapp"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "package": "com.android.diagnosinternalapp"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-asset",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#ffffff",
+          "image": "./assets/icon.png"
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "This app uses your location for visits and tracking.",
+          "locationAlwaysAndWhenInUsePermission": "This app uses your location in the background for visit tracking.",
+          "isIosBackgroundLocationEnabled": true,
+          "isAndroidBackgroundLocationEnabled": true
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#ffffff",
+          "sounds": [],
+          "iosMode": "production",
+          "androidMode": "default"
+        }
+      ]
+    ]
+  }
+}

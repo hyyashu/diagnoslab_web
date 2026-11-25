@@ -1,0 +1,26 @@
+# Diagnos Lab
+
+> Diagnos Lab is a top-rated diagnostic centre in Sakchi, Jamshedpur (Jharkhand, India) offering blood tests, ultrasound (USG), ECG, X-Ray, PFT, and health packages, with home sample collection across the city and same-day digital reports.
+
+## Services
+- [Tests](https://diagnoslab.in/tests): Full catalogue of pathology and lab tests, with prices and home collection.
+- [Health Packages](https://diagnoslab.in/packages): Bundled checkup packages covering blood, liver, kidney, heart, diabetes, and hormonal health.
+- [Radiology](https://diagnoslab.in/radiology): Ultrasound, X-Ray, ECG, and Echocardiography services.
+- [Ultrasound in Jamshedpur](https://diagnoslab.in/ultrasound-in-jamshedpur): USG scans performed by a female radiologist.
+- [ECG](https://diagnoslab.in/ecg): Electrocardiogram testing and booking.
+- [X-Ray](https://diagnoslab.in/xray): Digital X-Ray testing and booking.
+- [Book a Test](https://diagnoslab.in/book-a-test): Book a blood test or package online with home sample collection.
+- [Corporate Health Testing](https://diagnoslab.in/corporate): Health checkup programs for organisations and employees.
+
+## Company
+- [About Us](https://diagnoslab.in/aboutUs): Diagnos Lab's history, mission, and why patients trust us.
+- [Areas Served](https://diagnoslab.in/area): Neighbourhoods across Jamshedpur covered by home sample collection.
+- [Contact Us](https://diagnoslab.in/contact-us): Phone, WhatsApp, email, and location details.
+- [Policy](https://diagnoslab.in/policy): Privacy and service policies.
+
+## Details
+- Address: 1st Floor, Building No. 142, Rishab Shanti Apartment, Dhalbhum Road, Ambagan, Sakchi, Jamshedpur, Jharkhand 831001, India
+- Phone: +91 84048 02214 | WhatsApp: +91 90310 52505 | Email: info@diagnoslab.in
+- Lab hours: Monday–Sunday, 7:30 AM – 7:30 PM (ultrasound Monday–Saturday)
+- Home sample collection: every day, from 6 AM
+- Full list of pages: https://diagnoslab.in/sitemap.xml

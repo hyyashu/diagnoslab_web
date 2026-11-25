@@ -1,0 +1,11 @@
+# Used when build context is repo root (e.g. Dokploy, docker build -f Dockerfile .)
+node_modules
+**/node_modules
+dist
+**/dist
+.git
+.gitignore
+*.md
+.env
+.env.*
+!.dockerignore

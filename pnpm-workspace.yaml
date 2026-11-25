@@ -1,6 +1,17 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+
+# Packages allowed to run install scripts.
+onlyBuiltDependencies:
+  - "@nestjs/core"
+  - "@scarf/scarf"
+  - bcrypt
+  - esbuild
+  - unrs-resolver
+
 ignoredBuiltDependencies:
   - sharp
-  - unrs-resolver
 
 # Patched versions of build-time deps pulled in via next > styled-jsx.
 overrides:
