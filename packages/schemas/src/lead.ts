@@ -114,7 +114,8 @@ export const WebsiteTapSchema = z.object({
     .regex(/^DL-[A-Z0-9]{4}$/)
     .optional(),
   page: z.string().max(500).optional(),
-  source: z.record(z.string(), z.string().max(1000)).optional(),
+  /* Attribution as the website sends it; `touches` (visit history) can be long. */
+  source: z.record(z.string(), z.string().max(8000)).optional(),
 });
 export type WebsiteTapInput = z.infer<typeof WebsiteTapSchema>;
 

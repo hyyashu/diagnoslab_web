@@ -40,6 +40,9 @@ export interface LeadRow {
   channel: LeadChannel;
   isPaid: boolean;
   campaign: string | null;
+  /* How they first found us (first visit in the last 90 days). */
+  firstChannel: LeadChannel | null;
+  firstCampaign: string | null;
   source: Record<string, unknown> | null;
   notes: string | null;
   createdAt: string;
@@ -90,6 +93,8 @@ export interface LeadDetail extends Omit<LeadRow, "enquiries" | "nextTaskAt"> {
   landingPage: string | null;
   clickId: string | null;
   clickIdType: string | null;
+  conversionSentAt: string | null;
+  conversionError: string | null;
   person: { id: number; name: string | null; phoneE164: string; email: string | null } | null;
   activities: Activity[];
   tasks: Task[];

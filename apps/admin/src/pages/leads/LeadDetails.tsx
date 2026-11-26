@@ -32,6 +32,7 @@ import {
   outcomeLabel,
   phoneDigits,
   statusLabel,
+  statusTone,
   type Activity,
   type CallOutcome,
   type LeadDetail,
@@ -135,7 +136,7 @@ function LeadBody({ lead, onOpenLead }: { lead: LeadDetail; onOpenLead: (id: num
       {canWork && (
         <>
           <Section title="Status and owner">
-            <PipelineControls lead={lead} />
+            <PipelineControls lead={lead} onBook={() => setBooking(true)} />
           </Section>
 
           <Section title="Log contact">
@@ -191,33 +192,46 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 
 /* ---------- Status, lost reason, owner ---------- */
 
-function PipelineControls({ lead }: { lead: LeadDetail }) {
+/* Status is a row of pills: one click to change. "Booked" opens the booking
+   form (what they booked and the total); "Lost" asks why first. */
+function PipelineControls({ lead, onBook }: { lead: LeadDetail; onBook: () => void }) {
   const canAssign = useCan()("leads:assign");
   const update = useUpdateLead(lead.id);
   const { data: owners = [] } = useOwners();
   const [pendingLost, setPendingLost] = useState(false);
 
+  const current = pendingLost ? "lost" : lead.status;
   const setStatus = (s: LeadStatus) => {
+    if (s === current) return;
     if (s === "lost") return setPendingLost(true); // ask why first
     setPendingLost(false);
+    if (s === "booked") return onBook();
     update.mutate({ status: s });
   };
 
   return (
     <div className="grid gap-3 sm:grid-cols-2">
-      <Field label="Status">
-        <Select value={pendingLost ? "lost" : lead.status} onValueChange={(v) => setStatus(v as LeadStatus)}>
-          <SelectTrigger>
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {leadStatusValues.map((s) => (
-              <SelectItem key={s} value={s}>
-                {statusLabel[s]}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+      <Field label="Status" className="sm:col-span-2">
+        <div className="flex flex-wrap gap-1.5" role="radiogroup" aria-label="Status">
+          {leadStatusValues.filter((s) => s !== "completed" || current === "completed").map((s) => (
+            <button
+              key={s}
+              type="button"
+              role="radio"
+              aria-checked={current === s}
+              disabled={update.isPending}
+              onClick={() => setStatus(s)}
+              className={cn(
+                "rounded-full px-3 py-1 text-sm font-medium ring-1 ring-inset transition-colors disabled:opacity-60",
+                current === s
+                  ? cn(statusTone[s], "ring-2")
+                  : "bg-background text-muted-foreground ring-border hover:bg-muted hover:text-foreground",
+              )}
+            >
+              {statusLabel[s]}
+            </button>
+          ))}
+        </div>
       </Field>
       <Field label="Owner">
         <Select
@@ -514,19 +528,89 @@ function FollowUps({ lead }: { lead: LeadDetail }) {
 
 /* ---------- What they asked about and where they came from ---------- */
 
+const clickIdName: Record<string, string> = {
+  gclid: "Google click ID",
+  gbraid: "Google click ID (iPhone app)",
+  wbraid: "Google click ID (iPhone web)",
+  fbclid: "Facebook click ID",
+};
+
+/* "/lp/x/?gclid=..." -> path and its query, so the page shows the path
+   and keeps the full link on hover. */
+function splitUrl(url: string | null) {
+  if (!url) return null;
+  try {
+    const u = new URL(url, "https://diagnoslab.in");
+    return { path: u.pathname, params: u.searchParams };
+  } catch {
+    return { path: url, params: new URLSearchParams() };
+  }
+}
+
+/* "https://www.google.com/" -> "google.com". */
+function siteName(url: string | null) {
+  if (!url) return null;
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return url;
+  }
+}
+
+/* Whether the booking went to Google Ads (via the conversions sheet). */
+function adsStatus(lead: LeadDetail): string | null {
+  const booked = lead.status === "booked" || lead.status === "completed";
+  if (lead.conversionSentAt && !lead.conversionError)
+    return `Booking sent, ${format(new Date(lead.conversionSentAt), "d MMM h:mm a")}`;
+  if (lead.conversionError) return `${lead.conversionSentAt ? "Not sent" : "Will retry"}: ${lead.conversionError}`;
+  if (!booked) return null;
+  const fromGoogle = lead.channel === "google_ads" || ["gclid", "gbraid", "wbraid"].includes(lead.clickIdType ?? "");
+  return fromGoogle ? "Booking will be sent in a few minutes" : "Not sent (not from Google Ads)";
+}
+
 function EnquiryFacts({ lead }: { lead: LeadDetail }) {
   const src = (lead.source ?? {}) as Record<string, unknown>;
-  const referrer = typeof src.referrer === "string" ? src.referrer : null;
+  const str = (v: unknown) => (typeof v === "string" && v ? v : null);
+  const landing = splitUrl(lead.landingPage);
+  /* Google Ads adds its own campaign ID to the link; shown when there is no UTM name. */
+  const adsCampaignId = landing?.params.get("gad_campaignid") ?? landing?.params.get("utm_id");
+  const campaign = lead.campaign ?? (adsCampaignId ? `ID ${adsCampaignId}` : null);
   const rows: [string, React.ReactNode][] = [
     ["Interested in", lead.interestName ? `${lead.interestName}${lead.interestPrice ? ` · ${inr(lead.interestPrice)}` : ""}` : null],
     ["Message", lead.message],
     ["Booked", lead.bookedItems?.length ? `${lead.bookedItems.map((i) => i.name).join(", ")} · ${inr(lead.bookedAmount)}` : null],
     ["Source", channelLabel[lead.channel] + (lead.isPaid ? " (paid)" : "")],
-    ["Campaign", lead.campaign],
+    ["Campaign", campaign],
+    [
+      "First found us",
+      lead.firstChannel && (lead.firstChannel !== lead.channel || (lead.firstCampaign ?? null) !== (lead.campaign ?? null))
+        ? [channelLabel[lead.firstChannel], lead.firstCampaign, str(src.first_visit_at)].filter(Boolean).join(" · ")
+        : null,
+    ],
     ["Keyword", lead.keyword],
-    ["Landing page", lead.landingPage],
-    ["Came from", referrer],
-    ["Ad click ID", lead.clickIdType ? `${lead.clickIdType} ✓` : null],
+    [
+      "Landing page",
+      landing ? (
+        <span title={lead.landingPage ?? undefined}>
+          {landing.path}
+          {landing.params.size > 0 && <span className="text-muted-foreground"> + ad tags</span>}
+        </span>
+      ) : null,
+    ],
+    ["Came from", siteName(str(src.referrer))],
+    [
+      "Ad click ID",
+      lead.clickIdType
+        ? `${clickIdName[lead.clickIdType] ?? lead.clickIdType} saved${
+            src.ads_click_from === "earlier_visit"
+              ? ` (from an earlier ad visit, ${str(src.ads_click_at) ?? ""})`
+              : src.ads_click_from === "google_cookie"
+                ? " (from Google's cookie)"
+                : ""
+          }`
+        : null,
+    ],
+    ["Google Ads", adsStatus(lead)],
     [
       "Tapped",
       lead.websiteTaps?.length

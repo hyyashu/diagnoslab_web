@@ -7,6 +7,7 @@ import { DrizzleService } from '../../db/drizzle.service';
 import { AccessService, can, type AccessUser } from '../../auth/access.service';
 import { BookLeadDto, CreateLeadDto, CreateTaskDto, LogActivityDto, UpdateLeadDto, UpdateTaskDto } from './lead-dto';
 import { deriveAttribution, deriveInterest, normalizePhone } from './lead-derive';
+import { LEAD_BOOKED } from './ads-upload.service';
 
 type Db = DrizzleService['db'];
 type Tx = Parameters<Parameters<Db['transaction']>[0]>[0];
@@ -63,6 +64,8 @@ export class LeadsService {
         channel: leads.channel,
         isPaid: leads.isPaid,
         campaign: leads.campaign,
+        firstChannel: leads.firstChannel,
+        firstCampaign: leads.firstCampaign,
         source: leads.source,
         notes: leads.notes,
         createdAt: leads.createdAt,
@@ -290,7 +293,7 @@ export class LeadsService {
   /* Marks the lead booked with what they bought and the total (₹). */
   async book(id: number, dto: BookLeadDto, user: AccessUser) {
     const userId = user.id;
-    return this.db.transaction(async (tx) => {
+    const booked = await this.db.transaction(async (tx) => {
       const current = await this.mustGet(tx, id, user);
       const now = new Date();
       await tx.insert(leadEvents).values({
@@ -314,6 +317,9 @@ export class LeadsService {
         .returning();
       return updated;
     });
+    /* Sends it to the Google Ads sheet (AdsUploadService). */
+    this.eventEmitter.emit(LEAD_BOOKED, { id });
+    return booked;
   }
 
   async createTask(leadId: number, dto: CreateTaskDto, user: AccessUser) {

@@ -16,20 +16,19 @@ import LeadsTable from "./LeadsTable";
 import { channelLabel, inr, statusLabel, type LeadChannel, type LeadRow, type LeadStatus } from "./leadTypes";
 import { useWebsiteTaps, useLeadList, useOpenTasks, useOwners } from "./useLeadsApi";
 
-type StatusFilter = "all" | "to_call" | LeadStatus;
+type StatusFilter = "all" | LeadStatus;
 type Period = "all" | "today" | "7" | "30";
 
 const statusTabs: { value: StatusFilter; label: string }[] = [
   { value: "all", label: "All" },
-  { value: "to_call", label: "To call" },
-  ...(["new", "no_answer", "contacted", "booked", "completed", "lost", "spam"] as LeadStatus[]).map((s) => ({
+  ...(["new", "no_answer", "contacted", "booked", "lost", "spam"] as LeadStatus[]).map((s) => ({
     value: s,
     label: statusLabel[s],
   })),
 ];
 
 const matchesStatus = (l: LeadRow, f: StatusFilter) =>
-  f === "all" ? true : f === "to_call" ? l.status === "new" || l.status === "no_answer" : l.status === f;
+  f === "all" ? true : l.status === f;
 
 const since = (p: Period) =>
   p === "today" ? startOfDay(new Date()) : p === "7" ? subDays(new Date(), 7) : p === "30" ? subDays(new Date(), 30) : null;
@@ -142,7 +141,15 @@ export default function LeadManagementScreen() {
       />
 
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-        <Stat label="To call" value={stats.toCall} hint={`${stats.fresh} never called`} onClick={() => setStatus("to_call")} />
+        <Stat
+          label="New"
+          value={stats.fresh}
+          hint={`${stats.toCall - stats.fresh} with no answer`}
+          onClick={() => {
+            setStatus("new");
+            setView("leads");
+          }}
+        />
         <Stat
           label="Follow-ups due today"
           value={stats.due}

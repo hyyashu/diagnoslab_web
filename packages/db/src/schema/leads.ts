@@ -100,6 +100,9 @@ export const leads = pgTable(
     landingPage: text('landing_page'),
     clickId: text('click_id'),
     clickIdType: text('click_id_type'),
+    /* How they first found us (first visit in the last 90 days). */
+    firstChannel: leadChannel('first_channel'),
+    firstCampaign: text('first_campaign'),
     conversionSentAt: timestamp('conversion_sent_at', { withTimezone: true }),
     conversionError: text('conversion_error'),
 

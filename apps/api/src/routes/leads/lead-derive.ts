@@ -67,8 +67,41 @@ function path(url: string | null) {
   }
 }
 
+/* Where the lead came from. The website sends the latest visit as plain
+   fields, the first visit as first_* fields, and the newest Google click of
+   the last 90 days as ads_click_id (see apps/website/src/lib/attribution).
+   channel/campaign describe the latest visit; firstChannel/firstCampaign the
+   first; clickId is the latest visit's own click, else ads_click_id. */
 export function deriveAttribution(raw: unknown) {
   const s = asObject(raw) ?? {};
+  const latest = deriveTouch(s);
+
+  const firstKeys = Object.keys(s).filter((k) => k.startsWith('first_') && k !== 'first_visit_at');
+  const first = firstKeys.length
+    ? deriveTouch(Object.fromEntries(firstKeys.map((k) => [k.slice('first_'.length), s[k]])))
+    : latest;
+
+  let { clickId, clickIdType } = latest;
+  const adsType = str(s.ads_click_id_type);
+  if (!clickId && str(s.ads_click_id) && adsType && ['gclid', 'gbraid', 'wbraid'].includes(adsType)) {
+    clickId = str(s.ads_click_id);
+    clickIdType = adsType;
+  }
+
+  return {
+    channel: latest.channel,
+    isPaid: latest.isPaid,
+    campaign: latest.campaign,
+    keyword: latest.keyword,
+    landingPage: latest.landingPage,
+    clickId,
+    clickIdType,
+    firstChannel: first.channel,
+    firstCampaign: first.campaign,
+  };
+}
+
+function deriveTouch(s: Record<string, unknown>) {
   const utmSource = str(s.utm_source);
   const utmMedium = str(s.utm_medium);
   const landingPage = path(str(s.landing_page));
