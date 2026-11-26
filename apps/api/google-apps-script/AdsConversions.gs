@@ -2,11 +2,10 @@
  * Diagnos Lab: bookings -> Google Ads conversions sheet.
  *
  * The API (apps/api/src/routes/leads/ads-upload.service.ts) posts each
- * Google Ads booking here; this script writes it as a row in one of two tabs
- * that Google Ads reads on a schedule:
- *   "Google Ads - click IDs"       (bookings with a Google click ID)
- *   "Google Ads - phone and email" (other Google Ads bookings, hashed)
- * The API creates the tabs and headers on its first call.
+ * Google Ads booking here; this script writes it as a row in the tab
+ * "Google Ads - bookings", which it keeps as the file's first tab (Google
+ * Ads' Sheets connector reads the first tab, row 1 as headers). The API
+ * creates the tab and its header row on its first call.
  *
  * Setup (once):
  * 1. In the Google Sheet: Extensions > Apps Script. Paste this file, save.
@@ -37,13 +36,21 @@ function doPost(e) {
     try {
       var ss = SpreadsheetApp.getActiveSpreadsheet();
       if (body.action === 'ensureTabs') {
+        /* Each tab is created if missing and kept as the FIRST tab of the
+           file: Google Ads' Sheets connector reads the first tab, with
+           row 1 as headers. */
         var created = [];
-        Object.keys(body.tabs || {}).forEach(function (name) {
-          if (ss.getSheetByName(name)) return;
-          var sheet = ss.insertSheet(name);
-          appendRows_(sheet, body.tabs[name]);
-          sheet.setFrozenRows(2);
-          created.push(name);
+        Object.keys(body.tabs || {}).reverse().forEach(function (name) {
+          var sheet = ss.getSheetByName(name);
+          if (!sheet) {
+            sheet = ss.insertSheet(name, 0);
+            appendRows_(sheet, body.tabs[name]);
+            sheet.setFrozenRows(1);
+            created.push(name);
+          } else if (sheet.getIndex() !== 1) {
+            ss.setActiveSheet(sheet);
+            ss.moveActiveSheet(1);
+          }
         });
         return reply_({ ok: true, created: created });
       }

@@ -10,15 +10,15 @@ import { SheetWebhookClient } from '../../google/sheet-webhook.client';
 export const LEAD_BOOKED = 'lead.booked';
 
 /* Bookings to Google Ads, through a Google Sheet that Google Ads reads on a
-   schedule (Goals > Conversions > Uploads > Schedule > Google Sheets).
+   schedule (Goals > Conversions > offline > Google Sheets connector).
 
-   One row per booking, in one of two tabs:
-   - CLICKS: bookings with a Google click ID (gclid).
-   - PHONE_EMAIL: other Google Ads bookings (iPhone click IDs gbraid/wbraid, or
-     an ad visit without a click ID), matched by Google on the hashed
-     phone number and email ("enhanced conversions for leads").
-   A booking goes in only one tab, so Google never counts it twice.
-   Organic bookings are not sent.
+   One tab, "Google Ads - bookings", kept as the file's FIRST tab with plain
+   headers in row 1 (the connector reads the first tab, row 1 as headers).
+   One row per Google Ads booking, with every identifier we have: the click
+   ID in its own column (gclid / gbraid / wbraid) and the SHA-256 hashed
+   email and phone (enhanced conversions for leads). Booking ID is the
+   lead id, so a row is never counted twice. The conversion action is
+   chosen in the connector, so no name column. Organic bookings are not sent.
 
    A booking is sent once: leads.conversion_sent_at is set when its row is
    written; a failure clears it and stores the reason in conversion_error,
@@ -26,12 +26,9 @@ export const LEAD_BOOKED = 'lead.booked';
    Does nothing until GOOGLE_SHEET_WEBHOOK_URL and _SECRET are set (the
    sheet's Apps Script web app: apps/api/google-apps-script). */
 
-const CLICKS = 'Google Ads - click IDs';
-const PHONE_EMAIL = 'Google Ads - phone and email';
-const PARAMS_ROW = ['Parameters:TimeZone=Asia/Calcutta'];
+const TAB = 'Google Ads - bookings';
 const HEADERS: Record<string, string[][]> = {
-  [CLICKS]: [PARAMS_ROW, ['Google Click ID', 'Conversion Name', 'Conversion Time', 'Conversion Value', 'Conversion Currency']],
-  [PHONE_EMAIL]: [PARAMS_ROW, ['Email', 'Phone Number', 'Conversion Name', 'Conversion Time', 'Conversion Value', 'Conversion Currency']],
+  [TAB]: [['Booking ID', 'Conversion Time', 'GCLID', 'GBRAID', 'WBRAID', 'Email SHA256', 'Phone SHA256', 'Conversion Value', 'Currency']],
 };
 /* Google Ads only accepts conversions within 90 days of the ad click. */
 const MAX_AGE_DAYS = 90;
@@ -43,7 +40,6 @@ type Lead = typeof leads.$inferSelect;
 export class AdsUploadService implements OnModuleInit, OnModuleDestroy {
   private readonly logger = new Logger(AdsUploadService.name);
   private readonly sheets: SheetWebhookClient | null;
-  private readonly conversionName: string;
   private timer: NodeJS.Timeout | null = null;
   private running: Promise<void> | null = null;
   private again = false;
@@ -56,7 +52,6 @@ export class AdsUploadService implements OnModuleInit, OnModuleDestroy {
     const url = config.get<string>('GOOGLE_SHEET_WEBHOOK_URL');
     const secret = config.get<string>('GOOGLE_SHEET_WEBHOOK_SECRET');
     this.sheets = url && secret ? new SheetWebhookClient(url, secret) : null;
-    this.conversionName = config.get<string>('GOOGLE_ADS_CONVERSION_NAME') || 'Booked Patient';
   }
 
   onModuleInit() {
@@ -123,7 +118,7 @@ export class AdsUploadService implements OnModuleInit, OnModuleDestroy {
         .returning();
       if (!claimed.length) return;
 
-      const byTab: Record<string, { lead: Lead; row: (string | number)[] }[]> = { [CLICKS]: [], [PHONE_EMAIL]: [] };
+      const byTab: Record<string, { lead: Lead; row: (string | number)[] }[]> = { [TAB]: [] };
       const skipped: Lead[] = [];
       for (const lead of claimed) {
         const out = this.row(lead);
@@ -174,16 +169,26 @@ export class AdsUploadService implements OnModuleInit, OnModuleDestroy {
   }
 
   private row(lead: Lead): { tab: string; row: (string | number)[] } | null {
-    const time = istTime(lead.bookedAt!);
-    const value = lead.bookedAmount ?? 0;
-    if (lead.clickIdType === 'gclid' && lead.clickId) {
-      return { tab: CLICKS, row: [lead.clickId, this.conversionName, time, value, 'INR'] };
-    }
+    const id = (type: string) => (lead.clickIdType === type && lead.clickId ? lead.clickId : '');
     const email = hashEmail(lead.email);
     const phone = lead.phoneE164 ? sha256(lead.phoneE164) : '';
-    if (!email && !phone) return null;
-    return { tab: PHONE_EMAIL, row: [email, phone, this.conversionName, time, value, 'INR'] };
+    if (!lead.clickId && !email && !phone) return null;
+    return {
+      tab: TAB,
+      row: [
+        `DL-${lead.id}`,
+        istTime(lead.bookedAt!),
+        id('gclid'),
+        id('gbraid'),
+        id('wbraid'),
+        email,
+        phone,
+        lead.bookedAmount ?? 0,
+        'INR',
+      ],
+    };
   }
+
 }
 
 const sha256 = (s: string) => createHash('sha256').update(s).digest('hex');
@@ -197,7 +202,8 @@ function hashEmail(raw: string | null) {
   return sha256(normal);
 }
 
-/* "2026-11-26 15:04:05" in India time, as the sheet's TimeZone row says. */
+/* "2026-11-26T15:04:05+05:30": India time with its offset, so the
+   connector never has to guess the time zone. */
 function istTime(d: Date) {
-  return new Date(d.getTime() + 5.5 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
+  return new Date(d.getTime() + 5.5 * 3600 * 1000).toISOString().slice(0, 19) + '+05:30';
 }
