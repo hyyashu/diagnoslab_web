@@ -169,10 +169,18 @@ export class AdsUploadService implements OnModuleInit, OnModuleDestroy {
   }
 
   private row(lead: Lead): { tab: string; row: (string | number)[] } | null {
-    const id = (type: string) => (lead.clickIdType === type && lead.clickId ? lead.clickId : '');
+    /* An ad link can carry gclid and gbraid/wbraid together; each goes in
+       its own column. The lead's main click ID, plus any others the same
+       visit brought (kept in `source`). */
+    const src = (lead.source ?? {}) as Record<string, unknown>;
+    const id = (type: string) => {
+      if (lead.clickIdType === type && lead.clickId) return lead.clickId;
+      const v = src[type];
+      return typeof v === 'string' && v.trim() ? v.trim() : '';
+    };
     const email = hashEmail(lead.email);
     const phone = lead.phoneE164 ? sha256(lead.phoneE164) : '';
-    if (!lead.clickId && !email && !phone) return null;
+    if (!id('gclid') && !id('gbraid') && !id('wbraid') && !email && !phone) return null;
     return {
       tab: TAB,
       row: [

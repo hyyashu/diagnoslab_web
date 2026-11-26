@@ -130,6 +130,11 @@ export class WebsiteTapsService {
           landingPage: existing.landingPage ?? a.landingPage,
           clickId: a.clickId,
           clickIdType: a.clickIdType,
+          /* Keeps every click ID of that visit (gclid + gbraid/wbraid) for the Google Ads sheet. */
+          source: {
+            ...((existing.source ?? {}) as Record<string, unknown>),
+            ...Object.fromEntries(['gclid', 'gbraid', 'wbraid'].filter((k) => source[k]).map((k) => [k, source[k]])),
+          },
         });
       }
       if (lead.status === 'new' || lead.status === 'no_answer') {
