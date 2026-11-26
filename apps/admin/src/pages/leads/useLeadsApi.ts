@@ -8,7 +8,7 @@ import type {
   UpdateLeadInput,
 } from "@diagno/schemas";
 import api from "@/lib/api";
-import type { LeadDetail, LeadRow, OpenTask } from "./leadTypes";
+import type { WebsiteTap, LeadDetail, LeadRow, OpenTask } from "./leadTypes";
 
 type Envelope<T> = { success: boolean; message: string; data: T };
 
@@ -86,3 +86,22 @@ export const useCreateLead = () =>
       api.post<Envelope<{ id: number }>>("/leads", v).then((r) => r.data.data),
     "Lead added",
   );
+
+/* Website Call / WhatsApp taps waiting to be matched, or a ref code lookup. */
+export const useWebsiteTaps = (ref?: string, enabled = true) =>
+  useQuery({
+    queryKey: ["leads", "taps", ref ?? ""],
+    queryFn: () => get<WebsiteTap[]>(`/leads/taps${ref ? `?ref=${encodeURIComponent(ref)}` : ""}`),
+    refetchInterval: 60_000,
+    enabled,
+  });
+
+export const useMatchTap = () =>
+  useLeadWrite(({ id, phone, name }: { id: number; phone: string; name?: string }) =>
+    api
+      .post<Envelope<{ leadId: number; reused: boolean }>>(`/leads/taps/${id}/match`, { phone, name: name || undefined })
+      .then((r) => r.data.data),
+  );
+
+export const useDismissTap = () =>
+  useLeadWrite((id: number) => api.post(`/leads/taps/${id}/dismiss`), "Hidden");

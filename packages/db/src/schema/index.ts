@@ -15,3 +15,4 @@ export * from './auditLog';
 export * from './billing';
 export * from './common';
 export * from './push';
+export * from './websiteTaps';

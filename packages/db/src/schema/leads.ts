@@ -50,7 +50,7 @@ export const leadChannel = pgEnum('lead_channel', [
 export const leadInterestKind = pgEnum('lead_interest_kind', ['test', 'package', 'scan', 'general']);
 
 /* One row per phone number, so repeat enquiries belong to one person. */
-export const people = pgTable('people', {
+export const contacts = pgTable('contacts', {
   id: serial('id').primaryKey(),
   name: text('name'),
   phoneE164: text('phone_e164').notNull().unique(),
@@ -60,12 +60,12 @@ export const people = pgTable('people', {
 });
 
 /* One row per enquiry. Its current state lives here; what happened over
-   time lives in lead_activities. */
+   time lives in lead_events. */
 export const leads = pgTable(
   'leads',
   {
     id: serial('id').primaryKey(),
-    personId: integer('person_id').references(() => people.id, { onDelete: 'set null' }),
+    personId: integer('person_id').references(() => contacts.id, { onDelete: 'set null' }),
 
     /* As typed on the form. */
     name: text('name'),
@@ -144,8 +144,8 @@ export const callOutcome = pgEnum('call_outcome', [
 ]);
 
 /* The timeline: one row per thing that happened to a lead. */
-export const leadActivities = pgTable(
-  'lead_activities',
+export const leadEvents = pgTable(
+  'lead_events',
   {
     id: serial('id').primaryKey(),
     leadId: integer('lead_id')
@@ -163,8 +163,8 @@ export const leadActivities = pgTable(
 );
 
 /* Follow-ups: "call Ravi back tomorrow 10 AM". */
-export const tasks = pgTable(
-  'tasks',
+export const leadFollowups = pgTable(
+  'lead_followups',
   {
     id: serial('id').primaryKey(),
     leadId: integer('lead_id')

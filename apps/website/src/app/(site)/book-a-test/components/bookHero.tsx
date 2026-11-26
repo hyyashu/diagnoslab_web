@@ -29,12 +29,8 @@ export default function BookHero() {
               NABL &amp; ISO accredited lab · Since 2009
             </p>
             <h1 className="font-display text-[27px] font-extrabold leading-[1.12] tracking-[-0.03em] text-dl-ink md:text-[40px] xl:text-[46px] xl:leading-[1.08]">
-              Book a blood test in Jamshedpur
+              Book a test in Jamshedpur
             </h1>
-            <p className="max-w-[600px] text-sm leading-normal text-dl-ink-2 md:text-[17px] md:leading-[1.55]">
-              We collect your sample at home, or you can walk in at our Sakchi lab. One quick call confirms your test,
-              price and slot.
-            </p>
           </div>
         </div>
 

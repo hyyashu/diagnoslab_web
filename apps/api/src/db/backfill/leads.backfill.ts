@@ -45,9 +45,9 @@ async function main() {
     }
     for (const [e164, p] of people) {
       await db.query(
-        `insert into people (name, phone_e164, email, created_at, updated_at) values ($1, $2, $3, $4, now())
-         on conflict (phone_e164) do update set name = coalesce(excluded.name, people.name),
-           email = coalesce(excluded.email, people.email), updated_at = now()`,
+        `insert into contacts (name, phone_e164, email, created_at, updated_at) values ($1, $2, $3, $4, now())
+         on conflict (phone_e164) do update set name = coalesce(excluded.name, contacts.name),
+           email = coalesce(excluded.email, contacts.email), updated_at = now()`,
         [p.name, e164, p.email, p.first],
       );
     }
@@ -58,7 +58,7 @@ async function main() {
       const i = deriveInterest(r.source);
       await db.query(
         `update leads set phone_e164 = $2,
-           person_id = (select id from people where phone_e164 = $2),
+           person_id = (select id from contacts where phone_e164 = $2),
            channel = $3, is_paid = $4, campaign = $5, keyword = $6, landing_page = $7,
            click_id = $8, click_id_type = $9,
            interest_kind = $10, interest_name = $11, interest_price = $12
@@ -66,9 +66,9 @@ async function main() {
         [r.id, e164, a.channel, a.isPaid, a.campaign, a.keyword, a.landingPage, a.clickId, a.clickIdType, i.interestKind, i.interestName, i.interestPrice],
       );
       await db.query(
-        `insert into lead_activities (lead_id, type, data, created_at)
+        `insert into lead_events (lead_id, type, data, created_at)
          select $1, 'created', $2::jsonb, $3
-         where not exists (select 1 from lead_activities where lead_id = $1 and type = 'created')`,
+         where not exists (select 1 from lead_events where lead_id = $1 and type = 'created')`,
         [r.id, JSON.stringify({ channel: a.channel }), r.created_at],
       );
     }
@@ -79,10 +79,10 @@ async function main() {
       `select channel, count(*)::int n, count(*) filter (where is_paid)::int paid from leads group by channel order by n desc`,
     );
     const counts = await db.query(
-      `select (select count(*) from people)::int people,
+      `select (select count(*) from contacts)::int people,
               (select count(*) from leads where person_id is null)::int no_person,
               (select count(*) from leads where interest_kind is not null)::int with_interest,
-              (select count(*) from lead_activities)::int activities`,
+              (select count(*) from lead_events)::int activities`,
     );
     console.log('Backfill done.', counts.rows[0]);
     console.table(summary.rows);

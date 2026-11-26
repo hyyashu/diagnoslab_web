@@ -94,6 +94,28 @@ export interface LeadDetail extends Omit<LeadRow, "enquiries" | "nextTaskAt"> {
   activities: Activity[];
   tasks: Task[];
   otherLeads: { id: number; status: LeadStatus; interestName: string | null; channel: LeadChannel; createdAt: string }[];
+  websiteTaps: { id: number; channel: "call" | "whatsapp"; refCode: string | null; clickedAt: string; page: string | null; clickIdType: string | null }[];
+}
+
+/* A tap on a Call / WhatsApp link on the website (GET /leads/taps). */
+export interface WebsiteTap {
+  id: number;
+  channel: "call" | "whatsapp";
+  refCode: string | null;
+  clickedAt: string;
+  page: string | null;
+  clickId: string | null;
+  clickIdType: string | null;
+  source: Record<string, string> | null;
+  leadId: number | null;
+  leadName: string | null;
+  matchedAt: string | null;
+  matchedByName: string | null;
+  dismissedAt: string | null;
+  from: LeadChannel;
+  isPaid: boolean;
+  campaign: string | null;
+  landingPage: string | null;
 }
 
 export interface OpenTask {

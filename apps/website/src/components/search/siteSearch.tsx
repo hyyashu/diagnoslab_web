@@ -2,6 +2,7 @@
 
 import { useId, useState, useSyncExternalStore } from "react";
 import { useRouter } from "next/navigation";
+import posthog from "posthog-js";
 import { Mic, Search } from "lucide-react";
 import type { SearchEntry } from "@/app/search-index.json/route";
 import { buttonClass } from "@/components/ui/button";
@@ -75,6 +76,16 @@ export default function SiteSearch({ variant }: SiteSearchProps) {
   };
 
   const go = (entry?: SearchEntry) => {
+    if (
+      process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN &&
+      process.env.NEXT_PUBLIC_POSTHOG_HOST
+    ) {
+      posthog.capture("catalog_search_selected", {
+        result_count: results.length,
+        result_type: entry?.k ?? "browse_all",
+        search_surface: variant,
+      });
+    }
     setOpen(false);
     router.push(entry ? entry.h : "/tests/#tests-section");
   };

@@ -105,3 +105,22 @@ export const PushSubscribeSchema = z.object({
 });
 export type PushSubscribeInput = z.infer<typeof PushSubscribeSchema>;
 export const PushUnsubscribeSchema = z.object({ endpoint: z.url() });
+
+/* POST /leads/taps (public): a tap on a Call or WhatsApp link. */
+export const WebsiteTapSchema = z.object({
+  channel: z.enum(['call', 'whatsapp']),
+  refCode: z
+    .string()
+    .regex(/^DL-[A-Z0-9]{4}$/)
+    .optional(),
+  page: z.string().max(500).optional(),
+  source: z.record(z.string(), z.string().max(1000)).optional(),
+});
+export type WebsiteTapInput = z.infer<typeof WebsiteTapSchema>;
+
+/* Staff link a tap to the person who called or messaged. */
+export const MatchTapSchema = z.object({
+  phone: z.string().trim().min(10).max(20),
+  name: z.string().trim().max(100).optional(),
+});
+export type MatchTapInput = z.infer<typeof MatchTapSchema>;

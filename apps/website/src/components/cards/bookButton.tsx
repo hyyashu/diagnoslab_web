@@ -2,6 +2,7 @@
 
 import { useState, type ReactNode } from "react";
 import dynamic from "next/dynamic";
+import posthog from "posthog-js";
 
 /* The only client-side part of a card. The contact sheet is mounted when
    the button is pressed rather than once per card, so a page of 100 cards
@@ -30,7 +31,15 @@ export default function BookButton({ children, className, form }: BookButtonProp
   return (
     <>
       <button
-        onClick={() => setOpen(true)}
+        onClick={() => {
+          if (
+            process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN &&
+            process.env.NEXT_PUBLIC_POSTHOG_HOST
+          ) {
+            posthog.capture("booking_sheet_opened");
+          }
+          setOpen(true);
+        }}
         onPointerEnter={loadSheet}
         onTouchStart={loadSheet}
         onFocus={loadSheet}

@@ -527,6 +527,17 @@ function EnquiryFacts({ lead }: { lead: LeadDetail }) {
     ["Landing page", lead.landingPage],
     ["Came from", referrer],
     ["Ad click ID", lead.clickIdType ? `${lead.clickIdType} ✓` : null],
+    [
+      "Tapped",
+      lead.websiteTaps?.length
+        ? lead.websiteTaps
+            .map(
+              (c) =>
+                `${c.channel === "call" ? "Call" : "WhatsApp"}${c.refCode ? ` (${c.refCode})` : ""} on ${c.page ?? "website"}, ${format(new Date(c.clickedAt), "d MMM h:mm a")}`,
+            )
+            .join(" · ")
+        : null,
+    ],
     ["Contact attempts", lead.contactAttempts ? `${lead.contactAttempts}, last ${formatDistanceToNowStrict(new Date(lead.lastContactedAt!), { addSuffix: true })}` : null],
   ];
   return (

@@ -2,6 +2,8 @@ import { createZodDto } from 'nestjs-zod';
 import {
   AdminCreateLeadSchema,
   BookLeadSchema,
+  WebsiteTapSchema,
+  MatchTapSchema,
   CreateTaskSchema,
   LogActivitySchema,
   UpdateLeadSchema,
@@ -16,3 +18,5 @@ export class LogActivityDto extends createZodDto(LogActivitySchema) {}
 export class BookLeadDto extends createZodDto(BookLeadSchema) {}
 export class CreateTaskDto extends createZodDto(CreateTaskSchema) {}
 export class UpdateTaskDto extends createZodDto(UpdateTaskSchema) {}
+export class WebsiteTapDto extends createZodDto(WebsiteTapSchema) {}
+export class MatchTapDto extends createZodDto(MatchTapSchema) {}

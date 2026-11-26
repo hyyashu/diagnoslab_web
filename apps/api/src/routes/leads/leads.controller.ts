@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { LeadsService } from './leads.service';
-import { BookLeadDto, CreateLeadDto, CreateTaskDto, LogActivityDto, UpdateLeadDto, UpdateTaskDto } from './lead-dto';
+import { BookLeadDto, WebsiteTapDto, CreateLeadDto, CreateTaskDto, LogActivityDto, MatchTapDto, UpdateLeadDto, UpdateTaskDto } from './lead-dto';
+import { WebsiteTapsService } from './website-taps.service';
 import { Message } from '../../common/decorators/message.decorator';
 import { Public } from 'src/auth/public.decorator';
 import { Permission } from 'src/auth/permissions.decorator';
@@ -12,7 +13,10 @@ import type { AccessUser } from 'src/auth/access.service';
 @ApiTags('leads')
 @Controller('leads')
 export class LeadsController {
-  constructor(private readonly leadsService: LeadsService) {}
+  constructor(
+    private readonly leadsService: LeadsService,
+    private readonly taps: WebsiteTapsService,
+  ) {}
 
   @Get()
   @Permission('leads:read:all', 'leads:read:own')
@@ -34,6 +38,38 @@ export class LeadsController {
   @Message('Tasks Fetched Successfully')
   openTasks(@User() user: AccessUser) {
     return this.leadsService.openTasks(user);
+  }
+
+  /* Taps on Call / WhatsApp links. Recording is public (the website);
+     seeing and matching them needs the full lead list. */
+  @Public()
+  @Post('taps')
+  @Message('Tap Recorded')
+  @ApiBody({ type: WebsiteTapDto })
+  recordTap(@Body() dto: WebsiteTapDto) {
+    return this.taps.record(dto);
+  }
+
+  @Get('taps')
+  @Permission('leads:read:all')
+  @Message('Taps Fetched Successfully')
+  listTaps(@Query('ref') ref?: string) {
+    return this.taps.list(ref?.trim() || undefined);
+  }
+
+  @Post('taps/:tapId/match')
+  @Permission('leads:read:all')
+  @Message('Tap Matched')
+  @ApiBody({ type: MatchTapDto })
+  matchTap(@Param('tapId', ParseIntPipe) tapId: number, @Body() dto: MatchTapDto, @User() user: AccessUser) {
+    return this.taps.match(tapId, dto, user);
+  }
+
+  @Post('taps/:tapId/dismiss')
+  @Permission('leads:read:all')
+  @Message('Tap Hidden')
+  dismissTap(@Param('tapId', ParseIntPipe) tapId: number) {
+    return this.taps.dismiss(tapId);
   }
 
   @Patch('tasks/:taskId')

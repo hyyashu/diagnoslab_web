@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { endOfToday, isAfter, startOfDay, subDays } from "date-fns";
-import { Plus, RefreshCw, Search } from "lucide-react";
+import { PhoneIncoming, Plus, RefreshCw, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -9,11 +9,12 @@ import { cn } from "@/lib/utils";
 import { useAuthStore, useCan } from "@/store/authStore";
 import PageHeader from "@/components/PageHeader";
 import AddLeadSheet from "./AddLeadSheet";
+import WebsiteTaps from "./WebsiteTaps";
 import FollowUpList from "./FollowUpList";
 import LeadDetailsSheet from "./LeadDetails";
 import LeadsTable from "./LeadsTable";
 import { channelLabel, inr, statusLabel, type LeadChannel, type LeadRow, type LeadStatus } from "./leadTypes";
-import { useLeadList, useOpenTasks, useOwners } from "./useLeadsApi";
+import { useWebsiteTaps, useLeadList, useOpenTasks, useOwners } from "./useLeadsApi";
 
 type StatusFilter = "all" | "to_call" | LeadStatus;
 type Period = "all" | "today" | "7" | "30";
@@ -44,6 +45,15 @@ export default function LeadManagementScreen() {
       else p.set("lead", String(id));
       return p;
     });
+  /* "Calls & WhatsApp": website taps to match (needs the full lead list). */
+  const canTaps = can("leads:read:all");
+  const view = canTaps && params.get("view") === "taps" ? "taps" : "leads";
+  const setView = (v: "leads" | "taps") =>
+    setParams((p) => {
+      if (v === "taps") p.set("view", "taps");
+      else p.delete("view");
+      return p;
+    });
 
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState<StatusFilter>("all");
@@ -56,6 +66,7 @@ export default function LeadManagementScreen() {
   const { data: leads = [], isLoading, error, refetch, isFetching } = useLeadList();
   const { data: tasks = [] } = useOpenTasks();
   const { data: owners = [] } = useOwners();
+  const { data: openTaps = [] } = useWebsiteTaps(undefined, canTaps);
 
   /* Everything except the status filter, so the tab counts stay useful. */
   const scoped = useMemo(() => {
@@ -160,6 +171,7 @@ export default function LeadManagementScreen() {
       )}
 
       <div className="space-y-3">
+        {view === "leads" && (
         <div className="flex flex-wrap gap-2">
           <div className="relative min-w-[220px] flex-1">
             <Search className="pointer-events-none absolute left-2.5 top-2.5 size-4 text-muted-foreground" />
@@ -211,35 +223,73 @@ export default function LeadManagementScreen() {
             </SelectContent>
           </Select>
         </div>
+        )}
 
         <div className="-mx-1 flex gap-1 overflow-x-auto px-1 pb-1">
           {statusTabs.map((t) => (
             <button
               key={t.value}
-              onClick={() => setStatus(t.value)}
+              onClick={() => {
+                setStatus(t.value);
+                setView("leads");
+              }}
               className={cn(
                 "flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1 text-sm transition-colors",
-                status === t.value ? "border-primary bg-primary text-primary-foreground" : "hover:bg-muted",
+                view === "leads" && status === t.value ? "border-primary bg-primary text-primary-foreground" : "hover:bg-muted",
               )}
             >
               {t.label}
-              <span className={cn("tabular-nums text-xs", status === t.value ? "opacity-80" : "text-muted-foreground")}>
+              <span
+                className={cn(
+                  "tabular-nums text-xs",
+                  view === "leads" && status === t.value ? "opacity-80" : "text-muted-foreground",
+                )}
+              >
                 {counts[t.value]}
               </span>
             </button>
           ))}
+          {canTaps && (
+            <>
+              <span className="mx-1 w-px shrink-0 bg-border" aria-hidden />
+              <button
+                onClick={() => setView("taps")}
+                className={cn(
+                  "flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1 text-sm transition-colors",
+                  view === "taps" ? "border-primary bg-primary text-primary-foreground" : "hover:bg-muted",
+                )}
+              >
+                <PhoneIncoming className="size-3.5" />
+                Calls &amp; WhatsApp
+                {openTaps.length > 0 && (
+                  <span
+                    className={cn(
+                      "rounded-full px-1.5 text-xs font-semibold tabular-nums",
+                      view === "taps" ? "bg-primary-foreground/20" : "bg-rose-600 text-white",
+                    )}
+                  >
+                    {openTaps.length}
+                  </span>
+                )}
+              </button>
+            </>
+          )}
         </div>
       </div>
 
-      <LeadsTable
-        leads={shown}
-        loading={isLoading}
-        error={error}
-        page={page}
-        setPage={setPage}
-        selectedId={openId}
-        onOpen={open}
-      />
+      {view === "taps" ? (
+        <WebsiteTaps onOpenLead={open} />
+      ) : (
+        <LeadsTable
+          leads={shown}
+          loading={isLoading}
+          error={error}
+          page={page}
+          setPage={setPage}
+          selectedId={openId}
+          onOpen={open}
+        />
+      )}
 
       <LeadDetailsSheet id={openId} onClose={() => open(null)} onOpenLead={open} />
     </div>

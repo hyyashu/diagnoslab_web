@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from "react";
+import posthog from "posthog-js";
 import { submitLeadForm, type LeadIntent } from "@/lib/api";
 import { attribution, istLabel } from "@/lib/attribution";
 import { THANK_YOU_PATH, markLeadSubmitted, saveEnhancedConversion } from "@/lib/leadConversion";
@@ -86,6 +87,15 @@ export function useLeadForm() {
           source: { ...attribution(), ...lead.source, submitted_at: istLabel() },
           ...(lead.intent && { lead_intent: lead.intent }),
         });
+        if (
+          process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN &&
+          process.env.NEXT_PUBLIC_POSTHOG_HOST
+        ) {
+          const leadIntent = lead.intent ?? "booking";
+
+          posthog.capture("lead_submitted", { lead_intent: leadIntent });
+          posthog.logger.info("lead submission accepted", { lead_intent: leadIntent });
+        }
         setName("");
         setPhone("");
         setSubmitted(true);
@@ -97,6 +107,12 @@ export function useLeadForm() {
         await saveEnhancedConversion(phone, lead.email);
         window.location.assign(THANK_YOU_PATH);
       } catch {
+        if (
+          process.env.NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN &&
+          process.env.NEXT_PUBLIC_POSTHOG_HOST
+        ) {
+          posthog.logger.error("lead submission failed");
+        }
         setError("Something went wrong. Please try again.");
       } finally {
         setSubmitting(false);

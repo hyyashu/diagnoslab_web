@@ -1,7 +1,7 @@
 import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { and, asc, desc, eq, isNull, or, sql, type SQL } from 'drizzle-orm';
-import { leadActivities, leads, people, tasks, users } from '@diagno/db';
+import { websiteTaps, leadEvents, leads, contacts, leadFollowups, users } from '@diagno/db';
 import type { LeadStatus } from '@diagno/schemas';
 import { DrizzleService } from '../../db/drizzle.service';
 import { AccessService, can, type AccessUser } from '../../auth/access.service';
@@ -40,7 +40,7 @@ export class LeadsService {
      many times this person has enquired, and the next open follow-up. */
   async getLeads(user: AccessUser) {
     const enquiries = sql<number>`(select count(*)::int from ${leads} l2 where l2.person_id = ${leads.personId})`;
-    const nextTaskAt = sql<Date | null>`(select min(${tasks.dueAt}) from ${tasks} where ${tasks.leadId} = ${leads.id} and ${tasks.doneAt} is null)`;
+    const nextTaskAt = sql<Date | null>`(select min(${leadFollowups.dueAt}) from ${leadFollowups} where ${leadFollowups.leadId} = ${leads.id} and ${leadFollowups.doneAt} is null)`;
     return this.db
       .select({
         id: leads.id,
@@ -88,22 +88,22 @@ export class LeadsService {
     if (!lead) throw new NotFoundException('Lead not found');
     this.assertCanSee(user, lead.lead);
 
-    const [person, activities, openTasks, otherLeads] = await Promise.all([
+    const [person, activities, openTasks, otherLeads, clicks] = await Promise.all([
       lead.lead.personId
-        ? this.db.select().from(people).where(eq(people.id, lead.lead.personId)).then((r) => r[0] ?? null)
+        ? this.db.select().from(contacts).where(eq(contacts.id, lead.lead.personId)).then((r) => r[0] ?? null)
         : null,
       this.db
-        .select({ activity: leadActivities, userName: users.name })
-        .from(leadActivities)
-        .leftJoin(users, eq(users.id, leadActivities.userId))
-        .where(eq(leadActivities.leadId, id))
-        .orderBy(desc(leadActivities.createdAt), desc(leadActivities.id)),
+        .select({ activity: leadEvents, userName: users.name })
+        .from(leadEvents)
+        .leftJoin(users, eq(users.id, leadEvents.userId))
+        .where(eq(leadEvents.leadId, id))
+        .orderBy(desc(leadEvents.createdAt), desc(leadEvents.id)),
       this.db
-        .select({ task: tasks, assigneeName: users.name })
-        .from(tasks)
-        .leftJoin(users, eq(users.id, tasks.assignedTo))
-        .where(eq(tasks.leadId, id))
-        .orderBy(asc(tasks.doneAt), asc(tasks.dueAt)),
+        .select({ task: leadFollowups, assigneeName: users.name })
+        .from(leadFollowups)
+        .leftJoin(users, eq(users.id, leadFollowups.assignedTo))
+        .where(eq(leadFollowups.leadId, id))
+        .orderBy(asc(leadFollowups.doneAt), asc(leadFollowups.dueAt)),
       lead.lead.personId
         ? this.db
             .select({
@@ -117,6 +117,18 @@ export class LeadsService {
             .where(and(eq(leads.personId, lead.lead.personId), sql`${leads.id} <> ${id}`, this.scope(user)))
             .orderBy(desc(leads.createdAt))
         : [],
+      this.db
+        .select({
+          id: websiteTaps.id,
+          channel: websiteTaps.channel,
+          refCode: websiteTaps.refCode,
+          clickedAt: websiteTaps.clickedAt,
+          page: websiteTaps.page,
+          clickIdType: websiteTaps.clickIdType,
+        })
+        .from(websiteTaps)
+        .where(eq(websiteTaps.leadId, id))
+        .orderBy(desc(websiteTaps.clickedAt)),
     ]);
 
     return {
@@ -126,6 +138,7 @@ export class LeadsService {
       activities: activities.map((a) => ({ ...a.activity, userName: a.userName })),
       tasks: openTasks.map((t) => ({ ...t.task, assigneeName: t.assigneeName })),
       otherLeads,
+      websiteTaps: clicks,
     };
   }
 
@@ -140,17 +153,17 @@ export class LeadsService {
       let personId: number | null = null;
       if (phoneE164) {
         const [person] = await tx
-          .insert(people)
+          .insert(contacts)
           .values({ phoneE164, name: dto.name?.trim() || null, email: dto.email || null })
           .onConflictDoUpdate({
-            target: people.phoneE164,
+            target: contacts.phoneE164,
             set: {
-              name: sql`coalesce(excluded.name, ${people.name})`,
-              email: sql`coalesce(excluded.email, ${people.email})`,
+              name: sql`coalesce(excluded.name, ${contacts.name})`,
+              email: sql`coalesce(excluded.email, ${contacts.email})`,
               updatedAt: new Date(),
             },
           })
-          .returning({ id: people.id });
+          .returning({ id: contacts.id });
         personId = person.id;
       }
 
@@ -169,7 +182,7 @@ export class LeadsService {
         })
         .returning();
 
-      await tx.insert(leadActivities).values({
+      await tx.insert(leadEvents).values({
         leadId: created.id,
         userId: userId ?? null,
         type: 'created',
@@ -205,7 +218,7 @@ export class LeadsService {
       if (dto.status && dto.status !== current.status) {
         changes.status = dto.status;
         if (dto.status !== 'lost') changes.lostReason = null;
-        await tx.insert(leadActivities).values({
+        await tx.insert(leadEvents).values({
           leadId: id,
           userId,
           type: 'status_change',
@@ -217,7 +230,7 @@ export class LeadsService {
       }
       if (dto.assignedTo !== undefined && dto.assignedTo !== current.assignedTo) {
         changes.assignedTo = dto.assignedTo;
-        await tx.insert(leadActivities).values({
+        await tx.insert(leadEvents).values({
           leadId: id,
           userId,
           type: 'assigned',
@@ -239,7 +252,7 @@ export class LeadsService {
       const current = await this.mustGet(tx, id, user);
       const now = new Date();
       const [activity] = await tx
-        .insert(leadActivities)
+        .insert(leadEvents)
         .values({ leadId: id, userId, type: dto.type, outcome: dto.outcome, note: dto.note })
         .returning();
 
@@ -262,7 +275,7 @@ export class LeadsService {
       if (dto.type === 'whatsapp' && current.status === 'new') next = 'contacted';
       if (next && next !== current.status) {
         changes.status = next;
-        await tx.insert(leadActivities).values({
+        await tx.insert(leadEvents).values({
           leadId: id,
           userId,
           type: 'status_change',
@@ -280,7 +293,7 @@ export class LeadsService {
     return this.db.transaction(async (tx) => {
       const current = await this.mustGet(tx, id, user);
       const now = new Date();
-      await tx.insert(leadActivities).values({
+      await tx.insert(leadEvents).values({
         leadId: id,
         userId,
         type: 'booked',
@@ -308,7 +321,7 @@ export class LeadsService {
     return this.db.transaction(async (tx) => {
       await this.mustGet(tx, leadId, user);
       const [task] = await tx
-        .insert(tasks)
+        .insert(leadFollowups)
         .values({
           leadId,
           title: dto.title,
@@ -317,7 +330,7 @@ export class LeadsService {
           createdBy: userId,
         })
         .returning();
-      await tx.insert(leadActivities).values({
+      await tx.insert(leadEvents).values({
         leadId,
         userId,
         type: 'task_created',
@@ -331,17 +344,17 @@ export class LeadsService {
   async updateTask(taskId: number, dto: UpdateTaskDto, user: AccessUser) {
     const userId = user.id;
     return this.db.transaction(async (tx) => {
-      const [task] = await tx.select().from(tasks).where(eq(tasks.id, taskId)).limit(1);
+      const [task] = await tx.select().from(leadFollowups).where(eq(leadFollowups.id, taskId)).limit(1);
       if (!task) throw new NotFoundException('Task not found');
       await this.mustGet(tx, task.leadId, user);
       if (dto.done === !!task.doneAt) return task;
       const [updated] = await tx
-        .update(tasks)
+        .update(leadFollowups)
         .set({ doneAt: dto.done ? new Date() : null })
-        .where(eq(tasks.id, taskId))
+        .where(eq(leadFollowups.id, taskId))
         .returning();
       if (dto.done) {
-        await tx.insert(leadActivities).values({
+        await tx.insert(leadEvents).values({
           leadId: task.leadId,
           userId,
           type: 'task_done',
@@ -355,14 +368,14 @@ export class LeadsService {
 
   /* Open follow-ups across all leads, soonest first: the "to do" list. */
   async openTasks(user: AccessUser) {
-    const mine = can(user, 'leads:read:all') ? undefined : or(eq(leads.assignedTo, user.id), eq(tasks.assignedTo, user.id));
+    const mine = can(user, 'leads:read:all') ? undefined : or(eq(leads.assignedTo, user.id), eq(leadFollowups.assignedTo, user.id));
     return this.db
-      .select({ task: tasks, leadName: leads.name, leadPhone: leads.phone, assigneeName: users.name })
-      .from(tasks)
-      .innerJoin(leads, eq(leads.id, tasks.leadId))
-      .leftJoin(users, eq(users.id, tasks.assignedTo))
-      .where(and(isNull(tasks.doneAt), mine))
-      .orderBy(asc(tasks.dueAt));
+      .select({ task: leadFollowups, leadName: leads.name, leadPhone: leads.phone, assigneeName: users.name })
+      .from(leadFollowups)
+      .innerJoin(leads, eq(leads.id, leadFollowups.leadId))
+      .leftJoin(users, eq(users.id, leadFollowups.assignedTo))
+      .where(and(isNull(leadFollowups.doneAt), mine))
+      .orderBy(asc(leadFollowups.dueAt));
   }
 
   /* Staff who can own leads, for the "Assigned to" picker. */
